@@ -2,5 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  -webkit-touch-callout: none;
 }

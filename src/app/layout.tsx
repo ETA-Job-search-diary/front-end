@@ -1,6 +1,33 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ReactNode } from 'react';
+import suit from 'next/font/local';
+
+const suitFont = suit({
+  src: [
+    {
+      path: './fonts/SUIT-Light.otf',
+      style: 'normal',
+      weight: '300',
+    },
+    {
+      path: './fonts/SUIT-Regular.otf',
+      style: 'normal',
+      weight: '400',
+    },
+    {
+      path: './fonts/SUIT-SemiBold.otf',
+      style: 'normal',
+      weight: '600',
+    },
+    {
+      path: './fonts/SUIT-Bold.otf',
+      style: 'normal',
+      weight: '700',
+    },
+  ],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -20,8 +47,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="ko">
+      <body
+        className={`w-screen h-screen overflow-x-hidden bg-gray-50 ${suitFont.className} antialiased font-sans`}
+      >
+        <main className="min-w-[280px] max-w-[420px] h-screen mx-auto bg-white">
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
