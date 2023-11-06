@@ -80,3 +80,9 @@
   -webkit-overflow-scrolling: touch;
   -webkit-touch-callout: none;
 }
+
+@media screen and (max-width: 500px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,16 +1,17 @@
 import { SVGProps } from 'react';
 import * as iconTypes from './svgs/index';
 
+export type IconTypes = keyof typeof iconTypes;
+
 interface IconProps extends SVGProps<SVGSVGElement> {
-  name: keyof typeof iconTypes;
-  fill?: string;
+  name: IconTypes;
   className?: string;
 }
 
-const Icon = ({ name, fill, className, ...rest }: IconProps) => {
+const Icon = ({ name, className, ...rest }: IconProps) => {
   const IconComponent = iconTypes[name];
 
-  return <IconComponent fill={fill} className={className} {...rest} />;
+  return <IconComponent className={className} {...rest} />;
 };
 
 export default Icon;

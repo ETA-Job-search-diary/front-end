@@ -53,21 +53,23 @@ export const Calender = ({ today, events }: CalenderProps) => {
 
   return (
     <>
-      <div className="border border-black20 rounded-[15px] flex flex-col justify-start gap-2 web:gap-[16px] h-[300px] web:h-[412px] bg-white">
+      <div className="border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-6 h-[300px] web:h-[408px] bg-white">
         <Calender.Header
           current={current}
           prevMonth={prevMonth}
           nextMonth={nextMonth}
           // goToToday={goToToday}
         />
-        <Calender.Weeks />
-        <Calender.Cell
-          today={today}
-          current={current}
-          events={events}
-          selectedDate={selectedDate}
-          onDateClick={onDateClick}
-        />
+        <div className="h-full flex flex-col gap-2 text-xs web:text-md px-4 web:px-5 pb-3 web:pb-4">
+          <Calender.Weeks />
+          <Calender.Cell
+            today={today}
+            current={current}
+            events={events}
+            selectedDate={selectedDate}
+            onDateClick={onDateClick}
+          />
+        </div>
       </div>
     </>
   );
@@ -80,10 +82,11 @@ Calender.Header = ({
 }: // goToToday,
 HeaderProps) => {
   return (
-    <div className="flex justify-between pt-4 px-5 web:pt-[28px] web:px-[34px]">
-      <div className="flex gap-1 text-md web:text-lg font-bold text-title">
-        <span className="">{format(current, 'yyyy')}</span>
-        <span className="">{format(current, 'LL')}월</span>
+    <div className="flex justify-between pt-4 px-7 web:pt-[38px] web:px-[38px]">
+      <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] text-md web:text-xxl font-bold text-black900">
+        <span>{format(current, 'yyyy')}년</span>
+        <span className="place-self-end">{format(current, 'LL')}</span>
+        <span>월</span>
       </div>
       {/* <Calender.Button goToToday={goToToday} /> */}
       <div className="flex gap-[10px]">
@@ -93,7 +96,7 @@ HeaderProps) => {
           onClick={prevMonth}
           className="w-[26px] h-[26px]"
         >
-          <ChevronLeft className="h-4 w-4 text-[#969696]" />
+          <ChevronLeft className="h-4 w-4 text-[#949494]" />
         </Button>
         <Button
           variant="outline"
@@ -101,7 +104,7 @@ HeaderProps) => {
           onClick={nextMonth}
           className="w-[26px] h-[26px]"
         >
-          <ChevronRight className="h-4 w-4 text-[#969696]" />
+          <ChevronRight className="h-4 w-4 text-[#949494]" />
         </Button>
       </div>
     </div>
@@ -111,16 +114,16 @@ HeaderProps) => {
 Calender.Weeks = () => {
   const date = ['일', '월', '화', '수', '목', '금', '토'];
   return (
-    <ul className="grid grid-cols-7 place-items-center px-3">
+    <ul className="grid grid-cols-7 place-items-center">
       {date.map((d) => (
-        <li key={d} className="text-black70 text-xs web:text-sm">
+        <li key={d} className="text-black600">
           {d}
         </li>
       ))}
     </ul>
   );
 };
-
+//TODO: 기획 - 날짜 클릭시 이벤트 리스트를 보여줄 지 검토
 Calender.Cell = ({
   today,
   current,
@@ -153,7 +156,7 @@ Calender.Cell = ({
     return (
       <div
         key={day.toString()}
-        className="w-full h-full flex flex-col justify-between items-center text-center cursor-pointer font-medium text-xs web:text-md"
+        className="w-full h-full flex flex-col gap-1 items-center text-center font-medium"
         onClick={() => onDateClick(day)}
       >
         {isToday && (
@@ -162,14 +165,16 @@ Calender.Cell = ({
         <span
           className={
             format(current, 'M') !== format(day, 'M')
-              ? 'text-black30'
-              : `${isToday ? `text-white font-bold absolute leading-7` : ''}`
+              ? 'text-black200'
+              : `${
+                  isToday ? `text-white font-bold absolute leading-7` : '' //TODO: 'cursor-pointer'
+                }`
           }
         >
           {formattedDate}
         </span>
         {weekEvents && weekEvents.length > 0 && (
-          <span className="rounded-full bg-primary m-auto w-1 h-1 web:w-1.5 web:h-1.5"></span>
+          <span className="rounded-full bg-primary500 mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
         )}
       </div>
     );
@@ -186,9 +191,9 @@ Calender.Cell = ({
   }
 
   return (
-    <div className="h-full web:pb-1 flex flex-col web:gap-3">
+    <div className="h-full flex flex-col">
       {rows.map((week, index) => (
-        <div key={index} className="h-full grid grid-cols-7 px-3">
+        <div key={index} className="h-full grid grid-cols-7">
           {week}
         </div>
       ))}

@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { ReactNode } from 'react';
 import suit from 'next/font/local';
-import ServiceTitle from '@/components/ServiceTitle';
-import Icon from '@/assets/Icon';
+import TabBar from '@/components/common/TabBar';
 
 const suitFont = suit({
   src: [
@@ -53,14 +52,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`w-screen h-screen overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
-        <div className="relative h-screen mx-auto bg-white min-w-[280px] max-w-[500px] bg-gradient-pattern bg-top-right bg-no-repeat">
-          <ServiceTitle />
-          <main className="z-10 pt-2 web:pt-[24px] px-[22px]">{children}</main>
-          <Icon
-            name="mainCharacter"
-            className="absolute top-20 web:top-[108px] right-5 web:right-[24px] w-[100px] h-[80px] web:w-[140px] web:h-[106px]"
-          />
-        </div>
+        <main className="h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
+          <section className="h-full w-full">{children}</section>
+          <TabBar />
+        </main>
       </body>
     </html>
   );
