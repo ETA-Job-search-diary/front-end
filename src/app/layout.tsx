@@ -52,8 +52,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`w-screen h-screen overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
-        <main className="h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
-          <section className="h-full w-full">{children}</section>
+        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
+          {children}
           <TabBar />
         </main>
       </body>

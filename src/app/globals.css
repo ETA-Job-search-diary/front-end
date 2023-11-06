@@ -81,6 +81,15 @@
   -webkit-touch-callout: none;
 }
 
+input,
+textarea {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
 @media screen and (max-width: 500px) {
   ::-webkit-scrollbar {
     display: none;

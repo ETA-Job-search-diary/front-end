@@ -1,21 +1,44 @@
-import { TextareaHTMLAttributes, forwardRef } from 'react';
+import {
+  ChangeEvent,
+  TextareaHTMLAttributes,
+  forwardRef,
+  useState,
+} from 'react';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
   label: string;
+  maxLength: number;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ id, label, ...rest }, ref) => {
+  ({ id, label, maxLength, onChange, ...rest }, ref) => {
+    const [count, setCount] = useState(0);
+
+    const handleTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      const { value } = e.currentTarget;
+      onChange(e);
+      setCount(value.length);
+    };
+
     return (
-      <label htmlFor={id} className="grid grid-cols-[auto_1fr] gap-3">
+      <label
+        htmlFor={id}
+        className="relative flex flex-col gap-3 text-xs web:text-md"
+      >
         <span className="font-semibold">{label}</span>
         <textarea
           id={id}
-          className="w-full border border-gray-300"
+          className="w-full text-black900 border-b border-black100 placeholder:text-black200 placeholder:font-medium p-1 web:p-2 h-32 web:h-44"
           ref={ref}
+          maxLength={maxLength}
+          onChange={handleTextArea}
           {...rest}
         />
+        {maxLength && (
+          <span className="absolute bottom-1 right-2 text-black200 text-xxs  web:text-sm">{`${count}자`}</span>
+        )}
       </label>
     );
   },

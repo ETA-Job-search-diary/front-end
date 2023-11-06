@@ -4,7 +4,7 @@ interface ServiceTitleProps {
 
 const ServiceTitle = ({ name }: ServiceTitleProps) => {
   return (
-    <div className="w-max h-max flex flex-col gap-5 pl-7 pt-10 web:pl-[40px] web:pt-[73px] pb-5">
+    <div className="w-max h-max flex flex-col gap-2 web:gap-5 pl-7 web:pl-[40px] pt-6 web:pt-[73px] pb-5">
       <h1 className="text-black text-md web:text-2xl">
         안녕하세요:) {name ? `${name}님` : ''}
       </h1>

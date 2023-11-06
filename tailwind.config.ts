@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  mode: 'jit',
   darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -16,6 +17,7 @@ module.exports = {
       },
     },
     screens: {
+      xs: { max: '350px' },
       web: '500px',
     },
     extend: {
@@ -26,8 +28,12 @@ module.exports = {
       backgroundPosition: {
         'top-right': 'right 28px',
       },
+      boxShadow: {
+        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.04)',
+      },
       colors: {
         body: '#F6F6F6',
+        alert: 'rgba(0, 0, 0, 0.30)',
         'light-primary': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',
         black100: '#D4D4D4',
