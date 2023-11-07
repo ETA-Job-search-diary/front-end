@@ -56,6 +56,14 @@ export const STEPS = [
   { value: 'personality', name: '인적성' },
 ];
 
+export enum FormType {
+  COMPANY = '회사',
+  POSITION = '직무',
+  DATE = '시간',
+  LINK = '채용공고',
+  MEMO = '메모',
+}
+
 export const ERROR: Record<Partial<FormIdType>, string> = {
   title: '타이틀을 입력해주세요.',
   step: '전형단계를 선택해주세요.',
