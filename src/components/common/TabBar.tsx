@@ -32,21 +32,19 @@ const TabBar = () => {
         <FloatNewButton onClick={handleNewClick} />
         <LinkButton path={PathType.list} />
         {isNewOpen && (
-          <>
-            <Alert
-              message="일정을 등록하시겠습니까?"
-              type={[
-                {
-                  value: AlertType.cancel,
-                  onClick: () => setIsOpen(false),
-                },
-                {
-                  value: AlertType.login,
-                  onClick: handleLoginClick,
-                },
-              ]}
-            />
-          </>
+          <Alert
+            message="일정을 등록하시겠습니까?"
+            type={[
+              {
+                value: AlertType.cancel,
+                onClick: () => setIsOpen(false),
+              },
+              {
+                value: AlertType.login,
+                onClick: handleLoginClick,
+              },
+            ]}
+          />
         )}
       </div>
     </nav>

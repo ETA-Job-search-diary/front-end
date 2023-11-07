@@ -1,4 +1,4 @@
-import { getFormattedDate } from '@/lib/date';
+import { getFormattedDate } from '@/service/date';
 import Link from 'next/link';
 import Badge from './common/Badge';
 
