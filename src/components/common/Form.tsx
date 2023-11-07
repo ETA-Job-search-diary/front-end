@@ -34,18 +34,14 @@ const Form = () => {
     else setSteps(value);
   };
 
-  const handleChipInputClick = () => {
-    setSteps('');
-  };
+  const handleChipInputClick = () => setSteps('');
 
   //TODO: 전형단계 입력했다가 다른 거 클릭했을때 focus 효과 없애기
   const handleChipInputBlur = () => {
     setSteps(steps);
   };
 
-  const handleStepChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSteps(e.currentTarget.value);
-  };
+  const handleStepChange = (value: string) => setSteps(value);
 
   const handleSubmit = () => {
     const data = {
@@ -81,9 +77,9 @@ const Form = () => {
             </li>
           ))}
           <ChipInput
-            onReset={handleChipInputBlur}
+            current={steps}
             onClick={handleChipInputClick}
-            onChange={handleStepChange}
+            onTextInput={handleStepChange}
           />
         </ul>
       </FormLabel>
