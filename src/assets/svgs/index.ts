@@ -8,3 +8,6 @@ export { default as plus } from './plus.svg';
 export { default as union } from './union.svg';
 export { default as arrowleft } from './arrow-left.svg';
 export { default as close } from './close.svg';
+export { default as naver } from './naver.svg';
+export { default as kakao } from './kakao.svg';
+export { default as loginCharacter } from './loginCharacter.svg';

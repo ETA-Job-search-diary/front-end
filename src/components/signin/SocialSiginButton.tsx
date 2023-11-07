@@ -1,5 +1,6 @@
 'use client';
 
+import Icon from '@/assets/Icon';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
 
 export type ProviderType = Record<string, ClientSafeProvider>;
@@ -8,7 +9,7 @@ interface SocialSiginButtonProps {
   providers: ProviderType;
   callbackUrl: string;
 }
-//TODO: 디자인 - 수정
+
 const SocialSiginButton = ({
   providers,
   callbackUrl,
@@ -16,13 +17,19 @@ const SocialSiginButton = ({
   return (
     <>
       {Object.values(providers).map(({ name, id }) => {
+        const socialName = name === 'Kakao' ? '카카오' : '네이버';
+        const iconName = name === 'Kakao' ? 'kakao' : 'naver';
+
         return (
           <button
-            className="rounded-small border py-3 px-3"
+            className="z-10 w-full bg-white rounded-medium border py-3 px-4 web:py-4 web:px-6 flex justify-center items-center"
             key={name}
             onClick={() => signIn(id, { callbackUrl })}
           >
-            {name} 계정으로 로그인
+            <Icon name={iconName} className="w-4 h-4 web:w-6 web:h-6" />
+            <span className="grow text-black800 text-xs web:text-md font-medium">
+              {socialName} 계정으로 로그인
+            </span>
           </button>
         );
       })}
