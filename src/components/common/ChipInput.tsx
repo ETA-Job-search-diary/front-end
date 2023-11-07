@@ -1,60 +1,50 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, InputHTMLAttributes, useState } from 'react';
 import { defaultChipStyle } from './Chip';
-import Icon from '@/assets/Icon';
 import useFocus from '@/hook/useFocus';
 
 interface ChipInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  onReset: () => void;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  current: string;
   onClick: () => void;
+  onTextInput: (value: string) => void;
 }
 
-const ChipInput = ({ onReset, onChange, onClick, ...rest }: ChipInputProps) => {
-  const { isFocus, onFocus, onBlur } = useFocus();
-
-  const handleClick = () => {
-    onFocus();
-    onClick();
-  };
+const ChipInput = ({
+  current,
+  onClick,
+  onTextInput,
+  ...rest
+}: ChipInputProps) => {
+  const [value, setValue] = useState('');
+  const { onFocus, onBlur } = useFocus();
+  const checked = current === value;
 
   const handleChipnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
+    setValue(value);
+    onTextInput(value);
     if (value === '') onBlur();
-    onChange(e);
+    else onFocus();
   };
 
   return (
-    <>
-      {isFocus ? (
-        <>
-          <input
-            className={`${defaultChipStyle} ${getChipInputStyle(isFocus)} `}
-            onFocus={onFocus}
-            {...rest}
-            onChange={handleChipnChange}
-          />
-        </>
-      ) : (
-        <div
-          className={`${defaultChipStyle} ${getChipInputStyle(
-            isFocus,
-          )} whitespace-nowrap`}
-          onClick={handleClick}
-        >
-          <span className="flex justify-center items-center text-black800">
-            직접입력
-            <Icon name="plus" className="fill-black800 w-3.5 h-3.5" />
-          </span>
-        </div>
-      )}
-    </>
+    <input
+      className={`${defaultChipStyle} ${getChipInputStyle(checked)} `}
+      onFocus={onFocus}
+      onChange={handleChipnChange}
+      {...rest}
+      placeholder={'직접입력 +'}
+    />
   );
 };
 
 const getChipInputStyle = (checked: boolean) => {
-  return checked
-    ? 'border-dashed border-primary500 text-primary500'
-    : 'border-dashed border-black100 text-black900';
+  const defaultStyle =
+    'rounded-full border border-dashed text-center text-xxs web:text-sm w-20 xs:w-[70px] web:w-[104px] h-8 leading-8 web:h-10 web:leading-10 whitespace-nowrap';
+  const checkedStyle = checked
+    ? 'border-primary500 text-primary500'
+    : 'border-black100 text-black900';
+
+  return `${defaultStyle} ${checkedStyle}`;
 };
 
 export default ChipInput;

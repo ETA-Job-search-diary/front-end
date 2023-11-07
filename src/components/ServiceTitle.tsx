@@ -1,4 +1,4 @@
-import LoginUser from './common/LoginUSer';
+import LoginUser from './common/LoginUser';
 
 const ServiceTitle = () => {
   return (
