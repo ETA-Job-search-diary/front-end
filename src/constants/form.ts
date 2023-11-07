@@ -1,3 +1,5 @@
+import { FormIdType } from '@/model/form';
+
 export enum SiteType {
   SARAMIN = 'saramin', // https://www.saramin.co.kr
   JOBKOREA = 'jobkorea', // https://www.jobkorea.co.kr/Recruit/
@@ -54,9 +56,13 @@ export const STEPS = [
   { value: 'personality', name: '인적성' },
 ];
 
-export const ERROR = {
+export const ERROR: Record<Partial<FormIdType>, string> = {
   title: '타이틀을 입력해주세요.',
+  step: '전형단계를 선택해주세요.',
   company: '회사명을 입력해주세요.',
   position: '직무를 입력해주세요.',
+  date: '일정을 입력해주세요.',
+  link: '링크를 입력해주세요.',
   platform: '플랫폼을 선택해주세요.',
+  memo: '메모를 입력해주세요.',
 };

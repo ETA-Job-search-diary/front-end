@@ -16,7 +16,7 @@ const ChipInput = ({
 }: ChipInputProps) => {
   const [value, setValue] = useState('');
   const { onFocus, onBlur } = useFocus();
-  const checked = current === value;
+  const checked = current !== '' && current === value;
 
   const handleChipnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;

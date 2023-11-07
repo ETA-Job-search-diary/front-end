@@ -1,6 +1,6 @@
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'gray';
   label?: string;
   size?: 'sm' | 'md' | 'lg';
   active?: boolean;
@@ -29,10 +29,10 @@ const Button = ({
 const getButtonStyle = (
   active: boolean,
   size: 'sm' | 'md' | 'lg',
-  color: 'primary' | 'secondary',
+  color: 'primary' | 'secondary' | 'gray',
 ) => {
   const defaultStyle =
-    'w-full rounded-small text-white font-medium text-xs web:text-md hover:font-bold';
+    'w-full rounded-small font-medium text-xs web:text-md hover:font-bold';
 
   const sizeStyle = {
     sm: 'h-7 web:h-10 text-xxs web:text-sm',
@@ -42,12 +42,16 @@ const getButtonStyle = (
 
   const colorStyle = {
     primary: {
-      inactive: 'bg-black100',
-      active: 'bg-primary500',
+      inactive: 'bg-black100 text-white',
+      active: 'bg-primary500 text-white',
     },
     secondary: {
-      inactive: 'bg-black100',
-      active: 'bg-black100',
+      inactive: 'border border-black100 text-black200',
+      active: 'border border-primary500 text-primary500',
+    },
+    gray: {
+      inactive: 'bg-black100 text-black200',
+      active: 'bg-black100 text-white',
     },
   };
 

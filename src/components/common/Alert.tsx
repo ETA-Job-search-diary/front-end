@@ -21,7 +21,7 @@ const Alert = ({ message, type }: AlertProps) => {
 
   return createPortal(
     <div className="fixed z-30 w-full h-full top-0 flex justify-center items-center bg-alert">
-      <section className="bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 w-[269px] web:w-[320px] h-40 web:h-[190px]">
+      <section className="bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 w-[269px] web:w-[320px] h-40 web:h-[190px] shadow-md">
         <div className="grow flex justify-center items-center web:text-md">
           {message}
         </div>
@@ -30,7 +30,13 @@ const Alert = ({ message, type }: AlertProps) => {
             <>
               <Button
                 key={value}
-                color={index === 0 ? 'secondary' : 'primary'}
+                color={
+                  type.length === 1
+                    ? 'primary'
+                    : index === 0
+                    ? 'secondary'
+                    : 'primary'
+                }
                 label={value}
                 active
                 size="sm"
