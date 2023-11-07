@@ -3,6 +3,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 import suit from 'next/font/local';
 import TabBar from '@/components/common/TabBar';
+import AuthSessionProvider from '@/context/AuthSessionProvider';
 
 const suitFont = suit({
   src: [
@@ -53,8 +54,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`w-screen h-screen overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
-          {children}
-          <TabBar />
+          <AuthSessionProvider>
+            {children}
+            <TabBar />
+          </AuthSessionProvider>
         </main>
       </body>
     </html>
