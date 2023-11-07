@@ -9,7 +9,7 @@ export interface ScheduleItemProps {
   steps: string;
   position: string;
   company: string;
-  endAt: string;
+  endAt?: string;
 }
 
 const ScheduleItem = ({
@@ -30,13 +30,13 @@ const ScheduleItem = ({
   return (
     <Link
       href={`/schedule/${id}`}
-      className="grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-[18px] web:pt-[29px] web:pb-[23px]"
+      className="grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-[18px] web:pt-[29px] web:pb-[23px] h-[88px] web:h-[129px]"
     >
       <div className="place-self-center flex flex-col items-center text-black900 px-6 web:px-[30px]">
         <h3 className="font-bold text-lg web:text-2xl">{date}</h3>
         <span className="text-xxs web:text-sm">{day}</span>
       </div>
-      <div className="flex flex-col gap-1 web:gap-[14px]">
+      <div className="flex flex-col justify-center gap-1 web:gap-[14px]">
         <h3 className="text-black900 font-bold text-xs web:text-md leading-3">
           {title}
         </h3>
