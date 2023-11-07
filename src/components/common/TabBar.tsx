@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LinkButton, { PathType } from './LinkButton';
 import FloatNewButton from './FloatNewButton';
-import Alert, { AlertType } from './Alert';
+// import Alert, { AlertType } from './Alert';
 
 //TODO: Login을 하게되면, 토큰을 session storage에 저장해서 로그인 여부 판단
 const TabBar = () => {
