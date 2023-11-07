@@ -12,7 +12,7 @@ const Singin = async () => {
   const providers = (await getProviders()) ?? {};
 
   return (
-    <div className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px] flex flex-col gap-28 web:gap-[170px]">
+    <div className="overflow-hidden min-h-screen web:min-h-full w-full px-[22px] web:px-[28px] flex flex-col gap-28 web:gap-[170px]">
       <div className="pt-40 web:pt-[293px] text-black700">
         <p className="font-bold text-xl web:text-3xl">
           <span className="text-primary500">취준로그</span>

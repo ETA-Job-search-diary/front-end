@@ -20,11 +20,11 @@ const FormLabel = ({
   return (
     <label htmlFor={id} className="h-full flex flex-col gap-1 web:gap-3">
       {label && (
-        <span className="font-semibold w-max text-xs web:text-md">
+        <span className="text-black-900 font-semibold w-max text-sm web:text-md">
           {label}
           {must && <span className="text-primary500"> *</span>}
           {must && message ? (
-            <span className="text-black400 text-xxs font-normal">
+            <span className="text-black400 text-xxs web:text-xs font-normal">
               {' '}
               {message}
             </span>

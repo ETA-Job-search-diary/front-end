@@ -156,11 +156,11 @@ Calender.Cell = ({
     return (
       <div
         key={day.toString()}
-        className="w-full h-full flex flex-col gap-1 items-center text-center font-medium"
+        className="w-full h-full flex flex-col gap-1 items-center justify-center font-medium"
         onClick={() => onDateClick(day)}
       >
         {isToday && (
-          <span className="inline-block w-7 h-7 rounded-full bg-black" />
+          <span className="inline-block w-7 h-7 web:w-9 web:h-9 rounded-full bg-black" />
         )}
         <span
           className={

@@ -25,12 +25,12 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <label
         htmlFor={id}
-        className="relative flex flex-col gap-3 text-xs web:text-md"
+        className="text-black900 relative flex flex-col gap-3 text-xs web:text-md"
       >
         <span className="font-semibold">{label}</span>
         <textarea
           id={id}
-          className="w-full text-black900 border-b border-black100 placeholder:text-black200 placeholder:font-medium p-1 web:p-2 h-32 web:h-44"
+          className="w-full font-medium border-b border-black100 placeholder:text-black200 placeholder:font-medium p-1 web:p-2 h-32 web:h-44"
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}
