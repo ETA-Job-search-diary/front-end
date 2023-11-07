@@ -12,7 +12,7 @@
 // import { getPlatformFromLink } from '@/service/form';
 // import Alert, { AlertType } from './Alert';
 
-// //TODO: 임시저장기능, 수정기능
+// //!! //TODO: 임시저장기능, 수정기능, 일정 입력!!
 // const Form = () => {
 //   const router = useRouter();
 //   const [title, setTitle] = useState('');
