@@ -7,9 +7,11 @@ interface ListPagelayoutProps {
 
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
-    <section className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px]">
+    <>
       <BackButton />
-      {children}
-    </section>
+      <section className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px]">
+        {children}
+      </section>
+    </>
   );
 }
