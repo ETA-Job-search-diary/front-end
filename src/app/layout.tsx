@@ -51,7 +51,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body
-        className={`w-screen h-screen overflow-x-hidden bg-body ${suitFont.className} antialiased`}
+        className={`w-screen h-full overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
           <AuthSessionProvider>

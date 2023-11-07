@@ -35,8 +35,8 @@ const getButtonStyle = (
     'w-full rounded-small font-medium text-xs web:text-md hover:font-bold';
 
   const sizeStyle = {
-    sm: 'h-7 web:h-10 text-xxs web:text-sm',
-    md: 'h-11 web:h-16 text-xs web:text-md',
+    sm: 'h-10 web:h-12 text-xxs web:text-sm',
+    md: 'h-12 web:h-16 text-xs web:text-md',
     lg: 'h-16 web:h-20',
   };
 

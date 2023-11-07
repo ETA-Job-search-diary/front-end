@@ -20,7 +20,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         <span className="h-full">
           <input
             id={id}
-            className={`w-full text-black900 border-b ${
+            className={`w-full font-medium text-black900 text-xs web:text-md border-b ${
               isError ? 'border-primary500' : 'border-black100'
             } placeholder:text-black200 placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
             ref={ref}
