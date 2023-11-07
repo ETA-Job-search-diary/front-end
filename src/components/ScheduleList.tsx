@@ -11,7 +11,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
         items={[
           {
             id: '1',
-            dateAt: '2023-11-07T10:00',
+            date: '2023-11-07T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -25,7 +25,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
         items={[
           {
             id: '1',
-            dateAt: '2023-11-14T10:00',
+            date: '2023-11-14T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -34,7 +34,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-14T10:00',
+            date: '2023-11-14T10:00',
             title: '네이버 2차 면접',
             steps: '2차 면접',
             position: '데이터 분석',
@@ -43,7 +43,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-14T10:00',
+            date: '2023-11-14T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -52,7 +52,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-14T10:00',
+            date: '2023-11-14T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -61,7 +61,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-14T10:00',
+            date: '2023-11-14T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -70,7 +70,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-15T10:00',
+            date: '2023-11-15T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -79,7 +79,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-16T10:00',
+            date: '2023-11-16T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -88,7 +88,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-17T10:00',
+            date: '2023-11-17T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -97,7 +97,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-18T10:00',
+            date: '2023-11-18T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',
@@ -106,7 +106,7 @@ const ScheduleList = ({}: ScheduleListProps) => {
           },
           {
             id: '1',
-            dateAt: '2023-11-18T10:00',
+            date: '2023-11-18T10:00',
             title: '네이버 1차 면접',
             steps: '1차 면접',
             position: '데이터 분석',

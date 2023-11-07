@@ -4,7 +4,7 @@ import Badge from './common/Badge';
 
 export interface ScheduleItemProps {
   id: string;
-  dateAt: string;
+  date: string;
   title: string;
   steps: string;
   position: string;
@@ -14,17 +14,13 @@ export interface ScheduleItemProps {
 
 const ScheduleItem = ({
   id,
-  dateAt,
+  date,
   title,
   steps,
   position,
   company,
-  endAt,
 }: ScheduleItemProps) => {
-  const { date, day, endTime } = getFormattedDate({
-    start: dateAt,
-    end: endAt,
-  });
+  const { date: formattedDate, day, endTime } = getFormattedDate(date);
 
   //TODO: 일정 아이템 클릭시 상세 페이지로 이동하는 거 맞는지 확인
   return (
@@ -33,7 +29,7 @@ const ScheduleItem = ({
       className="grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-[18px] web:pt-[29px] web:pb-[23px] h-[88px] web:h-[129px]"
     >
       <div className="place-self-center flex flex-col items-center text-black900 px-6 web:px-[30px]">
-        <h3 className="font-bold text-lg web:text-2xl">{date}</h3>
+        <h3 className="font-bold text-lg web:text-2xl">{formattedDate}</h3>
         <span className="text-xxs web:text-sm">{day}</span>
       </div>
       <div className="flex flex-col justify-center gap-1 web:gap-[14px]">
