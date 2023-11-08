@@ -2,7 +2,7 @@
 
 import { getFormattedCurrentTime } from '@/service/date';
 import { InputHTMLAttributes, forwardRef } from 'react';
-import MeridiemPicker from './MeridiemPicker';
+// import MeridiemPicker from './MeridiemPicker';
 
 interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
