@@ -115,10 +115,25 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        mount: {
+          '0%': { opacity: 0, transform: 'translateY(50%)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        unmount: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        mount: 'mount 0.2s linear',
+        unmount: 'unmount 0.2s ease-in-out',
+        wiggle: 'wiggle 1s ease-in-out infinite',
       },
     },
   },

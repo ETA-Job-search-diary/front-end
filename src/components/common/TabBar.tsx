@@ -45,6 +45,7 @@ const TabBar = () => {
                 onClick: handleLoginClick,
               },
             ]}
+            onClose={() => setIsOpen(false)}
           />
         )} */}
       </div>
