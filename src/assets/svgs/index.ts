@@ -17,7 +17,7 @@ export { default as memo } from './clipboard.svg';
 export { default as clock } from './clock.svg';
 export { default as briefcase } from './briefcase.svg';
 export { default as global } from './global.svg';
-export { default as trash } from './trash.svg';
+export { default as delete } from './trash.svg';
 export { default as moreVertical } from './more-vertical.svg';
 export { default as chevronDown } from './chevron-down.svg';
 export { default as alert } from './alert-circle.svg';

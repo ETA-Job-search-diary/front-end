@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <>
       <ServiceBackground>
+        {/* //TODO: 달력에만 스티키를 주는건 어떨까?? */}
         <Calender
           today={new Date()}
           events={[

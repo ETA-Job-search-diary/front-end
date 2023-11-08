@@ -1,11 +1,13 @@
 import { createPortal } from 'react-dom';
 import Button from './Button';
+import { useEffect, useState } from 'react';
 
 export enum AlertType {
   cancel = '취소',
   delete = '삭제',
   login = '로그인이 필요해요',
   confirm = '확인',
+  edit = '수정',
 }
 
 interface AlertProps {
@@ -14,14 +16,20 @@ interface AlertProps {
     value: AlertType;
     onClick: () => void;
   }[];
+  onClose: () => void;
 }
-
-const Alert = ({ message, type }: AlertProps) => {
+//TODO: 모달 팝업 애니메이션 추가
+const Alert = ({ message, type, onClose }: AlertProps) => {
   if (typeof window === 'undefined') return null;
 
   return createPortal(
-    <div className="fixed z-30 w-full h-full top-0 flex justify-center items-center bg-alert">
-      <section className="bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 w-[269px] web:w-[320px] h-40 web:h-[190px] shadow-md">
+    <div
+      className={`fixed z-30 w-full h-full top-0 flex justify-center items-center bg-alert`}
+      onClick={onClose}
+    >
+      <section
+        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 w-[269px] web:w-[320px] h-40 web:h-[190px] shadow-md`}
+      >
         <div className="grow flex justify-center items-center web:text-md">
           {message}
         </div>
