@@ -92,7 +92,7 @@ const Form = () => {
             />
           </ul>
         </FormLabel>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2 web:gap-4">
           <TextInput
             must
             id="company"
@@ -121,7 +121,7 @@ const Form = () => {
             onChange={(e) => setTime(e.currentTarget.value)}
           />
         </FormLabel>
-        <div className="flex flex-col gap-7">
+        <div className="flex flex-col gap-2 web:gap-4">
           <TextInput
             id="link"
             label="채용공고"
