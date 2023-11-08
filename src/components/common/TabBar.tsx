@@ -12,10 +12,11 @@ const TabBar = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const [isNewOpen, setIsOpen] = useState(false);
-
+//TODO: 개발중에는 로그인 잠시 보류
   const handleNewClick = () => {
-    if (session) router.push('/new');
-    else setIsOpen(true);
+    // if (session) router.push('/new');
+    // else setIsOpen(true);
+    router.push('/new');
   };
 
   const handleLoginClick = () => {
@@ -31,7 +32,7 @@ const TabBar = () => {
         <LinkButton path={PathType.home} />
         <FloatNewButton onClick={handleNewClick} />
         <LinkButton path={PathType.list} />
-        {isNewOpen && (
+        {/* {isNewOpen && (
           <Alert
             message="일정을 등록하시겠습니까?"
             type={[
@@ -45,7 +46,7 @@ const TabBar = () => {
               },
             ]}
           />
-        )}
+        )} */}
       </div>
     </nav>
   );

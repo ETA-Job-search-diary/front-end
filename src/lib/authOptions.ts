@@ -34,14 +34,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      console.log('JWT', token, user);
+      // console.log('JWT', token, user);
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      console.log('SESSION', session, token);
+      // console.log('SESSION', session, token);
       const user = session?.user;
       if (user) {
         session.user = {
@@ -54,7 +54,7 @@ export const authOptions: NextAuthOptions = {
     },
     async signIn({ user, account, profile, email, credentials }) {
       //** 회원 가입 로직 POST */
-      console.log('signIn', user, account, profile, email, credentials);
+      // console.log('signIn', user, account, profile, email, credentials);
       return true; // 로그인 성공시 true, 실패시 false
     },
   },
