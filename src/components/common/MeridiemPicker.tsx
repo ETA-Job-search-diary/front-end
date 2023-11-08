@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-export enum Meridiem {
+export enum MeridiemType {
   AM = '오전',
   PM = '오후',
 }
@@ -37,12 +37,18 @@ const MeridiemPicker = ({ meridiem, onChange }: MeridiemPickerProps) => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem onClick={() => handleMeridiemChange(Meridiem.AM)}>
-            {Meridiem.AM}
+          <DropdownMenuItem
+            key={MeridiemType.AM}
+            onClick={() => handleMeridiemChange(MeridiemType.AM)}
+          >
+            {MeridiemType.AM}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => handleMeridiemChange(Meridiem.PM)}>
-            {Meridiem.PM}
+          <DropdownMenuItem
+            key={MeridiemType.PM}
+            onClick={() => handleMeridiemChange(MeridiemType.PM)}
+          >
+            {MeridiemType.PM}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

@@ -63,6 +63,8 @@ const Form = () => {
     router.push('/list');
   };
 
+  const handleTimeChange = (value: string) => setTime(value);
+
   return (
     <>
       <form className="h-[calc(100%-164px)] flex flex-col justify-between gap-5 web:gap-10 py-4 web:py-6">
@@ -116,10 +118,7 @@ const Form = () => {
           message="서류마감일, 면접일 등을 입력해 보세요!"
         >
           <DatePicker id="date" date={date} setDate={setDate} />
-          <TimePicker
-            value={time}
-            onChange={(e) => setTime(e.currentTarget.value)}
-          />
+          <TimePicker value={time} onSetValue={handleTimeChange} />
         </FormLabel>
         <div className="flex flex-col gap-2 web:gap-4">
           <TextInput
