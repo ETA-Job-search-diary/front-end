@@ -16,13 +16,13 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
     return (
       <label
         htmlFor="time"
-        className="p-1 web:p-2 text-xs web:text-md border-b border-black100"
+        className="h-full text-xs web:text-md border-b border-black100"
       >
         <input
           ref={ref}
           type="time"
           defaultValue={currentTime}
-          className={`bg-white w-full web:cursor-text ${
+          className={`p-1 web:p-2 bg-white w-full web:cursor-text ${
             isFilled ? 'text-black900' : 'text-black200'
           } without_ampm`}
           step="600"
