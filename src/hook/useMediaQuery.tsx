@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 interface useMediaQueryProps {
   mediaQuery: string;
@@ -22,7 +22,7 @@ const useMediaQuery = ({ mediaQuery }: useMediaQueryProps) => {
     !!window.matchMedia(mediaQuery).matches,
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mediaQueryList = window.matchMedia(mediaQuery);
     const documentChangeHandler = (event: MediaQueryListEvent) =>
       setIsVerified(!!event.matches);
