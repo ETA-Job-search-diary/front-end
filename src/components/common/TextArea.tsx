@@ -30,14 +30,14 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <span className="font-semibold">{label}</span>
         <textarea
           id={id}
-          className="w-full font-medium border-b border-black100 placeholder:text-black200 placeholder:font-medium p-1 web:p-2 h-32 web:h-44"
+          className="w-full font-medium border-b border-black100 placeholder:text-xs web:placeholder:text-md placeholder:text-black200 placeholder:font-medium p-1 web:p-2 h-32 web:h-44"
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}
           {...rest}
         />
         {maxLength && (
-          <span className="absolute bottom-1 right-2 text-black200 text-xxs  web:text-xs">{`${count} / 200 자`}</span>
+          <span className="absolute bottom-1 right-2 text-black200 text-xxs web:text-xs">{`${count} / 200 자`}</span>
         )}
       </label>
     );
