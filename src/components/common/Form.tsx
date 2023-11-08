@@ -77,11 +77,11 @@ const Form = () => {
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
         <FormLabel must id="step" label="전형단계">
-          <ul className="grid grid-cols-4 gap-2 xs:gap-1 xs:grid-cols-3">
-            {STEPS.map(({ value, name }) => (
+          <ul className="grid grid-cols-4 gap-2 xs:gap-1">
+            {STEPS.map(({ value, label }) => (
               <li key={value}>
                 <Chip
-                  label={name}
+                  label={label}
                   checked={steps === value}
                   onClick={() => handleChipClick(value)}
                 />

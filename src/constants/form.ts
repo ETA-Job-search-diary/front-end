@@ -50,12 +50,12 @@ export const StepType = {
 };
 
 export const STEPS = [
-  { value: 'document', name: '서류전형 ' },
-  { value: 'assignment', name: '사전과제' },
-  { value: 'written', name: '필기전형' },
-  { value: 'first', name: '1차면접' },
-  { value: 'second', name: '2차면접' },
-  { value: 'personality', name: '인적성' },
+  { value: 'document', label: '서류전형 ' },
+  { value: 'assignment', label: '사전과제' },
+  { value: 'written', label: '필기전형' },
+  { value: 'first', label: '1차면접' },
+  { value: 'second', label: '2차면접' },
+  { value: 'personality', label: '인적성' },
 ];
 
 export enum FormType {
