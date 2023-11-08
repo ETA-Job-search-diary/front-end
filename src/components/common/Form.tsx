@@ -67,7 +67,7 @@ const Form = () => {
 
   return (
     <>
-      <form className="h-[calc(100%-170px)] flex flex-col justify-between gap-5 web:gap-7 py-4 web:py-5">
+      <form className="h-[calc(100%-170px)] flex flex-col justify-between gap-6 web:gap-7 py-4 web:py-5">
         <TextInput
           must
           id="title"

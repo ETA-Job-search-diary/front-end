@@ -1,4 +1,5 @@
 import BackButton from '@/components/common/BackButton';
+import NavBar from '@/components/common/NavBar';
 import { ReactNode } from 'react';
 
 interface layoutProps {
@@ -8,7 +9,7 @@ interface layoutProps {
 const ScheduleLayout = ({ children }: layoutProps) => {
   return (
     <>
-      <BackButton />
+      <NavBar leftSection={<BackButton />} />
       <section className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px]">
         {children}
       </section>
