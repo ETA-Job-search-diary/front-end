@@ -14,6 +14,7 @@ export enum SiteType {
   BLINDHIRE = 'blindhire', // https://www.blindhire.co.kr/
   JASOSEOL = 'jasoseol', // https://jasoseol.com/
   SUPEROOKIE = 'superookie', //https://www.superookie.com/
+  INTHISWORK = 'inthistwork', // https://inthistwork.com/
 }
 
 export const PLATFORM: Record<
@@ -36,6 +37,7 @@ export const PLATFORM: Record<
   [SiteType.BLINDHIRE]: { value: 'blindhire', name: '블라인드하이어' },
   [SiteType.JASOSEOL]: { value: 'jasoseol', name: '자소설닷컴' },
   [SiteType.SUPEROOKIE]: { value: 'superookie', name: '슈퍼루키' },
+  [SiteType.INTHISWORK]: { value: 'inthistwork', name: '인디스워크' },
 };
 
 export const StepType = {

@@ -4,13 +4,14 @@ import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import Chip from './Chip';
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import ChipInput from './ChipInput';
 import Button from './Button';
 import FormLabel from './FormLabel';
 import { STEPS } from '@/constants/form';
 import { getPlatformFromLink } from '@/service/form';
 import DatePicker from './DatePicker';
+import TimePicker from './TimePicker';
 
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
@@ -20,6 +21,7 @@ const Form = () => {
   const [company, setCompany] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState<Date>();
+  const [time, setTime] = useState<string>();
   const [link, setLink] = useState('');
   const [platform, setPlatform] = useState('');
   const [memo, setMemo] = useState('');
@@ -41,7 +43,10 @@ const Form = () => {
 
   const handleStepChange = (value: string) => setSteps(value);
 
-  const handleSubmit = () => {
+  const handleSubmit = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+  ) => {
+    e.preventDefault();
     if (!isReady) {
       return;
     }
@@ -106,11 +111,15 @@ const Form = () => {
         </div>
         <FormLabel
           must
-          id="date"
+          id="date-time"
           label="일정"
           message="서류마감일, 면접일 등을 입력해 보세요!"
         >
           <DatePicker id="date" date={date} setDate={setDate} />
+          <TimePicker
+            value={time}
+            onChange={(e) => setTime(e.currentTarget.value)}
+          />
         </FormLabel>
         <div className="flex flex-col gap-7">
           <TextInput

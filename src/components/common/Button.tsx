@@ -1,10 +1,11 @@
-interface ButtonProps {
+import { ButtonHTMLAttributes } from 'react';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
   color?: 'primary' | 'secondary' | 'gray';
   label?: string;
   size?: 'sm' | 'md' | 'lg';
   active?: boolean;
-  onClick: () => void;
 }
 
 const Button = ({
@@ -13,13 +14,13 @@ const Button = ({
   label,
   size = 'md',
   active = false,
-  onClick,
+  ...rest
 }: ButtonProps) => {
   return (
     <button
       type={type}
       className={`${getButtonStyle(active, size, color)}`}
-      onClick={onClick}
+      {...rest}
     >
       {label}
     </button>

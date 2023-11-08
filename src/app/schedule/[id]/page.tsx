@@ -27,7 +27,7 @@ const page = ({ params: { id } }: pageProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-2 pb-4 web:pb-[34px] border-b border-black100">
+      <div className="flex flex-col gap-2 px-2 pb-4 web:pb-[34px] border-b border-black100">
         <div className="flex gap-3 items-center">
           <h1 className="text-black900 font-bold text-md web:text-xl">
             {title}
