@@ -24,6 +24,7 @@ module.exports = {
       backgroundImage: {
         'gradient-pattern': 'url("/images/bg.png")',
         'gradient-pattern-sm': 'url("/images/small-bg.png")',
+        'splash-pattern': 'url("/images/splash-bg.png")',
       },
       backgroundPosition: {
         'top-right': 'right 28px',

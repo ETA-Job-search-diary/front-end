@@ -1,7 +1,6 @@
-import BackButton from '@/components/BackButton';
 import Detail from '@/components/Detail';
-import DetailMoreMenu from '@/components/DetailMoreMenu';
-import NavBar from '@/components/common/NavBar';
+import DetailHeader from '@/components/DetailHeader';
+import { getFormattedDate } from '@/service/date';
 interface pageProps {
   params: {
     id: string;
@@ -20,12 +19,17 @@ const mockData = {
 };
 
 const page = ({ params: { id } }: pageProps) => {
+  const { fullDate, day, endTime } = getFormattedDate(mockData.date);
+
   return (
     <>
-      <NavBar leftSection={<BackButton />} rightSection={<DetailMoreMenu />} />
-      <section className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px]">
-        <Detail {...mockData} />
-      </section>
+      <DetailHeader
+        title={mockData.title}
+        step={mockData.step}
+        fullDate={fullDate}
+        day={day}
+      />
+      <Detail {...mockData} endTime={endTime} />
     </>
   );
 };
