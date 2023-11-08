@@ -1,4 +1,4 @@
-import BackButton from '@/components/common/BackButton';
+import BackButton from '@/components/BackButton';
 import NavBar from '@/components/common/NavBar';
 import { ReactNode } from 'react';
 
