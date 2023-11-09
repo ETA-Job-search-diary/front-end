@@ -6,10 +6,8 @@ interface ListPagelayoutProps {
 
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
-    <>
-      <section className="min-h-screen web:min-h-full w-full bg-white">
-        {children}
-      </section>
-    </>
+    <section className="min-h-screen web:min-h-full w-full bg-white">
+      {children}
+    </section>
   );
 }

@@ -3,13 +3,10 @@ import { ReactNode } from 'react';
 interface DetaillayoutProps {
   children: ReactNode;
 }
-
-const Detaillayout = ({ children }: DetaillayoutProps) => {
+export default function Detaillayout({ children }: DetaillayoutProps) {
   return (
-    <div className="min-h-screen web:min-h-full w-full bg-white">
+    <section className="min-h-screen web:min-h-full w-full bg-white">
       {children}
-    </div>
+    </section>
   );
-};
-
-export default Detaillayout;
+}
