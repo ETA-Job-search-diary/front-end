@@ -3,7 +3,6 @@ import { NextAuthOptions } from 'next-auth';
 
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
-import { setStorage } from '@/service/login';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -38,16 +37,18 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.accessToken = user.accessToken;
       }
       return token;
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       const sessionUser = session?.user;
       if (sessionUser) {
         session.user = {
           name: sessionUser.name,
           email: sessionUser.email,
           id: token.id as string,
+          accessToken: token.accessToken as string,
         };
       }
       return session;
@@ -60,7 +61,8 @@ export const authOptions: NextAuthOptions = {
           'http://track.bugilabs.com:3905/api/auth/login',
           { identifier: id, name, email },
         );
-        setStorage({ key: 'token', value: data.token });
+        user.accessToken = data.token;
+        console.log('토큰', data.token);
         return true;
       } catch (err) {
         console.log(err);
