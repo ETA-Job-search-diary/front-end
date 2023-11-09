@@ -2,7 +2,7 @@
 
 import EmptyItem from '@/components/EmptyItem';
 import FilterChips from '@/components/FilterChips';
-import ListScheduleItem from '@/components/ListScheduleItem';
+import ScheduleList from '@/components/ScheduleList';
 import ScheduleListHeader from '@/components/ScheduleListHeader';
 
 import { data2 } from '@/mock/data';
@@ -27,9 +27,9 @@ export default function ListPage() {
   return (
     <>
       <ScheduleListHeader count={total} />
-      <div className="px-[22px] web:px-[28px] flex flex-col gap-5">
+      <div className="pb-[80px] px-[22px] web:px-[28px] flex flex-col gap-5">
         <FilterChips checked={filter} onClick={handleFilter} />
-        {<ListScheduleItem items={data2} />}
+        {<ScheduleList items={data2} />}
         {!total &&
           (!!filter.length ? (
             <EmptyItem page="list" messageType="additional" />
