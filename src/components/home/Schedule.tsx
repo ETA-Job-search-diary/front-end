@@ -1,6 +1,6 @@
 import EmptyItem from './EmptyItem';
 import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
-import SubScheduleTitle from './SubScheduleTitle';
+import SubScheduleTitle from '../list/SubScheduleTitle';
 
 export enum WeekType {
   this = '이번주',

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeaderProps {

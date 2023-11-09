@@ -1,5 +1,5 @@
 import { STEPS } from '@/constants/form';
-import Chip from './common/Chip';
+import Chip from '../common/Chip';
 
 const ETC = {
   value: 'etc',
@@ -7,6 +7,7 @@ const ETC = {
 };
 
 interface FilterChipsProps {
+  isEdit?: boolean;
   checked: string[];
   onClick: (value: string) => void;
 }

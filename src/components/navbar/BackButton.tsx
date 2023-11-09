@@ -17,7 +17,7 @@ const BackButton = ({ onClose }: BackButtonProps) => {
     >
       <Icon
         name="arrowleft"
-        className="stroke-black900 w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
+        className="stroke-black900 w-4 h-4 web:w-6 web:h-6 mx-auto hover:scale-110 transition-all"
       />
     </button>
   );

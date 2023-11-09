@@ -32,6 +32,7 @@ const suitFont = suit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://newjoblog.vercel.app'),
   title: {
     default: '취준로그',
     template: '%s | 취준로그',
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     title: '취준로그',
     description: '취업에 필요한 정보를 기록해보세요! 당신의 취뽀를 기원합니다.',
     locale: 'ko_KR',
-    url: 'https://newjoblog.vercel.app/',
+    url: 'https://newjoblog.vercel.app',
     siteName: '취준로그',
     images: [
       {

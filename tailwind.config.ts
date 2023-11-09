@@ -33,14 +33,15 @@ module.exports = {
         'top-right': 'right 28px',
       },
       boxShadow: {
-        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.04)',
+        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.06)',
       },
       colors: {
         body: '#F6F6F6',
         light: '#fafafa',
         'ligtht-gray': 'rgba(234, 234, 234, 0.30)',
         alert: 'rgba(0, 0, 0, 0.30)',
-        'light-primary': 'rgba(126, 230, 119, 0.15)',
+        'primary-bg': 'rgba(47, 201, 100, 0.04)',
+        'primary-light': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',
         black100: '#D4D4D4',
         black200: '#BFBFBF',
