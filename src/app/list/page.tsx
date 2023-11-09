@@ -1,11 +1,9 @@
 'use client';
 
-import Icon from '@/assets/Icon';
 import EmptyItem from '@/components/home/EmptyItem';
 import FilterChips from '@/components/list/FilterChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
-import Button from '@/components/common/Button';
 
 import { data2 } from '@/mock/data';
 import { useState } from 'react';
@@ -28,7 +26,6 @@ export default function ListPage() {
   };
 
   const [isEdit, setIsEdit] = useState(false); // isEdit 이면 ? 체크박스 보이게
-  //** 체크 리스트  Reducer사용 (id 담아서, 전송하면 될듯?)
   const [checked, setChecked] = useState<string[]>([]);
   const [isAllChecked, setIsAllChecked] = useState(false); // 전체선택시, true로 변경
 

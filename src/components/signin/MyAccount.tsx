@@ -8,6 +8,7 @@ import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { getProviderByEmail } from '@/service/signin';
 import Link from 'next/link';
 import { SUPPORT_FORM } from '@/constants/service';
+import { redirect } from 'next/navigation';
 
 interface MyAccountProps {
   session: Session | null;
@@ -15,6 +16,14 @@ interface MyAccountProps {
 }
 
 const MyAccount = ({ session, onClose }: MyAccountProps) => {
+  if (!session) {
+    redirect('/auth/signin');
+  }
+
+  const {
+    user: { name, email },
+  } = session;
+
   useDisableBodyScroll();
 
   return createPortal(
@@ -26,22 +35,23 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
       <div className="px-[22px] web:px-[28px]">
         <div className="bg-ligtht-gray rounded-large flex flex-col justify-center gap-2 h-20 web:h-[115px] px-4 web:px-6">
           <h1 className="text-black900 font-bold text-md web:text-lg">
-            {session?.user.name}
+            {name}
           </h1>
           <div className="flex items-start gap-2">
             <span>
               <Icon
-                name={`${getProviderByEmail(session?.user.email).name}`}
+                name={`${getProviderByEmail(email).name}`}
                 className="w-3 h-3 web:w-4 web:h-4"
               />
             </span>
             <span className="text-black600 text-xss web:text-sm leading-3">
-              {session?.user.email}
+              {email}
             </span>
           </div>
         </div>
         <div className="flex flex-col items-center first:border border-black100 px-3 py-5">
           <SignOutButton />
+          {/* //TODO: 서비스 소개 나오면 수정 하기 */}
           <Link
             href={'https://www.naver.com'}
             rel="noopener noreferrer"
