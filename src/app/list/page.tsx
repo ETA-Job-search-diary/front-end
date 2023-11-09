@@ -59,46 +59,22 @@ export default function ListPage() {
       <ScheduleListHeader
         count={total}
         isEdit={isEdit}
+        isAllChecked={isAllChecked}
         onEditClick={handleEditToggle}
+        onCheckAll={handleCheckAll}
       />
       <section
-        className={`px-[22px] web:px-[28px] flex flex-col gap-5 transition-all transform ${
-          isEdit ? 'translate-y-[-8rem]' : 'translate-y-0 pb-20'
+        className={`px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
+          isEdit ? '-translate-y-24' : 'translate-y-0 pb-20'
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
-        {isEdit && (
-          <div className="flex justify-between items-end h-14">
-            <div className="flex items-center gap-4 web:gap-3.5">
-              <button type="button" onClick={handleCheckAll}>
-                <Icon
-                  name="check"
-                  className={`w-3.5 h-3.5 web:w-5 web:h-5 ${
-                    isAllChecked ? 'fill-primary500' : 'fill-black100'
-                  }`}
-                />
-              </button>
-              <span className="text-black900 text-sm web:text-md font-bold">
-                전체 선택
-              </span>
-              {/* //TODO: 기획 - 있어도 좋지않을까..! <span className="text-black900 text-xs web:text-sm font-bold">
-                {checked.length} 개
-              </span> */}
-            </div>
-            <div className="flex gap-3">
-              <Button size="xxs" label="전체삭제" color="border" />
-              <Button size="xxs" label="선택삭제" color="border" />
-            </div>
-          </div>
-        )}
-        {
-          <ScheduleList
-            items={data2}
-            isEdit={isEdit}
-            checked={checked}
-            onCheck={handleCheckItem}
-          />
-        }
+        <ScheduleList
+          items={data2}
+          isEdit={isEdit}
+          checked={checked}
+          onCheck={handleCheckItem}
+        />
         {!total &&
           (!!filter.length ? (
             <EmptyItem page="list" messageType="additional" />

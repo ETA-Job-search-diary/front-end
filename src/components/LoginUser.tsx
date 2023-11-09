@@ -22,7 +22,7 @@ const LoginUser = () => {
         <button onClick={session ? handleAccount : () => signIn()}>
           <Icon
             name="person"
-            className="w-4 h-4 web:w-5 web:h-5 fill-black900 hover:scale-105 transition-all"
+            className="w-4 h-4 web:w-5 web:h-5 fill-black900 hover:scale-110 transition-all"
           />
         </button>
       </div>

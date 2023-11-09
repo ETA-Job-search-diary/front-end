@@ -16,6 +16,6 @@ const HomeIcon = ({ active = false }: HomeIconProps) => {
   );
 };
 
-const defaultStyle = 'fill-none hover:scale-105 transition-all';
+const defaultStyle = 'fill-none hover:scale-110 transition-all';
 
 export default HomeIcon;
