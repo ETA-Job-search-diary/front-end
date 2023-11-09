@@ -1,5 +1,6 @@
 import EmptyItem from './EmptyItem';
 import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
+import SubScheduleTitle from './SubScheduleTitle';
 
 export enum WeekType {
   this = '이번주',
@@ -16,12 +17,7 @@ const Schedule = ({ week, items }: ScheduleProps) => {
 
   return (
     <section className="flex flex-col gap-2 web:gap-4">
-      <div className="flex gap-[10px] text-sm web:text-xl">
-        <span className="text-black900 font-bold">{week} 일정</span>
-        <span className="text-black500">
-          총 <span className="text-primary500 font-bold">{count}</span>건
-        </span>
-      </div>
+      <SubScheduleTitle label={week} count={count} />
       <ul className="flex flex-col gap-3">
         {items.length > 0 ? (
           items.map((item) => (
@@ -30,7 +26,7 @@ const Schedule = ({ week, items }: ScheduleProps) => {
             </li>
           ))
         ) : (
-          <EmptyItem />
+          <EmptyItem page="home" messageType="additional" />
         )}
       </ul>
     </section>
