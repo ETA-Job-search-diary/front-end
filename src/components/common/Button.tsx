@@ -32,14 +32,14 @@ const getButtonStyle = (
   size: 'sm' | 'md' | 'xxs',
   color: 'primary' | 'secondary' | 'gray' | 'border',
 ) => {
-  const defaultStyle = 'w-full font-medium web:text-md hover:font-bold';
+  const defaultStyle = 'w-full font-medium web:text-md hover:font-semibold';
 
   const sizeStyle = {
     xxs: 'w-max px-2 web:px-4 py-0 web:py-0.5 text-[11px] web:text-sm rounded-[2px]',
     sm: 'h-10 web:h-12 text-xxs web:text-sm rounded-small',
     md: 'h-12 web:h-16 text-xs web:text-md rounded-small',
   };
-//TODO: Border버튼 형태 확인
+  //TODO: Border버튼 형태 확인
   const colorStyle = {
     primary: {
       inactive: 'bg-black100 text-white',

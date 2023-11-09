@@ -1,5 +1,4 @@
 import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
-
 interface ListScheduleItemProps {
   items: ScheduleItemProps[];
 }

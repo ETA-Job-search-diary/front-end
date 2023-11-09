@@ -57,7 +57,7 @@ const DetailMoreMenu = () => {
         <DropdownMenuTrigger>
           <Icon
             name="moreVertical"
-            className="stroke-black600 w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
+            className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

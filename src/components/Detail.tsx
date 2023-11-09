@@ -1,48 +1,26 @@
 import Icon from '@/assets/Icon';
 import { FormType } from '@/constants/form';
-import { getFormattedDate } from '@/service/date';
-import Badge from './common/Badge';
 
 interface DetailProps {
-  title: string;
-  step: string;
   company: string;
   position: string;
   date: string;
+  endTime: string;
   link: string;
   platform: string;
   memo: string;
 }
-//TODO: 분리하기
+
 const Detail = ({
-  title,
-  step,
   company,
   position,
-  date,
+  endTime,
   link,
   platform,
   memo,
 }: DetailProps) => {
-  const { fullDate, day, endTime } = getFormattedDate(date);
-
   return (
-    <>
-      <div className="flex flex-col gap-2 px-2 pb-4 web:pb-[34px] border-b border-black100">
-        <div className="flex gap-3 items-center">
-          <h1 className="text-black900 font-bold text-md web:text-xl">
-            {title}
-          </h1>
-          <Badge label={step} />
-        </div>
-        <span className="text-black600 font-medium flex gap-2 items-center text-xxs web:text-sm">
-          <Icon
-            name="calendar"
-            className="w-3 h-3 web:w-4 web:h-4 stroke-black600"
-          />
-          {fullDate}.{day}
-        </span>
-      </div>
+    <section className="min-h-screen web:min-h-full w-full px-[22px] web:px-[28px] overflow-auto">
       <div className="flex flex-col gap-8 text-black-800 text-xs web:text-md pt-4 web:pt-8">
         <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">
           <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
@@ -83,7 +61,7 @@ const Detail = ({
           <span className="text-black600 font-medium">{memo}</span>
         </label>
       </div>
-    </>
+    </section>
   );
 };
 

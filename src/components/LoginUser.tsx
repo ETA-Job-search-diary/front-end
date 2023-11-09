@@ -1,10 +1,12 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import SignInOutButton from './signin/SignInOutButton';
+import Icon from '@/assets/Icon';
 
 const LoginUser = () => {
   const { data: session } = useSession();
+
+  const handleAccount = () => console.log('마이페이지');
 
   return (
     <div className="w-full grid grid-cols-[1fr_auto] items-center">
@@ -13,7 +15,12 @@ const LoginUser = () => {
         {session && <span>{session?.user.name}님</span>}
       </span>
       <div className="col-start-2">
-        <SignInOutButton session={session} />
+        <button onClick={handleAccount}>
+          <Icon
+            name="person"
+            className="w-4 h-4 web:w-5 web:h-5 fill-black900 hover:scale-105 transition-all"
+          />
+        </button>
       </div>
     </div>
   );

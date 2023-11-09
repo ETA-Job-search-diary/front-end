@@ -134,7 +134,12 @@ const Form = () => {
             type="text"
             value={platform}
             onChange={(e) => setPlatform(e.currentTarget.value)}
-            placeholder={autoPlatform || '채용공고 사이트를 선택해주세요'}
+            placeholder={
+              autoPlatform ||
+              (link
+                ? '채용공고 사이트를 직접 입력해주세요'
+                : '채용공고 사이트를 입력해주세요')
+            }
           />
         </div>
         <TextArea
