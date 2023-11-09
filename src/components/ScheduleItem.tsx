@@ -25,7 +25,7 @@ const ScheduleItem = ({
   return (
     <Link
       href={`/schedule/${id}`}
-      className="whitespace-nowrap min-w-max grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px]"
+      className="hover:bg-light transition-colors whitespace-nowrap min-w-max grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px]"
     >
       <div className="h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100 ">
         <h3 className="font-bold text-lg web:text-2xl">{formattedDate}</h3>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
   DropdownMenu,
@@ -55,16 +55,17 @@ const DetailMoreMenu = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Icon
-            name="moreVertical"
-            className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
-          />
+          <button type="button">
+            <Icon
+              name="moreVertical"
+              className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
+            />
+          </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {MenuItems.map(({ type, text, onClick }, index) => (
-            <>
+            <Fragment key={type}>
               <DropdownMenuItem
-                key={type}
                 onClick={() => onClick(type)}
                 className="flex justify-center items-center gap-2"
               >
@@ -74,10 +75,8 @@ const DetailMoreMenu = () => {
                 />
                 <span className="text-xxs web:text-sm">{text}하기</span>
               </DropdownMenuItem>
-              {index === MenuItems.length - 1 || (
-                <DropdownMenuSeparator key={text} />
-              )}
-            </>
+              {index === MenuItems.length - 1 || <DropdownMenuSeparator />}
+            </Fragment>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>

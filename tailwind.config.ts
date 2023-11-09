@@ -37,6 +37,8 @@ module.exports = {
       },
       colors: {
         body: '#F6F6F6',
+        light: '#fafafa',
+        'ligtht-gray': 'rgba(234, 234, 234, 0.30)',
         alert: 'rgba(0, 0, 0, 0.30)',
         'light-primary': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',

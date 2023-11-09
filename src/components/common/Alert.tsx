@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom';
 import Button from './Button';
-import { useEffect, useState } from 'react';
+import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 
 export enum AlertType {
   cancel = '취소',
@@ -22,9 +22,11 @@ interface AlertProps {
 const Alert = ({ message, type, onClose }: AlertProps) => {
   if (typeof window === 'undefined') return null;
 
+  useDisableBodyScroll();
+
   return createPortal(
     <div
-      className={`fixed z-30 w-full h-full top-0 flex justify-center items-center bg-alert`}
+      className={`fixed z-30 top-0 min-h-screen mx-auto min-w-[280px] w-full max-w-[500px] flex justify-center items-center bg-alert`}
       onClick={onClose}
     >
       <section
@@ -55,7 +57,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
         </div>
       </section>
     </div>,
-    document.getElementById('root')?.querySelector('main') || document.body,
+    document.body.querySelector('main') || document.body,
   );
 };
 
