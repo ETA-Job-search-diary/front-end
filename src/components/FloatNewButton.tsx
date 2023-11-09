@@ -15,7 +15,7 @@ const FloatNewButton = ({ onClick }: FloatNewButtonProps) => {
       >
         <Icon
           name="edit"
-          className="stroke-white fill-none w-[30px] f-[30px] m-auto hover:scale-105 transition-all"
+          className="stroke-white fill-none w-[30px] f-[30px] m-auto hover:scale-110 transition-all"
         />
       </button>
     </>
