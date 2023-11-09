@@ -1,5 +1,5 @@
 import { Calender } from '@/components/Calendar';
-import ScheduleList from '@/components/ScheduleList';
+import ScheduleList from '@/components/WeeklySchedule';
 import ServiceBackground from '@/components/ServiceBackground';
 
 export default function Home() {
