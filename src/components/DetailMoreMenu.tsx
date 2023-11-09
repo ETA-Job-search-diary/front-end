@@ -82,7 +82,7 @@ const DetailMoreMenu = () => {
       </DropdownMenu>
       {isOpen && message && (
         <Alert
-          message={`등록된 일정을 ${AlertType[message]} 할까요?`}
+          message={`등록된 일정을 ${AlertType[message]}할까요?`}
           type={[
             {
               value: AlertType.cancel,
