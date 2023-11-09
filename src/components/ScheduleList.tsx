@@ -24,13 +24,13 @@ const ScheduleList = ({
       {items.map((item) => (
         <li
           key={item.id}
-          className="grid grid-cols-[20px_auto] gap-3 items-center"
+          className="grid grid-cols-[20px_auto] gap-1 web:gap-3 items-center"
         >
           {isEdit && (
             <button type="button" onClick={() => handleCheck(item.id)}>
               <Icon
                 name="check"
-                className={`w-5 h-5 ${
+                className={`w-3.5 h-3.5 web:w-5 web:h-5 ${
                   isChecked(item.id) ? 'fill-primary500' : 'fill-black100'
                 }`}
               />

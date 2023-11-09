@@ -15,7 +15,7 @@ const mockData = {
   date: '2023-11-21T22:30',
   link: 'link',
   platform: 'platform',
-  memo: '- 1차 면접 전 직무분석 내용 다시 한번 확인',
+  memo: `* 1차 면접 전 직무분석 내용 다시 한번 확인\n - [ ] 할일이 많음\n # todo 진짜 많아요\n - **kdjasldfk**\n  * [x] 다했음`,
 };
 
 const page = ({ params: { id } }: pageProps) => {
