@@ -20,11 +20,16 @@ const EditButton = ({
         <>
           <Button
             size="xxs"
-            label="선택삭제"
+            label="전체삭제"
             color="border"
             onClick={onDelete}
           />
-          <Button size="xxs" label="완료" color="border" onClick={onConfirm} />
+          <Button
+            size="xxs"
+            label="선택삭제"
+            color="border"
+            onClick={onConfirm}
+          />
         </>
       ) : (
         <Button size="xxs" label="편집" color="border" onClick={onEdit} />

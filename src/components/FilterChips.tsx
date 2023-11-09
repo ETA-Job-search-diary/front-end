@@ -7,13 +7,18 @@ const ETC = {
 };
 
 interface FilterChipsProps {
+  isEdit?: boolean;
   checked: string[];
   onClick: (value: string) => void;
 }
 
-const FilterChips = ({ checked, onClick }: FilterChipsProps) => {
+const FilterChips = ({ isEdit, checked, onClick }: FilterChipsProps) => {
   return (
-    <ul className="grid grid-cols-4 gap-2 xs:gap-1">
+    <ul
+      className={`grid grid-cols-4 gap-2 xs:gap-1 transition-all transform ${
+        isEdit ? 'translate-y-[-2rem] opacity-0' : 'translate-y-0 opacity-100'
+      }`}
+    >
       {[...STEPS, ETC].map(({ value, label }) => (
         <li key={value}>
           <Chip

@@ -6,6 +6,8 @@ import { Session } from 'next-auth';
 import Icon from '@/assets/Icon';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { getProviderByEmail } from '@/service/signin';
+import Link from 'next/link';
+import { SUPPORT_FORM } from '@/constants/service';
 
 interface MyAccountProps {
   session: Session | null;
@@ -40,14 +42,34 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         </div>
         <div className="flex flex-col items-center first:border border-black100 px-3 py-5">
           <SignInOutButton session={session} />
-          <button type="button" className="w-full flex items-center gap-3 p-3">
-            <Icon
+          <Link
+            href={'https://www.naver.com'}
+            rel="noopener noreferrer"
+            target="_blank"
+            className="text-xs web:text-md text-black900 w-full flex items-center gap-3 p-3"
+          >
+            <span className="text-xs web:text-md text-black900">
+              서비스소개
+            </span>
+          </Link>
+          <Link
+            href={SUPPORT_FORM}
+            rel="noopener noreferrer"
+            target="_blank"
+            className="text-xs web:text-md text-black900 w-full flex items-center gap-3 p-3"
+          >
+            <span className="text-xs web:text-md text-black900">문의하기</span>
+          </Link>
+        </div>
+        <footer className="grid place-items-center">
+          <button type="button" className="fixed flex bottom-12">
+            {/* <Icon
               name="withdraw"
               className="w-3 h-5 web:w-6 web:h-6 stroke-black300"
-            />
-            <span className="text-xs web:text-md text-black900">탈퇴하기</span>
+            /> */}
+            <span className="text-xs web:text-sm text-black900">탈퇴하기</span>
           </button>
-        </div>
+        </footer>
       </div>
     </section>,
     document.body.querySelector('main') || document.body,

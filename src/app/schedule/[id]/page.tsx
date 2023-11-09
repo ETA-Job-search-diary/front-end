@@ -1,5 +1,5 @@
 import Detail from '@/components/Detail';
-import DetailHeader from '@/components/DetailHeader';
+import DetailNavBar from '@/components/navbar/DetailNavBar';
 import { getFormattedDate } from '@/service/date';
 interface pageProps {
   params: {
@@ -23,7 +23,7 @@ const page = ({ params: { id } }: pageProps) => {
 
   return (
     <>
-      <DetailHeader
+      <DetailNavBar
         title={mockData.title}
         step={mockData.step}
         fullDate={fullDate}

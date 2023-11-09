@@ -1,17 +1,17 @@
 import Icon from '@/assets/Icon';
-import Badge from './common/Badge';
+import Badge from '../common/Badge';
 import BackButton from '@/components/BackButton';
 import DetailMoreMenu from '@/components/DetailMoreMenu';
 import NavBar from '@/components/common/NavBar';
 
-interface DetailHeaderProps {
+interface DetailNavBarProps {
   title: string;
   step: string;
   fullDate: string;
   day: string;
 }
 
-const DetailHeader = ({ title, step, fullDate, day }: DetailHeaderProps) => {
+const DetailNavBar = ({ title, step, fullDate, day }: DetailNavBarProps) => {
   return (
     <div className="sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
       <NavBar leftSection={<BackButton />} rightSection={<DetailMoreMenu />} />
@@ -34,4 +34,4 @@ const DetailHeader = ({ title, step, fullDate, day }: DetailHeaderProps) => {
   );
 };
 
-export default DetailHeader;
+export default DetailNavBar;
