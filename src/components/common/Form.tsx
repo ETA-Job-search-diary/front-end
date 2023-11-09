@@ -77,7 +77,7 @@ const Form = () => {
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
         <FormLabel must id="step" label="전형단계">
-          <ul className="grid grid-cols-4 gap-2 xs:gap-1">
+          <ul className="grid grid-cols-4 gap-4 xs:gap-1">
             {STEPS.map(({ value, label }) => (
               <li key={value}>
                 <Chip
@@ -94,7 +94,7 @@ const Form = () => {
             />
           </ul>
         </FormLabel>
-        <div className="flex flex-col gap-2 web:gap-4">
+        <div className="flex flex-col gap-4">
           <TextInput
             must
             id="company"
@@ -120,7 +120,7 @@ const Form = () => {
           <DatePicker id="date" date={date} setDate={setDate} />
           <TimePicker value={time} onSetValue={handleTimeChange} />
         </FormLabel>
-        <div className="flex flex-col gap-2 web:gap-4">
+        <div className="flex flex-col gap-4">
           <TextInput
             id="link"
             label="채용공고"
