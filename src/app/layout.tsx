@@ -3,6 +3,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 import suit from 'next/font/local';
 import TabBar from '@/components/common/TabBar';
+import AuthSessionProvider from '@/context/AuthSessionProvider';
 
 const suitFont = suit({
   src: [
@@ -35,7 +36,24 @@ export const metadata: Metadata = {
     default: '취준로그',
     template: '%s | 취준로그',
   },
-  description: '취업에 필요한 정보를 기록하고 관리하는 서비스', //TODO: 기획 - 수정
+  description: '취업에 필요한 정보를 기록해보세요! 당신의 취뽀를 기원합니다.',
+  manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    title: '취준로그',
+    description: '취업에 필요한 정보를 기록해보세요! 당신의 취뽀를 기원합니다.',
+    locale: 'ko_KR',
+    url: 'https://newjoblog.vercel.app/',
+    siteName: '취준로그',
+    images: [
+      {
+        url: '/images/share.png',
+        width: 800,
+        height: 600,
+        alt: '취준로그',
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -50,11 +68,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body
-        className={`w-screen h-screen overflow-x-hidden bg-body ${suitFont.className} antialiased`}
+        className={`w-screen h-full overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
-          {children}
-          <TabBar />
+          <AuthSessionProvider>
+            {children}
+            <TabBar />
+          </AuthSessionProvider>
         </main>
       </body>
     </html>

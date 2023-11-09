@@ -1,0 +1,32 @@
+{
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "newjowlog",
+  "short_name": "newjoblog",
+  "description": "\ucde8\uc5c5\uc5d0 \ud544\uc694\ud55c \uc815\ubcf4\ub97c \uae30\ub85d\ud558\uace0 \uad00\ub9ac\ud558\ub294 \uc11c\ube44\uc2a4",
+  "icons": [
+    {
+      "src": "./images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

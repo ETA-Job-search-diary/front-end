@@ -123,7 +123,7 @@ Calender.Weeks = () => {
     </ul>
   );
 };
-//TODO: 기획 - 날짜 클릭시 이벤트 리스트를 보여줄 지 검토
+
 Calender.Cell = ({
   today,
   current,
@@ -156,19 +156,17 @@ Calender.Cell = ({
     return (
       <div
         key={day.toString()}
-        className="w-full h-full flex flex-col gap-1 items-center text-center font-medium"
+        className="w-full h-full flex flex-col gap-1 items-center justify-center font-medium"
         onClick={() => onDateClick(day)}
       >
         {isToday && (
-          <span className="inline-block w-7 h-7 rounded-full bg-black" />
+          <span className="inline-block w-7 h-7 web:w-9 web:h-9 rounded-full bg-black" />
         )}
         <span
           className={
             format(current, 'M') !== format(day, 'M')
               ? 'text-black200'
-              : `${
-                  isToday ? `text-white font-bold absolute leading-7` : '' //TODO: 'cursor-pointer'
-                }`
+              : `${isToday ? `text-white font-bold absolute leading-7` : ''}`
           }
         >
           {formattedDate}

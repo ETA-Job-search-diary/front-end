@@ -20,10 +20,14 @@ module.exports = {
       xs: { max: '350px' },
       web: '500px',
     },
+    borderWidth: {
+      DEFAULT: '0.5px',
+    },
     extend: {
       backgroundImage: {
         'gradient-pattern': 'url("/images/bg.png")',
         'gradient-pattern-sm': 'url("/images/small-bg.png")',
+        'splash-pattern': 'url("/images/splash-bg.png")',
       },
       backgroundPosition: {
         'top-right': 'right 28px',
@@ -33,6 +37,8 @@ module.exports = {
       },
       colors: {
         body: '#F6F6F6',
+        light: '#fafafa',
+        'ligtht-gray': 'rgba(234, 234, 234, 0.30)',
         alert: 'rgba(0, 0, 0, 0.30)',
         'light-primary': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',
@@ -55,8 +61,8 @@ module.exports = {
         primary700: '#1C793C',
         primary800: '#135028',
         primary900: '#092814',
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
+        border: '#D4D4D4',
+        input: '#D4D4D4',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -100,6 +106,7 @@ module.exports = {
       },
       borderRadius: {
         large: '15px',
+        medium: '10px',
         small: '5px',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -114,10 +121,25 @@ module.exports = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: 0 },
         },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        mount: {
+          '0%': { opacity: 0, transform: 'translateY(50%)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        unmount: {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0 },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        mount: 'mount 0.2s linear',
+        unmount: 'unmount 0.2s ease-in-out',
+        wiggle: 'wiggle 1s ease-in-out infinite',
       },
     },
   },

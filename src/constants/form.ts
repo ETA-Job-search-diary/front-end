@@ -1,3 +1,5 @@
+import { FormIdType } from '@/model/form';
+
 export enum SiteType {
   SARAMIN = 'saramin', // https://www.saramin.co.kr
   JOBKOREA = 'jobkorea', // https://www.jobkorea.co.kr/Recruit/
@@ -12,6 +14,7 @@ export enum SiteType {
   BLINDHIRE = 'blindhire', // https://www.blindhire.co.kr/
   JASOSEOL = 'jasoseol', // https://jasoseol.com/
   SUPEROOKIE = 'superookie', //https://www.superookie.com/
+  INTHISWORK = 'inthistwork', // https://inthistwork.com/
 }
 
 export const PLATFORM: Record<
@@ -34,6 +37,7 @@ export const PLATFORM: Record<
   [SiteType.BLINDHIRE]: { value: 'blindhire', name: '블라인드하이어' },
   [SiteType.JASOSEOL]: { value: 'jasoseol', name: '자소설닷컴' },
   [SiteType.SUPEROOKIE]: { value: 'superookie', name: '슈퍼루키' },
+  [SiteType.INTHISWORK]: { value: 'inthistwork', name: '인디스워크' },
 };
 
 export const StepType = {
@@ -46,17 +50,29 @@ export const StepType = {
 };
 
 export const STEPS = [
-  { value: 'document', name: '서류전형 ' },
-  { value: 'assignment', name: '사전과제' },
-  { value: 'written', name: '필기전형' },
-  { value: 'first', name: '1차면접' },
-  { value: 'second', name: '2차면접' },
-  { value: 'personality', name: '인적성' },
+  { value: 'document', label: '서류전형 ' },
+  { value: 'assignment', label: '사전과제' },
+  { value: 'written', label: '필기전형' },
+  { value: 'first', label: '1차면접' },
+  { value: 'second', label: '2차면접' },
+  { value: 'personality', label: '인적성' },
 ];
 
-export const ERROR = {
+export enum FormType {
+  COMPANY = '회사',
+  POSITION = '직무',
+  DATE = '시간',
+  LINK = '채용공고',
+  MEMO = '메모',
+}
+
+export const ERROR: Record<Partial<FormIdType>, string> = {
   title: '타이틀을 입력해주세요.',
+  step: '전형단계를 선택해주세요.',
   company: '회사명을 입력해주세요.',
   position: '직무를 입력해주세요.',
+  date: '일정을 입력해주세요.',
+  link: '링크를 입력해주세요.',
   platform: '플랫폼을 선택해주세요.',
+  memo: '메모를 입력해주세요.',
 };

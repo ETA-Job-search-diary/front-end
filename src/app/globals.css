@@ -79,6 +79,9 @@
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   -webkit-touch-callout: none;
+  ::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
 input,
@@ -92,6 +95,12 @@ textarea {
 
 @media screen and (max-width: 500px) {
   ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .without_ampm::-webkit-datetime-edit-ampm-field {
     display: none;
   }
 }
