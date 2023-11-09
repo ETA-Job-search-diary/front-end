@@ -1,21 +1,24 @@
 'use client';
 
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import Image from 'next/image';
 
 interface MarkDownViewerProps {
   content: string;
 }
 
 const MarkDownViewer = ({ content }: MarkDownViewerProps) => {
+  const Li = ({ children }: any) => (
+    <li className="list-disc list-inside">{children}</li>
+  );
   return (
-    <ReactMarkdown
-      className="prose max-w-none lg:prose-xl"
+    <Markdown
+      className="prose max-w-none lg:prose-xl text-black600 font-medium bg-primary-bg border border-primary300 w-full pl-6 py-3 pr-4 rounded-small"
       remarkPlugins={[remarkGfm]}
       components={{
+        li: Li,
         code({ node, className, children, ...rest }: any) {
           const match = /language-(\w+)/.exec(className || '');
           return match ? (
@@ -32,21 +35,10 @@ const MarkDownViewer = ({ content }: MarkDownViewerProps) => {
             </code>
           );
         },
-        img: (image) => (
-          <>
-            <Image
-              src={image.src || ''}
-              alt={image.alt || ''}
-              width={500}
-              height={300}
-              className={image.className}
-            />
-          </>
-        ),
       }}
     >
       {content}
-    </ReactMarkdown>
+    </Markdown>
   );
 };
 
