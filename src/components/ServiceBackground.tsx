@@ -13,7 +13,7 @@ const ServiceBackground = ({ children }: ServiceBackgroundProps) => {
       <div className="h-full mx-[22px] web:mx-[28px]">{children}</div>
       <Icon
         name="mainCharacter"
-        className="absolute top-[76px] web:top-[140px] right-5 web:right-[24px] w-[140px] h-[105px] web:w-[180px] web:h-[136px]"
+        className="absolute top-14 web:top-[86px] right-6 web:right-[24px] w-[90px] h-[105px] web:w-[150px] web:h-[136px]"
       />
     </div>
   );
