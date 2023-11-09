@@ -6,7 +6,8 @@ import { getProviders } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import NavBar from '../common/NavBar';
-import BackButton from '../BackButton';
+import BackButton from '../navbar/BackButton';
+import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
 
 const Singin = async () => {
   const session = await getServerSession(authOptions);
@@ -47,7 +48,7 @@ const Singin = async () => {
             <span className="text-[10px] web:text-xs">
               로그인 시{' '}
               <Link
-                href={'https://www.naver.com'}
+                href={TERMS_OF_SERVICE}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="border-b text-black400"
@@ -56,7 +57,7 @@ const Singin = async () => {
               </Link>
               과{' '}
               <Link
-                href={'https://www.daum.net'}
+                href={PRIVACY_POLICY}
                 rel="noopener noreferrer"
                 target="_blank"
                 className="border-b text-black400"

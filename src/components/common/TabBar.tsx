@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LinkButton, { PathType } from './LinkButton';
-import FloatNewButton from '../FloatNewButton';
+import FloatNewButton from '../new/FloatNewButton';
 import Alert, { AlertType } from './Alert';
 
 const TabBar = () => {
@@ -27,14 +27,15 @@ const TabBar = () => {
   if (pathname === '/auth/signin' || pathname === '/new') return null;
 
   return (
-    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
-      <div className="relative h-full w-full grid grid-cols-3 place-items-center">
-        <LinkButton path={PathType.home} />
+    <nav className="w-full h-full grid place-items-center">
+      <div className="fixed bottom-2 w-20 h-20 bg-white rounded-full shadow-tab" />
+      <div className="h-[72px] w-full grid grid-cols-3 place-items-center mx-auto min-w-[280px] max-w-[500px] fixed bottom-0 bg-white shadow-tab">
         <FloatNewButton onClick={handleNewClick} />
+        <LinkButton path={PathType.home} />
         <LinkButton path={PathType.list} />
-        {/* {isNewOpen && (
+        {isNewOpen && (
           <Alert
-            message="일정을 등록하시겠습니까?"
+            message="일정을 등록할까요?"
             type={[
               {
                 value: AlertType.cancel,
@@ -47,7 +48,7 @@ const TabBar = () => {
             ]}
             onClose={() => setIsOpen(false)}
           />
-        )} */}
+        )}
       </div>
     </nav>
   );

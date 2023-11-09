@@ -1,4 +1,4 @@
-import LoginUser from './LoginUser';
+import LoginUser from './UserProfileWidget';
 
 const ServiceTitle = () => {
   return (

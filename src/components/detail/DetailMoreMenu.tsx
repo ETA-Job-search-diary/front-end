@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
   DropdownMenu,
@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert, { AlertType } from './common/Alert';
+import Alert, { AlertType } from '../common/Alert';
 
 type Menu = 'edit' | 'delete';
 
@@ -34,55 +34,56 @@ const DetailMoreMenu = () => {
     handleCloseMenu();
   };
 
-  const MenuItems: {
-    type: Menu;
-    text: string;
-    onClick: (value: Menu) => void;
-  }[] = [
-    {
-      type: 'edit',
+  const MenuItem = {
+    edit: {
       text: '수정',
       onClick: handleEdit,
     },
-    {
-      type: 'delete',
+    delete: {
       text: '삭제',
       onClick: handleDelete,
     },
-  ];
+  };
 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <button type="button">
+        <DropdownMenuTrigger className="w-full h-full">
+          <span>
             <Icon
               name="moreVertical"
-              className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 hover:scale-105 transition-all"
+              className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 mx-auto hover:scale-110 transition-all"
             />
-          </button>
+          </span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {MenuItems.map(({ type, text, onClick }, index) => (
-            <Fragment key={type}>
-              <DropdownMenuItem
-                onClick={() => onClick(type)}
-                className="flex justify-center items-center gap-2"
-              >
-                <Icon
-                  name={type}
-                  className="w-4 h-4 stroke-black600 fill-none"
-                />
-                <span className="text-xxs web:text-sm">{text}하기</span>
-              </DropdownMenuItem>
-              {index === MenuItems.length - 1 || <DropdownMenuSeparator />}
-            </Fragment>
-          ))}
+          <DropdownMenuItem
+            onClick={() => MenuItem.edit.onClick('edit')}
+            className="flex justify-center items-center gap-2"
+          >
+            <Icon name={'edit'} className="w-4 h-4 stroke-black600 fill-none" />
+            <span className="text-xxs web:text-sm">
+              {MenuItem.edit.text}하기
+            </span>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => MenuItem.edit.onClick('delete')}
+            className="flex justify-center items-center gap-2"
+          >
+            <Icon
+              name={'delete'}
+              className="w-4 h-4 stroke-black600 fill-none"
+            />
+            <span className="text-xxs web:text-sm">
+              {MenuItem.delete.text}하기
+            </span>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       {isOpen && message && (
         <Alert
-          message={`등록된 일정을 ${AlertType[message]} 할까요?`}
+          message={`등록된 일정을 ${AlertType[message]}할까요?`}
           type={[
             {
               value: AlertType.cancel,
