@@ -32,7 +32,7 @@ const getButtonStyle = (
   size: 'sm' | 'md' | 'xxs',
   color: 'primary' | 'secondary' | 'gray' | 'border',
 ) => {
-  const defaultStyle = 'w-full font-medium web:text-md hover:font-semibold';
+  const defaultStyle = 'w-full font-medium web:text-md';
 
   const sizeStyle = {
     xxs: 'w-max px-2 web:px-4 py-0 web:py-0.5 text-[11px] web:text-sm rounded-[2px]',
@@ -43,15 +43,15 @@ const getButtonStyle = (
   const colorStyle = {
     primary: {
       inactive: 'bg-black100 text-white',
-      active: 'bg-primary500 text-white',
+      active: 'bg-primary500 text-white hover:font-semibold',
     },
     secondary: {
       inactive: 'border border-black100 text-black200',
-      active: 'border border-primary500 text-primary500',
+      active: 'border border-primary500 text-primary500 hover:font-semibold',
     },
     gray: {
       inactive: 'bg-black100 text-black200',
-      active: 'bg-black100 text-white',
+      active: 'bg-black100 text-white hover:font-semibold',
     },
     border: {
       inactive: 'border border-black100 text-black400 bg-body',

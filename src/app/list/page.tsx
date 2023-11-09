@@ -22,12 +22,13 @@ export default function ListPage() {
       newFilter.splice(index, 1);
       setFilter(newFilter);
     }
+    //TODO: Filter를 쿼리로 보내서 렌더링?
   };
 
   return (
     <>
       <ScheduleListHeader count={total} />
-      <div className="pb-[80px] px-[22px] web:px-[28px] flex flex-col gap-5">
+      <section className="pb-[80px] px-[22px] web:px-[28px] flex flex-col gap-5">
         <FilterChips checked={filter} onClick={handleFilter} />
         {<ScheduleList items={data2} />}
         {!total &&
@@ -36,7 +37,7 @@ export default function ListPage() {
           ) : (
             <EmptyItem page="list" messageType="empty" />
           ))}
-      </div>
+      </section>
     </>
   );
 }
