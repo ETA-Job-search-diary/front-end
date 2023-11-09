@@ -20,6 +20,9 @@ module.exports = {
       xs: { max: '350px' },
       web: '500px',
     },
+    borderWidth: {
+      DEFAULT: '0.5px',
+    },
     extend: {
       backgroundImage: {
         'gradient-pattern': 'url("/images/bg.png")',

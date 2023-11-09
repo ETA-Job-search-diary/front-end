@@ -12,7 +12,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ id, must, label, ...rest }, ref) => {
     const { isFocus, onFocus, onBlur } = useFocus();
-//TODO: 포커싱됐을때 보더 ${isFocus ? 'border-primary500' : 'border-black100'}
+    //TODO: 포커싱됐을때 보더 ${isFocus ? 'border-primary500' : 'border-black100'}
 
     return (
       <FormLabel id={id} label={label} must={must}>
@@ -32,4 +32,3 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 );
 
 export default TextInput;
-0;
