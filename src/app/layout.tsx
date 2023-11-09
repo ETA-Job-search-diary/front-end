@@ -32,9 +32,7 @@ const suitFont = suit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    'https://newjoblog.vercel.app' || 'http://localhost:3000',
-  ),
+  metadataBase: new URL('https://newjoblog.vercel.app'),
   title: {
     default: '취준로그',
     template: '%s | 취준로그',
