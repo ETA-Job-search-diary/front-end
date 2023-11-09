@@ -13,7 +13,7 @@ interface DetailHeaderProps {
 
 const DetailHeader = ({ title, step, fullDate, day }: DetailHeaderProps) => {
   return (
-    <div className="sticky top-0 bg-white/70 backdrop-blur-3xl">
+    <div className="sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
       <NavBar leftSection={<BackButton />} rightSection={<DetailMoreMenu />} />
       <div className="flex flex-col gap-2 pb-4 web:pb-[34px] border-b border-black100 mx-[22px] web:mx-[28px]">
         <div className="flex gap-3 items-center">

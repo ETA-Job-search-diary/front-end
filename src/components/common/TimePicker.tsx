@@ -51,7 +51,11 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
     };
 
     return (
-      <div className="web:h-[30px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4">
+      <div
+        className={`max-h-[43px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4 ${
+          isDesktop ? '' : 'border-b border-black100'
+        }`}
+      >
         {isDesktop && meridiem && (
           <MeridiemPicker meridiem={meridiem} onChange={handleMeridiemChange} />
         )}
@@ -59,9 +63,9 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
           ref={ref}
           type="time"
           defaultValue={currentTime}
-          className={`border-b border-black100 p-1 web:p-2 bg-white w-full web:cursor-text ${
+          className={`p-1 web:p-2 bg-white w-full web:cursor-text ${
             isFilled ? 'text-black900' : 'text-black200'
-          } without_ampm`}
+          } ${isDesktop ? 'border-b border-black100' : ''} without_ampm`}
           step="600"
           required
           onChange={handleTimeChange}
