@@ -51,7 +51,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
     };
 
     return (
-      <div className="h-full text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4">
+      <div className="web:h-[30px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4">
         {isDesktop && meridiem && (
           <MeridiemPicker meridiem={meridiem} onChange={handleMeridiemChange} />
         )}
