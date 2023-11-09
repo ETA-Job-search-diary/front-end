@@ -1,8 +1,8 @@
 import Icon from '@/assets/Icon';
 import Badge from '../common/Badge';
-import BackButton from '@/components/BackButton';
-import DetailMoreMenu from '@/components/DetailMoreMenu';
-import NavBar from '@/components/common/NavBar';
+import BackButton from './BackButton';
+import NavBar from '../common/NavBar';
+import DetailMoreMenu from '../detail/DetailMoreMenu';
 
 interface DetailNavBarProps {
   title: string;

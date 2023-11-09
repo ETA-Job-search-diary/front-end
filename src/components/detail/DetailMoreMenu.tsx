@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert, { AlertType } from './common/Alert';
+import Alert, { AlertType } from '../common/Alert';
 
 type Menu = 'edit' | 'delete';
 

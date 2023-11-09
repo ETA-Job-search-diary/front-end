@@ -1,10 +1,10 @@
 'use client';
 
 import Icon from '@/assets/Icon';
-import EmptyItem from '@/components/EmptyItem';
-import FilterChips from '@/components/FilterChips';
-import ScheduleList from '@/components/ScheduleList';
-import ScheduleListHeader from '@/components/ScheduleListHeader';
+import EmptyItem from '@/components/home/EmptyItem';
+import FilterChips from '@/components/list/FilterChips';
+import ScheduleList from '@/components/home/ScheduleList';
+import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import Button from '@/components/common/Button';
 
 import { data2 } from '@/mock/data';

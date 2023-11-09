@@ -1,6 +1,6 @@
 import { getFormattedDate } from '@/service/date';
 import Link from 'next/link';
-import Badge from './common/Badge';
+import Badge from '../common/Badge';
 import Icon from '@/assets/Icon';
 
 export interface ScheduleItemProps {

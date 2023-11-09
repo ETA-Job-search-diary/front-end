@@ -1,6 +1,6 @@
 import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
-import Button from './common/Button';
+import Button from '../common/Button';
 
 interface ScheduleListHeaderProps {
   count: number;

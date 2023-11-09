@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 import LinkButton, { PathType } from './LinkButton';
-import FloatNewButton from '../FloatNewButton';
+import FloatNewButton from '../new/FloatNewButton';
 import Alert, { AlertType } from './Alert';
 
 const TabBar = () => {

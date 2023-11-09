@@ -6,7 +6,7 @@ import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
 interface ScheduleListProps {
   items: ScheduleItemProps[];
   isEdit?: boolean;
-  checked?: string[]; // 리스트 페이지에서만 필요하기때문에, 여기서는 optional로 처리
+  checked?: string[];
   onCheck?: (id: string) => void;
 }
 

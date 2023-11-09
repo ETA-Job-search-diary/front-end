@@ -1,5 +1,5 @@
 import { STEPS } from '@/constants/form';
-import Chip from './common/Chip';
+import Chip from '../common/Chip';
 
 const ETC = {
   value: 'etc',
