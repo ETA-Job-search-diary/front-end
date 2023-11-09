@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
-import NavBar from './common/NavBar';
-import BackButton from './BackButton';
-import SignInOutButton from './signin/SignInOutButton';
+import NavBar from '../common/NavBar';
+import BackButton from '../navbar/BackButton';
+import SignOutButton from './SignOutButton';
 import { Session } from 'next-auth';
 import Icon from '@/assets/Icon';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
@@ -41,7 +41,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           </div>
         </div>
         <div className="flex flex-col items-center first:border border-black100 px-3 py-5">
-          <SignInOutButton session={session} />
+          <SignOutButton />
           <Link
             href={'https://www.naver.com'}
             rel="noopener noreferrer"
@@ -62,12 +62,11 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           </Link>
         </div>
         <footer className="grid place-items-center">
-          <button type="button" className="fixed flex bottom-12">
-            {/* <Icon
-              name="withdraw"
-              className="w-3 h-5 web:w-6 web:h-6 stroke-black300"
-            /> */}
-            <span className="text-xs web:text-sm text-black900">탈퇴하기</span>
+          <button
+            type="button"
+            className="fixed flex bottom-12 text-xs web:text-sm text-black600"
+          >
+            탈퇴하기
           </button>
         </footer>
       </div>

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Button from './common/Button';
+import Button from '../common/Button';
 
 interface EditButtonProps {
   isEdit: boolean;

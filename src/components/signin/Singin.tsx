@@ -6,7 +6,7 @@ import { getProviders } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import NavBar from '../common/NavBar';
-import BackButton from '../BackButton';
+import BackButton from '../navbar/BackButton';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
 
 const Singin = async () => {

@@ -1,6 +1,6 @@
 import Icon from '@/assets/Icon';
 import { FormType } from '@/constants/form';
-import MarkDownViewer from './common/MarkdownViewer';
+import MarkDownViewer from '../common/MarkdownViewer';
 
 interface DetailProps {
   company: string;

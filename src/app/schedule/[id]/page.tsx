@@ -1,4 +1,4 @@
-import Detail from '@/components/Detail';
+import Detail from '@/components/detail/Detail';
 import DetailNavBar from '@/components/navbar/DetailNavBar';
 import { getFormattedDate } from '@/service/date';
 interface pageProps {
