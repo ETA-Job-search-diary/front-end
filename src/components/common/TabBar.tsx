@@ -27,11 +27,10 @@ const TabBar = () => {
   if (pathname === '/auth/signin' || pathname === '/new') return null;
 
   return (
-    <nav className="w-full h-full grid place-items-center">
-      <div className="fixed bottom-2 w-20 h-20 bg-white rounded-full shadow-tab" />
-      <div className="h-[72px] w-full grid grid-cols-3 place-items-center mx-auto min-w-[280px] max-w-[500px] fixed bottom-0 bg-white shadow-tab">
-        <FloatNewButton onClick={handleNewClick} />
+    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
+      <div className="relative h-full w-full grid grid-cols-3 place-items-center">
         <LinkButton path={PathType.home} />
+        <FloatNewButton onClick={handleNewClick} />
         <LinkButton path={PathType.list} />
         {isNewOpen && (
           <Alert
