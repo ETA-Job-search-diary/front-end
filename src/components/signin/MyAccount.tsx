@@ -49,15 +49,17 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col items-center first:border border-black100 px-3 py-5">
-          <SignOutButton />
-          {/* //TODO: 서비스 소개 나오면 수정 하기 */}
+        <div className="flex flex-col items-center px-1 py-3 web:px-3 web:py-5">
           <Link
-            href={'https://www.naver.com'}
+            href={'https://www.naver.com'} ////TODO: 서비스 소개 나오면 수정 하기 */
             rel="noopener noreferrer"
             target="_blank"
-            className="text-xs web:text-md text-black900 w-full flex items-center gap-3 p-3"
+            className="w-full flex items-center gap-3 p-3 border-b border-black100"
           >
+            <Icon
+              name="message"
+              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+            />
             <span className="text-xs web:text-md text-black900">
               서비스소개
             </span>
@@ -66,19 +68,23 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             href={SUPPORT_FORM}
             rel="noopener noreferrer"
             target="_blank"
-            className="text-xs web:text-md text-black900 w-full flex items-center gap-3 p-3"
+            className="w-full flex items-center gap-3 p-3 border-b border-black100"
           >
+            <Icon
+              name="request"
+              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+            />
             <span className="text-xs web:text-md text-black900">문의하기</span>
           </Link>
-        </div>
-        <footer className="grid place-items-center">
-          <button
-            type="button"
-            className="fixed flex bottom-12 text-xs web:text-sm text-black600"
-          >
-            탈퇴하기
+          <SignOutButton />
+          <button type="button" className="w-full flex items-center gap-3 p-3">
+            <Icon
+              name="withdraw"
+              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+            />
+            <span className="text-xs web:text-md text-black900">탈퇴하기</span>
           </button>
-        </footer>
+        </div>
       </div>
     </section>,
     document.body.querySelector('main') || document.body,

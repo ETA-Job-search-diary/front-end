@@ -10,10 +10,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Alert, { AlertType } from '../common/Alert';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type Menu = 'edit' | 'delete';
 
-const DetailMoreMenu = () => {
+interface DetailMoreMenuProps {
+  scheduleId: string;
+}
+
+const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
+
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<Menu>();
 
@@ -30,8 +41,18 @@ const DetailMoreMenu = () => {
   const handleCloseMenu = () => setIsOpen(false);
 
   const handleDeleteConfirm = () => {
-    console.log('//TODO: 삭제 요청');
-    handleCloseMenu();
+    if (!token) return;
+    axios
+      .delete(`http://track.bugilabs.com:3905/api/schedules/${scheduleId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        handleCloseMenu();
+        router.push('/list');
+      })
+      .catch((err) => console.log(err));
   };
 
   const MenuItem = {

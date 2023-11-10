@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import Chip from './Chip';
@@ -18,10 +18,11 @@ import { format } from 'date-fns';
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
   const router = useRouter();
-  // 넥스트 api 활용 못하나
+
   const { data: session } = useSession();
   const token = session?.user.accessToken;
-  //TODO: 로그인 구현 완료시, 토큰없으면 리다이렉트 처리
+
+  if (!token) redirect('/');
 
   const [title, setTitle] = useState('');
   const [step, setStep] = useState('');
