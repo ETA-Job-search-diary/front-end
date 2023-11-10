@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/constants/service';
 import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
 import Button from '../common/Button';
@@ -51,7 +52,7 @@ const ScheduleListHeader = ({
     if (!token) return;
     axios
       .post(
-        `http://track.bugilabs.com:3905/api/schedules/deleteMany`,
+        `${BASE_URL}/schedules/deleteMany`,
         {
           data: {
             ids: checkedIds,
@@ -67,7 +68,7 @@ const ScheduleListHeader = ({
         handleCloseMenu();
         onUnCheckAll();
         // TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
-        // key: `http://track.bugilabs.com:3905/api/schedules/list?offset=${offset}${
+        // key: `${BASE_URL}/schedules/list?offset=${offset}${
         //   filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
         // }`;
       })

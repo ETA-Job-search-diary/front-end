@@ -14,6 +14,7 @@ import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
 import { useSession } from 'next-auth/react';
 import { format } from 'date-fns';
+import { BASE_URL } from '@/constants/service';
 
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
@@ -22,7 +23,9 @@ const Form = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  if (!token) redirect('/');
+  if (!token) {
+    //TODO: 토큰 만료시 로그인 페이지로 이동
+  }
 
   const [title, setTitle] = useState('');
   const [step, setStep] = useState('');
@@ -75,7 +78,7 @@ const Form = () => {
     };
     //TODO: link, platform, memo 빈값일때 처리
     axios
-      .post('http://track.bugilabs.com:3905/api/schedules', data, {
+      .post(`${BASE_URL}/schedules`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

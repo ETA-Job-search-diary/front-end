@@ -1,5 +1,5 @@
 'use client';
-
+import { BASE_URL } from '@/constants/service';
 import EmptyItem from '@/components/home/EmptyItem';
 import FilterChips from '@/components/list/FilterChips';
 import ScheduleList from '@/components/home/ScheduleList';
@@ -43,7 +43,7 @@ const AllScheduleList = () => {
     const getData = () =>
       axios
         .get(
-          `http://track.bugilabs.com:3905/api/schedules/list?offset=${offset}${
+          `${BASE_URL}/schedules/list?offset=${offset}${
             filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
           }`,
           {
