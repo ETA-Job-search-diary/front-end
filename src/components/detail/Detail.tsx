@@ -7,9 +7,9 @@ interface DetailProps {
   position: string;
   date: string;
   endTime: string;
-  link: string;
-  platform: string;
-  memo: string;
+  link?: string;
+  platform?: string;
+  memo?: string;
 }
 
 const Detail = ({
@@ -58,7 +58,7 @@ const Detail = ({
           <Icon name="memo" className="w-3 h-3 web:w-4 web:h-4" />
           {FormType.MEMO}
         </span>
-        <MarkDownViewer content={memo} />
+        <MarkDownViewer content={memo || ''} />
       </label>
     </section>
   );

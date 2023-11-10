@@ -14,6 +14,7 @@ export const authOptions: NextAuthOptions = {
           id: response.id.toString().slice(1),
           name: response.name,
           email: response.email,
+          accessToken: response.accessToken,
         };
       },
     }),
@@ -25,6 +26,7 @@ export const authOptions: NextAuthOptions = {
           id: profile.id,
           name: profile.kakao_account.profile.nickname,
           email: profile.kakao_account.email,
+          accessToken: profile.accessToken,
         };
       },
     }),
