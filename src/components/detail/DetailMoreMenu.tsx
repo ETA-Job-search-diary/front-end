@@ -1,5 +1,5 @@
 'use client';
-
+import { BASE_URL } from '@/constants/service';
 import { useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
@@ -40,10 +40,16 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const openMenu = () => setIsOpen(true);
   const handleCloseMenu = () => setIsOpen(false);
 
+  const handleEditConfirm = () => {
+    if (!token) return;
+    //TODO: New Page로 이동 (포탈로 해야되나)
+    router.push(`/edit/${scheduleId}`);
+  };
+
   const handleDeleteConfirm = () => {
     if (!token) return;
     axios
-      .delete(`http://track.bugilabs.com:3905/api/schedules/${scheduleId}`, {
+      .delete(`${BASE_URL}/schedules/${scheduleId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +118,8 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
             },
             {
               value: AlertType[message],
-              onClick: handleDeleteConfirm,
+              onClick:
+                message === 'edit' ? handleEditConfirm : handleDeleteConfirm,
             },
           ]}
           onClose={handleCloseMenu}
