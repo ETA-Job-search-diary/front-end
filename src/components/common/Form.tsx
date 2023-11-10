@@ -1,5 +1,6 @@
 'use client';
 
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
@@ -12,10 +13,17 @@ import { STEPS } from '@/constants/form';
 import { getPlatformFromLink } from '@/service/form';
 import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
+import { useSession } from 'next-auth/react';
+import { format } from 'date-fns';
 
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
   const router = useRouter();
+  // 넥스트 api 활용 못하나
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
+  //TODO: 로그인 구현 완료시, 토큰없으면 리다이렉트 처리
+
   const [title, setTitle] = useState('');
   const [steps, setSteps] = useState('');
   const [company, setCompany] = useState('');
@@ -51,16 +59,37 @@ const Form = () => {
       return;
     }
 
+    const convertTime = (date?: Date, time?: string) => {
+      if (!date || !time) return;
+      const convertedDate = format(new Date(date), 'yyyy-MM-dd');
+      const formattedDate = `${convertedDate}T${time}:00.000Z`;
+      return formattedDate;
+    };
+    const timeString = convertTime(date, time);
+    const stepLabel = STEPS.find((step) => step.value === steps)?.label;
+
     const data = {
       title,
-      steps,
+      step: {
+        name: stepLabel ? stepLabel : steps,
+        value: stepLabel ? steps : undefined,
+      },
+      company,
       position,
+      date: timeString,
       link,
       platform: platform || autoPlatform,
       memo,
     };
-    console.log(data); // TODO: POST 성공시 리스트로 이동
-    router.push('/list');
+    //TODO: link, platform, memo 빈값일때 처리
+    axios
+      .post('http://track.bugilabs.com:3905/api/schedules', data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => router.push('/list'))
+      .catch((err) => console.log(err));
   };
 
   const handleTimeChange = (value: string) => setTime(value);
