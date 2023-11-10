@@ -1,27 +1,40 @@
 import { format, getDate } from 'date-fns';
 import { ko } from 'date-fns/locale';
-
-export const getFormattedDate = (inputDate: string) => {
-  const input = new Date(inputDate);
-  const fullDate = getFormattedFullDate(inputDate);
-  const date = getDate(input); // 날짜
-  const day = format(input, 'EEEE', { locale: ko }); // 요일
-  const time = format(input, 'ppp'); // 시간
-  const endTime = format(input, 'a hh:mm', { locale: ko }); // 시간
+//TODO: 더 좋은 방법 없는 지 찾아보기 (컴포넌트에서 계쏙해서 각각 호출하는게 맞나..)
+export const getFormattedDate = (input: string) => {
+  const [inputDate, inputTime] = input.split('T');
+  const fullDate = getFormatByDateString(inputDate);
+  const date = getDate(new Date(inputDate));
+  const day = getFormatDayByDateStr(inputDate);
+  const endTime = getFormatEndTimeByTimeStr(inputTime);
 
   return {
     fullDate,
     date,
     day,
-    time,
     endTime,
   };
 };
 
-export const getFormattedFullDate = (inputDate: Date | string) => {
-  const input = new Date(inputDate);
-  const fullDate = format(input, 'yyyy.MM.dd');
+export const getFormatByDateString = (inputDate: string) => {
+  return inputDate.replaceAll('-', '.');
+};
+
+export const getFormatDayByDateStr = (inputDate: string) => {
+  const day = format(new Date(inputDate), 'EEEE', { locale: ko });
+  return day;
+};
+
+export const getFormatByDate = (inputDate: Date) => {
+  const fullDate = format(inputDate, 'yyyy.MM.dd');
   return fullDate;
+};
+
+export const getFormatEndTimeByTimeStr = (inputTime: string) => {
+  const time = inputTime.slice(0, 5);
+  const mer = time.split(':')[0] >= '12' ? '오후' : '오전';
+  const endTime = `${mer} ${time}`;
+  return endTime;
 };
 
 export const getFormattedCurrentTime = () => {

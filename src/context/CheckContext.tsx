@@ -56,13 +56,13 @@ const reducer = (state: CheckState, action: Action): CheckState => {
     case CheckActionType.CHECK: {
       if (!('id' in payload)) return state;
       const updateState = {
-        ...state,
+        allChecked: checkedIds.length > 0,
         checkedIds: checkedIds.includes(payload.id)
           ? checkedIds.filter((id) => id !== payload.id)
           : [...checkedIds, payload.id],
       };
       return {
-        ...state,
+        allChecked: checkedIds.length > 0,
         checkedIds: updateState.checkedIds,
       };
     }

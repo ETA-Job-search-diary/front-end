@@ -3,15 +3,19 @@ import Badge from '../common/Badge';
 import BackButton from './BackButton';
 import NavBar from '../common/NavBar';
 import DetailMoreMenu from '../detail/DetailMoreMenu';
+import { getFormattedDate } from '@/service/date';
+import { getBadgeByStep } from '@/service/schedule';
 
 interface DetailNavBarProps {
   title: string;
   step: string;
-  fullDate: string;
-  day: string;
+  date: string;
 }
 
-const DetailNavBar = ({ title, step, fullDate, day }: DetailNavBarProps) => {
+const DetailNavBar = ({ title, step, date }: DetailNavBarProps) => {
+  const { fullDate, day } = getFormattedDate(date);
+  const bagdeName = getBadgeByStep(step);
+
   return (
     <div className="sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
       <NavBar leftSection={<BackButton />} rightSection={<DetailMoreMenu />} />
@@ -20,7 +24,7 @@ const DetailNavBar = ({ title, step, fullDate, day }: DetailNavBarProps) => {
           <h1 className="text-black900 font-bold text-md web:text-xl">
             {title}
           </h1>
-          <Badge label={step} />
+          {bagdeName && <Badge label={bagdeName} />}
         </div>
         <span className="text-black600 font-medium flex gap-2 items-center text-xxs web:text-sm">
           <Icon

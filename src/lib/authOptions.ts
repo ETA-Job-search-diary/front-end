@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
           id: response.id.toString().slice(1),
           name: response.name,
           email: response.email,
-          accessToken: response.accessToken,
+          // accessToken: response.accessToken,
         };
       },
     }),
@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
           id: profile.id,
           name: profile.kakao_account.profile.nickname,
           email: profile.kakao_account.email,
-          accessToken: profile.accessToken,
+          // accessToken: profile.accessToken,
         };
       },
     }),
@@ -56,12 +56,12 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ user }) {
-      const { id, name, email } = user;
+      const { name, email } = user;
       try {
         if (!email) return false;
         const { data } = await axios.post(
           'http://track.bugilabs.com:3905/api/auth/login',
-          { identifier: id, name, email },
+          { name, email },
         );
         user.accessToken = data.token;
         return true;
