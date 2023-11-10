@@ -4,7 +4,6 @@ import EmptyItem from '@/components/home/EmptyItem';
 import FilterChips from '@/components/list/FilterChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
-
 import { useEffect, useState } from 'react';
 import { useCheckDispatch } from '@/context/CheckContext';
 import { ScheduleDetailType } from '@/model/schedule';
@@ -19,7 +18,7 @@ const AllScheduleList = () => {
   const [data, setData] = useState<ScheduleDetailType[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
-  const { onCheckAll } = useCheckDispatch();
+  const { onCheckToggle, onCheckAll } = useCheckDispatch();
 
   const total = data.length;
   const isFiltered = !!filter.length;
@@ -32,7 +31,10 @@ const AllScheduleList = () => {
       return updatedFilter;
     });
   };
+
   const handleEditToggle = () => setIsEdit((prev) => !prev);
+
+  const handleCheckToggleAll = () => onCheckToggle(data.map((d) => d.id));
 
   const handleCheckAll = () => onCheckAll(data.map((d) => d.id));
 
@@ -61,6 +63,7 @@ const AllScheduleList = () => {
         count={total}
         isEdit={isEdit}
         onEditClick={handleEditToggle}
+        onCheckToggle={handleCheckToggleAll}
         onCheckAll={handleCheckAll}
       />
       <section

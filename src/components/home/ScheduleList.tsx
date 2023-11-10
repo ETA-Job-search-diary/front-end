@@ -18,11 +18,11 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
   const handleCheck = (id: string) => onCheck(id);
 
   return (
-    <ul className="w-full flex flex-col gap-3 duration-500 ease-linear  transition-all">
+    <ul className="w-full flex flex-col gap-3 duration-500 ease-linear transition-all">
       {items.map((item) => (
         <li
           key={item.id}
-          className={`web:gap-3 items-center duration-500 ease-linear  transition-all ${
+          className={`web:gap-3 items-center duration-500 ease-linear transition-all ${
             isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
           }`}
         >

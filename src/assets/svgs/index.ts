@@ -25,3 +25,5 @@ export { default as person } from './person.svg';
 export { default as check } from './check-circle.svg';
 export { default as logout } from './logout.svg';
 export { default as withdraw } from './withdraw.svg';
+export { default as request } from './request.svg';
+export { default as message } from './servicemessage.svg';

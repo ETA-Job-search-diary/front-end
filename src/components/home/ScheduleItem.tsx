@@ -4,6 +4,9 @@ import Badge from '../common/Badge';
 import Icon from '@/assets/Icon';
 import { ScheduleSimpleType } from '@/model/schedule';
 import { getBadgeByStep, getStepByValue } from '@/service/schedule';
+import { isToday, isBefore } from 'date-fns';
+
+const currentDate = new Date();
 
 const ScheduleItem = ({
   id,
@@ -13,13 +16,22 @@ const ScheduleItem = ({
   position,
   date,
 }: ScheduleSimpleType) => {
-  const { date: formattedDate, day, endTime } = getFormattedDate(date);
+  const {
+    fullDate,
+    date: formattedDate,
+    day,
+    endTime,
+  } = getFormattedDate(date);
   const badge = getBadgeByStep(step);
+  const isBeforeToday =
+    isBefore(new Date(fullDate), currentDate) && !isToday(new Date(fullDate));
 
   return (
     <Link
       href={`/schedule/${id}`}
-      className="hover:bg-light transition-colors whitespace-nowrap grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px]"
+      className={`${
+        isBeforeToday ? 'bg-ligtht-gray' : 'bg-white'
+      } hover:bg-light transition-colors whitespace-nowrap grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px]`}
     >
       <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100 ">
         <h3 className="font-bold xs:text-sm text-lg web:text-2xl">
