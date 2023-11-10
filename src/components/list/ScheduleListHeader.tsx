@@ -40,7 +40,7 @@ const ScheduleListHeader = ({
         </div>
       </div>
       <div
-        className={`flex justify-between items-end sticky top-0 duration-200 ease-linear transition-all transform pb-3 px-[22px] web:px-[28px] ${
+        className={`flex justify-between items-end sticky top-0 duration-200 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
           isEdit ? 'translate-y-0' : '-translate-y-28 h-0 opacity-0'
         }`}
       >
