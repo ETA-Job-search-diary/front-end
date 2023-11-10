@@ -1,4 +1,4 @@
-import { data1, data2 } from '@/mock/data';
+import { data1 } from '@/mock/data';
 import Schedule, { WeekType } from './Schedule';
 
 interface ScheduleListProps {}

@@ -1,11 +1,11 @@
 import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
 import Button from '../common/Button';
+import { useCheckState } from '@/context/CheckContext';
 
 interface ScheduleListHeaderProps {
   count: number;
   isEdit: boolean;
-  isAllChecked?: boolean;
   onEditClick: () => void;
   onCheckAll?: () => void;
 }
@@ -13,10 +13,11 @@ interface ScheduleListHeaderProps {
 const ScheduleListHeader = ({
   count,
   isEdit,
-  isAllChecked,
   onEditClick,
   onCheckAll,
 }: ScheduleListHeaderProps) => {
+  const { allChecked } = useCheckState();
+
   return (
     <header className="z-30 flex flex-col sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
       <div className="z-40 pt-6 pb-4 px-[22px] web:px-[28px] bg-inherit">
@@ -49,7 +50,7 @@ const ScheduleListHeader = ({
             <Icon
               name="check"
               className={`w-3.5 h-3.5 web:w-5 web:h-5 ${
-                isAllChecked ? 'fill-primary500' : 'fill-black100'
+                allChecked ? 'fill-primary500' : 'fill-black100'
               }`}
             />
           </button>

@@ -1,3 +1,4 @@
+import CheckProvider from '@/context/CheckContext';
 import { ReactNode } from 'react';
 
 interface ListPagelayoutProps {
@@ -7,7 +8,7 @@ interface ListPagelayoutProps {
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
     <section className="min-h-screen web:min-h-full w-full bg-white">
-      {children}
+      <CheckProvider>{children}</CheckProvider>
     </section>
   );
 }

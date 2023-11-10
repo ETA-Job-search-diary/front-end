@@ -1,23 +1,21 @@
 'use client';
 
 import Icon from '@/assets/Icon';
-import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
+import ScheduleItem from './ScheduleItem';
+import { ScheduleSimpleType } from '@/model/schedule';
+import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
 
 interface ScheduleListProps {
-  items: ScheduleItemProps[];
+  items: ScheduleSimpleType[];
   isEdit?: boolean;
-  checked?: string[];
-  onCheck?: (id: string) => void;
 }
 
-const ScheduleList = ({
-  items,
-  isEdit,
-  checked,
-  onCheck,
-}: ScheduleListProps) => {
-  const isChecked = (id: string) => checked?.includes(id);
-  const handleCheck = (id: string) => onCheck?.(id);
+const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
+  const { checkedIds } = useCheckState();
+  const { onCheck } = useCheckDispatch();
+
+  const isChecked = (id: string) => checkedIds.includes(id);
+  const handleCheck = (id: string) => onCheck(id);
 
   return (
     <ul className="w-full flex flex-col gap-3 duration-500 ease-linear  transition-all">
