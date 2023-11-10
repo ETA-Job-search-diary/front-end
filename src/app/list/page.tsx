@@ -62,7 +62,9 @@ export default function ListPage() {
       />
       <section
         className={`px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
-          isEdit ? '-translate-y-24' : 'translate-y-0 pb-20'
+          isEdit
+            ? '-translate-y-[90px] xs:-translate-y-16'
+            : 'translate-y-0 pb-20'
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
