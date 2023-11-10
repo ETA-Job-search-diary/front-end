@@ -62,7 +62,6 @@ export const authOptions: NextAuthOptions = {
           { identifier: id, name, email },
         );
         user.accessToken = data.token;
-        console.log('토큰', data.token);
         return true;
       } catch (err) {
         console.log(err);
