@@ -1,7 +1,7 @@
 export interface ScheduleDetailType {
   id: string;
   title: string;
-  step: StepType;
+  step: string;
   user: string;
   company: string;
   position: string;
@@ -11,16 +11,10 @@ export interface ScheduleDetailType {
   memo?: string;
 }
 
-export interface StepType {
-  id?: string;
-  name: string; // 한글이름
-  value: string;
-}
-
 export interface ScheduleSimpleType {
   id: string;
   title: string;
-  step: StepType;
+  step: string;
   company: string;
   position: string;
   date: string;

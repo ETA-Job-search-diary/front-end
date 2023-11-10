@@ -1,12 +1,12 @@
 import Icon from '@/assets/Icon';
 import { FormType } from '@/constants/form';
 import MarkDownViewer from '../common/MarkdownViewer';
+import { getFormattedDate } from '@/service/date';
 
 interface DetailProps {
   company: string;
   position: string;
   date: string;
-  endTime: string;
   link?: string;
   platform?: string;
   memo?: string;
@@ -15,11 +15,13 @@ interface DetailProps {
 const Detail = ({
   company,
   position,
-  endTime,
+  date,
   link,
   platform,
   memo,
 }: DetailProps) => {
+  const { endTime } = getFormattedDate(date);
+
   return (
     <section className="w-full pb-24 px-[22px] web:px-[28px] flex flex-col gap-8 text-black-800 text-xs web:text-md pt-4 web:pt-8 scroll-auto">
       <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">

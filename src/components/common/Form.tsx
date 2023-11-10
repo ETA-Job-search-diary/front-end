@@ -6,7 +6,6 @@ import TextArea from './TextArea';
 import TextInput from './TextInput';
 import Chip from './Chip';
 import { useState, MouseEvent } from 'react';
-import ChipInput from './ChipInput';
 import Button from './Button';
 import FormLabel from './FormLabel';
 import { STEPS } from '@/constants/form';
@@ -25,7 +24,7 @@ const Form = () => {
   //TODO: 로그인 구현 완료시, 토큰없으면 리다이렉트 처리
 
   const [title, setTitle] = useState('');
-  const [steps, setSteps] = useState('');
+  const [step, setStep] = useState('');
   const [company, setCompany] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState<Date>();
@@ -38,18 +37,14 @@ const Form = () => {
 
   const isReady =
     title.length > 0 &&
-    steps.length > 0 &&
+    step.length > 0 &&
     company.length > 0 &&
     position.length > 0;
 
   const handleChipClick = (value: string) => {
-    if (steps === value) setSteps('');
-    else setSteps(value);
+    if (step === value) setStep('');
+    else setStep(value);
   };
-
-  const handleChipInputClick = () => setSteps('');
-
-  const handleStepChange = (value: string) => setSteps(value);
 
   const handleSubmit = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -66,14 +61,10 @@ const Form = () => {
       return formattedDate;
     };
     const timeString = convertTime(date, time);
-    const stepLabel = STEPS.find((step) => step.value === steps)?.label;
 
     const data = {
       title,
-      step: {
-        name: stepLabel ? stepLabel : steps,
-        value: stepLabel ? steps : undefined,
-      },
+      step,
       company,
       position,
       date: timeString,
@@ -107,20 +98,15 @@ const Form = () => {
         />
         <FormLabel must id="step" label="전형단계">
           <ul className="grid grid-cols-4 gap-4 xs:gap-1">
-            {STEPS.map(({ value, label }) => (
+            {STEPS.map(({ value, name }) => (
               <li key={value}>
                 <Chip
-                  label={label}
-                  checked={steps === value}
+                  label={name}
+                  checked={step === value}
                   onClick={() => handleChipClick(value)}
                 />
               </li>
             ))}
-            <ChipInput
-              current={steps}
-              onClick={handleChipInputClick}
-              onTextInput={handleStepChange}
-            />
           </ul>
         </FormLabel>
         <div className="flex flex-col gap-4">
