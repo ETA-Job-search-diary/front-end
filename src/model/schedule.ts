@@ -12,7 +12,20 @@ export interface ScheduleDetailType {
 }
 
 export interface StepType {
-  id: string;
+  id?: string;
   name: string; // 한글이름
+  value: string;
+}
+
+export interface ScheduleSimpleType {
+  id: string;
+  title: string;
+  step: StepType;
+  company: string;
+  position: string;
+  date: string;
+}
+
+export interface ScheduleFilterType {
   value: string;
 }

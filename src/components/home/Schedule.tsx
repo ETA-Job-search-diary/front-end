@@ -1,6 +1,7 @@
 import EmptyItem from './EmptyItem';
-import ScheduleItem, { ScheduleItemProps } from './ScheduleItem';
+import ScheduleItem from './ScheduleItem';
 import SubScheduleTitle from '../list/SubScheduleTitle';
+import { ScheduleSimpleType } from '@/model/schedule';
 
 export enum WeekType {
   this = '이번주',
@@ -9,7 +10,7 @@ export enum WeekType {
 
 interface ScheduleProps {
   week: WeekType;
-  items: ScheduleItemProps[];
+  items: ScheduleSimpleType[];
 }
 
 const Schedule = ({ week, items }: ScheduleProps) => {

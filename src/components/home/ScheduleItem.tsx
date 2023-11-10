@@ -2,24 +2,16 @@ import { getFormattedDate } from '@/service/date';
 import Link from 'next/link';
 import Badge from '../common/Badge';
 import Icon from '@/assets/Icon';
-
-export interface ScheduleItemProps {
-  id: string;
-  title: string;
-  steps: string;
-  company: string;
-  position: string;
-  date: string;
-}
+import { ScheduleSimpleType } from '@/model/schedule';
 
 const ScheduleItem = ({
   id,
   title,
-  steps,
+  step,
   company,
   position,
   date,
-}: ScheduleItemProps) => {
+}: ScheduleSimpleType) => {
   const { date: formattedDate, day, endTime } = getFormattedDate(date);
 
   return (
@@ -50,7 +42,7 @@ const ScheduleItem = ({
         )}
       </div>
       <div className="place-self-center text-black600 font-bold text-xxs web:text-sm xs:pr-3 pr-6 web:pr-[30px]">
-        {steps}
+        {step.name}
       </div>
     </Link>
   );
