@@ -134,6 +134,14 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
+        jumpDown: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-0.8rem)' },
+        },
+        jumpUp: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(0.8rem)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -141,6 +149,8 @@ module.exports = {
         mount: 'mount 0.2s linear',
         unmount: 'unmount 0.2s ease-in-out',
         wiggle: 'wiggle 1s ease-in-out infinite',
+        jumpDown: 'jumpDown 0.5s ease-in-out',
+        jumpUp: 'jumpUp 0.5s ease-in-out',
       },
     },
   },

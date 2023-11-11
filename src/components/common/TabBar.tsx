@@ -19,7 +19,7 @@ const TabBar = () => {
   };
 
   const handleLoginClick = () => {
-    router.push('/auth/signin'); // TODO:로그인 성공하면 new로 이동
+    router.push('/auth/signin'); // TODO:로그인 성공하면 new로 이동 (어떻게 할...할..할까)
     setIsOpen(false);
   };
 
@@ -47,6 +47,9 @@ const TabBar = () => {
             onClose={() => setIsOpen(false)}
           />
         )}
+      </div>
+      <div className="w-full h-full absolute bottom-0 grid place-items-center">
+        <div className="bg-white w-40 h-[68px]" />
       </div>
     </nav>
   );

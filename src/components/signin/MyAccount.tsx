@@ -111,10 +111,9 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             <span className="text-xs web:text-md text-black900">탈퇴하기</span>
           </button>
         </div>
-        <Image
-          src={TeamImage}
-          alt="team-eta"
-          className="absolute bottom-7 web:bottom-12 web:right-10 right-7 web:w-[212px] w-40"
+        <Icon
+          name="teamETA"
+          className="absolute bottom-7 web:bottom-12 right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
         />
         {isOpen && (
           <Alert

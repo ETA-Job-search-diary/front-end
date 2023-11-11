@@ -39,7 +39,7 @@ const getButtonStyle = (
     sm: 'h-10 web:h-12 text-xxs web:text-sm rounded-small',
     md: 'h-12 web:h-16 text-xs web:text-md rounded-small',
   };
-  //TODO: Border버튼 형태 확인
+
   const colorStyle = {
     primary: {
       inactive: 'bg-black100 text-white',
@@ -50,8 +50,8 @@ const getButtonStyle = (
       active: 'text-primary500 hover:font-semibold',
     },
     secondary: {
-      inactive: 'border border-black100 text-black200',
-      active: 'border border-primary500 text-primary500 hover:font-semibold',
+      inactive: 'border-[0.7px] border-black100 text-black200',
+      active: 'border-[0.7px] border-primary500 text-primary500 hover:font-semibold',
     },
     gray: {
       inactive: 'bg-black100 text-black200',
