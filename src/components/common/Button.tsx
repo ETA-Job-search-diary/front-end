@@ -58,8 +58,8 @@ const getButtonStyle = (
       active: 'bg-black100 text-white hover:font-semibold',
     },
     border: {
-      inactive: 'border border-black100 text-black400 bg-body h-6',
-      active: 'border border-black100 text-black400 bg-body h-6',
+      inactive: 'border-[0.7px] border-black100 text-black400 bg-body h-6',
+      active: 'border-[0.7px] border-black100 text-black400 bg-body h-6',
     },
   };
 
