@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import Chip from './Chip';
@@ -28,19 +28,22 @@ const Form = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
+  const handleRedirectToast = () => {
+    toast({
+      description: '로그인시간이 만료됐어요. 다시 로그인해주세요',
+      action: (
+        <ToastAction
+          onClick={() => router.push('/auth/login')}
+          altText="로그인"
+        >
+          로그인
+        </ToastAction>
+      ),
+    });
+  };
+
   if (!token) {
-    () =>
-      toast({
-        description: '로그인이 만료됐어요. 다시 로그인해주세요',
-        action: (
-          <ToastAction
-            onClick={() => router.push('/auth/login')}
-            altText="로그인"
-          >
-            로그인
-          </ToastAction>
-        ),
-      });
+    handleRedirectToast();
   }
 
   const [title, setTitle] = useState('');
@@ -77,7 +80,7 @@ const Form = () => {
     else setStep(value);
   };
 
-  const handleSubmitInValid = () => {
+  const handleSubmitValidationToast = () => {
     toast({
       title: '항목을 모두 입력해주세요 🙇🏻‍♀️',
       description:
@@ -90,12 +93,12 @@ const Form = () => {
   ) => {
     e.preventDefault();
     if (isReady && !isDevReady) {
-      handleSubmitInValid();
+      handleSubmitValidationToast();
       return;
     }
 
     if (!isReady) {
-      handleSubmitInValid();
+      handleSubmitValidationToast();
       return;
     }
 

@@ -69,7 +69,7 @@ export const Calender = () => {
       <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-60 web:h-[360px] bg-white">
         <Icon
           name="mainCharacter"
-          className="absolute -top-[76px] web:-top-24 right-0 xs:w-14  w-24 h-28 web:w-36 web:h-[136px]"
+          className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
         />
         <Calender.Header
           current={current}
@@ -105,7 +105,7 @@ HeaderProps) => {
           variant="outline"
           size="icon"
           onClick={prevMonth}
-          className="w-6 h-6 web:w-7 web:h-7"
+          className="w-[1.5rem] h-[1.5rem]"
         >
           <ChevronLeft className="h-4 w-4 text-[#949494]" />
         </Button>
@@ -113,7 +113,7 @@ HeaderProps) => {
           variant="outline"
           size="icon"
           onClick={nextMonth}
-          className="w-6 h-6 web:w-7 web:h-7"
+          className="w-[1.5rem] h-[1.5rem]"
         >
           <ChevronRight className="h-4 w-4 text-[#949494]" />
         </Button>
@@ -173,7 +173,7 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
           {formattedDate}
         </span>
         {weekEvents && weekEvents.length > 0 && (
-          <span className="rounded-full bg-primary500 mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
+          <span className="rounded-full bg-primary500 mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
         )}
       </div>
     );
