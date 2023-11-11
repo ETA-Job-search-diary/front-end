@@ -30,7 +30,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         <span className="font-semibold">{label}</span>
         <textarea
           id={id}
-          className="w-full h-[9rem] font-medium bg-primary-bg border border-primary300 rounded-small placeholder:text-xs web:placeholder:text-md placeholder:text-black200 placeholder:font-medium p-1 web:p-2"
+          className="w-full h-[9rem] font-medium bg-primary-bg border border-primary300 rounded-small text-xs web:text-md placeholder:text-black300 placeholder:text-xxs web:placeholder:text-sm placeholder:font-medium p-2 web:p-[0.8rem]"
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}

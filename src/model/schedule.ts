@@ -2,7 +2,7 @@ export interface ScheduleDetailType {
   id: string;
   title: string;
   step: string;
-  user: string;
+  user?: string;
   company: string;
   position: string;
   date: string;

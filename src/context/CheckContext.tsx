@@ -15,7 +15,6 @@ interface CheckContextProps {
 
 enum CheckActionType {
   CHECK_TOGGLE = 'CHECK_TOGGLE',
-  CHECK_ALL = 'CHECK_ALL',
   CHECK = 'CHECK',
   UNCHECK_ALL = 'UNCHECK_ALL',
 }
@@ -78,13 +77,6 @@ const reducer = (state: CheckState, action: Action): CheckState => {
         checkedIds: [],
       };
     }
-    case CheckActionType.CHECK_ALL: {
-      if (!('checkedIds' in payload)) return state;
-      return {
-        allChecked: true,
-        checkedIds: payload.checkedIds,
-      };
-    }
     default:
       return state;
   }
@@ -103,7 +95,6 @@ const CheckDispatchContext = createContext({
   onCheckToggle: (checkedIds: string[]) => {},
   onCheck: (id: string) => {},
   onUnCheckAll: () => {},
-  onCheckAll: (checkedIds: string[]) => {},
 });
 
 const CheckProvider = ({ children }: CheckContextProps) => {
@@ -130,19 +121,11 @@ const CheckProvider = ({ children }: CheckContextProps) => {
     });
   }, []);
 
-  const onCheckAll = useCallback((checkedIds: string[]) => {
-    dispatch({
-      type: CheckActionType.CHECK_ALL,
-      payload: { checkedIds },
-    });
-  }, []);
-
   const checksDispatch = useMemo(() => {
     return {
       onCheckToggle,
       onCheck,
       onUnCheckAll,
-      onCheckAll,
     };
   }, [onCheckToggle, onCheck, onUnCheckAll]);
 
@@ -161,9 +144,9 @@ export const useCheckState = () => {
 };
 
 export const useCheckDispatch = () => {
-  const { onCheckToggle, onUnCheckAll, onCheck, onCheckAll } =
+  const { onCheckToggle, onUnCheckAll, onCheck } =
     useContext(CheckDispatchContext);
-  return { onCheckToggle, onUnCheckAll, onCheck, onCheckAll };
+  return { onCheckToggle, onUnCheckAll, onCheck };
 };
 
 export default CheckProvider;
