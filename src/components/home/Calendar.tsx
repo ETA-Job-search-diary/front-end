@@ -66,7 +66,7 @@ export const Calender = () => {
 
   return (
     <>
-      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-56 web:h-[334px] bg-white">
+      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-60 web:h-[360px] bg-white">
         <Icon
           name="mainCharacter"
           className="absolute -top-[76px] web:-top-24 right-0 xs:w-14  w-24 h-28 web:w-36 web:h-[136px]"
@@ -93,7 +93,7 @@ Calender.Header = ({
 }: // goToToday,
 HeaderProps) => {
   return (
-    <div className="flex justify-between pt-3.5 px-7 web:pt-[30px] web:px-[38px]">
+    <div className="flex justify-between pt-3.5 px-7 web:pt-6 web:px-[38px]">
       <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
@@ -127,7 +127,7 @@ Calender.Weeks = () => {
   return (
     <ul className="grid grid-cols-7 place-items-center">
       {date.map((d) => (
-        <li key={d} className="text-black600">
+        <li key={d} className="text-black900 font-semibold">
           {d}
         </li>
       ))}

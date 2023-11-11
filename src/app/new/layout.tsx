@@ -7,9 +7,9 @@ interface NewPagelayoutProps {
 
 export default function NewPagelayout({ children }: NewPagelayoutProps) {
   return (
-    <>
+    <div className="bg-white">
       <NewNavBar />
       <section className="px-[22px] web:px-[28px]">{children}</section>
-    </>
+    </div>
   );
 }

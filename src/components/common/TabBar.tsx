@@ -14,9 +14,8 @@ const TabBar = () => {
   const [isNewOpen, setIsOpen] = useState(false);
 
   const handleNewClick = () => {
-    // if (session) router.push('/new');
-    // else setIsOpen(true);
-    router.push('/new');
+    if (session) router.push('/new');
+    else setIsOpen(true);
   };
 
   const handleLoginClick = () => {

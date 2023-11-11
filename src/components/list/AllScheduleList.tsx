@@ -19,7 +19,7 @@ const AllScheduleList = () => {
   let [data, setData] = useState<ScheduleDetailType[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
-  const { onCheckToggle, onCheckAll } = useCheckDispatch();
+  const { onCheckToggle } = useCheckDispatch();
 
   data = data2;
 
@@ -38,8 +38,6 @@ const AllScheduleList = () => {
   const handleEditToggle = () => setIsEdit((prev) => !prev);
 
   const handleCheckToggleAll = () => onCheckToggle(data.map((d) => d.id));
-
-  const handleCheckAll = () => onCheckAll(data.map((d) => d.id));
 
   useEffect(() => {
     if (!token) return;
@@ -67,25 +65,24 @@ const AllScheduleList = () => {
         isEdit={isEdit}
         onEditClick={handleEditToggle}
         onCheckToggle={handleCheckToggleAll}
-        onCheckAll={handleCheckAll}
       />
       <section
         className={`pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
-          isEdit
-            ? '-translate-y-[90px] xs:-translate-y-16'
-            : 'translate-y-0 pb-20'
+          isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
         {data && !!total && <ScheduleList items={data} isEdit={isEdit} />}
-        {token &&
-          !total &&
-          (isFiltered ? (
-            <EmptyItem page="list" messageType="additional" border={false} />
-          ) : (
-            <EmptyItem page="list" messageType="empty" border={false} />
-          ))}
-        {!token && <EmptyItem page="list" messageType="empty" border={false} />}
+        <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
+          {token &&
+            !total &&
+            (isFiltered ? (
+              <EmptyItem page="list" messageType="additional" />
+            ) : (
+              <EmptyItem page="list" messageType="empty" />
+            ))}
+          {!token && <EmptyItem page="list" messageType="empty" />}
+        </div>
       </section>
     </>
   );
