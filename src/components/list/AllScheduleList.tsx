@@ -4,23 +4,28 @@ import EmptyItem from '@/components/home/EmptyItem';
 import FilterChips from '@/components/list/FilterChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCheckDispatch } from '@/context/CheckContext';
 import { ScheduleDetailType } from '@/model/schedule';
-import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
+import Skeletone from '../common/Skeletone';
 
 const AllScheduleList = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
   const [offset, setOffset] = useState(0);
-  const [data, setData] = useState<ScheduleDetailType[]>([]);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
   const { onCheckToggle } = useCheckDispatch();
 
-  const total = data.length;
+  const { data, isLoading, error } = useSWR<ScheduleDetailType[]>([
+    `${BASE_URL}/schedules/list?offset=${offset}${
+      filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
+    }`,
+  ]);
+
   const isFiltered = !!filter.length;
 
   const handleFilter = (value: string) => {
@@ -34,31 +39,13 @@ const AllScheduleList = () => {
 
   const handleEditToggle = () => setIsEdit((prev) => !prev);
 
-  const handleCheckToggleAll = () => onCheckToggle(data.map((d) => d.id));
-
-  useEffect(() => {
-    if (!token) return;
-    const getData = () =>
-      axios
-        .get(
-          `${BASE_URL}/schedules/list?offset=${offset}${
-            filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
-          }`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        )
-        .then((res) => setData(res.data))
-        .catch((err) => console.log(err));
-    getData();
-  }, [offset, filter]);
+  const handleCheckToggleAll = () =>
+    data && onCheckToggle(data.map((d) => d.id));
 
   return (
     <>
       <ScheduleListHeader
-        count={total}
+        count={data?.length}
         isEdit={isEdit}
         onEditClick={handleEditToggle}
         onCheckToggle={handleCheckToggleAll}
@@ -69,9 +56,14 @@ const AllScheduleList = () => {
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
-        {data && !!total && <ScheduleList items={data} isEdit={isEdit} />}
-        {token &&
-          !total &&
+        {isLoading && <Skeletone.List />}
+        {!isLoading && data && !!data.length && (
+          <ScheduleList items={data} isEdit={isEdit} />
+        )}
+        {!isLoading &&
+          data &&
+          token &&
+          !data.length &&
           (isFiltered ? (
             <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
               <EmptyItem page="list" messageType="additional" />

@@ -1,4 +1,5 @@
 'use client';
+
 import { useToast } from '../ui/use-toast';
 import { BASE_URL } from '@/constants/service';
 import { useState } from 'react';
@@ -45,7 +46,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const handleEditConfirm = () => {
     toast({
       title: '지금은 수정이 어려워요 🥹',
-      description: '곧 업데이트 될 예정이니 잠시만 기다려주세요!',
+      description: '잠시만 기다려주세요!',
     });
   };
 
