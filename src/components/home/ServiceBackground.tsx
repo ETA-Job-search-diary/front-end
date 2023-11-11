@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import ServiceTitle from './ServiceTitle';
-import Icon from '@/assets/Icon';
 
 interface ServiceBackgroundProps {
   children: ReactNode;

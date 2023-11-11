@@ -1,15 +1,15 @@
 'use client';
-import { useEffect, useState } from 'react';
+
+import { useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import axios from 'axios';
 import { BASE_URL } from '@/constants/service';
-import { useSession } from 'next-auth/react';
 import { getFormattedDate } from '@/service/date';
 import Icon from '@/assets/Icon';
+import useSWR from 'swr';
 
 interface HeaderProps {
   current: Date;
@@ -33,13 +33,11 @@ interface TodayProps {
 const today = new Date();
 
 export const Calender = () => {
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
-  const [events, setEvents] = useState<EventsType>([]);
-
   const [current, setCurrent] = useState(today);
   const currentMonth = format(current, 'yyyy-MM');
+  const { data: events } = useSWR<EventsType>([
+    `${BASE_URL}/schedules/calendar?date=${currentMonth}`,
+  ]);
 
   const prevMonth = () => setCurrent(subMonths(current, 1));
   const nextMonth = () => setCurrent(addMonths(current, 1));
@@ -47,22 +45,6 @@ export const Calender = () => {
   // const goToToday = () => {
   //   setCurrent(today);
   // };
-
-  useEffect(() => {
-    if (!token) return;
-    const getEvents = async () => {
-      const res = await axios.get(
-        `${BASE_URL}/schedules/calendar?date=${currentMonth}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      setEvents(res.data);
-    };
-    getEvents();
-  }, [currentMonth]);
 
   return (
     <>

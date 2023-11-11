@@ -142,6 +142,10 @@ module.exports = {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(0.8rem)' },
         },
+        loading: {
+          '0%': { transform: 'translateX(-10%)' },
+          '50%, 100%': { transform: ' translateX(120%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -151,6 +155,7 @@ module.exports = {
         wiggle: 'wiggle 1s ease-in-out infinite',
         jumpDown: 'jumpDown 0.6s linear',
         jumpUp: 'jumpUp 0.6s linear',
+        loading: 'loading 1.5s infinite linear;',
       },
     },
   },

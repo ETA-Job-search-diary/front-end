@@ -9,7 +9,7 @@ import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';
 
 interface ScheduleListHeaderProps {
-  count: number;
+  count?: number;
   isEdit: boolean;
   onEditClick: () => void;
   onCheckToggle: () => void;
