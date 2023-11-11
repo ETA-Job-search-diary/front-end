@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/popover';
 import { FormIdType } from '@/model/form';
 import Icon from '@/assets/Icon';
-import { getFormattedFullDate } from '@/service/date';
+import { getFormatByDate } from '@/service/date';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: FormIdType;
@@ -31,15 +31,15 @@ const DatePicker = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button>
-          <span className="h-full flex items-center border-b border-black100 text-xs web:text-md">
+        <button className="bg-primary-bg border border-primary300 rounded-small pr-3">
+          <span className="h-full flex items-center text-xs web:text-md">
             <input
               id={id}
               type="text"
-              value={date ? getFormattedFullDate(date) : ''}
+              value={date ? getFormatByDate(date) : ''}
               onChange={(e) => setDate(new Date(e.currentTarget.value))}
-              placeholder={`${getFormattedFullDate(new Date())}`}
-              className={`w-full font-medium text-black900 placeholder:text-black200  placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
+              placeholder={`${getFormatByDate(new Date())}`}
+              className={`w-full bg-inherit font-medium text-black900  placeholder:text-black200  placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
               {...rest}
             />
             <Icon

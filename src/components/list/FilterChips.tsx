@@ -1,11 +1,6 @@
 import { STEPS } from '@/constants/form';
 import Chip from '../common/Chip';
 
-const ETC = {
-  value: 'etc',
-  label: '기타',
-};
-
 interface FilterChipsProps {
   isEdit?: boolean;
   checked: string[];
@@ -15,10 +10,10 @@ interface FilterChipsProps {
 const FilterChips = ({ checked, onClick }: FilterChipsProps) => {
   return (
     <ul className="grid grid-cols-4 gap-2 xs:gap-1">
-      {[...STEPS, ETC].map(({ value, label }) => (
+      {STEPS.map(({ value, name }) => (
         <li key={value}>
           <Chip
-            label={label}
+            label={name}
             checked={checked.includes(value)}
             onClick={() => onClick(value)}
           />

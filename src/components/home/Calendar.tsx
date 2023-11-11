@@ -1,10 +1,15 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import axios from 'axios';
+import { BASE_URL } from '@/constants/service';
+import { useSession } from 'next-auth/react';
+import { getFormattedDate } from '@/service/date';
+import Icon from '@/assets/Icon';
 
 interface HeaderProps {
   current: Date;
@@ -13,62 +18,68 @@ interface HeaderProps {
   // goToToday: () => void;
 }
 
-interface EventType {
-  title: string;
-  from: string;
-  to: string;
-}
+type EventsType = string[];
 
 interface CellProps {
   today: Date;
   current: Date;
-  events?: EventType[];
-  range?: Date[];
-  selectedDate: Date;
-  onDateClick: (day: Date) => void;
+  events?: EventsType;
 }
 
 interface TodayProps {
   goToToday: () => void;
 }
 
-interface CalenderProps {
-  today: Date;
-  events?: EventType[];
-  range?: Date[];
-  onClick?: (day: Date) => void;
-}
+const today = new Date();
 
-export const Calender = ({ today, events }: CalenderProps) => {
+export const Calender = () => {
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
+
+  const [events, setEvents] = useState<EventsType>([]);
+
   const [current, setCurrent] = useState(today);
-  const [selectedDate, setSelectedDate] = useState(today);
+  const currentMonth = format(current, 'yyyy-MM');
 
   const prevMonth = () => setCurrent(subMonths(current, 1));
   const nextMonth = () => setCurrent(addMonths(current, 1));
-  const onDateClick = (day: Date) => setSelectedDate(day);
+
   // const goToToday = () => {
   //   setCurrent(today);
-  //   setSelectedDate(today);
   // };
+
+  useEffect(() => {
+    if (!token) return;
+    const getEvents = async () => {
+      const res = await axios.get(
+        `${BASE_URL}/schedules/calendar?date=${currentMonth}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setEvents(res.data);
+    };
+    getEvents();
+  }, [currentMonth]);
 
   return (
     <>
-      <div className="border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-6 h-[300px] web:h-[408px] bg-white">
+      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-56 web:h-[334px] bg-white">
+        <Icon
+          name="mainCharacter"
+          className="absolute -top-[76px] web:-top-24 right-0 xs:w-14  w-24 h-28 web:w-36 web:h-[136px]"
+        />
         <Calender.Header
           current={current}
           prevMonth={prevMonth}
           nextMonth={nextMonth}
           // goToToday={goToToday}
         />
-        <div className="h-full flex flex-col gap-2 text-xs web:text-md px-4 web:px-5 pb-3 web:pb-4">
+        <div className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4">
           <Calender.Weeks />
-          <Calender.Cell
-            today={today}
-            current={current}
-            events={events}
-            selectedDate={selectedDate}
-            onDateClick={onDateClick}
-          />
+          <Calender.Cell today={today} current={current} events={events} />
         </div>
       </div>
     </>
@@ -82,19 +93,19 @@ Calender.Header = ({
 }: // goToToday,
 HeaderProps) => {
   return (
-    <div className="flex justify-between pt-4 px-7 web:pt-[38px] web:px-[38px]">
-      <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] text-md web:text-xxl font-bold text-black900">
+    <div className="flex justify-between pt-3.5 px-7 web:pt-[30px] web:px-[38px]">
+      <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
       </div>
       {/* <Calender.Button goToToday={goToToday} /> */}
-      <div className="flex gap-[10px]">
+      <div className="flex items-center gap-3.5">
         <Button
           variant="outline"
           size="icon"
           onClick={prevMonth}
-          className="w-[26px] h-[26px]"
+          className="w-6 h-6 web:w-7 web:h-7"
         >
           <ChevronLeft className="h-4 w-4 text-[#949494]" />
         </Button>
@@ -102,7 +113,7 @@ HeaderProps) => {
           variant="outline"
           size="icon"
           onClick={nextMonth}
-          className="w-[26px] h-[26px]"
+          className="w-6 h-6 web:w-7 web:h-7"
         >
           <ChevronRight className="h-4 w-4 text-[#949494]" />
         </Button>
@@ -124,13 +135,7 @@ Calender.Weeks = () => {
   );
 };
 
-Calender.Cell = ({
-  today,
-  current,
-  events,
-  // selectedDate,
-  onDateClick,
-}: CellProps) => {
+Calender.Cell = ({ today, current, events }: CellProps) => {
   const monthStart = startOfMonth(current);
   const monthEnd = endOfMonth(monthStart);
   const from = startOfWeek(monthStart);
@@ -141,33 +146,29 @@ Calender.Cell = ({
 
   const weekElements = (day: Date) => {
     const formattedDate = format(day, 'd');
-    // const isCurrent = isSameMonth(day, monthStart);
-    // const isCurrentDay = isSameDay(day, selectedDate);
     const isToday = isSameDay(day, today);
 
     const weekEvents =
       events &&
       events.filter((event) => {
-        const eventfrom = new Date(event.from);
-        const eventTo = new Date(event.to);
-        return isSameDay(eventfrom, day) || (eventfrom < day && eventTo >= day);
+        const checkedDay = new Date(getFormattedDate(event).fullDate);
+        return isSameDay(checkedDay, day);
       });
 
     return (
       <div
         key={day.toString()}
         className="w-full h-full flex flex-col gap-1 items-center justify-center font-medium"
-        onClick={() => onDateClick(day)}
       >
         {isToday && (
-          <span className="inline-block w-7 h-7 web:w-9 web:h-9 rounded-full bg-black" />
+          <span className="inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black" />
         )}
         <span
-          className={
+          className={`${
             format(current, 'M') !== format(day, 'M')
-              ? 'text-black200'
+              ? 'text-black200 font-medium'
               : `${isToday ? `text-white font-bold absolute leading-7` : ''}`
-          }
+          }`}
         >
           {formattedDate}
         </span>

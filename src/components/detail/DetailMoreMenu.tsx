@@ -1,5 +1,5 @@
 'use client';
-
+import { BASE_URL } from '@/constants/service';
 import { useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
@@ -10,10 +10,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Alert, { AlertType } from '../common/Alert';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type Menu = 'edit' | 'delete';
 
-const DetailMoreMenu = () => {
+interface DetailMoreMenuProps {
+  scheduleId: string;
+}
+
+const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
+  const router = useRouter();
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
+
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<Menu>();
 
@@ -29,9 +40,25 @@ const DetailMoreMenu = () => {
   const openMenu = () => setIsOpen(true);
   const handleCloseMenu = () => setIsOpen(false);
 
+  const handleEditConfirm = () => {
+    if (!token) return;
+    //TODO: New Page로 이동 (포탈로 해야되나)
+    router.push(`/edit/${scheduleId}`);
+  };
+
   const handleDeleteConfirm = () => {
-    console.log('//TODO: 삭제 요청');
-    handleCloseMenu();
+    if (!token) return;
+    axios
+      .delete(`${BASE_URL}/schedules/${scheduleId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        handleCloseMenu();
+        router.push('/list');
+      })
+      .catch((err) => console.log(err));
   };
 
   const MenuItem = {
@@ -91,7 +118,8 @@ const DetailMoreMenu = () => {
             },
             {
               value: AlertType[message],
-              onClick: handleDeleteConfirm,
+              onClick:
+                message === 'edit' ? handleEditConfirm : handleDeleteConfirm,
             },
           ]}
           onClose={handleCloseMenu}

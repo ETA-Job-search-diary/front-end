@@ -47,15 +47,20 @@ export const StepType = {
   FIRST: '1차면접',
   SECOND: '2차면접',
   PERSONALITY: '인적성',
+  ETC: '기타',
 };
-
-export const STEPS = [
-  { value: 'document', label: '서류전형 ' },
-  { value: 'assignment', label: '사전과제' },
-  { value: 'written', label: '필기전형' },
-  { value: 'first', label: '1차면접' },
-  { value: 'second', label: '2차면접' },
-  { value: 'personality', label: '인적성' },
+//TODO: 타입 구체화
+export const STEPS: {
+  value: string;
+  name: string;
+}[] = [
+  { value: 'document', name: StepType.DOCUMENT },
+  { value: 'assignment', name: StepType.ASSIGNMENT },
+  { value: 'written', name: StepType.WRITTEN },
+  { value: 'first', name: StepType.FIRST },
+  { value: 'second', name: StepType.SECOND },
+  { value: 'personality', name: StepType.PERSONALITY },
+  { value: 'etc', name: StepType.ETC },
 ];
 
 export enum FormType {

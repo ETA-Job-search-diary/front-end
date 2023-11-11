@@ -1,23 +1,34 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { redirect, useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import Chip from './Chip';
 import { useState, MouseEvent } from 'react';
-import ChipInput from './ChipInput';
 import Button from './Button';
 import FormLabel from './FormLabel';
 import { STEPS } from '@/constants/form';
 import { getPlatformFromLink } from '@/service/form';
 import DatePicker from './DatePicker';
 import TimePicker from './TimePicker';
+import { useSession } from 'next-auth/react';
+import { format } from 'date-fns';
+import { BASE_URL } from '@/constants/service';
 
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
   const router = useRouter();
+
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
+
+  if (!token) {
+    //TODO: 토큰 만료시 로그인 페이지로 이동
+  }
+
   const [title, setTitle] = useState('');
-  const [steps, setSteps] = useState('');
+  const [step, setStep] = useState('');
   const [company, setCompany] = useState('');
   const [position, setPosition] = useState('');
   const [date, setDate] = useState<Date>();
@@ -25,23 +36,26 @@ const Form = () => {
   const [link, setLink] = useState('');
   const [platform, setPlatform] = useState('');
   const [memo, setMemo] = useState('');
-
+  //TODO: 일정 시간 후 적용하게끔 디바운스 적용필요
   const autoPlatform = getPlatformFromLink(link);
 
   const isReady =
     title.length > 0 &&
-    steps.length > 0 &&
+    step.length > 0 &&
     company.length > 0 &&
     position.length > 0;
 
-  const handleChipClick = (value: string) => {
-    if (steps === value) setSteps('');
-    else setSteps(value);
+  const isLinkValid = (link: string) => {
+    const regex = new RegExp(
+      /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{1,61}\.)?([a-zA-Z0-9-]{1,61}\.)([a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*)?$/,
+    );
+    return regex.test(link);
   };
 
-  const handleChipInputClick = () => setSteps('');
-
-  const handleStepChange = (value: string) => setSteps(value);
+  const handleChipClick = (value: string) => {
+    if (step === value) setStep('');
+    else setStep(value);
+  };
 
   const handleSubmit = (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -51,16 +65,33 @@ const Form = () => {
       return;
     }
 
+    const convertTime = (date?: Date, time?: string) => {
+      if (!date || !time) return;
+      const convertedDate = format(new Date(date), 'yyyy-MM-dd');
+      const formattedDate = `${convertedDate}T${time}:00.000Z`;
+      return formattedDate;
+    };
+    const timeString = convertTime(date, time);
+
     const data = {
       title,
-      steps,
+      step,
+      company,
       position,
+      date: timeString,
       link,
       platform: platform || autoPlatform,
       memo,
     };
-    console.log(data); // TODO: POST 성공시 리스트로 이동
-    router.push('/list');
+    //TODO: link, platform, memo 빈값일때 처리
+    axios
+      .post(`${BASE_URL}/schedules`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => router.push('/list'))
+      .catch((err) => console.log(err));
   };
 
   const handleTimeChange = (value: string) => setTime(value);
@@ -78,27 +109,21 @@ const Form = () => {
         />
         <FormLabel must id="step" label="전형단계">
           <ul className="grid grid-cols-4 gap-4 xs:gap-1">
-            {STEPS.map(({ value, label }) => (
+            {STEPS.map(({ value, name }) => (
               <li key={value}>
                 <Chip
-                  label={label}
-                  checked={steps === value}
+                  label={name}
+                  checked={step === value}
                   onClick={() => handleChipClick(value)}
                 />
               </li>
             ))}
-            <ChipInput
-              current={steps}
-              onClick={handleChipInputClick}
-              onTextInput={handleStepChange}
-            />
           </ul>
         </FormLabel>
-        <div className="flex flex-col gap-4">
+        <FormLabel id="company" label="지원하는 회사/직무">
           <TextInput
             must
             id="company"
-            label="지원하는 회사/직무"
             type="text"
             placeholder="회사명을 입력해주세요"
             onChange={(e) => setCompany(e.currentTarget.value)}
@@ -110,7 +135,7 @@ const Form = () => {
             placeholder="직무를 입력해주세요"
             onChange={(e) => setPosition(e.currentTarget.value)}
           />
-        </div>
+        </FormLabel>
         <FormLabel
           must
           id="date-time"
@@ -120,28 +145,37 @@ const Form = () => {
           <DatePicker id="date" date={date} setDate={setDate} />
           <TimePicker value={time} onSetValue={handleTimeChange} />
         </FormLabel>
-        <div className="flex flex-col gap-4">
+        <FormLabel
+          id="link"
+          label="채용공고 링크"
+          message={`${
+            isLinkValid(link)
+              ? autoPlatform
+                ? '채용사이트 정보가 맞는지 확인 후 저장해주세요!'
+                : '채용사이트를 직접 입력해주세요'
+              : ''
+          }`}
+          errorMessage={`${
+            link && !isLinkValid(link) ? 'URL형식에 맞게 입력해주세요' : ''
+          }`}
+        >
           <TextInput
             id="link"
-            label="채용공고"
             type="url"
             value={link}
             onChange={(e) => setLink(e.currentTarget.value)}
             placeholder="지원한 채용 링크를 첨부해 주세요"
           />
-          <TextInput
-            id="platform"
-            type="text"
-            value={platform}
-            onChange={(e) => setPlatform(e.currentTarget.value)}
-            placeholder={
-              autoPlatform ||
-              (link
-                ? '채용공고 사이트를 직접 입력해주세요'
-                : '채용공고 사이트를 입력해주세요')
-            }
-          />
-        </div>
+          {link && (
+            <TextInput
+              id="platform"
+              type="text"
+              value={platform}
+              onChange={(e) => setPlatform(e.currentTarget.value)}
+              placeholder={autoPlatform || ''}
+            />
+          )}
+        </FormLabel>
         <TextArea
           id="memo"
           label="메모"

@@ -12,7 +12,7 @@ const TabBar = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const [isNewOpen, setIsOpen] = useState(false);
-  //TODO: 개발중에는 로그인 잠시 보류
+
   const handleNewClick = () => {
     // if (session) router.push('/new');
     // else setIsOpen(true);
