@@ -56,7 +56,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
           ref={ref}
           type="time"
           defaultValue={currentTime}
-          className={`w-full h-10 web:h-12 py-2 px-[0.8rem] web:cursor-text bg-primary-bg border-[0.6px] border-primary300 rounded-small ${
+          className={`w-full min-w-[114px] h-10 web:h-12 py-2 px-[0.8rem] web:cursor-text bg-primary-bg border-[0.6px] border-primary300 rounded-small ${
             isFilled
               ? 'text-black900 text-xs web:text-md'
               : 'text-black300 web:text-sm text-xxs font-medium'

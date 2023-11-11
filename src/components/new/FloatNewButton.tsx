@@ -9,7 +9,7 @@ const FloatNewButton = ({ onClick }: FloatNewButtonProps) => {
     <div className="absolute bottom-2 w-20 h-20 bg-white flex justify-center items-center rounded-full shadow-tab">
       <button
         onClick={onClick}
-        className="bg-primary500 rounded-full w-16 h-16 m-auto"
+        className="bg-primary500 rounded-full w-16 h-16 m-auto z-20"
       >
         <Icon
           name="edit"

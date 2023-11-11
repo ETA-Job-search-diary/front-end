@@ -7,7 +7,7 @@ import {
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
-  label: string;
+  label?: string;
   maxLength: number;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
@@ -27,10 +27,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         htmlFor={id}
         className="text-black900 relative flex flex-col gap-3 text-sm web:text-md"
       >
-        <span className="font-semibold">{label}</span>
+        {label && <span className="font-semibold">{label}</span>}
         <textarea
           id={id}
-          className="w-full h-36 web:h-60 font-medium bg-primary-bg border-[0.6px] border-primary300 rounded-small text-xs web:text-md placeholder:text-black300 placeholder:text-xxs web:placeholder:text-sm placeholder:font-medium p-[0.8rem]"
+          className="w-full h-36 web:h-60 font-medium bg-primary-bg border-[0.6px] border-primary300 rounded-small text-xs web:text-md placeholder:text-black300 placeholder:text-xxs web:placeholder:text-sm placeholder:font-medium p-[0.9rem]"
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}

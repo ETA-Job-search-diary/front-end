@@ -18,7 +18,7 @@ const DetailNavBar = ({ id, title, step, date }: DetailNavBarProps) => {
   const bagdeName = getBadgeByStep(step);
 
   return (
-    <div className="sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
+    <div className="sticky top-0 bg-white">
       <NavBar
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}

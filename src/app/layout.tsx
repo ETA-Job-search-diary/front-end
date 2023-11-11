@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import suit from 'next/font/local';
 import TabBar from '@/components/common/TabBar';
 import AuthSessionProvider from '@/context/AuthSessionProvider';
+import { Toaster } from '@/components/ui/toaster';
 
 const suitFont = suit({
   src: [
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
       {
         url: '/images/share.png',
         width: 800,
-        height: 600,
+        height: 400,
         alt: '취준로그',
       },
     ],
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AuthSessionProvider>
             {children}
             <TabBar />
+            <Toaster />
           </AuthSessionProvider>
         </main>
       </body>
