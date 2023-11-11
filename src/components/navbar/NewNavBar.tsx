@@ -5,7 +5,7 @@ import BackButton from './BackButton';
 const NewNavBar = () => {
   return (
     <div className="sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
-      <NavBar leftSection={<BackButton />} />
+      <NavBar label='일정추가' leftSection={<BackButton />} />
     </div>
   );
 };

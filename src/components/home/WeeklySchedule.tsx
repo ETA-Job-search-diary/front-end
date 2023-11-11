@@ -37,10 +37,10 @@ const WeeklySchedule = ({}: ScheduleListProps) => {
   }, []);
 
   return (
-    <section className="h-full flex flex-col gap-7 mx-[22px] web:mx-[28px] pb-20">
+    <section className="h-full flex flex-col gap-7 mx-[22px] web:mx-[28px]">
       {token ? (
         <>
-          {data ? (
+          {data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
             <>
               {data.thisWeek.length > 0 && (
                 <Schedule week={WeekType.this} items={data.thisWeek} />
@@ -50,11 +50,15 @@ const WeeklySchedule = ({}: ScheduleListProps) => {
               )}
             </>
           ) : (
-            <EmptyItem page="home" messageType="additional" />
+            <div className="h-[calc(100vh-35em)] w-full flex justify-center items-center">
+              <EmptyItem page="home" messageType="additional" />
+            </div>
           )}
         </>
       ) : (
-        <EmptyItem page="home" messageType="empty" />
+        <div className="h-[calc(100vh-35em)] w-full flex justify-center items-center">
+          <EmptyItem page="home" messageType="empty" />
+        </div>
       )}
     </section>
   );

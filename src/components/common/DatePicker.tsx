@@ -39,7 +39,7 @@ const DatePicker = ({
               value={date ? getFormatByDate(date) : ''}
               onChange={(e) => setDate(new Date(e.currentTarget.value))}
               placeholder={`${getFormatByDate(new Date())}`}
-              className={`w-full bg-inherit font-medium text-black900  placeholder:text-black200  placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
+              className={`w-full bg-inherit font-medium text-black900  text-xs web:text-md placeholder:text-black300 placeholder:text-xxs web:placeholder:text-sm placeholder:font-medium p-1 web:p-2`}
               {...rest}
             />
             <Icon

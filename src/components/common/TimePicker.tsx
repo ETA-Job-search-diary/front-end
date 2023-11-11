@@ -52,7 +52,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
 
     return (
       <div
-        className={`max-h-[43px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4`}
+        className={`max-h-[43px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4 w-full`}
       >
         {isDesktop && meridiem && (
           <MeridiemPicker meridiem={meridiem} onChange={handleMeridiemChange} />
@@ -62,7 +62,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
           type="time"
           defaultValue={currentTime}
           className={`p-1 web:p-2 w-full web:cursor-text bg-primary-bg border border-primary300 rounded-small ${
-            isFilled ? 'text-black900' : 'text-black200'
+            isFilled ? 'text-black900 text-xs web:text-md' : 'text-black300 web:text-sm text-xxs font-medium'
           } without_ampm`}
           step="600"
           required

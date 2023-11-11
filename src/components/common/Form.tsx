@@ -43,7 +43,9 @@ const Form = () => {
     title.length > 0 &&
     step.length > 0 &&
     company.length > 0 &&
-    position.length > 0;
+    position.length > 0 &&
+    !!date &&
+    !!time;
 
   const isLinkValid = (link: string) => {
     const regex = new RegExp(
@@ -98,7 +100,7 @@ const Form = () => {
 
   return (
     <>
-      <form className="h-[calc(100%-170px)] flex flex-col justify-between gap-6 web:gap-7 py-4 web:py-5">
+      <form className="h-[calc(100%-170px)] flex flex-col justify-between gap-6 web:gap-7 pb-4 web:pb-5">
         <TextInput
           must
           id="title"
@@ -108,7 +110,7 @@ const Form = () => {
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
         <FormLabel must id="step" label="전형단계">
-          <ul className="grid grid-cols-4 gap-4 xs:gap-1">
+          <ul className="grid grid-cols-4 gap-[0.7rem]">
             {STEPS.map(({ value, name }) => (
               <li key={value}>
                 <Chip
@@ -120,7 +122,7 @@ const Form = () => {
             ))}
           </ul>
         </FormLabel>
-        <FormLabel id="company" label="지원하는 회사/직무">
+        <FormLabel id="company" must label="지원하는 회사/직무">
           <TextInput
             must
             id="company"
