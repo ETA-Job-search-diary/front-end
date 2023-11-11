@@ -114,7 +114,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         <Image
           src={TeamImage}
           alt="team-eta"
-          className="absolute bottom-7 web:bottom-12 web:right-12 right-7 web:w-[212px] w-40"
+          className="absolute bottom-7 web:bottom-12 web:right-10 right-7 web:w-[212px] w-40"
         />
         {isOpen && (
           <Alert
