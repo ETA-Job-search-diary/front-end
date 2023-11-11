@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BASE_URL } from '@/constants/service';
 import { WeeklyScheduleType } from '@/model/schedule';
 import EmptyItem from './EmptyItem';
+import { data1, data2 } from '@/mock/data';
 
 interface ScheduleListProps {}
 
@@ -14,7 +15,12 @@ const WeeklySchedule = ({}: ScheduleListProps) => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
   const [offset, setOffset] = useState(0);
-  const [data, setData] = useState<WeeklyScheduleType>();
+  let [data, setData] = useState<WeeklyScheduleType>();
+
+  data = {
+    thisWeek: data1,
+    nextWeek: data2,
+  };
 
   useEffect(() => {
     if (!token) return;
