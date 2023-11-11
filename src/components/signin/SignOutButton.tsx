@@ -1,16 +1,15 @@
-import { signOut } from 'next-auth/react';
 import Icon from '@/assets/Icon';
 
-const SignOutButton = () => {
-  const handleOnClick = () =>
-    signOut({
-      callbackUrl: '/',
-    });
+interface SignOutButtonProps {
+  onClick: () => void;
+}
+
+const SignOutButton = ({ onClick }: SignOutButtonProps) => {
   return (
     <button
       type="button"
       className="w-full flex items-center gap-3 p-3 border-b border-black100"
-      onClick={handleOnClick}
+      onClick={onClick}
     >
       <Icon
         name={'logout'}

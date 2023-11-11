@@ -1,3 +1,5 @@
+import Image from 'next/image';
+import TeamImage from '../../../public/images/team-eta.png';
 import { createPortal } from 'react-dom';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
@@ -9,13 +11,24 @@ import { getProviderByEmail } from '@/service/signin';
 import Link from 'next/link';
 import { SUPPORT_FORM } from '@/constants/service';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
+import Alert, { AlertType } from '../common/Alert';
+import { signOut } from 'next-auth/react';
 
 interface MyAccountProps {
   session: Session | null;
   onClose: () => void;
 }
 
+const enum Service {
+  LOGOUT = '로그아웃 하시겠습니까?',
+  WITHDRAW = '서비스를 탈퇴 하시겠습니까?',
+}
+
 const MyAccount = ({ session, onClose }: MyAccountProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
   if (!session) {
     redirect('/auth/signin');
   }
@@ -23,6 +36,15 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const {
     user: { name, email },
   } = session;
+
+  const handleAlert = (value: string) => {
+    setMessage(value);
+    setIsOpen(true);
+  };
+
+  const onSignOut = () => signOut({ callbackUrl: '/' });
+
+  const onWithdraw = () => onClose();
 
   useDisableBodyScroll();
 
@@ -49,7 +71,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col items-center px-1 py-3 web:px-3 web:py-5">
+        <div className="flex flex-col items-center px-1 py-3 web:px-3 web:py-5 gap-3">
           <Link
             href={'https://www.naver.com'} ////TODO: 서비스 소개 나오면 수정 하기 */
             rel="noopener noreferrer"
@@ -76,8 +98,12 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             />
             <span className="text-xs web:text-md text-black900">문의하기</span>
           </Link>
-          <SignOutButton />
-          <button type="button" className="w-full flex items-center gap-3 p-3">
+          <SignOutButton onClick={() => handleAlert(Service.LOGOUT)} />
+          <button
+            type="button"
+            className="w-full flex items-center gap-3 p-3"
+            onClick={() => handleAlert(Service.WITHDRAW)}
+          >
             <Icon
               name="withdraw"
               className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
@@ -85,6 +111,27 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             <span className="text-xs web:text-md text-black900">탈퇴하기</span>
           </button>
         </div>
+        <Image
+          src={TeamImage}
+          alt="team-eta"
+          className="absolute bottom-7 web:bottom-12 web:right-12 right-7 web:w-[212px] w-40"
+        />
+        {isOpen && (
+          <Alert
+            message={message}
+            type={[
+              {
+                value: AlertType.cancel,
+                onClick: () => setIsOpen(false),
+              },
+              {
+                value: AlertType.confirm,
+                onClick: message === Service.LOGOUT ? onSignOut : onWithdraw,
+              },
+            ]}
+            onClose={() => setIsOpen(false)}
+          />
+        )}
       </div>
     </section>,
     document.body.querySelector('main') || document.body,
