@@ -1,21 +1,16 @@
 import { getFormattedCurrentTime } from '@/service/date';
 import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
 import MeridiemPicker, { MeridiemType } from './MeridiemPicker';
-import useMediaQuery from '@/hook/useMediaQuery';
 
 interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
+  isDesktop?: boolean;
   value?: string;
   onSetValue: (value: string) => void;
 }
 
-const desktopMediaQuery = '(min-width: 500px)';
 //TODO: 코드 정리 1순위
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
-  ({ value, onSetValue, ...rest }, ref) => {
-    const isDesktop = useMediaQuery({
-      mediaQuery: desktopMediaQuery,
-    });
-
+  ({ isDesktop, value, onSetValue, ...rest }, ref) => {
     const { meridiem, time: currentTime } = getFormattedCurrentTime();
     const isFilled = value !== undefined;
 
@@ -52,7 +47,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
 
     return (
       <div
-        className={`max-h-[43px] text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4 w-full`}
+        className={`w-full h-10 web:h-12 text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4`}
       >
         {isDesktop && meridiem && (
           <MeridiemPicker meridiem={meridiem} onChange={handleMeridiemChange} />
@@ -61,8 +56,10 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
           ref={ref}
           type="time"
           defaultValue={currentTime}
-          className={`p-1 web:p-2 w-full web:cursor-text bg-primary-bg border border-primary300 rounded-small ${
-            isFilled ? 'text-black900 text-xs web:text-md' : 'text-black300 web:text-sm text-xxs font-medium'
+          className={`w-full h-10 web:h-12 py-2 px-[0.8rem] web:cursor-text bg-primary-bg border-[0.6px] border-primary300 rounded-small ${
+            isFilled
+              ? 'text-black900 text-xs web:text-md'
+              : 'text-black300 web:text-sm text-xxs font-medium'
           } without_ampm`}
           step="600"
           required

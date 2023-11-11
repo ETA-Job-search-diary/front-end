@@ -18,7 +18,7 @@ const FormLabel = ({
   children,
 }: FormLabelProps) => {
   return (
-    <label htmlFor={id} className="h-full flex flex-col gap-2 web:gap-4">
+    <label htmlFor={id} className="flex flex-col gap-2 web:gap-4">
       {label && (
         <span className="text-black900 font-semibold w-max text-sm web:text-md">
           {label}
