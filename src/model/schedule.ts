@@ -23,3 +23,8 @@ export interface ScheduleSimpleType {
 export interface ScheduleFilterType {
   value: string;
 }
+
+export interface WeeklyScheduleType {
+  thisWeek: ScheduleDetailType[];
+  nextWeek: ScheduleDetailType[];
+}

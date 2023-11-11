@@ -49,7 +49,7 @@ const ScheduleListHeader = ({
   };
 
   const handleDeleteConfirm = () => {
-    if (!token) return;
+    if (!token || !checkedIds.length) return;
     axios
       .post(
         `${BASE_URL}/schedules/deleteMany`,
@@ -67,7 +67,7 @@ const ScheduleListHeader = ({
       .then(() => {
         handleCloseMenu();
         onUnCheckAll();
-        // TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
+        //!!!!!!!! TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
         // key: `${BASE_URL}/schedules/list?offset=${offset}${
         //   filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
         // }`;
@@ -83,7 +83,7 @@ const ScheduleListHeader = ({
   return (
     <>
       <header className="z-30 flex flex-col sticky top-0 bg-white/60 backdrop-blur-xl web:bg-white/70 web:backdrop-blur-2xl">
-        <div className="z-40 pt-6 pb-4 px-[22px] web:px-[28px] bg-inherit">
+        <div className="z-40 pt-6 pb-3 web:pb-5 px-[22px] web:px-[28px] bg-inherit">
           <div className="flex justify-between sticky top-0">
             <SubScheduleTitle label={'전체'} count={count} />
             {isEdit ? (
@@ -104,8 +104,8 @@ const ScheduleListHeader = ({
           </div>
         </div>
         <div
-          className={`flex justify-between items-end sticky top-0 duration-200 ease-linear transition-all transform pb-3 px-[22px] web:px-[28px] ${
-            isEdit ? 'translate-y-0' : '-translate-y-28 h-0 opacity-0'
+          className={`flex justify-between items-end sticky top-0 duration-200 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
+            isEdit ? 'translate-y-0' : '-translate-y-32 h-0 opacity-0'
           }`}
         >
           <div className="flex items-center gap-4 web:gap-3.5">
@@ -117,12 +117,9 @@ const ScheduleListHeader = ({
                 }`}
               />
             </button>
-            <span className="text-black900 text-sm web:text-md font-bold">
+            <span className="text-black900 text-xs web:text-md font-bold">
               전체 선택
             </span>
-            {/* //TODO: 기획 - 있어도 좋지않을까..! <span className="text-black900 text-xs web:text-sm font-bold">
-                {checked.length} 개
-              </span> */}
           </div>
           <div className="flex gap-3">
             <Button

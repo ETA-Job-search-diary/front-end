@@ -40,7 +40,7 @@ module.exports = {
         light: '#fafafa',
         'ligtht-gray': 'rgba(234, 234, 234, 0.30)',
         alert: 'rgba(0, 0, 0, 0.30)',
-        'primary-bg': 'rgba(47, 201, 100, 0.04)',
+        'primary-bg': 'rgba(47, 201, 100, 0.03)',
         'primary-light': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',
         black100: '#D4D4D4',

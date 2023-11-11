@@ -31,7 +31,7 @@ const EmptyItem = ({ page, messageType, border = true }: EmptyItemProps) => {
 const getEmptyStyle = (border: boolean) => {
   const defaultStyle =
     'w-full flex flex-col justify-center items-center gap-1 text-black200 rounded-large web:h-96';
-  const borderStyle = border ? 'border border-black100 h-[14em]' : 'h-[24em]';
+  const borderStyle = border ? 'border border-black100 h-[14em]' : 'h-96';
   return `${defaultStyle} ${borderStyle}`;
 };
 
