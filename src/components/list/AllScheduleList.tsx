@@ -70,7 +70,7 @@ const AllScheduleList = () => {
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
         {data && !!total && <ScheduleList items={data} isEdit={isEdit} />}
-        <div className="h-[calc(100vh-20rem)] flex justify-center items-center">
+        <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
           {token &&
             !total &&
             (isFiltered ? (
