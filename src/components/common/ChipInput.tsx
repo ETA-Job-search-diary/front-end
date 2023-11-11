@@ -39,7 +39,7 @@ const ChipInput = ({
 
 const getChipInputStyle = (checked: boolean) => {
   const defaultStyle =
-    'rounded-full border-dashed border-[0.7px] web:border text-center text-xxs web:text-sm w-20 xs:w-14 web:w-[104px] h-8 leading-8 web:h-10 web:leading-10 whitespace-nowrap';
+    'rounded-full border-dashed border-[1px] web:border text-center text-xxs web:text-sm w-20 xs:w-14 web:w-[104px] h-8 leading-8 web:h-10 web:leading-10 whitespace-nowrap';
   const checkedStyle = checked
     ? 'border-primary500 text-primary500'
     : 'border-black100 text-black900';

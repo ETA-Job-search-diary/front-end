@@ -1,4 +1,5 @@
 'use client';
+import { useToast } from '../ui/use-toast';
 import { BASE_URL } from '@/constants/service';
 import { useState } from 'react';
 import Icon from '@/assets/Icon';
@@ -21,6 +22,7 @@ interface DetailMoreMenuProps {
 }
 
 const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
+  const { toast } = useToast();
   const router = useRouter();
   const { data: session } = useSession();
   const token = session?.user.accessToken;
@@ -41,9 +43,10 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const handleCloseMenu = () => setIsOpen(false);
 
   const handleEditConfirm = () => {
-    if (!token) return;
-    //TODO: New Page로 이동 (포탈로 해야되나)
-    router.push(`/edit/${scheduleId}`);
+    toast({
+      title: '지금은 수정이 어려워요 🥹',
+      description: '곧 업데이트 될 예정이니 잠시만 기다려주세요!',
+    });
   };
 
   const handleDeleteConfirm = () => {

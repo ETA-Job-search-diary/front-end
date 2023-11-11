@@ -15,7 +15,7 @@ const UserProfileWidget = () => {
     <div className="w-full grid grid-cols-[1fr_auto] items-center">
       <div className="text-black text-md web:text-2xl">
         <span>{'안녕하세요 :) '}</span>
-        {session && <span>{session?.user.name}님</span>}
+        {/* {session && <span>{session?.user.name}님</span>} */}
       </div>
       <div className="col-start-2">
         <button onClick={session ? handleAccount : () => signIn()}>

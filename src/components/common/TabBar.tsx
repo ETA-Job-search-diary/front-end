@@ -19,14 +19,14 @@ const TabBar = () => {
   };
 
   const handleLoginClick = () => {
-    router.push('/auth/signin'); // TODO:로그인 성공하면 new로 이동
+    router.push('/auth/signin'); // TODO:로그인 성공하면 new로 이동 (어떻게 할...할..할까)
     setIsOpen(false);
   };
 
   if (pathname === '/auth/signin' || pathname === '/new') return null;
 
   return (
-    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
+    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white drop-shadow-tab">
       <div className="relative h-full w-full grid grid-cols-3 place-items-center">
         <LinkButton path={PathType.home} />
         <FloatNewButton onClick={handleNewClick} />
@@ -47,6 +47,9 @@ const TabBar = () => {
             onClose={() => setIsOpen(false)}
           />
         )}
+      </div>
+      <div className="w-full h-full absolute bottom-0 grid place-items-center">
+        <div className="bg-white w-40 h-[68px]" />
       </div>
     </nav>
   );

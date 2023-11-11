@@ -44,9 +44,9 @@ export const StepType = {
   DOCUMENT: '서류전형',
   ASSIGNMENT: '사전과제',
   WRITTEN: '필기전형',
+  PERSONALITY: '인적성',
   FIRST: '1차면접',
   SECOND: '2차면접',
-  PERSONALITY: '인적성',
   ETC: '기타',
 };
 //TODO: 타입 구체화
@@ -57,9 +57,9 @@ export const STEPS: {
   { value: 'document', name: StepType.DOCUMENT },
   { value: 'assignment', name: StepType.ASSIGNMENT },
   { value: 'written', name: StepType.WRITTEN },
+  { value: 'personality', name: StepType.PERSONALITY },
   { value: 'first', name: StepType.FIRST },
   { value: 'second', name: StepType.SECOND },
-  { value: 'personality', name: StepType.PERSONALITY },
   { value: 'etc', name: StepType.ETC },
 ];
 
