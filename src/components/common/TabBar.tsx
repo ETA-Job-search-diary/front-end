@@ -26,7 +26,7 @@ const TabBar = () => {
   if (pathname === '/auth/signin' || pathname === '/new') return null;
 
   return (
-    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
+    <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white drop-shadow-tab">
       <div className="relative h-full w-full grid grid-cols-3 place-items-center">
         <LinkButton path={PathType.home} />
         <FloatNewButton onClick={handleNewClick} />
