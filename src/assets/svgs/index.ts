@@ -27,3 +27,4 @@ export { default as logout } from './logout.svg';
 export { default as withdraw } from './withdraw.svg';
 export { default as request } from './request.svg';
 export { default as message } from './servicemessage.svg';
+export { default as chevronLeft } from './chevronLeft.svg';

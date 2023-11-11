@@ -15,6 +15,9 @@ import TimePicker from './TimePicker';
 import { useSession } from 'next-auth/react';
 import { format } from 'date-fns';
 import { BASE_URL } from '@/constants/service';
+import useMediaQuery from '@/hook/useMediaQuery';
+
+const desktopMediaQuery = '(min-width: 500px)';
 
 //TODO: 임시저장기능, 수정기능
 const Form = () => {
@@ -98,9 +101,13 @@ const Form = () => {
 
   const handleTimeChange = (value: string) => setTime(value);
 
+  const isDesktop = useMediaQuery({
+    mediaQuery: desktopMediaQuery,
+  });
+
   return (
     <>
-      <form className="h-[calc(100%-170px)] flex flex-col justify-between gap-6 web:gap-7 pb-4 web:pb-5">
+      <form className="h-full flex flex-col justify-between pb-4 web:pb-5 gap-[2.5rem] web:gap-[3.5rem]">
         <TextInput
           must
           id="title"
@@ -144,8 +151,25 @@ const Form = () => {
           label="일정"
           message="서류마감일, 면접일 등을 입력해 보세요!"
         >
-          <DatePicker id="date" date={date} setDate={setDate} />
-          <TimePicker value={time} onSetValue={handleTimeChange} />
+          {!isDesktop ? (
+            <span className="grid grid-cols-2 gap-2 web:gap-4">
+              <DatePicker id="date" date={date} setDate={setDate} />
+              <TimePicker
+                isDesktop={isDesktop}
+                value={time}
+                onSetValue={handleTimeChange}
+              />
+            </span>
+          ) : (
+            <>
+              <DatePicker id="date" date={date} setDate={setDate} />
+              <TimePicker
+                isDesktop={isDesktop}
+                value={time}
+                onSetValue={handleTimeChange}
+              />
+            </>
+          )}
         </FormLabel>
         <FormLabel
           id="link"

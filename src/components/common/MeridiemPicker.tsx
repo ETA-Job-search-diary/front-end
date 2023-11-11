@@ -27,9 +27,9 @@ const MeridiemPicker = ({ meridiem, onChange }: MeridiemPickerProps) => {
   };
 
   return (
-    <div className="w-full bg-primary-bg border border-primary300 rounded-small font-medium text-black900 text-xs web:text-md">
+    <div className="w-full h-10 web:h-12 bg-primary-bg border-[0.6px] border-primary300 rounded-small font-medium text-black900 text-xs web:text-md">
       <DropdownMenu>
-        <DropdownMenuTrigger className="flex justify-between items-center w-full h-full p-1 web:p-2">
+        <DropdownMenuTrigger className="flex justify-between items-center w-full h-full py-2 px-[0.8rem]">
           <span>{mer}</span>
           <Icon
             name="chevronDown"

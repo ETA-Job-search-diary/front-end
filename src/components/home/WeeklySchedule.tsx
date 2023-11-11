@@ -44,13 +44,13 @@ const WeeklySchedule = ({}: ScheduleListProps) => {
               )}
             </>
           ) : (
-            <div className="h-[calc(100vh-35em)] w-full flex justify-center items-center">
+            <div className="h-[30vh] w-full flex justify-center items-center">
               <EmptyItem page="home" messageType="additional" />
             </div>
           )}
         </>
       ) : (
-        <div className="h-[calc(100vh-35em)] w-full flex justify-center items-center">
+        <div className="h-[30vh] w-full flex justify-center items-center">
           <EmptyItem page="home" messageType="empty" />
         </div>
       )}
