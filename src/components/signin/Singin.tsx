@@ -21,7 +21,7 @@ const Singin = async () => {
       <section className="overflow-x-hidden w-full h-[calc(100vh-70px)] px-[22px] web:px-[28px]">
         <div className="relative top-[15%]">
           <div className="flex flex-col gap-28 web:gap-[170px]">
-            <div className="text-black700">
+            <div className="text-black900 flex flex-col gap-6">
               <p className="font-bold text-xl web:text-3xl">
                 <span className="text-primary500">취준로그</span>
                 는 로그인 후<br />
@@ -51,7 +51,7 @@ const Singin = async () => {
                 href={TERMS_OF_SERVICE}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="border-b text-black400"
+                className="border-b text-black400 font-semibold"
               >
                 이용약관
               </Link>
@@ -60,7 +60,7 @@ const Singin = async () => {
                 href={PRIVACY_POLICY}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="border-b text-black400"
+                className="border-b text-black400 font-semibold"
               >
                 개인정보 처리 방침
               </Link>
