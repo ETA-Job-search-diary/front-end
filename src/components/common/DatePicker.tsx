@@ -31,15 +31,15 @@ const DatePicker = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button>
-          <span className="h-full flex items-center border-b border-black100 text-xs web:text-md">
+        <button className="bg-primary-bg border border-primary300 rounded-small pr-3">
+          <span className="h-full flex items-center text-xs web:text-md">
             <input
               id={id}
               type="text"
               value={date ? getFormatByDate(date) : ''}
               onChange={(e) => setDate(new Date(e.currentTarget.value))}
               placeholder={`${getFormatByDate(new Date())}`}
-              className={`w-full font-medium text-black900 placeholder:text-black200  placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
+              className={`w-full bg-inherit font-medium text-black900  placeholder:text-black200  placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
               {...rest}
             />
             <Icon

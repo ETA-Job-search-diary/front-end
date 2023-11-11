@@ -36,7 +36,7 @@ const Form = () => {
   const [link, setLink] = useState('');
   const [platform, setPlatform] = useState('');
   const [memo, setMemo] = useState('');
-
+  //TODO: 일정 시간 후 적용하게끔 디바운스 적용필요
   const autoPlatform = getPlatformFromLink(link);
 
   const isReady =
@@ -44,6 +44,13 @@ const Form = () => {
     step.length > 0 &&
     company.length > 0 &&
     position.length > 0;
+
+  const isLinkValid = (link: string) => {
+    const regex = new RegExp(
+      /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{1,61}\.)?([a-zA-Z0-9-]{1,61}\.)([a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*)?$/,
+    );
+    return regex.test(link);
+  };
 
   const handleChipClick = (value: string) => {
     if (step === value) setStep('');
@@ -113,11 +120,10 @@ const Form = () => {
             ))}
           </ul>
         </FormLabel>
-        <div className="flex flex-col gap-4">
+        <FormLabel id="company" label="지원하는 회사/직무">
           <TextInput
             must
             id="company"
-            label="지원하는 회사/직무"
             type="text"
             placeholder="회사명을 입력해주세요"
             onChange={(e) => setCompany(e.currentTarget.value)}
@@ -129,7 +135,7 @@ const Form = () => {
             placeholder="직무를 입력해주세요"
             onChange={(e) => setPosition(e.currentTarget.value)}
           />
-        </div>
+        </FormLabel>
         <FormLabel
           must
           id="date-time"
@@ -139,28 +145,37 @@ const Form = () => {
           <DatePicker id="date" date={date} setDate={setDate} />
           <TimePicker value={time} onSetValue={handleTimeChange} />
         </FormLabel>
-        <div className="flex flex-col gap-4">
+        <FormLabel
+          id="link"
+          label="채용공고 링크"
+          message={`${
+            isLinkValid(link)
+              ? autoPlatform
+                ? '채용사이트 정보가 맞는지 확인 후 저장해주세요!'
+                : '채용사이트를 직접 입력해주세요'
+              : ''
+          }`}
+          errorMessage={`${
+            link && !isLinkValid(link) ? 'URL형식에 맞게 입력해주세요' : ''
+          }`}
+        >
           <TextInput
             id="link"
-            label="채용공고"
             type="url"
             value={link}
             onChange={(e) => setLink(e.currentTarget.value)}
             placeholder="지원한 채용 링크를 첨부해 주세요"
           />
-          <TextInput
-            id="platform"
-            type="text"
-            value={platform}
-            onChange={(e) => setPlatform(e.currentTarget.value)}
-            placeholder={
-              autoPlatform ||
-              (link
-                ? '채용공고 사이트를 직접 입력해주세요'
-                : '채용공고 사이트를 입력해주세요')
-            }
-          />
-        </div>
+          {link && (
+            <TextInput
+              id="platform"
+              type="text"
+              value={platform}
+              onChange={(e) => setPlatform(e.currentTarget.value)}
+              placeholder={autoPlatform || ''}
+            />
+          )}
+        </FormLabel>
         <TextArea
           id="memo"
           label="메모"
