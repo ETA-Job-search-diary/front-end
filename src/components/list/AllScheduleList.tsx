@@ -9,7 +9,6 @@ import { useCheckDispatch } from '@/context/CheckContext';
 import { ScheduleDetailType } from '@/model/schedule';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { data2 } from '@/mock/data';
 
 const AllScheduleList = () => {
   const { data: session } = useSession();
@@ -20,8 +19,6 @@ const AllScheduleList = () => {
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
   const { onCheckToggle } = useCheckDispatch();
-
-  data = data2;
 
   const total = data.length;
   const isFiltered = !!filter.length;
