@@ -14,6 +14,7 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';
 import { signOut } from 'next-auth/react';
+import { useToast } from '../ui/use-toast';
 
 interface MyAccountProps {
   session: Session | null;
@@ -28,6 +29,7 @@ const enum Service {
 const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const { toast } = useToast();
 
   if (!session) {
     redirect('/auth/signin');
@@ -44,7 +46,21 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const onSignOut = () => signOut({ callbackUrl: '/' });
 
-  const onWithdraw = () => onClose();
+  const onWithdraw = () => handleWithdrawToast();
+
+  const handleServiceToast = () => {
+    toast({
+      title: '취준로그에 관심을 가져 주셔서 감사해요!',
+      description: '서비스소개는 잠시만 기다려주세요 🍀',
+    });
+  };
+
+  const handleWithdrawToast = () => {
+    toast({
+      title: '탈퇴 기능은 아직 개발중입니다...',
+      description: '죄송합니다. 🚪',
+    });
+  };
 
   useDisableBodyScroll();
 
@@ -72,8 +88,9 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           </div>
         </div>
         <div className="flex flex-col items-center px-1 py-3 web:px-3 web:py-5 gap-3">
+          {/*  //!!TODO: 서비스 소개 나오면 수정
           <Link
-            href={'https://www.naver.com'} ////TODO: 서비스 소개 나오면 수정 하기 */
+            href={'https://www.naver.com'}
             rel="noopener noreferrer"
             target="_blank"
             className="w-full flex items-center gap-3 p-3 border-b border-black100"
@@ -85,7 +102,19 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             <span className="text-xs web:text-md text-black900">
               서비스소개
             </span>
-          </Link>
+          </Link> */}
+          <button
+            className="w-full flex items-center gap-3 p-3 border-b border-black100"
+            onClick={handleServiceToast}
+          >
+            <Icon
+              name="message"
+              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+            />
+            <span className="text-xs web:text-md text-black900">
+              서비스소개
+            </span>
+          </button>
           <Link
             href={SUPPORT_FORM}
             rel="noopener noreferrer"
@@ -113,7 +142,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         </div>
         <Icon
           name="teamETA"
-          className="absolute bottom-7 web:bottom-12 right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
+          className="absolute bottom-12 right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
         />
         {isOpen && (
           <Alert

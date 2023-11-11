@@ -6,15 +6,15 @@ export default function loading() {
       <div className="flex gap-6 web:gap-[2.5rem]">
         <Icon
           name="union1"
-          className="w-6 h-6 web:w-8 web:h-8 animate-jumpUp"
+          className="w-6 h-6 web:w-[30px] web:h-[30px] animate-jumpUp"
         />
         <Icon
           name="union2"
-          className="w-6 h-6 web:w-8 web:h-8 animate-jumpDown"
+          className="w-6 h-6 web:w-[30px] web:h-[30px] animate-jumpDown"
         />
         <Icon
           name="union3"
-          className="w-6 h-6 web:w-8 web:h-8 animate-jumpUp"
+          className="w-6 h-6 web:w-[30px] web:h-[30px] animate-jumpUp"
         />
       </div>
     </div>
