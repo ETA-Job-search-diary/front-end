@@ -84,7 +84,7 @@ const ScheduleListHeader = ({
   return (
     <>
       <header className="z-30 flex flex-col sticky top-0 bg-white">
-        <div className="z-40 pt-[3rem] pb-2 web:pb-3 px-[22px] web:px-[28px] bg-inherit">
+        <div className="z-40 pt-[2rem] pb-2 web:pb-3 px-[22px] web:px-[28px] bg-inherit">
           <div className="flex justify-between sticky top-0">
             <SubScheduleTitle label={'전체'} count={count} />
             {isEdit ? (
@@ -105,8 +105,8 @@ const ScheduleListHeader = ({
           </div>
         </div>
         <div
-          className={`flex justify-between items-end sticky top-0 duration-200 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
-            isEdit ? 'translate-y-0' : '-translate-y-32 h-0 opacity-0'
+          className={`flex justify-between items-end sticky top-0 duration-300 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
+            isEdit ? 'translate-y-0' : '-translate-y-24 h-0'
           }`}
         >
           <div className="flex items-center gap-4 web:gap-3.5">

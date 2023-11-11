@@ -50,17 +50,17 @@ const getButtonStyle = (
       active: 'text-primary500 hover:font-semibold',
     },
     secondary: {
-      inactive: 'border-[0.8px] border-black100 text-black200',
+      inactive: 'border-[1px] border-black100 text-black200',
       active:
-        'border-[0.8px] border-primary500 text-primary500 hover:font-semibold',
+        'border-[1px] border-primary500 text-primary500 hover:font-semibold',
     },
     gray: {
       inactive: 'bg-black100 text-black200',
       active: 'bg-black100 text-white hover:font-semibold',
     },
     border: {
-      inactive: 'border-[0.8px] border-black100 text-black400 bg-body h-6',
-      active: 'border-[0.8px] border-black100 text-black400 bg-body h-6',
+      inactive: 'border-[1px] border-black100 text-black400 bg-body h-6',
+      active: 'border-[1px] border-black100 text-black400 bg-body h-6',
     },
   };
 
