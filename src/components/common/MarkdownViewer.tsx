@@ -15,7 +15,7 @@ const MarkDownViewer = ({ content }: MarkDownViewerProps) => {
   );
   return (
     <Markdown
-      className="prose max-w-none lg:prose-xl text-black600 font-medium bg-primary-bg border border-primary300 w-full pl-6 py-3 pr-4 rounded-small"
+      className="prose max-w-none lg:prose-xl text-black600 font-medium bg-primary-bg border border-primary300 rounded-small w-full min-h-[7rem] pl-6 py-3 pr-4 rounded-small"
       remarkPlugins={[remarkGfm]}
       components={{
         li: Li,
