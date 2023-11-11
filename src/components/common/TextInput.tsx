@@ -19,7 +19,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         <span className="h-full">
           <input
             id={id}
-            className={`w-full font-medium text-black900 text-xs web:text-md border-b border-black100 placeholder:text-black200 placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
+            className={`w-full font-medium text-black900 bg-primary-bg border border-primary300 rounded-small text-xs web:text-md placeholder:text-xs web:placeholder:text-md placeholder:font-medium p-1 web:p-2`}
             ref={ref}
             onFocus={onFocus}
             onBlur={onBlur}
