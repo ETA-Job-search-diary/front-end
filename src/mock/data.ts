@@ -6,22 +6,20 @@ export const data1 = [
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-07T14:00',
   },
 ];
 export const data2 = [
   {
     id: '2',
-    date: '2023-11-14T10:00',
+    date: '2023-11-10T10:00',
     title: '네이버 1차 면접',
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-14T14:00',
   },
   {
     id: '3',
-    date: '2023-11-14T10:00',
+    date: '2023-11-10T10:00',
     title: '네이버 2차 면접',
     step: 'second',
     position: '데이터 분석',
@@ -29,21 +27,19 @@ export const data2 = [
   },
   {
     id: '4',
-    date: '2023-11-14T10:00',
+    date: '2023-11-11T11:00',
     title: '네이버 1차 면접',
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-14T17:00',
   },
   {
     id: '5',
-    date: '2023-11-14T10:00',
+    date: '2023-11-12T12:00',
     title: '네이버 1차 면접',
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-14T22:00',
   },
   {
     id: '6',
@@ -52,7 +48,6 @@ export const data2 = [
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-14T14:00',
   },
   {
     id: '7',
@@ -61,7 +56,6 @@ export const data2 = [
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-15T15:00',
   },
   {
     id: '8',
@@ -86,7 +80,6 @@ export const data2 = [
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '',
   },
   {
     id: '22',
@@ -95,6 +88,5 @@ export const data2 = [
     step: 'first',
     position: '데이터 분석',
     company: '네이버',
-    endAt: '2023-11-18T18:00',
   },
 ];
