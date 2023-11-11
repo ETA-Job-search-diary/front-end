@@ -65,21 +65,21 @@ const AllScheduleList = () => {
       />
       <section
         className={`pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
-          isEdit
-            ? '-translate-y-[90px] xs:-translate-y-16'
-            : 'translate-y-0 pb-20'
+          isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
         {data && !!total && <ScheduleList items={data} isEdit={isEdit} />}
-        {token &&
-          !total &&
-          (isFiltered ? (
-            <EmptyItem page="list" messageType="additional" />
-          ) : (
-            <EmptyItem page="list" messageType="empty" />
-          ))}
-        {!token && <EmptyItem page="list" messageType="empty" />}
+        <div className="h-[calc(100vh-20rem)] flex justify-center items-center">
+          {token &&
+            !total &&
+            (isFiltered ? (
+              <EmptyItem page="list" messageType="additional" />
+            ) : (
+              <EmptyItem page="list" messageType="empty" />
+            ))}
+          {!token && <EmptyItem page="list" messageType="empty" />}
+        </div>
       </section>
     </>
   );

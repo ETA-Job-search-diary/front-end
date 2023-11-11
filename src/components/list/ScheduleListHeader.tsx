@@ -42,29 +42,40 @@ const ScheduleListHeader = ({
 
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
-    axios
-      .post(
-        `${BASE_URL}/schedules/deleteMany`,
-        {
-          data: {
-            ids: checkedIds,
-          },
-        },
-        {
+    if (checkedIds.length === 1) {
+      axios
+        .delete(`${BASE_URL}/schedules/${checkedIds[0]}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        },
-      )
-      .then(() => {
-        handleCloseMenu();
-        onUnCheckAll();
-        //!!!!!!!! TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
-        // key: `${BASE_URL}/schedules/list?offset=${offset}${
-        //   filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
-        // }`;
-      })
-      .catch((err) => console.log(err));
+        })
+        .then(() => handleCloseMenu())
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .post(
+          `${BASE_URL}/schedules/deleteMany`,
+          {
+            data: {
+              ids: checkedIds,
+            },
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then(() => {
+          handleCloseMenu();
+          onUnCheckAll();
+          //!!!!!!!! TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
+          // key: `${BASE_URL}/schedules/list?offset=${offset}${
+          //   filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
+          // }`;
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleComplete = () => {

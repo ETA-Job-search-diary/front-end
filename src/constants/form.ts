@@ -1,7 +1,7 @@
 import { FormIdType } from '@/model/form';
 
 export enum SiteType {
-  SARAMIN = 'saramin', // https://www.saramin.co.kr
+  SARAMIN = 'saram', // https://www.saramin.co.kr
   JOBKOREA = 'jobkorea', // https://www.jobkorea.co.kr/Recruit/
   JOBPLANET = 'jobplanet', // https://www.jobplanet.co.kr/job
   WANTED = 'wanted', // https://www.wanted.co.kr/company
@@ -20,24 +20,24 @@ export enum SiteType {
 export const PLATFORM: Record<
   SiteType,
   {
-    value: string;
+    value: string[];
     name: string;
   }
 > = {
-  [SiteType.SARAMIN]: { value: 'saramin', name: '사람인' },
-  [SiteType.JOBKOREA]: { value: 'jobkorea', name: '잡코리아' },
-  [SiteType.JOBPLANET]: { value: 'jobplanet', name: '잡플래닛' },
-  [SiteType.WANTED]: { value: 'wanted', name: '원티드' },
-  [SiteType.ROCKETPUNCH]: { value: 'rocketpunch', name: '로켓펀치' },
-  [SiteType.PROGRAMMERS]: { value: 'programmers', name: '프로그래머스' },
-  [SiteType.INCRUIT]: { value: 'incruit', name: '인크루트' },
-  [SiteType.WORKNET]: { value: 'worknet', name: '워크넷' },
-  [SiteType.LINKEDIN]: { value: 'linkedin', name: '링크드인' },
-  [SiteType.REMEMBER]: { value: 'remember', name: '리멤버' },
-  [SiteType.BLINDHIRE]: { value: 'blindhire', name: '블라인드하이어' },
-  [SiteType.JASOSEOL]: { value: 'jasoseol', name: '자소설닷컴' },
-  [SiteType.SUPEROOKIE]: { value: 'superookie', name: '슈퍼루키' },
-  [SiteType.INTHISWORK]: { value: 'inthistwork', name: '인디스워크' },
+  [SiteType.SARAMIN]: { value: ['saramin', 'saram.in'], name: '사람인' },
+  [SiteType.JOBKOREA]: { value: ['jobkorea'], name: '잡코리아' },
+  [SiteType.JOBPLANET]: { value: ['jobplanet'], name: '잡플래닛' },
+  [SiteType.WANTED]: { value: ['wanted', 'wntd'], name: '원티드' },
+  [SiteType.ROCKETPUNCH]: { value: ['rocketpunch'], name: '로켓펀치' },
+  [SiteType.PROGRAMMERS]: { value: ['programmers'], name: '프로그래머스' },
+  [SiteType.INCRUIT]: { value: ['incruit'], name: '인크루트' },
+  [SiteType.WORKNET]: { value: ['worknet'], name: '워크넷' },
+  [SiteType.LINKEDIN]: { value: ['linkedin'], name: '링크드인' },
+  [SiteType.REMEMBER]: { value: ['remember'], name: '리멤버' },
+  [SiteType.BLINDHIRE]: { value: ['blindhire'], name: '블라인드하이어' },
+  [SiteType.JASOSEOL]: { value: ['jasoseol'], name: '자소설닷컴' },
+  [SiteType.SUPEROOKIE]: { value: ['superookie'], name: '슈퍼루키' },
+  [SiteType.INTHISWORK]: { value: ['inthistwork'], name: '인디스워크' },
 };
 
 export const StepType = {

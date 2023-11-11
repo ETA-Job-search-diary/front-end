@@ -43,7 +43,9 @@ const Form = () => {
     title.length > 0 &&
     step.length > 0 &&
     company.length > 0 &&
-    position.length > 0;
+    position.length > 0 &&
+    !!date &&
+    !!time;
 
   const isLinkValid = (link: string) => {
     const regex = new RegExp(
@@ -120,7 +122,7 @@ const Form = () => {
             ))}
           </ul>
         </FormLabel>
-        <FormLabel id="company" label="지원하는 회사/직무">
+        <FormLabel id="company" must label="지원하는 회사/직무">
           <TextInput
             must
             id="company"
