@@ -56,9 +56,7 @@ const ScheduleListHeader = ({
         .post(
           `${BASE_URL}/schedules/deleteMany`,
           {
-            data: {
-              ids: checkedIds,
-            },
+            ids: checkedIds,
           },
           {
             headers: {

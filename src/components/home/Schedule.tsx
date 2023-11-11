@@ -19,7 +19,11 @@ const Schedule = ({ week, items }: ScheduleProps) => {
   return (
     <section className="flex flex-col gap-2 web:gap-4">
       <SubScheduleTitle label={week} count={count} />
-      <ul className="flex flex-col gap-3 last:pb-20">
+      <ul
+        className={`flex flex-col gap-3 ${
+          week === WeekType.next ? 'last:pb-20' : ''
+        }`}
+      >
         {items.map((item) => (
           <li key={item.id}>
             <ScheduleItem {...item} />

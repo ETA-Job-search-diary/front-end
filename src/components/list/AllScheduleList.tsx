@@ -73,16 +73,22 @@ const AllScheduleList = () => {
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
         {data && !!total && <ScheduleList items={data} isEdit={isEdit} />}
-        <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
-          {token &&
-            !total &&
-            (isFiltered ? (
+        {token &&
+          !total &&
+          (isFiltered ? (
+            <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
               <EmptyItem page="list" messageType="additional" />
-            ) : (
+            </div>
+          ) : (
+            <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
               <EmptyItem page="list" messageType="empty" />
-            ))}
-          {!token && <EmptyItem page="list" messageType="empty" />}
-        </div>
+            </div>
+          ))}
+        {!token && (
+          <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
+            <EmptyItem page="list" messageType="empty" />
+          </div>
+        )}
       </section>
     </>
   );
