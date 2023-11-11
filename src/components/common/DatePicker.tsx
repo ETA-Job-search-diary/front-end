@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
@@ -19,7 +19,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   date?: Date;
   setDate: (date: Date | undefined) => void;
 }
-
+//!!!!! TODO: input 없애고 일반 텍스트로 변경해야됨. hydration 에러남
 const DatePicker = ({
   id,
   must,
@@ -31,7 +31,10 @@ const DatePicker = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <span className="h-10 web:h-12 bg-primary-bg border-[0.6px] border-primary300 rounded-small pr-3 flex items-center">
+        <span
+          className="h-10 web:h-12 bg-primary-bg border-[0.6px] border-primary300 rounded-small pr-3 flex items-center"
+          suppressHydrationWarning
+        >
           <input
             id={id}
             type="text"

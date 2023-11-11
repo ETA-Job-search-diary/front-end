@@ -32,8 +32,8 @@ module.exports = {
       backgroundPosition: {
         'top-right': 'right 0px',
       },
-      boxShadow: {
-        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.06)',
+      dropShadow: {
+        tab: '0px -5px 20px rgba(219, 219, 219, 0.25)',
       },
       colors: {
         body: '#F6F6F6',
@@ -134,6 +134,14 @@ module.exports = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
+        jumpDown: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-0.8rem)' },
+        },
+        jumpUp: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(0.8rem)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -141,6 +149,8 @@ module.exports = {
         mount: 'mount 0.2s linear',
         unmount: 'unmount 0.2s ease-in-out',
         wiggle: 'wiggle 1s ease-in-out infinite',
+        jumpDown: 'jumpDown 0.6s linear',
+        jumpUp: 'jumpUp 0.6s linear',
       },
     },
   },
