@@ -35,6 +35,9 @@ module.exports = {
       dropShadow: {
         tab: '0px -5px 20px rgba(219, 219, 219, 0.25)',
       },
+      boxShadow: {
+        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.06)',
+      },
       colors: {
         body: '#F6F6F6',
         light: '#fafafa',
