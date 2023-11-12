@@ -18,6 +18,7 @@ import { BASE_URL } from '@/constants/service';
 import useMediaQuery from '@/hook/useMediaQuery';
 import { useToast } from '../ui/use-toast';
 import { ToastAction } from '../ui/toast';
+// import { getFormatByDate } from '@/service/date';
 const desktopMediaQuery = '(min-width: 500px)';
 
 //TODO: 임시저장기능, 수정기능
@@ -44,6 +45,7 @@ const Form = () => {
 
   if (!token) {
     handleRedirectToast();
+    return;
   }
 
   const [title, setTitle] = useState('');
@@ -70,7 +72,7 @@ const Form = () => {
 
   const isLinkValid = (link: string) => {
     const regex = new RegExp(
-      /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{1,61}\.)?([a-zA-Z0-9-]{1,61}\.)([a-zA-Z]{2,})(\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]*)?$/,
+      /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
     );
     return regex.test(link);
   };
@@ -223,7 +225,9 @@ const Form = () => {
                   : ''
               }`}
               errorMessage={`${
-                link && !isLinkValid(link) ? 'URL형식에 맞게 입력해주세요' : ''
+                !!link.length && !isLinkValid(link) && !autoPlatform
+                  ? 'URL형식에 맞게 입력해주세요'
+                  : ''
               }`}
             >
               <TextInput
