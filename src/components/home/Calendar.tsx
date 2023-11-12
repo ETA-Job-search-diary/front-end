@@ -21,7 +21,6 @@ interface HeaderProps {
 type EventsType = string[];
 
 interface CellProps {
-  today: Date;
   current: Date;
   events?: EventsType;
 }
@@ -61,7 +60,7 @@ export const Calender = () => {
         />
         <div className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4">
           <Calender.Weeks />
-          <Calender.Cell today={today} current={current} events={events} />
+          <Calender.Cell current={current} events={events} />
         </div>
       </div>
     </>
@@ -117,7 +116,7 @@ Calender.Weeks = () => {
   );
 };
 
-Calender.Cell = ({ today, current, events }: CellProps) => {
+Calender.Cell = ({ current, events }: CellProps) => {
   const monthStart = startOfMonth(current);
   const monthEnd = endOfMonth(monthStart);
   const from = startOfWeek(monthStart);
@@ -128,7 +127,7 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
 
   const weekElements = (day: Date) => {
     const formattedDate = format(day, 'd');
-    const isToday = isSameDay(day, today);
+    const isToday = isSameDay(day, current);
 
     const weekEvents =
       events &&
@@ -140,22 +139,26 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
     return (
       <div
         key={day.toString()}
-        className="w-full h-full flex flex-col gap-1 items-center justify-center font-medium"
+        className="w-full h-full flex flex-col gap-[1px] items-center justify-center font-medium"
       >
-        {isToday && (
-          <span className="inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black" />
-        )}
-        <span
-          className={`${
-            format(current, 'M') !== format(day, 'M')
-              ? 'text-black200 font-medium'
-              : `${isToday ? `text-white font-bold absolute leading-7` : ''}`
-          }`}
-        >
-          {formattedDate}
-        </span>
-        {weekEvents && weekEvents.length > 0 && (
+        <div className="flex flex-col justify-center items-center">
+          {isToday && (
+            <span className="inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black" />
+          )}
+          <span
+            className={`${
+              format(current, 'M') !== format(day, 'M')
+                ? 'text-black200 font-medium'
+                : `${isToday ? `text-white font-bold absolute` : ''}`
+            }`}
+          >
+            {formattedDate}
+          </span>
+        </div>
+        {weekEvents && weekEvents.length > 0 ? (
           <span className="rounded-full bg-primary500 mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
+        ) : (
+          <span className="rounded-fullmx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
         )}
       </div>
     );
