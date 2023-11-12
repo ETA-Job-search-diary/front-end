@@ -38,13 +38,13 @@ const WeeklySchedule = () => {
                 )}
               </>
             ) : (
-              <div className="h-[30vh] w-full flex justify-center items-center">
+              <div className="h-full w-full flex justify-center items-center">
                 <EmptyItem page="home" messageType="additional" />
               </div>
             )}
           </>
         ) : (
-          <div className="h-[30vh] w-full flex justify-center items-center">
+          <div className="h-full w-full flex justify-center items-center">
             <EmptyItem page="home" messageType="empty" />
           </div>
         ))}
