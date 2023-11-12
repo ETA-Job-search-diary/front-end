@@ -8,6 +8,7 @@ import { redirect } from 'next/navigation';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
+import NaverButton from './NaverButton';
 
 const Singin = async () => {
   const session = await getServerSession(authOptions);
@@ -33,6 +34,7 @@ const Singin = async () => {
               </p>
             </div>
             <div className="relative w-full flex flex-col gap-3 justify-center items-center">
+              <NaverButton />
               <SocialSiginButton providers={providers} callbackUrl={'/'} />
               <Icon
                 name="loginCharacter"

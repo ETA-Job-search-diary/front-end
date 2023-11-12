@@ -6,18 +6,18 @@ import KakaoProvider from 'next-auth/providers/kakao';
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    NaverProvider({
-      clientId: process.env.NAVER_CLIENTID ?? '',
-      clientSecret: process.env.NAVER_SECRET ?? '',
-      profile({ response }) {
-        return {
-          id: response.id.toString().slice(1),
-          name: response.name,
-          email: response.email,
-          // accessToken: response.accessToken,
-        };
-      },
-    }),
+    // NaverProvider({
+    //   clientId: process.env.NAVER_CLIENTID ?? '',
+    //   clientSecret: process.env.NAVER_SECRET ?? '',
+    //   profile({ response }) {
+    //     return {
+    //       id: response.id.toString().slice(1),
+    //       name: response.name,
+    //       email: response.email,
+    //       // accessToken: response.accessToken,
+    //     };
+    //   },
+    // }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENTID ?? '',
       clientSecret: process.env.KAKAO_SECRET ?? '',

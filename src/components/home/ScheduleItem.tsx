@@ -33,7 +33,7 @@ const ScheduleItem = ({
         isBeforeToday ? 'bg-ligtht-gray' : 'bg-white'
       } hover:bg-light transition-colors whitespace-nowrap grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px]`}
     >
-      <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100 ">
+      <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100">
         <h3 className="font-bold xs:text-sm text-lg web:text-2xl">
           {formattedDate}
         </h3>

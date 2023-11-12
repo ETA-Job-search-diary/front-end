@@ -5,6 +5,7 @@ import suit from 'next/font/local';
 import TabBar from '@/components/common/TabBar';
 import AuthSessionProvider from '@/context/AuthSessionProvider';
 import { Toaster } from '@/components/ui/toaster';
+import SWRContext from '@/context/SWRContext';
 
 const suitFont = suit({
   src: [
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
           <AuthSessionProvider>
-            {children}
+            <SWRContext>{children}</SWRContext>
             <TabBar />
             <Toaster />
           </AuthSessionProvider>

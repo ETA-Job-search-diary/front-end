@@ -1,6 +1,10 @@
-import ScheduleDetail from '@/components/detail/ScheduleDetail';
+import Detail from '@/components/detail/Detail';
+import DetailNavBar from '@/components/navbar/DetailNavBar';
+import { BASE_URL } from '@/constants/service';
+import { authOptions } from '@/lib/authOptions';
+import axios from 'axios';
+import { getServerSession } from 'next-auth';
 import { notFound } from 'next/navigation';
-// import axios from 'axios';
 
 interface SchedulePageProps {
   params: {
@@ -8,14 +12,26 @@ interface SchedulePageProps {
   };
 }
 
-export default function SchedulePage({
+export default async function SchedulePage({
   params: { id },
 }: SchedulePageProps) {
-  // //TODO: 서버에서 데이터를 받아와서 렌더링 SSR해야되지 않을까..미리 패치하고 싶은데...!~!!!!
-  // const data = await axios.get(
-  //   `${BASE_URL}/schedules/detail/${id}`,
-  // );
-  // if (!id) return notFound();
+  const session = await getServerSession(authOptions);
+  const token = session?.user.accessToken;
 
-  return <ScheduleDetail id={id} />;
+  if (!id) return notFound();
+
+  const { data } = await axios.get(`${BASE_URL}/schedules/detail/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!data) return notFound();
+
+  return (
+    <>
+      {<DetailNavBar {...data} />}
+      <Detail {...data} />
+    </>
+  );
 }
