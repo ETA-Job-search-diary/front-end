@@ -35,6 +35,9 @@ module.exports = {
       dropShadow: {
         tab: '0px -5px 20px rgba(219, 219, 219, 0.25)',
       },
+      boxShadow: {
+        tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.06)',
+      },
       colors: {
         body: '#F6F6F6',
         light: '#fafafa',
@@ -142,6 +145,10 @@ module.exports = {
           '0%': { transform: 'translateY(0)' },
           '100%': { transform: 'translateY(0.8rem)' },
         },
+        loading: {
+          '0%': { transform: 'translateX(-10%)' },
+          '50%, 100%': { transform: ' translateX(120%)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -151,6 +158,7 @@ module.exports = {
         wiggle: 'wiggle 1s ease-in-out infinite',
         jumpDown: 'jumpDown 0.6s linear',
         jumpUp: 'jumpUp 0.6s linear',
+        loading: 'loading 1.5s infinite linear;',
       },
     },
   },
