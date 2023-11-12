@@ -2,6 +2,7 @@ import Icon from '@/assets/Icon';
 import { FormType } from '@/constants/form';
 import MarkDownViewer from '../common/MarkdownViewer';
 import { getFormattedDate } from '@/service/date';
+import Link from 'next/link';
 
 interface DetailProps {
   company: string;
@@ -50,10 +51,17 @@ const Detail = ({
           <Icon name="global" className="w-3 h-3 web:w-4 web:h-4" />
           {FormType.LINK}
         </span>
-        <span className="text-black600 font-medium">{link}</span>
         <span className="text-black600 font-medium col-start-2">
           {platform}
         </span>
+        <Link
+          href={link || ''}
+          rel="noopener noreferrer"
+          target="_blank"
+          className="text-black600 font-medium break-words col-start-2 min-w-full pr-2"
+        >
+          <span className="border-b border-black600">{link}</span>
+        </Link>
       </label>
       <label className="flex flex-col gap-4 items-start">
         <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">

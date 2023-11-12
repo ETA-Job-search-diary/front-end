@@ -86,7 +86,7 @@ const ScheduleListHeader = ({
       <header className="z-30 flex flex-col sticky top-0 bg-white">
         <div className="z-40 pt-[2rem] pb-2 web:pb-3 px-[22px] web:px-[28px] bg-inherit">
           <div className="flex justify-between sticky top-0">
-            <SubScheduleTitle label={'전체'} count={count} />
+            <SubScheduleTitle label={'전체'} count={token ? count : 0} />
             {isEdit ? (
               <Button
                 size="xxs"
