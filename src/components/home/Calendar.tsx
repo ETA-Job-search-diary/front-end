@@ -21,6 +21,7 @@ interface HeaderProps {
 type EventsType = string[];
 
 interface CellProps {
+  today: Date;
   current: Date;
   events?: EventsType;
 }
@@ -60,7 +61,7 @@ export const Calender = () => {
         />
         <div className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4">
           <Calender.Weeks />
-          <Calender.Cell current={current} events={events} />
+          <Calender.Cell today={today} current={current} events={events} />
         </div>
       </div>
     </>
@@ -116,7 +117,7 @@ Calender.Weeks = () => {
   );
 };
 
-Calender.Cell = ({ current, events }: CellProps) => {
+Calender.Cell = ({ today, current, events }: CellProps) => {
   const monthStart = startOfMonth(current);
   const monthEnd = endOfMonth(monthStart);
   const from = startOfWeek(monthStart);
@@ -127,7 +128,7 @@ Calender.Cell = ({ current, events }: CellProps) => {
 
   const weekElements = (day: Date) => {
     const formattedDate = format(day, 'd');
-    const isToday = isSameDay(day, current);
+    const isToday = isSameDay(day, today);
 
     const weekEvents =
       events &&
