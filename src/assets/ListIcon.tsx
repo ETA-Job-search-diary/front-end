@@ -6,13 +6,13 @@ interface ListIconProps {
 
 const ListIcon = ({ active = false }: ListIconProps) => {
   return (
-    <>
-      {active ? (
-        <Icon name="list" className={`stroke-primary500 ${defaultStyle}`} />
-      ) : (
-        <Icon name="list" className={`stroke-black200 ${defaultStyle}`} />
-      )}
-    </>
+    <Icon
+      aria-label="=list"
+      name="list"
+      className={`${
+        active ? 'stroke-primary500' : 'stroke-black200'
+      } ${defaultStyle}`}
+    />
   );
 };
 
