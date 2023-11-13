@@ -22,7 +22,7 @@ const Detail = ({
   const { endTime } = getFormattedDate(date);
 
   return (
-    <section className="w-full pb-24 px-[22px] web:px-[28px] flex flex-col gap-8 text-black-800 text-xs web:text-md pt-4 web:pt-8 scroll-auto">
+    <section className="w-full h-full px-[22px] web:px-[28px] flex flex-col gap-7 text-black-800 text-xs web:text-md pt-4 web:pt-8 scroll-auto">
       <DetailItem title={FormType.COMPANY} icon="briefcase" content={company} />
       <DetailItem
         title={FormType.POSITION}

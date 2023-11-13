@@ -139,7 +139,7 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
     return (
       <td
         key={day.toString()}
-        className="w-full h-full flex flex-col gap-[1px] items-center justify-center font-medium"
+        className="w-full h-full flex flex-col gap-[3px] items-center justify-center font-medium"
       >
         <span className="flex flex-col justify-center items-center">
           {isToday && (
@@ -156,9 +156,9 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
           </span>
         </span>
         {weekEvents && weekEvents.length > 0 ? (
-          <span className="rounded-full bg-primary500 mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
+          <span className="rounded-full bg-primary500 mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
         ) : (
-          <span className="rounded-full mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
+          <span className="rounded-full mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
         )}
       </td>
     );

@@ -19,7 +19,7 @@ const WeeklySchedule = () => {
   ]);
 
   return (
-    <section className="h-full flex flex-col gap-7 mx-[22px] web:mx-[28px]">
+    <section className="grow h-full flex flex-col gap-8 bg-white px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom)+90px)]">
       {isLoading && (
         <>
           <Skeletone.Item />
@@ -38,15 +38,11 @@ const WeeklySchedule = () => {
                 )}
               </>
             ) : (
-              <div className="h-full w-full flex justify-center items-center">
-                <EmptyItem page="home" messageType="additional" />
-              </div>
+              <EmptyItem page="home" messageType="additional" />
             )}
           </>
         ) : (
-          <div className="h-full w-full flex justify-center items-center">
-            <EmptyItem page="home" messageType="empty" />
-          </div>
+          <EmptyItem page="home" messageType="empty" />
         ))}
     </section>
   );

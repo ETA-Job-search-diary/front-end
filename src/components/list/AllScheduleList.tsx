@@ -51,33 +51,20 @@ const AllScheduleList = () => {
         onCheckToggle={handleCheckToggleAll}
       />
       <section
-        className={`pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
+        className={`grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
           isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
         }`}
       >
         <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
         {isLoading && <Skeletone.List />}
-        {!isLoading && data && !!data.length && (
-          <ScheduleList items={data} isEdit={isEdit} />
-        )}
         {!isLoading &&
-          data &&
-          token &&
-          !data.length &&
-          (isFiltered ? (
-            <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
-              <EmptyItem page="list" messageType="additional" />
-            </div>
+          (!!data?.length ? (
+            <ScheduleList items={data} isEdit={isEdit} />
+          ) : isFiltered ? (
+            <EmptyItem page="list" messageType="additional" />
           ) : (
-            <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
-              <EmptyItem page="list" messageType="empty" />
-            </div>
-          ))}
-        {!token && (
-          <div className="h-[calc(100vh-20rem)] py-10 flex justify-center items-center">
             <EmptyItem page="list" messageType="empty" />
-          </div>
-        )}
+          ))}
       </section>
     </>
   );
