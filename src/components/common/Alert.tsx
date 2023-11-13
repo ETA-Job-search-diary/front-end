@@ -37,22 +37,20 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
         </div>
         <div className="w-full flex justify-between gap-1">
           {type.map(({ value, onClick }, index) => (
-            <>
-              <Button
-                key={value}
-                color={
-                  type.length === 1
-                    ? 'primary'
-                    : index === 0
-                    ? 'secondary'
-                    : 'primary'
-                }
-                label={value}
-                active
-                size="sm"
-                onClick={onClick}
-              />
-            </>
+            <Button
+              key={value}
+              color={
+                type.length === 1
+                  ? 'primary'
+                  : index === 0
+                  ? 'secondary'
+                  : 'primary'
+              }
+              label={value}
+              active
+              size="sm"
+              onClick={onClick}
+            />
           ))}
         </div>
       </section>

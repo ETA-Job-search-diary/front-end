@@ -2,12 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import LinkButton, { PathType } from './LinkButton';
 import FloatNewButton from '../new/FloatNewButton';
-import Alert, { AlertType } from './Alert';
-import { useToast } from '../ui/use-toast';
-import { ToastAction } from '../ui/toast';
 
 const TabBar = () => {
   const pathname = usePathname();
@@ -15,70 +11,19 @@ const TabBar = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  const [isNewOpen, setIsOpen] = useState(false);
-  // const { toast } = useToast();
-
-  // const handleNewClick = () => {
-  //   if (session) router.push('/new');
-  //   else setIsOpen(true);
-  // };
-
   const handleLoginClick = () => {
     if (token) router.push('/new');
-    else router.push('/auth/signin'); // TODO:로그인 성공하면 new로 이동 (어떻게 할...할..할까)
-    // setIsOpen(false);
+    else router.push('/auth/signin');
   };
 
   if (pathname === '/auth/signin' || pathname === '/new') return null;
 
   return (
-    // <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white drop-shadow-tab">
-    //   <div className="relative h-full w-full grid grid-cols-3 place-items-center">
-    //     <LinkButton path={PathType.home} />
-    //     <FloatNewButton onClick={handleNewClick} />
-    //     <LinkButton path={PathType.list} />
-    //     {isNewOpen && (
-    //       <Alert
-    //         message="일정을 등록할까요?"
-    //         type={[
-    //           {
-    //             value: AlertType.cancel,
-    //             onClick: () => setIsOpen(false),
-    //           },
-    //           {
-    //             value: AlertType.login,
-    //             onClick: handleLoginClick,
-    //           },
-    //         ]}
-    //         onClose={() => setIsOpen(false)}
-    //       />
-    //     )}
-    //   </div>
-    //   <div className="w-full h-full absolute bottom-0 grid place-items-center">
-    //     <div className="bg-white w-40 h-[68px]" />
-    //   </div>
-    // </nav>
     <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
       <div className="relative h-full w-full grid grid-cols-3 place-items-center">
         <LinkButton path={PathType.home} />
         <FloatNewButton onClick={handleLoginClick} />
         <LinkButton path={PathType.list} />
-        {/* {isNewOpen && (
-          <Alert
-            message="일정을 등록할까요?"
-            type={[
-              {
-                value: AlertType.cancel,
-                onClick: () => setIsOpen(false),
-              },
-              {
-                value: AlertType.login,
-                onClick: handleLoginClick,
-              },
-            ]}
-            onClose={() => setIsOpen(false)}
-          />
-        )} */}
       </div>
       <div className="w-full h-full absolute bottom-0 grid place-items-center">
         <div className="bg-white w-40 h-[68px]" />

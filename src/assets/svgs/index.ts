@@ -21,7 +21,7 @@ export { default as delete } from './trash.svg';
 export { default as moreVertical } from './more-vertical.svg';
 export { default as chevronDown } from './chevron-down.svg';
 export { default as alert } from './alert-circle.svg';
-export { default as person } from './person.svg';
+export { default as user } from './person.svg';
 export { default as check } from './check-circle.svg';
 export { default as logout } from './logout.svg';
 export { default as withdraw } from './withdraw.svg';
