@@ -18,7 +18,6 @@ import { BASE_URL } from '@/constants/service';
 import useMediaQuery from '@/hook/useMediaQuery';
 import { useToast } from '../ui/use-toast';
 import { ToastAction } from '../ui/toast';
-// import { getFormatByDate } from '@/service/date';
 const desktopMediaQuery = '(min-width: 500px)';
 
 //TODO: 임시저장기능, 수정기능
@@ -195,7 +194,7 @@ const Form = () => {
               message="서류마감일, 면접일 등을 입력해 보세요!"
             >
               {!isDesktop ? (
-                <span className="grid grid-cols-2 gap-2 web:gap-4">
+                <span className="grid grid-cols-2 gap-1.5 web:gap-4">
                   <DatePicker id="date" date={date} setDate={setDate} />
                   <TimePicker
                     isDesktop={isDesktop}

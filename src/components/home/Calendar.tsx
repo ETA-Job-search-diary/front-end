@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { isSameMonth, isSameDay, addDays } from 'date-fns';
+import { isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { BASE_URL } from '@/constants/service';
@@ -11,16 +11,15 @@ import { getFormattedDate } from '@/service/date';
 import Icon from '@/assets/Icon';
 import useSWR from 'swr';
 
-interface HeaderProps {
+interface CaptionProps {
   current: Date;
   prevMonth: () => void;
   nextMonth: () => void;
-  // goToToday: () => void;
 }
 
 type EventsType = string[];
 
-interface CellProps {
+interface BodyProps {
   today: Date;
   current: Date;
   events?: EventsType;
@@ -42,10 +41,6 @@ export const Calender = () => {
   const prevMonth = () => setCurrent(subMonths(current, 1));
   const nextMonth = () => setCurrent(addMonths(current, 1));
 
-  // const goToToday = () => {
-  //   setCurrent(today);
-  // };
-
   return (
     <>
       <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-60 web:h-[360px] bg-white">
@@ -53,27 +48,24 @@ export const Calender = () => {
           name="mainCharacter"
           className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
         />
-        <Calender.Header
+        <Calender.Caption
           current={current}
           prevMonth={prevMonth}
           nextMonth={nextMonth}
-          // goToToday={goToToday}
         />
-        <div className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4">
-          <Calender.Weeks />
-          <Calender.Cell today={today} current={current} events={events} />
-        </div>
+        <table
+          className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4"
+          suppressHydrationWarning
+        >
+          <Calender.Head />
+          <Calender.Body today={today} current={current} events={events} />
+        </table>
       </div>
     </>
   );
 };
 
-Calender.Header = ({
-  current,
-  prevMonth,
-  nextMonth,
-}: // goToToday,
-HeaderProps) => {
+Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
     <div className="flex justify-between pt-3.5 px-7 web:pt-6 web:px-[38px]">
       <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
@@ -81,7 +73,6 @@ HeaderProps) => {
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
       </div>
-      {/* <Calender.Button goToToday={goToToday} /> */}
       <div className="flex items-center gap-3.5">
         <Button
           variant="outline"
@@ -89,7 +80,10 @@ HeaderProps) => {
           onClick={prevMonth}
           className="w-[1.5rem] h-[1.5rem]"
         >
-          <ChevronLeft className="h-4 w-4 text-[#949494]" />
+          <ChevronLeft
+            aria-label="left-button"
+            className="h-4 w-4 text-[#949494]"
+          />
         </Button>
         <Button
           variant="outline"
@@ -97,27 +91,32 @@ HeaderProps) => {
           onClick={nextMonth}
           className="w-[1.5rem] h-[1.5rem]"
         >
-          <ChevronRight className="h-4 w-4 text-[#949494]" />
+          <ChevronRight
+            aria-label="right-button"
+            className="h-4 w-4 text-[#949494]"
+          />
         </Button>
       </div>
     </div>
   );
 };
 
-Calender.Weeks = () => {
+Calender.Head = () => {
   const date = ['일', '월', '화', '수', '목', '금', '토'];
   return (
-    <ul className="grid grid-cols-7 place-items-center">
-      {date.map((d) => (
-        <li key={d} className="text-black900 font-semibold">
-          {d}
-        </li>
-      ))}
-    </ul>
+    <thead>
+      <tr className="grid grid-cols-7 place-items-center">
+        {date.map((d) => (
+          <th key={d} className="text-black900 font-semibold">
+            {d}
+          </th>
+        ))}
+      </tr>
+    </thead>
   );
 };
 
-Calender.Cell = ({ today, current, events }: CellProps) => {
+Calender.Body = ({ today, current, events }: BodyProps) => {
   const monthStart = startOfMonth(current);
   const monthEnd = endOfMonth(monthStart);
   const from = startOfWeek(monthStart);
@@ -130,19 +129,19 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
     const formattedDate = format(day, 'd');
     const isToday = isSameDay(day, today);
 
-    const weekEvents =
-      events &&
-      events.filter((event) => {
-        const checkedDay = new Date(getFormattedDate(event).fullDate);
-        return isSameDay(checkedDay, day);
-      });
+    const weekEvents = events?.filter((event) => {
+      const checkedDay = event.split('T')[0];
+      const currentDay = format(day, 'yyyy-MM-dd');
+      const isSameDay = currentDay === checkedDay;
+      return isSameDay;
+    });
 
     return (
-      <div
+      <td
         key={day.toString()}
         className="w-full h-full flex flex-col gap-[1px] items-center justify-center font-medium"
       >
-        <div className="flex flex-col justify-center items-center">
+        <span className="flex flex-col justify-center items-center">
           {isToday && (
             <span className="inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black" />
           )}
@@ -155,13 +154,13 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
           >
             {formattedDate}
           </span>
-        </div>
+        </span>
         {weekEvents && weekEvents.length > 0 ? (
           <span className="rounded-full bg-primary500 mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
         ) : (
-          <span className="rounded-fullmx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
+          <span className="rounded-full mx-auto w-1.5 h-1.5 web:w-[5px] web:h-[5px]"></span>
         )}
-      </div>
+      </td>
     );
   };
 
@@ -176,20 +175,12 @@ Calender.Cell = ({ today, current, events }: CellProps) => {
   }
 
   return (
-    <div className="h-full flex flex-col">
+    <tbody className="h-full flex flex-col">
       {rows.map((week, index) => (
-        <div key={index} className="h-full grid grid-cols-7">
+        <tr key={index} className="h-full grid grid-cols-7">
           {week}
-        </div>
+        </tr>
       ))}
-    </div>
-  );
-};
-//TODO: 기획 - 오늘 이동 버튼의 필요성 검토
-Calender.Button = ({ goToToday }: TodayProps) => {
-  return (
-    <button className="" onClick={goToToday}>
-      오늘
-    </button>
+    </tbody>
   );
 };

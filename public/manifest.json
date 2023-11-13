@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "newjowlog",
-  "short_name": "newjoblog",
+  "name": "취준로그",
+  "short_name": "취준로그",
   "description": "\ucde8\uc5c5\uc5d0 \ud544\uc694\ud55c \uc815\ubcf4\ub97c \uae30\ub85d\ud558\uace0 \uad00\ub9ac\ud558\ub294 \uc11c\ube44\uc2a4",
   "icons": [
     {
