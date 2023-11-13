@@ -112,6 +112,7 @@ const ScheduleListHeader = ({
           <div className="flex items-center gap-4 web:gap-3.5">
             <button type="button" onClick={onCheckToggle}>
               <Icon
+                aria-label="all-check"
                 name="check"
                 className={`w-3.5 h-3.5 web:w-5 web:h-5 ${
                   allChecked ? 'fill-primary500' : 'fill-black100'

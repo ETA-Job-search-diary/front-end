@@ -16,6 +16,7 @@ const BackButton = ({ onClose }: BackButtonProps) => {
       className="w-full h-full"
     >
       <Icon
+        aria-label="=back-button"
         name="arrowleft"
         className="stroke-black900 w-5 web:w-[1.5rem] mx-auto hover:scale-110 transition-all"
       />
