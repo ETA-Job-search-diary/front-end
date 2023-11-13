@@ -6,7 +6,7 @@ import BackButton from './BackButton';
 import NavBar from '../common/NavBar';
 import DetailMoreMenu from '../detail/DetailMoreMenu';
 import { getFormattedDate } from '@/service/date';
-import { getBadgeByStep } from '@/service/schedule';
+import { getBadgeByStep } from '@/service/form';
 
 interface DetailNavBarProps {
   id: string;
