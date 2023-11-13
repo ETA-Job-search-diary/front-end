@@ -6,8 +6,10 @@ type Size = 'sm' | 'md' | 'lg';
 
 type SizeProps = Pick<SkeletoneProps, 'size'>;
 
-const Skeletone = () => {
-  return <div></div>;
+const Skeletone = ({ size = 'sm' }: SizeProps) => {
+  return (
+    <div className={`${skeletoneAnimaion} ${getSkeletonTextStyle(size)}`}></div>
+  );
 };
 
 Skeletone.List = () => {
@@ -23,28 +25,22 @@ Skeletone.List = () => {
 Skeletone.Item = () => {
   return (
     <li
-      className={`relative grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px] animate-pulse`}
+      className={`relative bg-white grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px] animate-pulse`}
     >
       <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100">
-        <Skeletone.Text />
+        <Skeletone />
       </div>
       <div className="w-full flex flex-col justify-center gap-2 xs:pl-3 pl-6 web:pl-[30px]">
-        <Skeletone.Text size="sm" />
+        <Skeletone size="sm" />
         <div>
-          <Skeletone.Text size="md" />
+          <Skeletone size="md" />
         </div>
-        <Skeletone.Text size="lg" />
+        <Skeletone size="lg" />
       </div>
       <div className="w-full place-self-center xs:pr-3 pr-6 web:pr-[30px]">
-        <Skeletone.Text />
+        <Skeletone />
       </div>
     </li>
-  );
-};
-
-Skeletone.Text = ({ size = 'sm' }: SizeProps) => {
-  return (
-    <div className={`${skeletoneAnimaion} ${getSkeletonTextStyle(size)}`}></div>
   );
 };
 

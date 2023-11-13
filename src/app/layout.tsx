@@ -65,6 +65,7 @@ export const viewport: Viewport = {
   minimumScale: 1,
   maximumScale: 1,
   userScalable: false,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -73,7 +74,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`w-screen h-full overflow-x-hidden bg-body ${suitFont.className} antialiased`}
       >
-        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white">
+        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col">
           <AuthSessionProvider>
             <SWRContext>{children}</SWRContext>
             <TabBar />

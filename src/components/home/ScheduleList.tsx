@@ -18,11 +18,15 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
   const handleCheck = (id: string) => onCheck(id);
 
   return (
-    <ul className="w-full flex flex-col gap-3 duration-500 ease-linear transition-all last:pb-20">
+    <ul
+      className={`w-full flex flex-col gap-3 ${
+        isEdit ? 'pb-0' : 'pb-[calc(env(safe-area-inset-bottom)+90px)]'
+      }`}
+    >
       {items.map((item) => (
         <li
           key={item.id}
-          className={`web:gap-3 items-center duration-500 ease-linear transition-all ${
+          className={`web:gap-3 items-center ${
             isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
           }`}
         >
@@ -30,7 +34,7 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
             <button type="button" onClick={() => handleCheck(item.id)}>
               <Icon
                 name="check"
-                className={`w-3.5 h-3.5 web:w-5 web:h-5 hover:animate-wiggle duration-300 ease-linear transition-all ${
+                className={`w-3.5 h-3.5 web:w-5 web:h-5 hover:animate-wiggle ${
                   isChecked(item.id) ? 'fill-primary500' : 'fill-black100'
                 }`}
               />

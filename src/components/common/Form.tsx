@@ -147,7 +147,7 @@ const Form = () => {
 
   return (
     <>
-      <form className="h-full flex flex-col justify-between pb-4 web:pb-5 gap-[2.5rem] web:gap-[3.5rem]">
+      <form className="h-full flex flex-col gap-10 web:gap-14">
         {isClient && (
           <>
             <TextInput
@@ -254,15 +254,17 @@ const Form = () => {
                 onChange={(e) => setMemo(e.currentTarget.value)}
               />
             </FormLabel>
-            <Button
-              type="submit"
-              label="저장"
-              active={isReady}
-              onClick={handleSubmit}
-            />
           </>
         )}
       </form>
+      <div className="py-7 web:py-10">
+        <Button
+          type="submit"
+          label="저장"
+          active={isReady}
+          onClick={handleSubmit}
+        />
+      </div>
     </>
   );
 };
