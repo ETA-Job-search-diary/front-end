@@ -1,8 +1,6 @@
-import Icon from '@/assets/Icon';
 import { FormType } from '@/constants/form';
-import MarkDownViewer from '../common/MarkdownViewer';
 import { getFormattedDate } from '@/service/date';
-import Link from 'next/link';
+import DetailItem from './DetailItem';
 
 interface DetailProps {
   company: string;
@@ -25,51 +23,24 @@ const Detail = ({
 
   return (
     <section className="w-full pb-24 px-[22px] web:px-[28px] flex flex-col gap-8 text-black-800 text-xs web:text-md pt-4 web:pt-8 scroll-auto">
-      <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">
-        <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
-          <Icon name="briefcase" className="w-3 h-3 web:w-4 web:h-4" />
-          {FormType.COMPANY}
-        </span>
-        <span className="text-black600 font-medium">{company}</span>
-      </label>
-      <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">
-        <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
-          <Icon name="position" className="w-3 h-3 web:w-4 web:h-4" />
-          {FormType.POSITION}
-        </span>
-        <span className="text-black600 font-medium">{position}</span>
-      </label>
-      <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">
-        <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
-          <Icon name="clock" className="w-3 h-3 web:w-4 web:h-4" />
-          {FormType.DATE}
-        </span>
-        <span className="text-black600 font-medium">{endTime}</span>
-      </label>
-      <label className="grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4">
-        <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
-          <Icon name="global" className="w-3 h-3 web:w-4 web:h-4" />
-          {FormType.LINK}
-        </span>
-        <span className="text-black600 font-medium col-start-2">
-          {platform}
-        </span>
-        <Link
-          href={link || ''}
-          rel="noopener noreferrer"
-          target="_blank"
-          className="text-black600 font-medium break-words col-start-2 min-w-full pr-2"
-        >
-          <span className="border-b border-black600">{link}</span>
-        </Link>
-      </label>
-      <label className="flex flex-col gap-4 items-start">
-        <span className="text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5">
-          <Icon name="memo" className="w-3 h-3 web:w-4 web:h-4" />
-          {FormType.MEMO}
-        </span>
-        <MarkDownViewer content={memo || ''} />
-      </label>
+      <DetailItem title={FormType.COMPANY} icon="briefcase" content={company} />
+      <DetailItem
+        title={FormType.POSITION}
+        icon="position"
+        content={position}
+      />
+      <DetailItem title={FormType.DATE} icon="clock" content={endTime} />
+      {(platform || link) && (
+        <DetailItem.Link
+          title={FormType.LINK}
+          icon="global"
+          content={platform}
+          link={link}
+        />
+      )}
+      {memo && (
+        <DetailItem.MarkDown title={FormType.MEMO} icon="memo" content={memo} />
+      )}
     </section>
   );
 };
