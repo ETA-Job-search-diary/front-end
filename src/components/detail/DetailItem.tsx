@@ -54,7 +54,7 @@ DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
 
 DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   return (
-    <div className={`${itemStyle}`}>
+    <div className="flex flex-col gap-4 items-start">
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {title}
