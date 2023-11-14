@@ -25,7 +25,7 @@ const DetailNavBar = ({ id, title, step, date }: DetailNavBarProps) => {
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}
       />
-      <div className="flex flex-col gap-2 pb-4 web:pb-[34px] border-b border-black100 mx-[22px] web:mx-[28px]">
+      <div className="flex flex-col gap-2 pb-[2rem] border-b border-black100 mx-[22px] web:mx-[28px]">
         <div className="flex gap-3 items-center">
           <h1 className="text-black900 font-bold text-md web:text-xl">
             {title}
