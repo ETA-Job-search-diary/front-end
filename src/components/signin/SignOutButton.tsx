@@ -8,7 +8,7 @@ const SignOutButton = ({ onClick }: SignOutButtonProps) => {
   return (
     <button
       type="button"
-      className="w-full flex items-center gap-3 p-3 border-b border-black100"
+      className="w-full flex items-center gap-3 p-5 border-b border-black100"
       onClick={onClick}
     >
       <Icon

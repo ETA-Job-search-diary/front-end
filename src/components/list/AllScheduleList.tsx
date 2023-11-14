@@ -1,14 +1,13 @@
 'use client';
-import { BASE_URL } from '@/constants/service';
+
 import EmptyItem from '@/components/home/EmptyItem';
 import GridChips from '@/components/list/GridChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import { useState } from 'react';
 import { useCheckDispatch } from '@/context/CheckContext';
-import { ScheduleDetailType } from '@/model/schedule';
-import useSWR from 'swr';
 import Skeletone from '../common/Skeletone';
+import useScheduleList from '@/hook/scheduleList';
 
 const AllScheduleList = () => {
   const [offset, setOffset] = useState(0);
@@ -16,11 +15,10 @@ const AllScheduleList = () => {
   const [isEdit, setIsEdit] = useState(false);
   const { onCheckToggle } = useCheckDispatch();
 
-  const { data, isLoading, error } = useSWR<ScheduleDetailType[]>([
-    `${BASE_URL}/schedules/list?offset=${offset}${
-      filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
-    }`,
-  ]);
+  const { data, isLoading, setDeleteSchedule } = useScheduleList(
+    filter,
+    offset,
+  );
 
   const isFiltered = !!filter.length;
 
@@ -45,13 +43,20 @@ const AllScheduleList = () => {
         isEdit={isEdit}
         onEditClick={handleEditToggle}
         onCheckToggle={handleCheckToggleAll}
+        onDelete={setDeleteSchedule}
       />
       <section
-        className={`grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
+        className={`group grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
           isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
         }`}
       >
-        <GridChips checked={filter} onClick={handleFilter} />
+        <div
+          className={`duration-300 ease-linear transition-all transform ${
+            isEdit ? 'opacity-0' : ''
+          }`}
+        >
+          <GridChips checked={filter} onClick={handleFilter} />
+        </div>
         {isLoading && <Skeletone.List />}
         {!isLoading &&
           (!!data?.length ? (

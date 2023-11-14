@@ -68,7 +68,7 @@ export const Calender = () => {
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
     <div className="flex justify-between pt-3.5 px-7 web:pt-6 web:px-[38px]">
-      <div className="grid grid-cols-[1fr_27px_auto] web:grid-cols-[1fr_35px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
+      <div className="grid grid-cols-[1fr_23px_auto] web:grid-cols-[1fr_27px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
