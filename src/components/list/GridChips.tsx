@@ -1,15 +1,14 @@
 import { STEPS } from '@/constants/form';
 import Chip from '../common/Chip';
 
-interface FilterChipsProps {
-  isEdit?: boolean;
+interface GridChipsProps {
   checked: string[];
   onClick: (value: string) => void;
 }
 
-const FilterChips = ({ checked, onClick }: FilterChipsProps) => {
+const GridChips = ({ checked, onClick }: GridChipsProps) => {
   return (
-    <ul className="grid grid-cols-4 gap-2 xs:gap-1">
+    <ul className="grid grid-cols-4 gap-[0.7rem]">
       {STEPS.map(({ value, name }) => (
         <li key={value}>
           <Chip
@@ -23,4 +22,4 @@ const FilterChips = ({ checked, onClick }: FilterChipsProps) => {
   );
 };
 
-export default FilterChips;
+export default GridChips;

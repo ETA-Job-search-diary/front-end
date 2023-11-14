@@ -1,9 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
 
-interface useMediaQueryProps {
-  mediaQuery: string;
-}
-
 const isAPISupported = (api: string): boolean =>
   typeof window !== 'undefined' ? api in window : false;
 
@@ -13,7 +9,7 @@ const isClient = !!(
   window.document.createElement
 );
 
-const useMediaQuery = ({ mediaQuery }: useMediaQueryProps) => {
+const useMediaQuery = (mediaQuery: string) => {
   if (!isClient || !isAPISupported('matchMedia')) {
     return false;
   }

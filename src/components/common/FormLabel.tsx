@@ -12,7 +12,7 @@ interface FormLabelProps {
 const FormLabel = ({
   id,
   label,
-  must = false,
+  must = true,
   message,
   errorMessage,
   children,

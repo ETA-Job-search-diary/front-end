@@ -43,3 +43,10 @@ export const getFormattedCurrentTime = () => {
   const [meridiem, time] = currentTime.split(' ');
   return { meridiem, time };
 };
+
+export const convertToDateTime = (date?: Date, time?: string) => {
+  if (!date || !time) return;
+  const convertedDate = format(new Date(date), 'yyyy-MM-dd');
+  const formattedDate = `${convertedDate}T${time}:00.000Z`;
+  return formattedDate;
+};
