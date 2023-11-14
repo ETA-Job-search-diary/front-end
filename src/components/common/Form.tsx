@@ -10,16 +10,18 @@ import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
 import { BASE_URL } from '@/constants/service';
-import useMediaQuery from '@/hook/useMediaQuery';
 import { useToast } from '../ui/use-toast';
 import { ToastAction } from '../ui/toast';
-import { convertToDateTime } from '@/service/date';
+import { convertToDateTime, getFormatByDate } from '@/service/date';
 import GridChips from '../list/GridChips';
 import DateTimePicker from './DateTimePicker';
 
-// 임시저장
 const TEXTAREA_MAX_LENGTH = 200;
+const today = new Date();
+const currentDay = getFormatByDate(today);
+const currentHour = today.getHours() + ':00';
 
+// 임시저장
 const Form = () => {
   const router = useRouter();
   const { toast } = useToast();
@@ -50,8 +52,8 @@ const Form = () => {
   const [step, setStep] = useState('');
   const [company, setCompany] = useState('');
   const [position, setPosition] = useState('');
-  const [date, setDate] = useState<Date>();
-  const [time, setTime] = useState<string>();
+  const [date, setDate] = useState<string>(currentDay);
+  const [time, setTime] = useState<string>(currentHour);
   const [link, setLink] = useState('');
   const [platform, setPlatform] = useState('');
   const [memo, setMemo] = useState('');
@@ -80,9 +82,7 @@ const Form = () => {
 
   const handleSubmitValidationToast = () => {
     toast({
-      title: '항목을 모두 입력해주세요 🙇🏻‍♀️',
-      description:
-        '필수 항목만 저장할 수 있도록 수정하고 있어요.. 잠시만 기다려주세요',
+      title: '항목을 모두 입력해주세요',
     });
   };
 
