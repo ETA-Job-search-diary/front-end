@@ -1,18 +1,18 @@
-import { BASE_URL } from '@/constants/service';
 import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
 import Button from '../common/Button';
 import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
-import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';
+import { useToast } from '@/components/ui/use-toast';
 
 interface ScheduleListHeaderProps {
   count?: number;
   isEdit: boolean;
   onEditClick: () => void;
   onCheckToggle: () => void;
+  onDelete: (checkedIds: string[], token: string) => void;
 }
 
 const ScheduleListHeader = ({
@@ -20,9 +20,12 @@ const ScheduleListHeader = ({
   isEdit,
   onEditClick,
   onCheckToggle,
+  onDelete,
 }: ScheduleListHeaderProps) => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
+
+  const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<string>();
@@ -42,39 +45,16 @@ const ScheduleListHeader = ({
 
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
-    if (checkedIds.length === 1) {
-      axios
-        .delete(`${BASE_URL}/schedules/${checkedIds[0]}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(() => handleCloseMenu())
-        .catch((err) => console.log(err));
-    } else {
-      axios
-        .post(
-          `${BASE_URL}/schedules/deleteMany`,
-          {
-            ids: checkedIds,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        )
-        .then(() => {
-          handleCloseMenu();
-          onUnCheckAll();
-          //!!!!!!!! TODO: 삭제된 항목 제외한 아이템들만 보이게끔 해야됨.. (refetch요청 또는 mutation)
-          // key: `${BASE_URL}/schedules/list?offset=${offset}${
-          //   filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
-          // }`;
-        })
-        .catch((err) => console.log(err));
-    }
+    onDelete && onDelete(checkedIds, token);
+    deleteToast();
+    handleCloseMenu();
+    onUnCheckAll();
   };
+
+  const deleteToast = () =>
+    toast({
+      description: '삭제되었습니다.',
+    });
 
   const handleComplete = () => {
     onUnCheckAll();
