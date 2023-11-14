@@ -13,7 +13,6 @@ const DESKTOP_MEDIAQUERY = '(min-width: 500px)';
 const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
 
-  console.log(date, time);
   return (
     <span
       className={`${

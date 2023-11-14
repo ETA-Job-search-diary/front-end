@@ -1,6 +1,6 @@
 import { format, getDate } from 'date-fns';
 import { ko } from 'date-fns/locale';
-//TODO: 더 좋은 방법 없는 지 찾아보기 (컴포넌트에서 계쏙해서 각각 호출하는게 맞나..)
+//!!!!!TODO: 더 좋은 방법 없는 지 찾아보기 (컴포넌트에서 계쏙해서 각각 호출하는게 맞나..)
 export const getFormattedDate = (input: string) => {
   const [inputDate, inputTime] = input.split('T');
   const fullDate = getFormatDateStringToDot(inputDate);
@@ -86,9 +86,8 @@ export const getFormatCurrentDateTime = (dateTime: string) => {
   return currentDate;
 };
 
-export const convertToDateTime = (date?: string, time?: string) => {
-  if (!date || !time) return;
-  const convertedDate = format(new Date(date), 'yyyy-MM-dd');
+export const convertToDateTime = (date: string, time: string) => {
+  const convertedDate = getFormatDateStringToSlash(date);
   const formattedDate = `${convertedDate}T${time}:00.000Z`;
   return formattedDate;
 };
