@@ -1,20 +1,16 @@
 'use client';
 import { BASE_URL } from '@/constants/service';
 import EmptyItem from '@/components/home/EmptyItem';
-import FilterChips from '@/components/list/FilterChips';
+import GridChips from '@/components/list/GridChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import { useState } from 'react';
 import { useCheckDispatch } from '@/context/CheckContext';
 import { ScheduleDetailType } from '@/model/schedule';
-import { useSession } from 'next-auth/react';
 import useSWR from 'swr';
 import Skeletone from '../common/Skeletone';
 
 const AllScheduleList = () => {
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
   const [offset, setOffset] = useState(0);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -55,7 +51,7 @@ const AllScheduleList = () => {
           isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
         }`}
       >
-        <FilterChips isEdit={isEdit} checked={filter} onClick={handleFilter} />
+        <GridChips checked={filter} onClick={handleFilter} />
         {isLoading && <Skeletone.List />}
         {!isLoading &&
           (!!data?.length ? (
