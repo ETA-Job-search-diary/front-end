@@ -85,12 +85,12 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col items-center px-1 py-3 web:px-3 web:py-5 gap-3">
+        <div className="flex flex-col items-center px-1 web:px-3 pt-3">
           <Link
             href={SERVICE_DESCRIPTION}
             rel="noopener noreferrer"
             target="_blank"
-            className="w-full flex items-center gap-3 p-3 border-b border-black100"
+            className="w-full flex items-center gap-3 p-5 border-b border-black100"
           >
             <Icon
               name="message"
@@ -104,7 +104,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             href={SUPPORT_FORM}
             rel="noopener noreferrer"
             target="_blank"
-            className="w-full flex items-center gap-3 p-3 border-b border-black100"
+            className="w-full flex items-center gap-3 p-5 border-b border-black100"
           >
             <Icon
               name="request"
@@ -115,7 +115,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           <SignOutButton onClick={() => handleAlert(Service.LOGOUT)} />
           <button
             type="button"
-            className="w-full flex items-center gap-3 p-3"
+            className="w-full flex items-center gap-3 p-5"
             onClick={() => handleAlert(Service.WITHDRAW)}
           >
             <Icon

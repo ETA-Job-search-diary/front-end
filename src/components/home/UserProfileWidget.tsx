@@ -21,7 +21,7 @@ const UserProfileWidget = () => {
           <Icon
             aria-label="=user"
             name="user"
-            className="w-4 h-4 web:w-5 web:h-5 fill-black900 hover:scale-110 transition-all"
+            className="w-4 h-4 web:w-6 web:h-6 fill-black900 hover:scale-110 transition-all"
           />
         </button>
       </div>

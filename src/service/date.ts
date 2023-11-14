@@ -54,9 +54,9 @@ export const getFormattedCurrentTime = (current: string) => {
   } else if (Number(hour) === 0) {
     hour = '12';
   } else {
-    hour = String(Number(hour)).padStart(2, '0');
+    hour = String(hour).padStart(2, '0');
   }
-  const time24Hour = current;
+  const time24Hour = `${hour.padStart(2, '0')}:${minute}`;
   const time12Hour = `${hour}:${minute}`;
   return {
     meridiem,
