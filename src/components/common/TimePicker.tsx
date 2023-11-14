@@ -1,31 +1,25 @@
-import { getFormattedCurrentTime } from '@/service/date';
+import { convertTimeFormat, getFormattedCurrentTime } from '@/service/date';
 import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
-import MeridiemPicker, { MeridiemType } from './MeridiemPicker';
+import MeridiemPicker from './MeridiemPicker';
 
 interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   isDesktop?: boolean;
-  value?: string;
+  value: string;
   onSetValue: (value: string) => void;
 }
-
-//TODO: 코드 정리 1순위
+//!! 사파리 웹에서 ampm이 안사라짐....
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
   ({ isDesktop, value, onSetValue, ...rest }, ref) => {
-    const { meridiem, time: currentTime } = getFormattedCurrentTime();
+    const { meridiem, time24Hour } = getFormattedCurrentTime(value);
+
     const isFilled = value !== undefined;
 
     const [mer, setMer] = useState(meridiem);
-    const [time, setTime] = useState(currentTime);
+    const [time, setTime] = useState(time24Hour);
 
     const handleMeridiemChange = (value: string) => {
-      const [hour, minute] = time.split(':');
-      if (value === MeridiemType.PM && Number(hour) < 12) {
-        onSetValue(`${Number(hour) + 12}:${minute}`);
-      } else if (value === MeridiemType.AM && Number(hour) >= 12) {
-        onSetValue(
-          `${(Number(hour) - 12).toString().padStart(2, '0')}:${minute}`,
-        );
-      } else onSetValue(time);
+      const formatedTime = convertTimeFormat(value, time);
+      onSetValue(formatedTime);
       setMer(value);
     };
 
@@ -33,15 +27,8 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
       target: { value },
     }: ChangeEvent<HTMLInputElement>) => {
       if (!isDesktop) return onSetValue(value);
-
-      const [hour, minute] = value.split(':');
-      if (mer === MeridiemType.PM && Number(hour) < 12) {
-        onSetValue(`${Number(hour) + 12}:${minute}`);
-      } else if (mer === MeridiemType.AM && Number(hour) >= 12) {
-        onSetValue(
-          `${(Number(hour) - 12).toString().padStart(2, '0')}:${minute}`,
-        );
-      } else onSetValue(value);
+      const formatedTime = convertTimeFormat(mer, value);
+      onSetValue(formatedTime);
       setTime(value);
     };
 
@@ -55,7 +42,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
         <input
           ref={ref}
           type="time"
-          defaultValue={currentTime}
+          defaultValue={time}
           className={`w-full min-w-[140px] h-10 web:h-12 py-2 px-[0.8rem] text-start web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
             isFilled
               ? 'text-black900 text-xs web:text-sm'

@@ -3,15 +3,17 @@ import TimePicker from './TimePicker';
 import useMediaQuery from '@/hook/useMediaQuery';
 
 interface DateTimePickerProps {
-  date?: Date;
-  time?: string;
-  onChange: (date?: Date, time?: string) => void;
+  date: string;
+  time: string;
+  onChange: (date: string, time: string) => void;
 }
 
 const DESKTOP_MEDIAQUERY = '(min-width: 500px)';
 
 const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
+
+  console.log(date, time);
   return (
     <span
       className={`${
