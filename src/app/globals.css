@@ -100,7 +100,11 @@ textarea {
 }
 
 @media screen and (min-width: 500px) {
-  .without_ampm::-webkit-datetime-edit-ampm-field {
+  input[type='time'] {
+    text-align: start;
+  }
+
+  input[type='time']::-webkit-datetime-edit-ampm-field {
     display: none;
   }
 }

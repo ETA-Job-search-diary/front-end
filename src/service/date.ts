@@ -3,7 +3,7 @@ import { ko } from 'date-fns/locale';
 //TODO: 더 좋은 방법 없는 지 찾아보기 (컴포넌트에서 계쏙해서 각각 호출하는게 맞나..)
 export const getFormattedDate = (input: string) => {
   const [inputDate, inputTime] = input.split('T');
-  const fullDate = getFormatByDateString(inputDate);
+  const fullDate = getFormatDateStringToDot(inputDate);
   const date = getDate(new Date(inputDate));
   const day = getFormatDayByDateStr(inputDate);
   const endTime = getFormatEndTimeByTimeStr(inputTime);
@@ -16,8 +16,12 @@ export const getFormattedDate = (input: string) => {
   };
 };
 
-export const getFormatByDateString = (inputDate: string) => {
+export const getFormatDateStringToDot = (inputDate: string) => {
   return inputDate.replaceAll('-', '.');
+};
+
+export const getFormatDateStringToSlash = (inputDate: string) => {
+  return inputDate.replaceAll('.', '-');
 };
 
 export const getFormatDayByDateStr = (inputDate: string) => {
@@ -30,21 +34,59 @@ export const getFormatByDate = (inputDate: Date) => {
   return fullDate;
 };
 
+export const getConvertToDate = (inputDate: Date) => {
+  const convertedDate = format(inputDate, 'yyyy-MM-dd');
+  return convertedDate;
+};
+
 export const getFormatEndTimeByTimeStr = (inputTime: string) => {
   const time = inputTime.slice(0, 5);
-  const mer = time.split(':')[0] >= '12' ? '오후' : '오전';
-  const endTime = `${mer} ${time}`;
+  const { meridiem, time12Hour } = getFormattedCurrentTime(time);
+  const endTime = `${meridiem} ${time12Hour}`;
   return endTime;
 };
 
-export const getFormattedCurrentTime = () => {
-  const current = new Date();
-  const currentTime = format(current, 'a hh:00', { locale: ko });
-  const [meridiem, time] = currentTime.split(' ');
-  return { meridiem, time };
+export const getFormattedCurrentTime = (current: string) => {
+  let [hour, minute] = current.split(':');
+  const meridiem = hour >= '12' ? '오후' : '오전';
+  if (Number(hour) >= 12) {
+    hour = String(Number(hour) - 12).padStart(2, '0');
+  } else if (Number(hour) === 0) {
+    hour = '12';
+  } else {
+    hour = String(Number(hour)).padStart(2, '0');
+  }
+  const time24Hour = current;
+  const time12Hour = `${hour}:${minute}`;
+  return {
+    meridiem,
+    time24Hour,
+    time12Hour,
+  };
 };
 
-export const convertToDateTime = (date?: Date, time?: string) => {
+export const convertTimeFormat = (meridiem: string, time: string) => {
+  const [hour, minute] = time.split(':');
+  if (meridiem === '오후' && Number(hour) < 12) {
+    return `${Number(hour) + 12}:${minute}`;
+  } else if (meridiem === '오전' && Number(hour) >= 12) {
+    return `${(Number(hour) - 12).toString().padStart(2, '0')}:${minute}`;
+  }
+  return `${hour}:${minute}`;
+};
+
+export const getConverMeridiemToTime = (meridiem: string, time: string) => {
+  const convertedTime = meridiem === '오후' ? Number(time) + 12 : time;
+  return convertedTime;
+};
+
+export const getFormatCurrentDateTime = (dateTime: string) => {
+  const [date] = dateTime.split('T');
+  const currentDate = getFormatDateStringToDot(date);
+  return currentDate;
+};
+
+export const convertToDateTime = (date?: string, time?: string) => {
   if (!date || !time) return;
   const convertedDate = format(new Date(date), 'yyyy-MM-dd');
   const formattedDate = `${convertedDate}T${time}:00.000Z`;
