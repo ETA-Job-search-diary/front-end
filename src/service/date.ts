@@ -56,8 +56,9 @@ export const getFormattedCurrentTime = (current: string) => {
   } else {
     hour = String(hour).padStart(2, '0');
   }
-  const time24Hour = `${hour.padStart(2, '0')}:${minute}`;
+  const time24Hour = `${hour}:${minute}`;
   const time12Hour = `${hour}:${minute}`;
+
   return {
     meridiem,
     time24Hour,
@@ -66,13 +67,13 @@ export const getFormattedCurrentTime = (current: string) => {
 };
 
 export const convertTimeFormat = (meridiem: string, time: string) => {
-  const [hour, minute] = time.split(':');
+  let [hour, minute] = time.split(':');
   if (meridiem === '오후' && Number(hour) < 12) {
-    return `${Number(hour) + 12}:${minute}`;
+    hour = String(Number(hour) + 12);
   } else if (meridiem === '오전' && Number(hour) >= 12) {
-    return `${(Number(hour) - 12).toString().padStart(2, '0')}:${minute}`;
+    hour = String(Number(hour) - 12);
   }
-  return `${hour}:${minute}`;
+  return `${hour.padStart(2, '0')}:${minute}`;
 };
 
 export const getConverMeridiemToTime = (meridiem: string, time: string) => {
@@ -87,7 +88,8 @@ export const getFormatCurrentDateTime = (dateTime: string) => {
 };
 
 export const convertToDateTime = (date: string, time: string) => {
+  const [hour, minute] = time.split(':');
   const convertedDate = getFormatDateStringToSlash(date);
-  const formattedDate = `${convertedDate}T${time}:00.000Z`;
+  const formattedDate = `${convertedDate}T${hour.padStart(2, '0')}:${minute}`;
   return formattedDate;
 };
