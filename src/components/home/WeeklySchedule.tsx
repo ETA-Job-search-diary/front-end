@@ -19,7 +19,7 @@ const WeeklySchedule = () => {
   ]);
 
   return (
-    <section className="grow h-full flex flex-col gap-8 bg-white px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom)+90px)]">
+    <section className="grow h-full flex flex-col gap-8 bg-white px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom))]">
       {isLoading && (
         <>
           <Skeletone.Item />
