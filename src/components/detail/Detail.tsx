@@ -30,7 +30,7 @@ const Detail = ({
         content={position}
       />
       <DetailItem title={FormType.DATE} icon="clock" content={endTime} />
-      {(platform || link) && (
+      {link !== ' ' && (link || platform) && (
         <DetailItem.Link
           title={FormType.LINK}
           icon="global"
@@ -38,7 +38,7 @@ const Detail = ({
           link={link}
         />
       )}
-      {memo && (
+      {memo !== ' ' && memo && (
         <DetailItem.MarkDown title={FormType.MEMO} icon="memo" content={memo} />
       )}
     </section>
