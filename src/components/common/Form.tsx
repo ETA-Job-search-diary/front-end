@@ -4,26 +4,25 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
-import Chip from './Chip';
 import { useState, MouseEvent, useEffect } from 'react';
 import Button from './Button';
 import FormLabel from './FormLabel';
-import { STEPS } from '@/constants/form';
 import { getPlatformFromLink } from '@/service/form';
-import DatePicker from './DatePicker';
-import TimePicker from './TimePicker';
 import { useSession } from 'next-auth/react';
-import { format } from 'date-fns';
 import { BASE_URL } from '@/constants/service';
 import useMediaQuery from '@/hook/useMediaQuery';
 import { useToast } from '../ui/use-toast';
 import { ToastAction } from '../ui/toast';
-const desktopMediaQuery = '(min-width: 500px)';
+import { convertToDateTime } from '@/service/date';
+import GridChips from '../list/GridChips';
+import DateTimePicker from './DateTimePicker';
 
-//TODO: 임시저장기능, 수정기능
+// 임시저장
+const TEXTAREA_MAX_LENGTH = 200;
+
 const Form = () => {
-  const { toast } = useToast();
   const router = useRouter();
+  const { toast } = useToast();
 
   const { data: session } = useSession();
   const token = session?.user.accessToken;
@@ -67,8 +66,6 @@ const Form = () => {
     !!date &&
     !!time;
 
-  const isDevReady = isReady && link.length > 0 && memo.length > 0;
-
   const isLinkValid = (link: string) => {
     const regex = new RegExp(
       /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
@@ -93,35 +90,24 @@ const Form = () => {
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault();
-    if (isReady && !isDevReady) {
-      handleSubmitValidationToast();
-      return;
-    }
 
     if (!isReady) {
       handleSubmitValidationToast();
       return;
     }
 
-    const convertTime = (date?: Date, time?: string) => {
-      if (!date || !time) return;
-      const convertedDate = format(new Date(date), 'yyyy-MM-dd');
-      const formattedDate = `${convertedDate}T${time}:00.000Z`;
-      return formattedDate;
-    };
-    const timeString = convertTime(date, time);
+    const stringDate = convertToDateTime(date, time);
 
     const data = {
       title,
       step,
       company,
       position,
-      date: timeString,
-      link,
+      date: stringDate,
+      link: link || ' ',
       platform: platform || autoPlatform,
-      memo,
+      memo: memo || ' ',
     };
-    //TODO: link, platform, memo 빈값일때 처리
     axios
       .post(`${BASE_URL}/schedules`, data, {
         headers: {
@@ -132,15 +118,7 @@ const Form = () => {
       .catch((err) => console.log(err));
   };
 
-  const handleTimeChange = (value: string) => setTime(value);
-
-  const isDesktop = useMediaQuery({
-    mediaQuery: desktopMediaQuery,
-  });
-
-  //!! TODO: 새로고침 에러때문에 임시 해결책.. hydration 에러
   const [isClient, setIsClient] = useState(false);
-
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -151,70 +129,43 @@ const Form = () => {
         {isClient && (
           <>
             <TextInput
-              must
               id="title"
-              type="text"
               label="타이틀"
               placeholder="타이틀을 입력해주세요"
               onChange={(e) => setTitle(e.currentTarget.value)}
             />
             <FormLabel must id="step" label="전형단계">
-              <ul className="grid grid-cols-4 gap-[0.7rem]">
-                {STEPS.map(({ value, name }) => (
-                  <li key={value}>
-                    <Chip
-                      label={name}
-                      checked={step === value}
-                      onClick={() => handleChipClick(value)}
-                    />
-                  </li>
-                ))}
-              </ul>
+              <GridChips checked={[step]} onClick={handleChipClick} />
             </FormLabel>
-            <FormLabel id="company" must label="지원하는 회사/직무">
+            <FormLabel id="company-position" must label="지원하는 회사/직무">
               <TextInput
-                must
                 id="company"
-                type="text"
                 placeholder="회사명을 입력해주세요"
                 onChange={(e) => setCompany(e.currentTarget.value)}
               />
               <TextInput
-                must
                 id="position"
-                type="text"
                 placeholder="직무를 입력해주세요"
                 onChange={(e) => setPosition(e.currentTarget.value)}
               />
             </FormLabel>
             <FormLabel
-              must
               id="date-time"
               label="일정"
               message="서류마감일, 면접일 등을 입력해 보세요!"
             >
-              {!isDesktop ? (
-                <span className="grid grid-cols-2 gap-1.5 web:gap-4">
-                  <DatePicker id="date" date={date} setDate={setDate} />
-                  <TimePicker
-                    isDesktop={isDesktop}
-                    value={time}
-                    onSetValue={handleTimeChange}
-                  />
-                </span>
-              ) : (
-                <>
-                  <DatePicker id="date" date={date} setDate={setDate} />
-                  <TimePicker
-                    isDesktop={isDesktop}
-                    value={time}
-                    onSetValue={handleTimeChange}
-                  />
-                </>
-              )}
+              <DateTimePicker
+                date={date}
+                time={time}
+                onChange={(date, time) => {
+                  setDate(date);
+                  setTime(time);
+                }}
+              />
             </FormLabel>
             <FormLabel
-              id="link"
+              must={false}
+              id="link-platform"
               label="채용공고 링크"
               message={`${
                 isLinkValid(link)
@@ -239,18 +190,17 @@ const Form = () => {
               {link && (
                 <TextInput
                   id="platform"
-                  type="text"
                   value={platform}
                   onChange={(e) => setPlatform(e.currentTarget.value)}
                   placeholder={autoPlatform || ''}
                 />
               )}
             </FormLabel>
-            <FormLabel id="memo" label="메모">
+            <FormLabel must={false} id="memo" label="메모">
               <TextArea
                 id="memo"
-                placeholder="지원 관련 메모를 남겨 주세요. (최대 200자)"
-                maxLength={200}
+                placeholder={`지원 관련 메모를 남겨 주세요. (최대 ${TEXTAREA_MAX_LENGTH}자)`}
+                maxLength={TEXTAREA_MAX_LENGTH}
                 onChange={(e) => setMemo(e.currentTarget.value)}
               />
             </FormLabel>

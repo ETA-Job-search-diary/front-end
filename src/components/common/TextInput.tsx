@@ -10,7 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ id, must, label, ...rest }, ref) => {
+  ({ id, must, label, type = 'text', ...rest }, ref) => {
     const { isFocus, onFocus, onBlur } = useFocus();
 
     return (
