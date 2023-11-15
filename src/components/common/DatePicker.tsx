@@ -25,7 +25,7 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
       <PopoverTrigger placeholder={date} asChild>
         <span className="flex justify-between items-center h-10 web:h-12 bg-primary-bg border-[0.8px] border-primary300 rounded-small pr-3">
           <span className="font-medium text-black900 text-xs web:text-sm py-2 px-[0.8rem]">
-            {getFormatCurrentDateTime(date)}
+            {getFormatCurrentDateTime(date).date}
           </span>
           <Icon
             name="calendar"

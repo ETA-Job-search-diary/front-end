@@ -81,10 +81,14 @@ export const getConverMeridiemToTime = (meridiem: string, time: string) => {
   return convertedTime;
 };
 
-export const getFormatCurrentDateTime = (dateTime: string) => {
-  const [date] = dateTime.split('T');
-  const currentDate = getFormatDateStringToDot(date);
-  return currentDate;
+export const getFormatCurrentDateTime = (dateString: string) => {
+  const [inputDate, inputTime] = dateString.split('T');
+  const date = getFormatDateStringToDot(inputDate);
+  const time = inputTime && inputTime.slice(0, 5);
+  return {
+    date,
+    time,
+  };
 };
 
 export const convertToDateTime = (date: string, time: string) => {

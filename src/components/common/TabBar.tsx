@@ -16,7 +16,12 @@ const TabBar = () => {
     else router.push('/auth/signin');
   };
 
-  if (pathname === '/auth/signin' || pathname === '/new') return null;
+  if (
+    pathname === '/auth/signin' ||
+    pathname === '/new' ||
+    pathname.startsWith('/edit')
+  )
+    return null;
 
   return (
     <nav className="h-[68px] w-full mx-auto min-w-[280px] max-w-[500px] z-0 fixed bottom-0 bg-white shadow-tab">
