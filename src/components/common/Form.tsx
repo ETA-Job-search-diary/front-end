@@ -1,6 +1,5 @@
 'use client';
 
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
@@ -9,55 +8,68 @@ import Button from './Button';
 import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
-import { BASE_URL } from '@/constants/service';
 import { useToast } from '../ui/use-toast';
-import { ToastAction } from '../ui/toast';
-import { convertToDateTime, getFormatByDate } from '@/service/date';
+import {
+  convertToDateTime,
+  getFormatByDate,
+  getFormatCurrentDateTime,
+} from '@/service/date';
 import GridChips from '../list/GridChips';
 import DateTimePicker from './DateTimePicker';
+import {
+  ScheduleDataType,
+  postSchedule,
+  putSchedule,
+} from '@/service/schedule';
 
 const TEXTAREA_MAX_LENGTH = 200;
+
 const today = new Date();
 const currentDay = getFormatByDate(today);
 const currentHour = today.getHours() + ':00';
 
+interface FormProps {
+  originData?: {
+    id: string;
+    title: string;
+    step: string;
+    company: string;
+    position: string;
+    date: string;
+    link: string;
+    platform: string;
+    memo: string;
+  };
+}
+
 // 임시저장
-const Form = () => {
+const Form = ({ originData }: FormProps) => {
   const router = useRouter();
   const { toast } = useToast();
 
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  const handleRedirectToast = () => {
-    toast({
-      description: '로그인시간이 만료됐어요. 다시 로그인해주세요',
-      action: (
-        <ToastAction
-          onClick={() => router.push('/auth/login')}
-          altText="로그인"
-        >
-          로그인
-        </ToastAction>
-      ),
-    });
-  };
+  const [title, setTitle] = useState(originData?.title || '');
+  const [step, setStep] = useState(originData?.step || '');
+  const [company, setCompany] = useState(originData?.company || '');
+  const [position, setPosition] = useState(originData?.position || '');
+  const [date, setDate] = useState<string>(
+    (originData && getFormatCurrentDateTime(originData.date).date) ||
+      currentDay,
+  );
+  const [time, setTime] = useState<string>(
+    (originData && getFormatCurrentDateTime(originData.date).time) ||
+      currentHour,
+  );
+  const [link, setLink] = useState(
+    (originData?.link !== ' ' && originData?.link) || '',
+  );
+  const [platform, setPlatform] = useState(originData?.platform || '');
+  const [memo, setMemo] = useState(
+    (originData?.memo !== ' ' && originData?.memo) || '',
+  );
 
-  if (!token) {
-    handleRedirectToast();
-    return;
-  }
-
-  const [title, setTitle] = useState('');
-  const [step, setStep] = useState('');
-  const [company, setCompany] = useState('');
-  const [position, setPosition] = useState('');
-  const [date, setDate] = useState<string>(currentDay);
-  const [time, setTime] = useState<string>(currentHour);
-  const [link, setLink] = useState('');
-  const [platform, setPlatform] = useState('');
-  const [memo, setMemo] = useState('');
-  //TODO: 일정 시간 후 적용하게끔 디바운스 적용필요
   const autoPlatform = getPlatformFromLink(link);
 
   const isReady =
@@ -76,8 +88,11 @@ const Form = () => {
   };
 
   const handleChipClick = (value: string) => {
-    if (step === value) setStep('');
-    else setStep(value);
+    if (step === value) {
+      setStep('');
+      return;
+    }
+    setStep(value);
   };
 
   const handleSubmitValidationToast = () => {
@@ -86,18 +101,18 @@ const Form = () => {
     });
   };
 
-  const handleSubmit = (
+  const handleSubmit = async (
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
   ) => {
     e.preventDefault();
 
+    if (!token) return; //TODO: 토큰 없을때
     if (!isReady) {
       handleSubmitValidationToast();
       return;
     }
 
     const stringDate = convertToDateTime(date, time);
-
     const data = {
       title,
       step,
@@ -108,14 +123,29 @@ const Form = () => {
       platform: platform || autoPlatform,
       memo: memo || ' ',
     };
-    axios
-      .post(`${BASE_URL}/schedules`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+
+    if (originData) {
+      editSchedule(originData.id, data, token);
+      return;
+    }
+    newSchedule(data, token);
+  };
+
+  const editSchedule = async (
+    id: string,
+    data: ScheduleDataType,
+    token: string,
+  ) => {
+    return putSchedule(id, data, token)
+      .then(() => router.refresh())
+      .then(() => router.push(`/schedule/${id}`))
+      .catch((e) => console.error(e));
+  };
+
+  const newSchedule = async (data: ScheduleDataType, token: string) => {
+    return postSchedule(data, token)
       .then(() => router.push('/list'))
-      .catch((err) => console.log(err));
+      .catch((e) => console.error(e));
   };
 
   const [isClient, setIsClient] = useState(false);
@@ -131,6 +161,7 @@ const Form = () => {
             <TextInput
               id="title"
               label="타이틀"
+              value={title}
               placeholder="타이틀을 입력해주세요"
               onChange={(e) => setTitle(e.currentTarget.value)}
             />
@@ -140,11 +171,13 @@ const Form = () => {
             <FormLabel id="company-position" must label="지원하는 회사/직무">
               <TextInput
                 id="company"
+                value={company}
                 placeholder="회사명을 입력해주세요"
                 onChange={(e) => setCompany(e.currentTarget.value)}
               />
               <TextInput
                 id="position"
+                value={position}
                 placeholder="직무를 입력해주세요"
                 onChange={(e) => setPosition(e.currentTarget.value)}
               />
@@ -199,6 +232,7 @@ const Form = () => {
             <FormLabel must={false} id="memo" label="메모">
               <TextArea
                 id="memo"
+                value={memo}
                 placeholder={`지원 관련 메모를 남겨 주세요. (최대 ${TEXTAREA_MAX_LENGTH}자)`}
                 maxLength={TEXTAREA_MAX_LENGTH}
                 onChange={(e) => setMemo(e.currentTarget.value)}

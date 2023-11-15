@@ -56,7 +56,7 @@ export const getFormattedCurrentTime = (current: string) => {
   } else {
     hour = String(hour).padStart(2, '0');
   }
-  const time24Hour = `${hour}:${minute}`;
+  const time24Hour = current;
   const time12Hour = `${hour}:${minute}`;
 
   return {
@@ -81,15 +81,22 @@ export const getConverMeridiemToTime = (meridiem: string, time: string) => {
   return convertedTime;
 };
 
-export const getFormatCurrentDateTime = (dateTime: string) => {
-  const [date] = dateTime.split('T');
-  const currentDate = getFormatDateStringToDot(date);
-  return currentDate;
+export const getFormatCurrentDateTime = (dateString: string) => {
+  const [inputDate, inputTime] = dateString.split('T');
+  const date = getFormatDateStringToDot(inputDate);
+  const time = inputTime && inputTime.slice(0, 5);
+  return {
+    date,
+    time,
+  };
 };
 
 export const convertToDateTime = (date: string, time: string) => {
   const [hour, minute] = time.split(':');
   const convertedDate = getFormatDateStringToSlash(date);
-  const formattedDate = `${convertedDate}T${hour.padStart(2, '0')}:${minute}`;
+  const formattedDate = `${convertedDate}T${hour.padStart(
+    2,
+    '0',
+  )}:${minute}:00.000Z`;
   return formattedDate;
 };
