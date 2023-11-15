@@ -10,7 +10,7 @@ interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
 //!! 사파리 웹에서 ampm이 안사라짐....
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
   ({ isDesktop, value, onSetValue, ...rest }, ref) => {
-    const { meridiem, time24Hour } = getFormattedCurrentTime(value);
+    const { meridiem, time24Hour, time12Hour } = getFormattedCurrentTime(value);
 
     const isFilled = value !== undefined;
 
@@ -33,27 +33,49 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
     };
 
     return (
-      <div
-        className={`w-full h-10 web:h-12 text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4`}
-      >
-        {isDesktop && meridiem && (
-          <MeridiemPicker meridiem={meridiem} onChange={handleMeridiemChange} />
+      <>
+        {isDesktop ? (
+          meridiem && (
+            <div
+              className={`w-full h-10 web:h-12 text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4`}
+            >
+              <MeridiemPicker
+                meridiem={meridiem}
+                onChange={handleMeridiemChange}
+              />
+              <input
+                ref={ref}
+                type="time"
+                defaultValue={time}
+                className={`w-full h-10 web:h-12 py-2 px-[0.8rem] text-start web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
+                  isFilled
+                    ? 'text-black900 text-xs web:text-sm'
+                    : 'text-black300 text-xs web:text-sm font-medium'
+                } without_ampm`}
+                step="600"
+                required
+                onChange={handleTimeChange}
+                {...rest}
+              />
+            </div>
+          )
+        ) : (
+          <input
+            ref={ref}
+            type="time"
+            defaultValue={time}
+            className={`w-full h-10 web:h-12 py-2 px-[0.8rem] text-start web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
+              isFilled
+                ? 'text-black900 text-xs web:text-sm'
+                : 'text-black300 text-xs web:text-sm font-medium'
+            } without_ampm`}
+            step="600"
+            required
+            onChange={handleTimeChange}
+            {...rest}
+          />
         )}
-        <input
-          ref={ref}
-          type="time"
-          defaultValue={time}
-          className={`w-full min-w-[140px] h-10 web:h-12 py-2 px-[0.8rem] text-start web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
-            isFilled
-              ? 'text-black900 text-xs web:text-sm'
-              : 'text-black300 text-xs web:text-sm font-medium'
-          } without_ampm`}
-          step="600"
-          required
-          onChange={handleTimeChange}
-          {...rest}
-        />
-      </div>
+      </>
     );
   },
 );

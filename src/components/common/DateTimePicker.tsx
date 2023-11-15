@@ -14,10 +14,10 @@ const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
 
   return (
-    <span
+    <div
       className={`${
         !isDesktop
-          ? 'grid grid-cols-2 gap-1.5 web:gap-4'
+          ? 'grid grid-cols-2 gap-2 web:gap-4'
           : 'flex flex-col gap-2.5 web:gap-4'
       }`}
     >
@@ -35,7 +35,7 @@ const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
           onChange(date, value);
         }}
       />
-    </span>
+    </div>
   );
 };
 
