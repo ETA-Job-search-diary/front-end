@@ -56,7 +56,7 @@ export const getFormattedCurrentTime = (current: string) => {
   } else {
     hour = String(hour).padStart(2, '0');
   }
-  const time24Hour = `${hour}:${minute}`;
+  const time24Hour = current;
   const time12Hour = `${hour}:${minute}`;
 
   return {
@@ -90,6 +90,9 @@ export const getFormatCurrentDateTime = (dateTime: string) => {
 export const convertToDateTime = (date: string, time: string) => {
   const [hour, minute] = time.split(':');
   const convertedDate = getFormatDateStringToSlash(date);
-  const formattedDate = `${convertedDate}T${hour.padStart(2, '0')}:${minute}`;
+  const formattedDate = `${convertedDate}T${hour.padStart(
+    2,
+    '0',
+  )}:${minute}:00.000Z`;
   return formattedDate;
 };
