@@ -16,9 +16,14 @@ import {
 } from '@/service/date';
 import GridChips from '../list/GridChips';
 import DateTimePicker from './DateTimePicker';
-import { postSchedule, putSchedule } from '@/service/schedule';
+import {
+  ScheduleDataType,
+  postSchedule,
+  putSchedule,
+} from '@/service/schedule';
 
 const TEXTAREA_MAX_LENGTH = 200;
+
 const today = new Date();
 const currentDay = getFormatByDate(today);
 const currentHour = today.getHours() + ':00';
@@ -65,7 +70,6 @@ const Form = ({ originData }: FormProps) => {
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
 
-  //TODO: 일정 시간 후 적용하게끔 디바운스 적용필요
   const autoPlatform = getPlatformFromLink(link);
 
   const isReady =
@@ -84,8 +88,11 @@ const Form = ({ originData }: FormProps) => {
   };
 
   const handleChipClick = (value: string) => {
-    if (step === value) setStep('');
-    else setStep(value);
+    if (step === value) {
+      setStep('');
+      return;
+    }
+    setStep(value);
   };
 
   const handleSubmitValidationToast = () => {
@@ -116,15 +123,29 @@ const Form = ({ originData }: FormProps) => {
       platform: platform || autoPlatform,
       memo: memo || ' ',
     };
-    //TODO: 수정했을 땐 상세 페이지 새로고침
-    try {
-      const res = originData
-        ? await putSchedule(originData.id, data, token)
-        : await postSchedule(data, token);
-      if (res) router.push('/list');
-    } catch (error) {
-      console.error(error);
+
+    if (originData) {
+      editSchedule(originData.id, data, token);
+      return;
     }
+    newSchedule(data, token);
+  };
+
+  const editSchedule = async (
+    id: string,
+    data: ScheduleDataType,
+    token: string,
+  ) => {
+    return putSchedule(id, data, token)
+      .then(() => router.refresh())
+      .then(() => router.push(`/schedule/${id}`))
+      .catch((e) => console.error(e));
+  };
+
+  const newSchedule = async (data: ScheduleDataType, token: string) => {
+    return postSchedule(data, token)
+      .then(() => router.push('/list'))
+      .catch((e) => console.error(e));
   };
 
   const [isClient, setIsClient] = useState(false);

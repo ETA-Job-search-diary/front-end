@@ -7,7 +7,6 @@ import { isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { BASE_URL } from '@/constants/service';
-import { getFormattedDate } from '@/service/date';
 import Icon from '@/assets/Icon';
 import useSWR from 'swr';
 

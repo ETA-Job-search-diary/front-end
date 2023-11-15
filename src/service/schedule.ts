@@ -1,17 +1,7 @@
 import { BASE_URL } from '@/constants/service';
 import axios from 'axios';
 
-export const getScheduleBy = async (id: string, token: string) => {
-  return axios
-    .get(`${BASE_URL}/schedules/detail/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((res) => res.data);
-};
-
-interface ScheduleDataType {
+export interface ScheduleDataType {
   title: string;
   step: string;
   company: string;
@@ -21,6 +11,16 @@ interface ScheduleDataType {
   platform: string | null;
   memo?: string;
 }
+
+export const getScheduleBy = async (id: string, token: string) => {
+  return axios
+    .get(`${BASE_URL}/schedules/detail/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data);
+};
 
 export const postSchedule = async (data: ScheduleDataType, token: string) => {
   return axios
