@@ -47,17 +47,18 @@ export const getFormatEndTimeByTimeStr = (inputTime: string) => {
 };
 
 export const getFormattedCurrentTime = (current: string) => {
-  let [hour, minute] = current.split(':');
-  const meridiem = hour >= '12' ? '오후' : '오전';
-  if (Number(hour) >= 12) {
-    hour = String(Number(hour) - 12).padStart(2, '0');
-  } else if (Number(hour) === 0) {
-    hour = '12';
+  const [hour, minute] = current.split(':');
+  let formatedHour = hour;
+  const meridiem = formatedHour >= '12' ? '오후' : '오전';
+  if (Number(formatedHour) > 12) {
+    formatedHour = String(Number(formatedHour) - 12).padStart(2, '0');
+  } else if (Number(formatedHour) === 0) {
+    formatedHour = '12';
   } else {
-    hour = String(hour).padStart(2, '0');
+    formatedHour = String(Number(formatedHour)).padStart(2, '0');
   }
-  const time24Hour = current;
-  const time12Hour = `${hour}:${minute}`;
+  const time24Hour = `${String(Number(hour)).padStart(2, '0')}:${minute}`;
+  const time12Hour = `${formatedHour}:${minute}`;
 
   return {
     meridiem,
