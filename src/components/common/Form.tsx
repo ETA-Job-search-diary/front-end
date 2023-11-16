@@ -21,6 +21,7 @@ import {
   postSchedule,
   putSchedule,
 } from '@/service/schedule';
+import TextInputWithReset from './TextInputWithReset';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -80,6 +81,17 @@ const Form = ({ originData }: FormProps) => {
     !!date &&
     !!time;
 
+  const isEdit =
+    (originData &&
+      (originData.title !== title ||
+        originData.step !== step ||
+        originData.company !== company ||
+        originData.position !== position)) ||
+    originData?.date !== convertToDateTime(date, time) ||
+    originData.link.trim() !== link ||
+    (originData.platform === null ? '' : originData.platform) !== platform ||
+    originData.memo.trim() !== memo;
+
   const isLinkValid = (link: string) => {
     const regex = new RegExp(
       /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
@@ -125,7 +137,7 @@ const Form = ({ originData }: FormProps) => {
     };
 
     if (originData) {
-      editSchedule(originData.id, data, token);
+      if (isEdit) editSchedule(originData.id, data, token);
       return;
     }
     newSchedule(data, token);
@@ -213,12 +225,16 @@ const Form = ({ originData }: FormProps) => {
                   : ''
               }`}
             >
-              <TextInput
+              <TextInputWithReset
                 id="link"
                 type="url"
                 value={link}
                 onChange={(e) => setLink(e.currentTarget.value)}
                 placeholder="지원한 채용 링크를 첨부해 주세요"
+                onReset={() => {
+                  setLink('');
+                  setPlatform('');
+                }}
               />
               {link && (
                 <TextInput
@@ -245,7 +261,7 @@ const Form = ({ originData }: FormProps) => {
         <Button
           type="submit"
           label="저장"
-          active={isReady}
+          active={originData ? isEdit && isReady : isReady}
           onClick={handleSubmit}
         />
       </div>
