@@ -82,6 +82,14 @@
   ::-webkit-calendar-picker-indicator {
     display: none;
   }
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    text-align: left;
+  }
 }
 
 input,
@@ -100,11 +108,8 @@ textarea {
 }
 
 @media screen and (min-width: 500px) {
-  input[type='time'] {
-    text-align: start;
-  }
-
-  input[type='time']::-webkit-datetime-edit-ampm-field {
+  ::-webkit-datetime-edit-ampm-field,
+  ::-webkit-datetime-edit-meridiem-field {
     display: none;
   }
 }
