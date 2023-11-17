@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'secondary' | 'gray' | 'border' | 'primary-border';
+  color?: 'primary' | 'gray' | 'border' | 'primary-border';
   label?: string;
   size?: 'sm' | 'md' | 'xs' | 'xxs';
   active?: boolean;
@@ -30,30 +30,27 @@ const Button = ({
 const getButtonStyle = (
   active: boolean,
   size: 'sm' | 'md' | 'xs' | 'xxs',
-  color: 'primary' | 'secondary' | 'gray' | 'border' | 'primary-border',
+  color: 'primary' | 'gray' | 'border' | 'primary-border',
 ) => {
-  const defaultStyle = 'w-full font-medium';
+  const defaultStyle = 'font-medium';
 
   const sizeStyle = {
-    xxs: 'w-max px-2 text-xxs xs:text-[11px]',
-    xs: 'w-max px-3 text-sm font-semibold',
-    sm: 'h-10 web:h-12 text-sm rounded-small',
-    md: 'h-12 web:h-16 text-sm rounded-small',
+    xxs: 'w-max px-2 text-xxs xs:text-xxxs',
+    xs: 'text-xs',
+    sm: 'w-max px-3 text-sm xs:text-xxs font-semibold',
+    md: 'text-sm rounded-small',
   };
 
   const colorStyle = {
     primary: {
-      inactive: 'bg-black100 text-white',
-      active: 'bg-primary500 text-white hover:font-semibold',
+      inactive:
+        'border-[1px] border-primary500 text-primary500 hover:font-semibold rounded-small h-10 w-full',
+      active:
+        'bg-primary500 text-white hover:font-semibold rounded-small h-10 w-full',
     },
     'primary-border': {
-      inactive: 'text-primary500 hover:font-extrabold',
+      inactive: 'text-black100 hover:font-extrabold',
       active: 'text-primary500 hover:font-extrabold',
-    },
-    secondary: {
-      inactive: 'border-[1px] border-black100 text-black200',
-      active:
-        'border-[1px] border-primary500 text-primary500 hover:font-semibold',
     },
     gray: {
       inactive: 'bg-black100 text-black200',

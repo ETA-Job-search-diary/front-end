@@ -25,18 +25,15 @@ const DetailNavBar = ({ id, title, step, date }: DetailNavBarProps) => {
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}
       />
-      <div className="flex flex-col gap-2 pb-[2rem] border-b border-black100 mx-[22px] web:mx-[28px]">
+      <div className="flex flex-col gap-2 pb-8 border-b border-black100 mx-[22px] web:mx-[28px]">
         <div className="flex gap-3 items-center">
           <h1 className="text-black900 font-bold text-md web:text-xl">
             {title}
           </h1>
           {bagdeName && <Badge label={bagdeName} />}
         </div>
-        <span className="text-black600 font-medium flex gap-2 items-center text-xxs web:text-sm">
-          <Icon
-            name="calendar"
-            className="w-3 h-3 web:w-4 web:h-4 stroke-black600"
-          />
+        <span className="text-black600 font-medium flex gap-2 items-center text-form">
+          <Icon name="calendar" className="w-4 h-4 stroke-black600" />
           {fullDate}.{day}
         </span>
       </div>

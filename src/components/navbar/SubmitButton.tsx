@@ -10,7 +10,7 @@ const SubmitButton = ({ active, onClick }: SubmitButtonProps) => {
   return (
     <Button
       type="submit"
-      size="xs"
+      size="sm"
       label="저장"
       color="primary-border"
       active={active}

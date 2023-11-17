@@ -13,7 +13,7 @@ const AllScheduleList = () => {
   const [offset, setOffset] = useState(0);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
-  const { onCheckToggle } = useCheckDispatch();
+  const { onCheckToggle, onCheckAll } = useCheckDispatch();
 
   const { data, isLoading, setDeleteSchedule } = useScheduleList(
     filter,
@@ -36,6 +36,10 @@ const AllScheduleList = () => {
   const handleCheckToggleAll = () =>
     data && onCheckToggle(data.map((d) => d.id));
 
+  const handleCheckAll = () => {
+    data && onCheckAll(data.map((d) => d.id));
+  };
+
   return (
     <>
       <ScheduleListHeader
@@ -44,6 +48,7 @@ const AllScheduleList = () => {
         onEditClick={handleEditToggle}
         onCheckToggle={handleCheckToggleAll}
         onDelete={setDeleteSchedule}
+        onCheckAll={handleCheckAll}
       />
       <section
         className={`group grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${

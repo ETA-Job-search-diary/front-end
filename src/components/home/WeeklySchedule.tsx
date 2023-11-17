@@ -14,18 +14,18 @@ const WeeklySchedule = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
   const [offset, setOffset] = useState(0);
-  const { data, isLoading, error } = useSWR<WeeklyScheduleType>([
+  let { data, isLoading, error } = useSWR<WeeklyScheduleType>([
     `${BASE_URL}/schedules/listByWeek?offset=${offset}`,
   ]);
 
   return (
-    <section className="grow h-full flex flex-col gap-8 bg-white px-[22px] web:px-[28px]">
+    <section className="grow h-full bg-white px-[22px] web:px-[28px] flex justify-center items-center">
       {isLoading && <Skeletone.Item />}
       {!isLoading &&
         (token ? (
           <>
             {data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
-              <div className="pb-[calc(env(safe-area-inset-bottom)+90px)]">
+              <div className="flex flex-col gap-8 pb-[calc(env(safe-area-inset-bottom)+90px)]">
                 {data.thisWeek.length > 0 && (
                   <Schedule week={WeekType.this} items={data.thisWeek} />
                 )}

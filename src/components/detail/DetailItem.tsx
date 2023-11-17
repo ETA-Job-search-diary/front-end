@@ -25,7 +25,7 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
         <Icon name={icon} className={`${iconStyle}`} />
         {title}
       </h3>
-      <p className={`${contentStyle}`}>{content}</p>
+      <p className={`${detailContentStyle}`}>{content}</p>
     </div>
   );
 };
@@ -37,13 +37,15 @@ DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
         <Icon name={icon} className={`${iconStyle}`} />
         {title}
       </h3>
-      {content && <p className={`${contentStyle} col-start-2`}>{content}</p>}
+      {content && (
+        <p className={`${detailContentStyle} col-start-2`}>{content}</p>
+      )}
       {link && (
         <Link
           href={link}
           rel="noopener noreferrer"
           target="_blank"
-          className={`${contentStyle} break-words min-w-full pr-2 col-start-2`}
+          className={`${detailContentStyle} break-words min-w-full pr-2 col-start-2`}
         >
           <span className="border-b border-black-600">{link}</span>
         </Link>
@@ -64,10 +66,11 @@ DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   );
 };
 
-const itemStyle = 'grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-4';
+const itemStyle = 'grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-5';
 const titleStyle =
-  'text-black-900 font-semibold flex gap-3 items-center whitespace-nowrap leading5';
-const iconStyle = 'w-3 h-3 web:w-4 web:h-4';
-const contentStyle = 'text-black600 font-medium';
+  'text-black-800 font-semibold flex gap-3 items-center whitespace-nowrap leading5 text-xs web:text-sm';
+const iconStyle = 'w-4 h-4';
+export const detailContentStyle =
+  'text-black600 font-medium text-xs web:text-sm';
 
 export default DetailItem;
