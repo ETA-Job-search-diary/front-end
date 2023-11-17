@@ -1,11 +1,20 @@
 import NavBar from '@/components/common/NavBar';
 import BackButton from './BackButton';
+import SubmitButton from './SubmitButton';
+import { MouseEvent } from 'react';
+interface NewNavBarProps {
+  active: boolean;
+  onSubmit: (e: MouseEvent<HTMLButtonElement>) => void;
+}
 
-//TODO: 상단 클릭하면 위로 스크롤 되는 기능 추가
-const NewNavBar = () => {
+const NewNavBar = ({ active, onSubmit }: NewNavBarProps) => {
   return (
     <div className="sticky top-0 bg-white">
-      <NavBar label='일정등록' leftSection={<BackButton />} />
+      <NavBar
+        label="일정등록"
+        leftSection={<BackButton />}
+        rightSection={<SubmitButton active={active} onClick={onSubmit} />}
+      />
     </div>
   );
 };

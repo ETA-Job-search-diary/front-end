@@ -25,7 +25,7 @@ function Calendar({
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
         caption: 'flex justify-center pt-1 relative items-center',
-        caption_label: 'text-xs web:text-sm font-medium',
+        caption_label: 'text-xs font-medium',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
@@ -36,9 +36,9 @@ function Calendar({
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex',
         head_cell:
-          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-xxs web:text-xs',
+          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-xxs',
         row: 'flex w-full mt-2',
-        cell: 'rounded-[9999px] text-center text-xxs web:text-xs p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
+        cell: 'rounded-[9999px] text-center text-xxs p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
           'h-7 w-7 web:h-9 web:w-9 p-0 web:p-3 font-normal aria-selected:opacity-100 rounded-[9999px]',

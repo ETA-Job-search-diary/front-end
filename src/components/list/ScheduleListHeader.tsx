@@ -69,16 +69,16 @@ const ScheduleListHeader = ({
             <SubScheduleTitle label={'전체'} count={token ? count : 0} />
             {isEdit ? (
               <Button
-                size="xxs"
+                size="xs"
                 label="완료"
-                color="primary-sub"
+                color="primary-border"
                 onClick={handleComplete}
               />
             ) : (
               <Button
-                size="xxs"
+                size="xs"
                 label="편집"
-                color="border"
+                color="primary-border"
                 onClick={onEditClick}
               />
             )}
@@ -99,7 +99,7 @@ const ScheduleListHeader = ({
                 }`}
               />
             </button>
-            <span className="text-black900 text-xs web:text-md font-bold">
+            <span className="text-black900 text-sm xs:text-xs font-bold">
               전체 선택
             </span>
           </div>

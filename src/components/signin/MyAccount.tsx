@@ -46,13 +46,6 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const onWithdraw = () => handleWithdrawToast();
 
-  const handleServiceToast = () => {
-    toast({
-      title: '취준로그에 관심을 가져 주셔서 감사해요!',
-      description: '서비스소개는 잠시만 기다려주세요 🍀',
-    });
-  };
-
   const handleWithdrawToast = () => {
     toast({
       title: '탈퇴 기능은 아직 개발중입니다...',
@@ -70,19 +63,15 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
       />
       <div className="px-[22px] web:px-[28px]">
         <div className="bg-ligtht-gray rounded-large flex flex-col justify-center gap-2 h-20 web:h-[115px] px-4 web:px-6">
-          <h1 className="text-black900 font-bold text-md web:text-lg">
-            {name}
-          </h1>
+          <h1 className="text-black900 font-bold text-md">{name}</h1>
           <div className="flex items-start gap-2">
             <span>
               <Icon
                 name={`${getProviderByEmail(email).name}`}
-                className="w-3 h-3 web:w-4 web:h-4"
+                className="w-[0.9rem] h-[0.9rem]"
               />
             </span>
-            <span className="text-black600 text-xss web:text-sm leading-3">
-              {email}
-            </span>
+            <span className="text-black600 text-xs leading-3">{email}</span>
           </div>
         </div>
         <div className="flex flex-col items-center px-1 web:px-3 pt-3">
@@ -94,11 +83,9 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           >
             <Icon
               name="message"
-              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+              className="w-5 h-4 web:w-5 web:h-4 stroke-black300"
             />
-            <span className="text-xs web:text-md text-black900">
-              서비스 소개
-            </span>
+            <span className="text-xs text-black900">서비스 소개</span>
           </Link>
           <Link
             href={SUPPORT_FORM}
@@ -108,9 +95,9 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           >
             <Icon
               name="request"
-              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+              className="w-5 h-4 web:w-5 web:h-4 stroke-black300"
             />
-            <span className="text-xs web:text-md text-black900">문의하기</span>
+            <span className="text-xs text-black900">문의하기</span>
           </Link>
           <SignOutButton onClick={() => handleAlert(Service.LOGOUT)} />
           <button
@@ -120,9 +107,9 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           >
             <Icon
               name="withdraw"
-              className="w-3.5 h-3 web:w-5 web:h-4 stroke-black300"
+              className="w-5 h-4 web:w-5 web:h-4 stroke-black300"
             />
-            <span className="text-xs web:text-md text-black900">탈퇴하기</span>
+            <span className="text-xs text-black900">탈퇴하기</span>
           </button>
         </div>
         <Icon

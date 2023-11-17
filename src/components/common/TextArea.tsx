@@ -4,6 +4,7 @@ import {
   forwardRef,
   useState,
 } from 'react';
+import { formLabelStyle, formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
@@ -23,21 +24,18 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     return (
-      <label
-        htmlFor={id}
-        className="relative flex flex-col gap-2 web:gap-4 text-sm web:text-md text-black900"
-      >
-        {label && <span className="font-semibold">{label}</span>}
+      <label htmlFor={id} className={`relative flex flex-col gap-2 web:gap-4`}>
+        {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
           id={id}
-          className="w-full h-36 web:h-60 font-medium bg-primary-bg border-[0.8px] border-primary300 rounded-small text-xs web:text-sm placeholder:text-black300 placeholder:text-xs web:placeholder:text-sm placeholder:font-medium p-[0.9rem]"
+          className={`w-full h-36 web:h-60 bg-primary-bg border-[0.8px] border-primary300 rounded-small p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}
           {...rest}
         />
         {maxLength && (
-          <span className="absolute bottom-1 right-2 text-black200 text-xxs web:text-xs">{`${count} / 200 자`}</span>
+          <span className="absolute bottom-1 right-2 text-black200 text-xxs">{`${count} / 200 자`}</span>
         )}
       </label>
     );

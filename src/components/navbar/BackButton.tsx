@@ -18,7 +18,7 @@ const BackButton = ({ onClose }: BackButtonProps) => {
       <Icon
         aria-label="=back-button"
         name="arrowleft"
-        className="stroke-black900 w-5 web:w-[1.5rem] mx-auto hover:scale-110 transition-all"
+        className="stroke-black900 w-6 mx-auto hover:scale-110 transition-all"
       />
     </button>
   );
