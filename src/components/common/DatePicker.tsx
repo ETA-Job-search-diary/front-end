@@ -13,6 +13,7 @@ import {
   getFormatCurrentDateTime,
   getFormatDateStringToSlash,
 } from '@/service/date';
+import { formTextStyle } from './Form';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   date: string;
@@ -24,7 +25,7 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
     <Popover>
       <PopoverTrigger placeholder={date} asChild>
         <span className="h-full w-full flex justify-between items-center bg-primary-bg border-[0.8px] border-primary300 rounded-small pr-3">
-          <span className="font-medium text-black900 text-xs web:text-sm py-2 px-[0.8rem]">
+          <span className={`py-2 px-[0.8rem] ${formTextStyle}`}>
             {getFormatCurrentDateTime(date).date}
           </span>
           <Icon

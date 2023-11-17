@@ -7,6 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { formTextStyle } from './Form';
 
 export enum MeridiemType {
   AM = '오전',
@@ -27,7 +28,9 @@ const MeridiemPicker = ({ meridiem, onChange }: MeridiemPickerProps) => {
   };
 
   return (
-    <div className="w-full h-10 web:h-12 bg-primary-bg border-[0.8px] border-primary300 rounded-small font-medium text-black900 text-xs web:text-sm">
+    <div
+      className={`w-full h-10 web:h-12 bg-primary-bg border-[0.8px] border-primary300 rounded-small ${formTextStyle}`}
+    >
       <DropdownMenu>
         <DropdownMenuTrigger className="flex justify-between items-center w-full h-full py-2 px-[0.8rem]">
           <span>{mer}</span>

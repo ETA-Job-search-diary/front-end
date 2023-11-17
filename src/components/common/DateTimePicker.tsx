@@ -17,8 +17,8 @@ const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
     <div
       className={`w-full ${
         isDesktop
-          ? 'flex flex-col gap-2 web:gap-4'
-          : 'grid grid-cols-2 gap-2 web:gap-4 h-10 web:h-12'
+          ? 'flex flex-col gap-3'
+          : 'grid grid-cols-2 gap-3 h-10 web:h-12'
       }`}
     >
       <DatePicker

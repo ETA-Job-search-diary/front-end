@@ -16,9 +16,9 @@ const EmptyItem = ({ page, messageType }: EmptyItemProps) => {
 
   return (
     <div className="grow h-full w-full flex flex-col justify-center items-center gap-1 text-black200 rounded-large pb-20">
-      <Icon name="defaultCharacter" className="w-4 h-4 web:w-6 web:h-6" />
-      <h3 className="xs:text-xxs text-xs web:text-sm font-bold">{content}</h3>
-      <p className="xs:text-[10px] text-xxs web:text-xs text-center">
+      <Icon name="defaultCharacter" className="w-6 h-6 xs:w-5 xs:h-5" />
+      <h3 className="text-xs font-bold">{content}</h3>
+      <p className="text-xxs text-center">
         {suggestion}
         <br />
         {suggestAlt && suggestAlt}

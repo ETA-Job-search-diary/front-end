@@ -18,7 +18,7 @@ interface AlertProps {
   }[];
   onClose: () => void;
 }
-//TODO: 모달 팝업 애니메이션 추가
+
 const Alert = ({ message, type, onClose }: AlertProps) => {
   if (typeof window === 'undefined') return null;
 
@@ -30,25 +30,19 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
       onClick={onClose}
     >
       <section
-        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 w-[269px] web:w-[320px] h-40 web:h-[190px] shadow-md`}
+        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 shadow-md`}
       >
-        <div className="grow flex justify-center items-center web:text-md">
+        <div className="grow flex justify-center items-center p-7 text-xs">
           {message}
         </div>
         <div className="w-full flex justify-between gap-1">
           {type.map(({ value, onClick }, index) => (
             <Button
               key={value}
-              color={
-                type.length === 1
-                  ? 'primary'
-                  : index === 0
-                  ? 'secondary'
-                  : 'primary'
-              }
+              color="primary"
               label={value}
-              active
-              size="sm"
+              active={type.length === 1 || index !== 0 ? true : false}
+              size="xs"
               onClick={onClick}
             />
           ))}

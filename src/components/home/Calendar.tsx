@@ -42,7 +42,7 @@ export const Calender = () => {
 
   return (
     <>
-      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 web:gap-4 h-60 web:h-[360px] bg-white">
+      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 bg-white">
         <Icon
           name="mainCharacter"
           className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
@@ -53,7 +53,7 @@ export const Calender = () => {
           nextMonth={nextMonth}
         />
         <table
-          className="h-full flex flex-col gap-2 text-xxs web:text-[15px] px-4 web:px-5 pb-3 web:pb-4"
+          className="h-full flex flex-col gap-2 text-xxxs web:text-xs px-4 web:px-5 pb-2.5"
           suppressHydrationWarning
         >
           <Calender.Head />
@@ -66,8 +66,8 @@ export const Calender = () => {
 
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
-    <div className="flex justify-between pt-3.5 px-7 web:pt-6 web:px-[38px]">
-      <div className="grid grid-cols-[1fr_23px_auto] web:grid-cols-[1fr_27px_auto] xs:text-sm text-md web:text-xl font-bold text-black900">
+    <div className="flex justify-between pt-3.5 px-7 web:pt-5 web:px-[38px]">
+      <div className="grid grid-cols-[1fr_23px_auto] web:grid-cols-[1fr_27px_auto] text-sm web:text-md xs:text-xs font-bold text-black900">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
@@ -138,7 +138,7 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
     return (
       <td
         key={day.toString()}
-        className="w-full h-full flex flex-col gap-[3px] items-center justify-center font-medium"
+        className="flex flex-col gap-[3px] items-center justify-center font-medium"
       >
         <span className="flex flex-col justify-center items-center">
           {isToday && (
@@ -174,9 +174,9 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
   }
 
   return (
-    <tbody className="h-full flex flex-col">
+    <tbody className="flex flex-col h-[10.5rem] web:h-max">
       {rows.map((week, index) => (
-        <tr key={index} className="h-full grid grid-cols-7">
+        <tr key={index} className="grid grid-cols-7 h-full web:h-max">
           {week}
         </tr>
       ))}

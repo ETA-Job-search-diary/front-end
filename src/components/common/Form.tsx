@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 import { useState, MouseEvent, useEffect } from 'react';
-import Button from './Button';
 import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
@@ -22,6 +21,7 @@ import {
   putSchedule,
 } from '@/service/schedule';
 import TextInputWithReset from './TextInputWithReset';
+import NewNavBar from '../navbar/NewNavBar';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -107,18 +107,25 @@ const Form = ({ originData }: FormProps) => {
     setStep(value);
   };
 
-  const handleSubmitValidationToast = () => {
+  const handleTokenValidationToast = () => {
     toast({
-      title: '항목을 모두 입력해주세요',
+      title: '로그인이 만료되었어요. 다시 로그인해주세요',
     });
   };
 
-  const handleSubmit = async (
-    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
-  ) => {
+  const handleSubmitValidationToast = () => {
+    toast({
+      title: '필수 항목을 입력해주세요',
+    });
+  };
+
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!token) return; //TODO: 토큰 없을때
+    if (!token) {
+      handleTokenValidationToast();
+      return;
+    }
     if (!isReady) {
       handleSubmitValidationToast();
       return;
@@ -167,7 +174,8 @@ const Form = ({ originData }: FormProps) => {
 
   return (
     <>
-      <form className="h-full flex flex-col gap-10 web:gap-14">
+      <NewNavBar active={isReady} onSubmit={handleSubmit} />
+      <form className="h-full flex flex-col gap-12 px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom)+2rem)]">
         {isClient && (
           <>
             <TextInput
@@ -257,16 +265,13 @@ const Form = ({ originData }: FormProps) => {
           </>
         )}
       </form>
-      <div className="py-7 web:py-10">
-        <Button
-          type="submit"
-          label="저장"
-          active={originData ? isEdit && isReady : isReady}
-          onClick={handleSubmit}
-        />
-      </div>
     </>
   );
 };
+
+export const formLabelStyle =
+  'font-semibold w-max text-xs xs:text-xxs text-black900';
+export const formTextStyle = 'text-form text-black900';
+export const formPlaceholderStyle = 'text-black300';
 
 export default Form;
