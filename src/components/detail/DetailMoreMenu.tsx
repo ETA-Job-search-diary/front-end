@@ -56,7 +56,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           <Icon
             aria-label="=more-menu"
             name="moreVertical"
-            className="stroke-black900 fill-none w-4 h-4 web:w-6 web:h-6 mx-auto hover:scale-110 transition-all"
+            className="stroke-black900 fill-none w-5 mx-auto hover:scale-110 transition-all"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -74,7 +74,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           >
             <Icon
               name={'delete'}
-              className="w-4 h-4 stroke-black600 fill-none"
+              className="w-4 h-4 stroke-black600 fill-none pr-1"
             />
             <span className="text-xxs web:text-sm">{Menu.delete}하기</span>
           </DropdownMenuItem>

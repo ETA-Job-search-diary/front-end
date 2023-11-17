@@ -3,6 +3,7 @@ import FormLabel from './FormLabel';
 import { FormIdType } from '@/model/form';
 import useFocus from '@/hook/useFocus';
 import ResetIcon from '@/assets/ResetIcon';
+import { formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TextInputWithResetProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -24,7 +25,7 @@ const TextInputWithReset = forwardRef<
         <span className="relative h-10 web:h-12 w-full border-[0.8px] border-primary300 rounded-small">
           <input
             id={id}
-            className={`w-full h-full font-medium bg-primary-bg text-black900 text-xs web:text-sm placeholder:text-black300 placeholder:text-xs web:placeholder:text-sm placeholder:font-medium py-2 pl-[0.8rem] pr-10`}
+            className={`w-full h-full font-medium bg-primary-bg py-2 pl-[0.8rem] pr-10 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
             ref={ref}
             onFocus={onFocus}
             onBlur={onBlur}

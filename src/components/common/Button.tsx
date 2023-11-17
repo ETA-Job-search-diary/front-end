@@ -2,9 +2,9 @@ import { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'secondary' | 'gray' | 'border' | 'primary-sub';
+  color?: 'primary' | 'gray' | 'border' | 'primary-border';
   label?: string;
-  size?: 'sm' | 'md' | 'xxs';
+  size?: 'sm' | 'md' | 'xs' | 'xxs';
   active?: boolean;
 }
 
@@ -29,38 +29,38 @@ const Button = ({
 
 const getButtonStyle = (
   active: boolean,
-  size: 'sm' | 'md' | 'xxs',
-  color: 'primary' | 'secondary' | 'gray' | 'border' | 'primary-sub',
+  size: 'sm' | 'md' | 'xs' | 'xxs',
+  color: 'primary' | 'gray' | 'border' | 'primary-border',
 ) => {
-  const defaultStyle = 'w-full font-medium web:text-md';
+  const defaultStyle = 'font-medium';
 
   const sizeStyle = {
-    xxs: 'w-max px-2 web:px-4 py-0 web:py-0.5 text-[11px] web:text-sm rounded-[3px] web:h-[34px]',
-    sm: 'h-10 web:h-12 text-xxs web:text-sm rounded-small',
-    md: 'h-12 web:h-16 text-xs web:text-md rounded-small',
+    xxs: 'w-max px-2 text-xxs xs:text-xxxs',
+    xs: 'text-xs',
+    sm: 'w-max px-3 text-sm xs:text-xxs font-semibold',
+    md: 'text-sm rounded-small',
   };
 
   const colorStyle = {
     primary: {
-      inactive: 'bg-black100 text-white',
-      active: 'bg-primary500 text-white hover:font-semibold',
-    },
-    'primary-sub': {
-      inactive: 'text-primary500 hover:font-semibold',
-      active: 'text-primary500 hover:font-semibold',
-    },
-    secondary: {
-      inactive: 'border-[1px] border-black100 text-black200',
+      inactive:
+        'border-[1px] border-primary500 text-primary500 hover:font-semibold rounded-small h-10 w-full',
       active:
-        'border-[1px] border-primary500 text-primary500 hover:font-semibold',
+        'bg-primary500 text-white hover:font-semibold rounded-small h-10 w-full',
+    },
+    'primary-border': {
+      inactive: 'text-black100 hover:font-extrabold',
+      active: 'text-primary500 hover:font-extrabold',
     },
     gray: {
       inactive: 'bg-black100 text-black200',
       active: 'bg-black100 text-white hover:font-semibold',
     },
     border: {
-      inactive: 'border-[1px] border-black100 text-black400 bg-body h-6',
-      active: 'border-[1px] border-black100 text-black400 bg-body h-6',
+      inactive:
+        'border-[1px] border-black100 text-black400 bg-body rounded-[3px] xs:h-6 h-7',
+      active:
+        'border-[1px] border-black100 text-black400 bg-white rounded-[3px] xs:h-6 h-7',
     },
   };
 

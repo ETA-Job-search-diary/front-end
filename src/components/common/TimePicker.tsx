@@ -1,6 +1,7 @@
 import { convertTimeFormat, getFormattedCurrentTime } from '@/service/date';
 import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
 import MeridiemPicker from './MeridiemPicker';
+import { formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
   isDesktop?: boolean;
@@ -42,7 +43,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
             <div
               className={`${
                 isDesktop ? 'h-10 web:h-12' : 'h-full'
-              } w-full text-xs web:text-md grid web:grid-cols-[1fr_2fr] gap-4`}
+              } w-full grid web:grid-cols-[1fr_2fr] gap-4 ${formTextStyle}`}
             >
               <MeridiemPicker
                 meridiem={meridiem}
@@ -50,7 +51,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
               />
               <TimePickerWithoutAmpm
                 ref={ref}
-                value={value}
+                value={time}
                 onChange={(e) => handleTimeChange(e)}
               />
             </div>
@@ -58,7 +59,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
         ) : (
           <TimePickerWithoutAmpm
             ref={ref}
-            value={value}
+            value={time}
             onChange={(e) => handleTimeChange(e)}
           />
         )}
@@ -78,10 +79,8 @@ const TimePickerWithoutAmpm = forwardRef<
       type="time"
       defaultValue={value}
       className={`w-full h-full py-2 px-[0.8rem] text-left web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
-        isFilled
-          ? 'text-black900 text-xs web:text-sm'
-          : 'text-black300 text-xs web:text-sm font-medium'
-      } without_ampm`}
+        isFilled ? `${formTextStyle}` : `text-form ${formPlaceholderStyle}`
+      }`}
       step="600"
       required
       {...rest}

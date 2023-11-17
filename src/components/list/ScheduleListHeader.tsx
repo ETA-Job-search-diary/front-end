@@ -6,6 +6,9 @@ import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';
 import { useToast } from '@/components/ui/use-toast';
+import CheckButton from '@/components/list/CheckButton';
+import DeleteButtons from './DeleteButtons';
+import ListEditButtons from './ListEditButtons';
 
 interface ScheduleListHeaderProps {
   count?: number;
@@ -13,6 +16,7 @@ interface ScheduleListHeaderProps {
   onEditClick: () => void;
   onCheckToggle: () => void;
   onDelete: (checkedIds: string[], token: string) => void;
+  onCheckAll: () => void;
 }
 
 const ScheduleListHeader = ({
@@ -21,6 +25,7 @@ const ScheduleListHeader = ({
   onEditClick,
   onCheckToggle,
   onDelete,
+  onCheckAll,
 }: ScheduleListHeaderProps) => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
@@ -34,6 +39,12 @@ const ScheduleListHeader = ({
 
   const openMenu = () => setIsOpen(true);
   const handleCloseMenu = () => setIsOpen(false);
+
+  const handleDeleteAll = () => {
+    setMessage('전체 일정을');
+    onCheckAll();
+    openMenu();
+  };
 
   const handleDelete = () => {
     if (checkedIds.length === 0) return;
@@ -63,54 +74,30 @@ const ScheduleListHeader = ({
 
   return (
     <>
-      <header className="z-30 flex flex-col sticky top-0 bg-white">
-        <div className="z-40 pt-[2rem] pb-2 web:pb-3 px-[22px] web:px-[28px] bg-inherit">
-          <div className="flex justify-between sticky top-0">
-            <SubScheduleTitle label={'전체'} count={token ? count : 0} />
-            {isEdit ? (
-              <Button
-                size="xxs"
-                label="완료"
-                color="primary-sub"
-                onClick={handleComplete}
-              />
-            ) : (
-              <Button
-                size="xxs"
-                label="편집"
-                color="border"
-                onClick={onEditClick}
-              />
-            )}
-          </div>
+      <header className="z-10 flex flex-col sticky top-0 bg-white">
+        <div className="z-20 bg-white pt-[2rem] pb-2 px-[22px] web:px-[28px] flex justify-between sticky top-0">
+          <SubScheduleTitle label={'전체'} count={token ? count : 0} />
+          <ListEditButtons
+            isEdit={isEdit}
+            onEditClick={onEditClick}
+            onEditComplete={handleComplete}
+          />
         </div>
         <div
           className={`flex justify-between items-end sticky top-0 duration-300 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
             isEdit ? 'translate-y-0' : '-translate-y-24 h-0 opacity-0'
           }`}
         >
-          <div className="flex items-center gap-4 web:gap-3.5">
-            <button type="button" onClick={onCheckToggle}>
-              <Icon
-                aria-label="all-check"
-                name="check"
-                className={`w-3.5 h-3.5 web:w-5 web:h-5 ${
-                  allChecked ? 'fill-primary500' : 'fill-black100'
-                }`}
-              />
-            </button>
-            <span className="text-black900 text-xs web:text-md font-bold">
+          <div className="flex items-center gap-3.5">
+            <CheckButton all checked={allChecked} onClick={onCheckToggle} />
+            <span className="text-black900 text-sm xs:text-xxs font-bold">
               전체 선택
             </span>
           </div>
-          <div className="flex gap-3">
-            <Button
-              size="xxs"
-              label="선택삭제"
-              color="border"
-              onClick={handleDelete}
-            />
-          </div>
+          <DeleteButtons
+            onDeleteAll={handleDeleteAll}
+            onDelete={handleDelete}
+          />
         </div>
       </header>
       {isOpen && (

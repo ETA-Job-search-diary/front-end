@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { formLabelStyle } from './Form';
 
 interface FormLabelProps {
   id: string;
@@ -18,17 +19,17 @@ const FormLabel = ({
   children,
 }: FormLabelProps) => {
   return (
-    <label htmlFor={id} className="flex flex-col gap-2 web:gap-4">
+    <label htmlFor={id} className="flex flex-col gap-3">
       {label && (
-        <span className="text-black900 font-semibold w-max text-sm web:text-md">
+        <span className={`${formLabelStyle}`}>
           {label}
-          {must && <span className="text-primary500"> *</span>}
+          {must && <sup className="text-primary500"> *</sup>}
           {message ? (
-            <span className="text-black400 xs:-text-[10px] text-xxs web:text-xs font-normal pl-2">
+            <span className="text-black400 xs:text-[0.7rem] text-xxs font-normal pl-2">
               {message}
             </span>
           ) : errorMessage ? (
-            <span className="text-primary500 xs:-text-[10px] text-xxs web:text-xs h-3 font-normal pl-2">
+            <span className="text-primary500 xs:text-[0.7rem] text-xxs h-3 font-normal pl-2">
               {errorMessage}
             </span>
           ) : null}

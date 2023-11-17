@@ -13,7 +13,7 @@ const UserProfileWidget = () => {
 
   return (
     <div className="w-full grid grid-cols-[1fr_auto] items-center">
-      <div className="text-black text-md web:text-2xl">
+      <div className="text-black text-md xs:text-sm">
         <span>{'안녕하세요 :) '}</span>
       </div>
       <div className="col-start-2">
@@ -21,7 +21,7 @@ const UserProfileWidget = () => {
           <Icon
             aria-label="=user"
             name="user"
-            className="w-4 h-4 web:w-6 web:h-6 fill-black900 hover:scale-110 transition-all"
+            className="w-5 h-5 web:w-6 web:h-6 fill-black900 hover:scale-110 transition-all"
           />
         </button>
       </div>

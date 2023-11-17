@@ -1,9 +1,9 @@
 'use client';
 
-import Icon from '@/assets/Icon';
 import ScheduleItem from './ScheduleItem';
 import { ScheduleSimpleType } from '@/model/schedule';
 import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import CheckButton from '../list/CheckButton';
 
 interface ScheduleListProps {
   items: ScheduleSimpleType[];
@@ -31,14 +31,10 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
           }`}
         >
           {isEdit && (
-            <button type="button" onClick={() => handleCheck(item.id)}>
-              <Icon
-                name="check"
-                className={`w-3.5 h-3.5 web:w-5 web:h-5 hover:animate-wiggle ${
-                  isChecked(item.id) ? 'fill-primary500' : 'fill-black100'
-                }`}
-              />
-            </button>
+            <CheckButton
+              checked={isChecked(item.id)}
+              onClick={() => handleCheck(item.id)}
+            />
           )}
           <ScheduleItem {...item} />
         </li>
