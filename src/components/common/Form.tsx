@@ -44,7 +44,6 @@ interface FormProps {
   };
 }
 
-// 임시저장
 const Form = ({ originData }: FormProps) => {
   const router = useRouter();
   const { toast } = useToast();
@@ -157,14 +156,14 @@ const Form = ({ originData }: FormProps) => {
     token: string,
   ) => {
     return putSchedule(id, data, token)
+      .then(() => router.replace(`/schedule/${id}`))
       .then(() => router.refresh())
-      .then(() => router.push(`/schedule/${id}`))
       .catch((e) => console.error(e));
   };
 
   const newSchedule = async (data: ScheduleDataType, token: string) => {
     return postSchedule(data, token)
-      .then(() => router.push('/list'))
+      .then(() => router.replace('/list'))
       .catch((e) => console.error(e));
   };
 
@@ -180,7 +179,7 @@ const Form = ({ originData }: FormProps) => {
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
-      <form className="h-full flex flex-col gap-12 px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom)+2rem)]">
+      <form className="h-full flex flex-col gap-12 px-[22px] web:px-[28px] pb-8">
         {isClient && (
           <>
             <TextInput
