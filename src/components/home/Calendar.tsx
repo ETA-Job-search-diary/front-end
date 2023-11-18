@@ -41,26 +41,24 @@ export const Calender = () => {
   const nextMonth = () => setCurrent(addMonths(current, 1));
 
   return (
-    <>
-      <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 bg-white">
-        <Icon
-          name="mainCharacter"
-          className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
-        />
-        <Calender.Caption
-          current={current}
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
-        />
-        <table
-          className="h-full flex flex-col gap-2 text-xxxs web:text-xs px-4 web:px-5 pb-2.5"
-          suppressHydrationWarning
-        >
-          <Calender.Head />
-          <Calender.Body today={today} current={current} events={events} />
-        </table>
-      </div>
-    </>
+    <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 bg-white">
+      <Icon
+        name="mainCharacter"
+        className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
+      />
+      <Calender.Caption
+        current={current}
+        prevMonth={prevMonth}
+        nextMonth={nextMonth}
+      />
+      <table
+        className="h-full flex flex-col gap-2 text-xxxs web:text-xs px-4 web:px-5 pb-2.5"
+        suppressHydrationWarning
+      >
+        <Calender.Head />
+        <Calender.Body today={today} current={current} events={events} />
+      </table>
+    </div>
   );
 };
 
@@ -174,7 +172,7 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
   }
 
   return (
-    <tbody className="flex flex-col h-[10.5rem] web:h-max">
+    <tbody className="flex flex-col h-[11rem] web:h-max">
       {rows.map((week, index) => (
         <tr key={index} className="grid grid-cols-7 h-full web:h-max">
           {week}

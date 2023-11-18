@@ -20,16 +20,16 @@ const WeeklySchedule = () => {
 
   return (
     <section
-      className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex ${
+      className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex overflow-auto ${
         isLoading || !!data ? '' : 'justify-center items-center'
-      } pb-[calc(env(safe-area-inset-bottom)+90px)]`}
+      }`}
     >
       {isLoading && <Skeletone.Item />}
       {!isLoading &&
         token &&
         data &&
         (data.thisWeek.length > 0 || data?.nextWeek.length > 0) && (
-          <div className="w-full flex flex-col gap-8 pb-[calc(env(safe-area-inset-bottom)+90px)]">
+          <div className="w-full flex flex-col gap-10">
             {data.thisWeek.length > 0 && (
               <Schedule week={WeekType.this} items={data.thisWeek} />
             )}
