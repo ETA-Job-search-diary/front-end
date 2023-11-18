@@ -56,7 +56,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed z-30 top-0 min-h-screen mx-auto min-w-[280px] w-full max-w-[500px] bg-white">
+    <section className="fixed z-30 top-0 min-h-screen mx-auto min-w-[280px] w-full max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
@@ -114,7 +114,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         </div>
         <Icon
           name="teamETA"
-          className="absolute bottom-[4rem] right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
+          className="absolute bottom-20 right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
         />
         {isOpen && (
           <Alert
