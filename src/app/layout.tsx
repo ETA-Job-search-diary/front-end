@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   },
   description: '취업에 필요한 정보를 기록해보세요! 당신의 취뽀를 기원합니다.',
   manifest: '/manifest.json',
+  icons: {
+    icon: '/images/icons/icon-512x512.png',
+  },
   openGraph: {
     type: 'website',
     title: '취준로그',
@@ -57,6 +60,63 @@ export const metadata: Metadata = {
       },
     ],
   },
+  appleWebApp: {
+    statusBarStyle: 'black-translucent',
+    title: '취준로그',
+    startupImage: [
+      '/images/startup/iphone_splash.png',
+      {
+        url: '/images/startup/iphone5_splash.png',
+        media:
+          '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/iphone6_splash.png',
+        media:
+          '(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/iphoneplus_splash.png',
+        media:
+          '(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)',
+      },
+      {
+        url: '/images/startup/iphonex_splash.png',
+        media:
+          '(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)',
+      },
+      {
+        url: '/images/startup/iphonexr_splash.png',
+        media:
+          '(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/iphonexsmax_splash.png',
+        media:
+          '(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)',
+      },
+      {
+        url: '/images/startup/ipad_splash.png',
+        media:
+          '(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/ipadpro1_splash.png',
+        media:
+          '(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/ipadpro3_splash.png',
+        media:
+          '(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)',
+      },
+      {
+        url: '/images/startup/ipadpro2_splash.png',
+        media:
+          '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)',
+      },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -66,6 +126,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -74,7 +135,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`w-screen h-full overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
-        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))]">
+        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))] pb-[calc(env(safe-area-inset-bottom)+90px)]">
           <AuthSessionProvider>
             <SWRContext>{children}</SWRContext>
             <TabBar />

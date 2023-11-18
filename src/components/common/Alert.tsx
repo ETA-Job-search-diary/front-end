@@ -30,12 +30,12 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
       onClick={onClose}
     >
       <section
-        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-5 py-4 shadow-md`}
+        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-4 py-4 shadow-md`}
       >
         <div className="grow flex justify-center items-center p-7 text-xs">
           {message}
         </div>
-        <div className="w-full flex justify-between gap-1">
+        <div className="w-full flex justify-between gap-1.5">
           {type.map(({ value, onClick }, index) => (
             <Button
               key={value}

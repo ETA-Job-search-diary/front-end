@@ -15,7 +15,7 @@ const EmptyItem = ({ page, messageType }: EmptyItemProps) => {
     SCHEDULE_MESSAGE[page][messageType];
 
   return (
-    <div className="h-full w-full flex flex-col justify-center items-center gap-1 text-black200 rounded-large">
+    <div className="grow h-full w-full flex flex-col justify-center items-center gap-1 text-black200">
       <Icon name="defaultCharacter" className="w-6 h-6 xs:w-5 xs:h-5" />
       <h3 className="text-xs font-bold">{content}</h3>
       <p className="text-xxs text-center">
