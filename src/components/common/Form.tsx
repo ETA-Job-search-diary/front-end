@@ -22,6 +22,7 @@ import {
 } from '@/service/schedule';
 import TextInputWithReset from './TextInputWithReset';
 import NewNavBar from '../navbar/NewNavBar';
+import EditNavBar from '../navbar/EditNavBar';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -174,7 +175,11 @@ const Form = ({ originData }: FormProps) => {
 
   return (
     <>
-      <NewNavBar active={isReady} onSubmit={handleSubmit} />
+      {originData ? (
+        <EditNavBar active={isEdit} onSubmit={handleSubmit} />
+      ) : (
+        <NewNavBar active={isReady} onSubmit={handleSubmit} />
+      )}
       <form className="h-full flex flex-col gap-12 px-[22px] web:px-[28px] pb-[calc(env(safe-area-inset-bottom)+2rem)]">
         {isClient && (
           <>

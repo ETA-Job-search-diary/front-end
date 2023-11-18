@@ -57,63 +57,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  appleWebApp: {
-    title: '취준로그',
-    statusBarStyle: 'black-translucent',
-    startupImage: [
-      '/images/startup/iphone_splash.png',
-      {
-        url: '/images/startup/iphone5_splash.png',
-        media:
-          '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/iphone6_splash.png',
-        media:
-          '(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/iphoneplus_splash.png',
-        media:
-          '(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)',
-      },
-      {
-        url: '/images/startup/iphonex_splash.png',
-        media:
-          '(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)',
-      },
-      {
-        url: '/images/startup/iphonexr_splash.png',
-        media:
-          '(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/iphonexsmax_splash.png',
-        media:
-          '(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)',
-      },
-      {
-        url: '/images/startup/ipad_splash.png',
-        media:
-          '(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/ipadpro1_splash.png',
-        media:
-          '(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/ipadpro3_splash.png',
-        media:
-          '(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)',
-      },
-      {
-        url: '/images/startup/ipadpro2_splash.png',
-        media:
-          '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)',
-      },
-    ],
-  },
 };
 
 export const viewport: Viewport = {
@@ -129,9 +72,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body
-        className={`w-screen h-full overflow-x-hidden bg-body ${suitFont.className} antialiased`}
+        className={`w-screen h-full overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
-        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col">
+        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))]">
           <AuthSessionProvider>
             <SWRContext>{children}</SWRContext>
             <TabBar />

@@ -72,10 +72,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
             onClick={openMenu}
             className="flex justify-center items-center gap-2"
           >
-            <Icon
-              name={'delete'}
-              className="w-4 h-4 stroke-black600 fill-none pr-1"
-            />
+            <Icon name={'delete'} className="w-4 h-4 stroke-black600" />
             <span className="text-xxs web:text-sm">{Menu.delete}하기</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
