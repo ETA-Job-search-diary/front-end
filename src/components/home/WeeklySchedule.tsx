@@ -14,32 +14,34 @@ const WeeklySchedule = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
   const [offset, setOffset] = useState(0);
-  let { data, isLoading, error } = useSWR<WeeklyScheduleType>([
+  const { data, isLoading, error } = useSWR<WeeklyScheduleType>([
     `${BASE_URL}/schedules/listByWeek?offset=${offset}`,
   ]);
 
   return (
-    <section className="grow h-full bg-white px-[22px] web:px-[28px] flex justify-center items-center">
+    <section
+      className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex ${
+        isLoading || !!data ? '' : 'justify-center items-center'
+      } pb-[calc(env(safe-area-inset-bottom)+90px)]`}
+    >
       {isLoading && <Skeletone.Item />}
       {!isLoading &&
-        (token ? (
-          <>
-            {data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
-              <div className="flex flex-col gap-8 pb-[calc(env(safe-area-inset-bottom)+90px)]">
-                {data.thisWeek.length > 0 && (
-                  <Schedule week={WeekType.this} items={data.thisWeek} />
-                )}
-                {data.nextWeek.length > 0 && (
-                  <Schedule week={WeekType.next} items={data.nextWeek} />
-                )}
-              </div>
-            ) : (
-              <EmptyItem page="home" messageType="additional" />
+        token &&
+        data &&
+        (data.thisWeek.length > 0 || data?.nextWeek.length > 0) && (
+          <div className="w-full flex flex-col gap-8 pb-[calc(env(safe-area-inset-bottom)+90px)]">
+            {data.thisWeek.length > 0 && (
+              <Schedule week={WeekType.this} items={data.thisWeek} />
             )}
-          </>
-        ) : (
-          <EmptyItem page="home" messageType="empty" />
-        ))}
+            {data.nextWeek.length > 0 && (
+              <Schedule week={WeekType.next} items={data.nextWeek} />
+            )}
+          </div>
+        )}
+      {!isLoading && token && !data && (
+        <EmptyItem page="home" messageType="additional" />
+      )}
+      {!isLoading && !token && <EmptyItem page="home" messageType="empty" />}
     </section>
   );
 };

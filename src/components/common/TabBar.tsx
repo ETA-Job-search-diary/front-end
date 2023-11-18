@@ -12,9 +12,8 @@ const TabBar = () => {
   const token = session?.user.accessToken;
 
   const handleLoginClick = () => {
-    // if (token) router.push('/new');
-    // else router.push('/auth/signin');
-    router.push('/new');
+    if (token) router.push('/new');
+    else router.push('/auth/signin');
   };
 
   if (
