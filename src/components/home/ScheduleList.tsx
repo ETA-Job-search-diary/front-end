@@ -27,7 +27,7 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
         <li
           key={item.id}
           className={`web:gap-3 items-center ${
-            isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
+            isEdit ? 'grid grid-cols-[20px_auto] gap-3.5' : ''
           }`}
         >
           {isEdit && (

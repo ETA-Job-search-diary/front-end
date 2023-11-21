@@ -1,12 +1,9 @@
+type Size = 'sm' | 'md' | 'lg';
 interface SkeletoneProps {
   size?: Size;
 }
 
-type Size = 'sm' | 'md' | 'lg';
-
-type SizeProps = Pick<SkeletoneProps, 'size'>;
-
-const Skeletone = ({ size = 'sm' }: SizeProps) => {
+const Skeletone = ({ size = 'sm' }: SkeletoneProps) => {
   return (
     <div className={`${skeletoneAnimaion} ${getSkeletonTextStyle(size)}`}></div>
   );

@@ -1,6 +1,4 @@
-import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
-import Button from '../common/Button';
 import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
