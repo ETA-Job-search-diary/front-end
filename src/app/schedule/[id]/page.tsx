@@ -22,7 +22,7 @@ export default async function SchedulePage({
 
   return (
     <>
-      {<DetailNavBar {...data} />}
+      <DetailNavBar {...data} />
       <Detail {...data} />
     </>
   );
