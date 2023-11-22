@@ -5,7 +5,7 @@ import GridChips from '@/components/list/GridChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import { useState } from 'react';
-import { useCheckDispatch } from '@/context/CheckContext';
+import { useCheckDispatch } from '@/context/CheckProvider';
 import Skeletone from '../common/Skeletone';
 import useScheduleList from '@/hook/scheduleList';
 

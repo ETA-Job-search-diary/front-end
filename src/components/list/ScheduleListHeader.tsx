@@ -1,5 +1,5 @@
 import SubScheduleTitle from './SubScheduleTitle';
-import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';

@@ -2,7 +2,7 @@
 
 import ScheduleItem from './ScheduleItem';
 import { ScheduleSimpleType } from '@/model/schedule';
-import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import CheckButton from '../list/CheckButton';
 
 interface ScheduleListProps {
