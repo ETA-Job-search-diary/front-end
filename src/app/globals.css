@@ -79,6 +79,8 @@
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
   -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
   ::-webkit-calendar-picker-indicator {
     display: none;
   }

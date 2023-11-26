@@ -21,14 +21,14 @@ const WeeklySchedule = () => {
   return (
     <section
       className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex overflow-auto pb-[calc(env(safe-area-inset-bottom)+90px)] ${
-        isLoading || !!data ? '' : 'justify-center items-center'
+        isLoading || (!!data?.thisWeek.length && !!data.nextWeek.length)
+          ? ''
+          : 'justify-center items-center'
       }`}
     >
       {isLoading && <Skeletone.Item />}
-      {!isLoading &&
-        token &&
-        data &&
-        (data.thisWeek.length > 0 || data?.nextWeek.length > 0) && (
+      {!isLoading && !!token ? (
+        data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
           <div className="w-full flex flex-col gap-8">
             {data.thisWeek.length > 0 && (
               <Schedule week={WeekType.this} items={data.thisWeek} />
@@ -37,14 +37,12 @@ const WeeklySchedule = () => {
               <Schedule week={WeekType.next} items={data.nextWeek} />
             )}
           </div>
-        )}
-      {!isLoading &&
-        token &&
-        !!data?.nextWeek.length &&
-        !!data?.thisWeek.length && (
+        ) : (
           <EmptyItem page="home" messageType="additional" />
-        )}
-      {!isLoading && !token && <EmptyItem page="home" messageType="empty" />}
+        )
+      ) : (
+        <EmptyItem page="home" messageType="empty" />
+      )}
     </section>
   );
 };
