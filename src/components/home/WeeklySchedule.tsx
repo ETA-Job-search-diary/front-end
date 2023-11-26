@@ -27,22 +27,23 @@ const WeeklySchedule = () => {
       }`}
     >
       {isLoading && <Skeletone.Item />}
-      {!isLoading && !!token ? (
-        data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
-          <div className="w-full flex flex-col gap-8">
-            {data.thisWeek.length > 0 && (
-              <Schedule week={WeekType.this} items={data.thisWeek} />
-            )}
-            {data.nextWeek.length > 0 && (
-              <Schedule week={WeekType.next} items={data.nextWeek} />
-            )}
-          </div>
+      {!isLoading &&
+        (!!token ? (
+          data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
+            <div className="w-full flex flex-col gap-8">
+              {data.thisWeek.length > 0 && (
+                <Schedule week={WeekType.this} items={data.thisWeek} />
+              )}
+              {data.nextWeek.length > 0 && (
+                <Schedule week={WeekType.next} items={data.nextWeek} />
+              )}
+            </div>
+          ) : (
+            <EmptyItem page="home" messageType="additional" />
+          )
         ) : (
-          <EmptyItem page="home" messageType="additional" />
-        )
-      ) : (
-        <EmptyItem page="home" messageType="empty" />
-      )}
+          <EmptyItem page="home" messageType="empty" />
+        ))}
     </section>
   );
 };
