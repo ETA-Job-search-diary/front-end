@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   mode: 'jit',
-  darkMode: ['class', '[data-mode="dark"]'],
+  darkMode: ['class'],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -139,12 +139,12 @@ module.exports = {
           '100%': { opacity: 0 },
         },
         jumpDown: {
-          '0%': { transform: 'translateY(0)' },
-          '100%': { transform: 'translateY(-0.8rem)' },
+          '0%, 100%': { transform: 'translateY(1rem)' },
+          '50%': { transform: 'translateY(-1rem)' },
         },
         jumpUp: {
-          '0%': { transform: 'translateY(0)' },
-          '100%': { transform: 'translateY(0.8rem)' },
+          '0%, 100%': { transform: 'translateY(-1rem)' },
+          '50%': { transform: 'translateY(1rem)' },
         },
         loading: {
           '0%': { transform: 'translateX(-10%)' },
@@ -157,8 +157,8 @@ module.exports = {
         mount: 'mount 0.2s linear',
         unmount: 'unmount 0.2s ease-in-out',
         wiggle: 'wiggle 1s ease-in-out infinite',
-        jumpDown: 'jumpDown 0.6s linear',
-        jumpUp: 'jumpUp 0.6s linear',
+        jumpDown: 'jumpDown 0.7s linear infinite',
+        jumpUp: 'jumpUp 0.7s linear infinite',
         loading: 'loading 1.5s infinite linear;',
       },
     },

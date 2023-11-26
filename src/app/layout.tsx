@@ -6,6 +6,7 @@ import TabBar from '@/components/common/TabBar';
 import AuthSessionProvider from '@/context/AuthSessionProvider';
 import { Toaster } from '@/components/ui/toaster';
 import SWRContext from '@/context/SWRContext';
+import ThemeProvider from '@/context/ThemeProvider';
 
 const suitFont = suit({
   src: [
@@ -131,16 +132,18 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body
         className={`w-screen h-full overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))]">
-          <AuthSessionProvider>
-            <SWRContext>{children}</SWRContext>
-            <TabBar />
-            <Toaster />
-          </AuthSessionProvider>
+          <ThemeProvider>
+            <AuthSessionProvider>
+              <SWRContext>{children}</SWRContext>
+              <TabBar />
+              <Toaster />
+            </AuthSessionProvider>
+          </ThemeProvider>
         </main>
       </body>
     </html>

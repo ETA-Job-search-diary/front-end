@@ -2,7 +2,7 @@
 
 import ScheduleItem from './ScheduleItem';
 import { ScheduleSimpleType } from '@/model/schedule';
-import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import CheckButton from '../list/CheckButton';
 
 interface ScheduleListProps {
@@ -27,7 +27,7 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
         <li
           key={item.id}
           className={`web:gap-3 items-center ${
-            isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
+            isEdit ? 'grid grid-cols-[20px_auto] gap-3.5' : ''
           }`}
         >
           {isEdit && (

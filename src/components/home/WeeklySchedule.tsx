@@ -38,9 +38,12 @@ const WeeklySchedule = () => {
             )}
           </div>
         )}
-      {!isLoading && token && !data && (
-        <EmptyItem page="home" messageType="additional" />
-      )}
+      {!isLoading &&
+        token &&
+        !!data?.nextWeek.length &&
+        !!data?.thisWeek.length && (
+          <EmptyItem page="home" messageType="additional" />
+        )}
       {!isLoading && !token && <EmptyItem page="home" messageType="empty" />}
     </section>
   );

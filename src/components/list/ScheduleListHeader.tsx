@@ -1,7 +1,5 @@
-import Icon from '@/assets/Icon';
 import SubScheduleTitle from './SubScheduleTitle';
-import Button from '../common/Button';
-import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import Alert, { AlertType } from '../common/Alert';
@@ -56,7 +54,7 @@ const ScheduleListHeader = ({
 
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
-    onDelete && onDelete(checkedIds, token);
+    onDelete(checkedIds, token);
     deleteToast();
     handleCloseMenu();
     onUnCheckAll();

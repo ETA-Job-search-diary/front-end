@@ -70,6 +70,6 @@ const ScheduleItem = ({
 };
 
 const borderStyle = 'border-black100';
-const accentStyle = 'text-black900 ';
+const accentStyle = 'text-black900';
 
 export default ScheduleItem;

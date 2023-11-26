@@ -1,5 +1,3 @@
-'use client';
-
 import Icon from '@/assets/Icon';
 import Badge from '../common/Badge';
 import BackButton from './BackButton';

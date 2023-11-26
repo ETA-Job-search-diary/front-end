@@ -4,11 +4,13 @@ import { NextAuthOptions } from 'next-auth';
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
+
 export const authOptions: NextAuthOptions = {
   providers: [
     NaverProvider({
-      clientId: process.env.NAVER_CLIENTID ?? '',
-      clientSecret: process.env.NAVER_SECRET ?? '',
+      clientId: process.env.NEXT_PUBLIC_NAVER_CLIENTID ?? '',
+      clientSecret: process.env.NEXT_PUBLIC_NAVER_SECRET ?? '',
       profile({ response }) {
         return {
           id: response.id.toString().slice(1),
@@ -18,8 +20,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENTID ?? '',
-      clientSecret: process.env.KAKAO_SECRET ?? '',
+      clientId: process.env.NEXT_PUBLIC_KAKAO_CLIENTID ?? '',
+      clientSecret: process.env.NEXT_PUBLIC_KAKAO_SECRET ?? '',
       profile(profile) {
         return {
           id: profile.id,
@@ -29,7 +31,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
   pages: {
     signIn: '/auth/signin',
   },
@@ -57,10 +59,7 @@ export const authOptions: NextAuthOptions = {
       const { name, email } = user;
       try {
         if (!email) return false;
-        const { data } = await axios.post(
-          'http://track.bugilabs.com:3905/api/auth/login',
-          { name, email },
-        );
+        const { data } = await axios.post(API_URL, { name, email });
         user.accessToken = data.token;
         return true;
       } catch (err) {
