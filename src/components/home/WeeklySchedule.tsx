@@ -21,7 +21,7 @@ const WeeklySchedule = () => {
   return (
     <section
       className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex overflow-auto pb-[calc(env(safe-area-inset-bottom)+90px)] ${
-        isLoading || (!!data?.thisWeek.length && !!data.nextWeek.length)
+        isLoading || !!data?.thisWeek.length || !!data?.nextWeek.length
           ? ''
           : 'justify-center items-center'
       }`}
