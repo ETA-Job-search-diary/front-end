@@ -54,7 +54,7 @@ const ScheduleListHeader = ({
 
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
-    onDelete && onDelete(checkedIds, token);
+    onDelete(checkedIds, token);
     deleteToast();
     handleCloseMenu();
     onUnCheckAll();
