@@ -1,5 +1,5 @@
 import { FormType } from '@/constants/form';
-import { getFormattedDate } from '@/service/date';
+import { getFormattedDateTimeInfo } from '@/service/date';
 import DetailItem from './DetailItem';
 
 interface DetailProps {
@@ -19,7 +19,7 @@ const Detail = ({
   platform,
   memo,
 }: DetailProps) => {
-  const { endTime } = getFormattedDate(date);
+  const { endTime } = getFormattedDateTimeInfo(date);
 
   return (
     <section className="w-full h-full px-[22px] web:px-[28px] flex flex-col gap-7 pt-8 scroll-auto">

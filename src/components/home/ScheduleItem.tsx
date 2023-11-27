@@ -1,4 +1,4 @@
-import { getFormattedDate } from '@/service/date';
+import { getFormattedDateTimeInfo } from '@/service/date';
 import Link from 'next/link';
 import Badge from '../common/Badge';
 import Icon from '@/assets/Icon';
@@ -14,17 +14,12 @@ const ScheduleItem = ({
   step,
   company,
   position,
-  date,
+  date: dateInfo,
 }: ScheduleSimpleType) => {
-  const {
-    fullDate,
-    date: formattedDate,
-    day,
-    endTime,
-  } = getFormattedDate(date);
-  const badge = getBadgeByStep(step);
+  const { fullDate, date, day, endTime } = getFormattedDateTimeInfo(dateInfo);
   const isBeforeToday =
     isBefore(new Date(fullDate), currentDate) && !isToday(new Date(fullDate));
+  const badge = getBadgeByStep(step);
 
   return (
     <Link
@@ -36,9 +31,7 @@ const ScheduleItem = ({
       <div
         className={`w-full h-full flex flex-col justify-center items-center px-5 web:px-6 border-r ${borderStyle} ${accentStyle}`}
       >
-        <h3 className="font-bold xs:text-sm text-lg web:text-xl">
-          {formattedDate}
-        </h3>
+        <h3 className="font-bold xs:text-sm text-lg web:text-xl">{date}</h3>
         <span className="text-xxs web:text-xs">{day}</span>
       </div>
       <div className="w-full flex flex-col justify-center gap-1 pl-5 web:pl-6 pr-2 overflow-hidden">

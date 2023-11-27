@@ -1,13 +1,42 @@
-import { format, getDate } from 'date-fns';
-import { ko } from 'date-fns/locale';
-//!!!!!TODO: 더 좋은 방법 없는 지 찾아보기 (컴포넌트에서 계쏙해서 각각 호출하는게 맞나..)
-export const getFormattedDate = (input: string) => {
-  const [inputDate, inputTime] = input.split('T');
-  const fullDate = getFormatDateStringToDot(inputDate);
-  const date = getDate(new Date(inputDate));
-  const day = getFormatDayByDateStr(inputDate);
-  const endTime = getFormatEndTimeByTimeStr(inputTime);
+const parseDateTimeString = (dateTimeString: string) => {
+  const [dateString, timeString] = dateTimeString.split('T');
+  const [year, month, day, hour, minute] = [
+    ...dateString.split('-'),
+    ...timeString.slice(0, -5).split(':'),
+  ].map(Number);
+  return new Date(year, month - 1, day, hour, minute);
+};
 
+const formatDateStringWithDot = (inputDate: Date) => {
+  return inputDate
+    .toLocaleDateString('ko', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+    .replace(/\s/g, '')
+    .slice(0, -1);
+};
+
+const formattedDayOfWeek = (inputDate: Date) => {
+  return new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(
+    inputDate,
+  );
+};
+
+const formattedEndTime = (inputDate: Date) => {
+  return inputDate.toLocaleTimeString('ko-KR', {
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+};
+
+export const getFormattedDateTimeInfo = (input: string) => {
+  const inputDate = parseDateTimeString(input);
+  const fullDate = formatDateStringWithDot(inputDate);
+  const date = inputDate.getDate();
+  const day = formattedDayOfWeek(inputDate);
+  const endTime = formattedEndTime(inputDate);
   return {
     fullDate,
     date,
@@ -16,35 +45,13 @@ export const getFormattedDate = (input: string) => {
   };
 };
 
-export const getFormatDateStringToDot = (inputDate: string) => {
-  return inputDate.replaceAll('-', '.');
+export const formatCalendarDate = (inputDate: Date) => {
+  const year = inputDate.getFullYear();
+  const month = String(inputDate.getMonth() + 1).padStart(2, '0');
+  const day = String(inputDate.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 };
 
-export const getFormatDateStringToSlash = (inputDate: string) => {
-  return inputDate.replaceAll('.', '-');
-};
-
-export const getFormatDayByDateStr = (inputDate: string) => {
-  const day = format(new Date(inputDate), 'EEEE', { locale: ko });
-  return day;
-};
-
-export const getFormatByDate = (inputDate: Date) => {
-  const fullDate = format(inputDate, 'yyyy.MM.dd');
-  return fullDate;
-};
-
-export const getConvertToDate = (inputDate: Date) => {
-  const convertedDate = format(inputDate, 'yyyy-MM-dd');
-  return convertedDate;
-};
-
-export const getFormatEndTimeByTimeStr = (inputTime: string) => {
-  const time = inputTime.slice(0, 5);
-  const { meridiem, time12Hour } = getFormattedCurrentTime(time);
-  const endTime = `${meridiem} ${time12Hour}`;
-  return endTime;
-};
 
 export const getFormattedCurrentTime = (current: string) => {
   const [hour, minute] = current.split(':');
@@ -67,7 +74,7 @@ export const getFormattedCurrentTime = (current: string) => {
   };
 };
 
-export const convertTimeFormat = (meridiem: string, time: string) => {
+export const combineTo24Hour = (meridiem: string, time: string) => {
   let [hour, minute] = time.split(':');
   if (meridiem === '오후' && Number(hour) < 12) {
     hour = String(Number(hour) + 12);
@@ -77,27 +84,35 @@ export const convertTimeFormat = (meridiem: string, time: string) => {
   return `${hour.padStart(2, '0')}:${minute}`;
 };
 
-export const getConverMeridiemToTime = (meridiem: string, time: string) => {
-  const convertedTime = meridiem === '오후' ? Number(time) + 12 : time;
-  return convertedTime;
+export const formatToISODateTime = (inputDate: string, inputTime: string) => {
+  const cleanedDateStr = inputDate.replaceAll('.', '-');
+  const combinedDateTimeStr = `${cleanedDateStr}T${inputTime}:00.000Z`;
+  return combinedDateTimeStr;
 };
 
-export const getFormatCurrentDateTime = (dateString: string) => {
-  const [inputDate, inputTime] = dateString.split('T');
-  const date = getFormatDateStringToDot(inputDate);
-  const time = inputTime && inputTime.slice(0, 5);
+export const getFormattedISODateTime = (origin?: string) => {
+  const dateObj = origin ? new Date(origin) : new Date();
+  const date = origin
+    ? origin.slice(0, 10).replaceAll('-', '.')
+    : formatDateStringWithDot(dateObj);
+  const time = origin
+    ? origin.slice(11, 16)
+    : dateObj.getHours().toString().padStart(2, '0') + ':00';
+
   return {
     date,
     time,
   };
 };
 
-export const convertToDateTime = (date: string, time: string) => {
-  const [hour, minute] = time.split(':');
-  const convertedDate = getFormatDateStringToSlash(date);
-  const formattedDate = `${convertedDate}T${hour.padStart(
-    2,
-    '0',
-  )}:${minute}:00.000Z`;
-  return formattedDate;
+export const convertDateToAlternateFormat = (
+  inputDate: string,
+  targetFormat: '.' | '-' = '.',
+) => {
+  if (
+    (targetFormat === '.' && inputDate.includes('.')) ||
+    (targetFormat === '-' && inputDate.includes('-'))
+  )
+    return inputDate;
+  return inputDate.replace(/[-.]/g, (match) => (match === '-' ? '.' : '-'));
 };

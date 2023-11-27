@@ -7,13 +7,13 @@ import FloatNewButton from '../new/FloatNewButton';
 
 const TabBar = () => {
   const pathname = usePathname();
-  const router = useRouter();
+  const { push } = useRouter();
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
   const handleLoginClick = () => {
-    if (token) router.push('/new');
-    else router.push('/auth/signin');
+    if (token) push('/new');
+    else push('/auth/signin');
   };
 
   if (

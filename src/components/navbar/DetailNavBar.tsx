@@ -3,7 +3,7 @@ import Badge from '../common/Badge';
 import BackButton from './BackButton';
 import NavBar from '../common/NavBar';
 import DetailMoreMenu from '../detail/DetailMoreMenu';
-import { getFormattedDate } from '@/service/date';
+import { getFormattedDateTimeInfo } from '@/service/date';
 import { getBadgeByStep } from '@/service/form';
 
 interface DetailNavBarProps {
@@ -14,7 +14,7 @@ interface DetailNavBarProps {
 }
 
 const DetailNavBar = ({ id, title, step, date }: DetailNavBarProps) => {
-  const { fullDate, day } = getFormattedDate(date);
+  const { fullDate, day } = getFormattedDateTimeInfo(date);
   const bagdeName = getBadgeByStep(step);
 
   return (

@@ -24,7 +24,7 @@ interface DetailMoreMenuProps {
 }
 
 const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
@@ -35,7 +35,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
 
   const handleEditConfirm = () => {
     handleCloseMenu();
-    router.push(`/edit/${scheduleId}`);
+    push(`/edit/${scheduleId}`);
   };
 
   const handleDeleteConfirm = () => {
@@ -44,7 +44,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
     deleteSchedule(scheduleId, token)
       .then(() => {
         handleCloseMenu();
-        router.push('/list');
+        push('/list');
       })
       .catch((err) => console.log(err));
   };

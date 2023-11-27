@@ -11,7 +11,7 @@ interface errorProps {
 }
 
 const error = ({ error }: errorProps) => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const error = ({ error }: errorProps) => {
       toast({
         description: '에러가 발생했어요. 홈화면으로 돌아갈게요.',
         action: (
-          <ToastAction onClick={() => router.push('/')} altText="홈">
+          <ToastAction onClick={() => push('/')} altText="홈">
             홈으로
           </ToastAction>
         ),

@@ -1,4 +1,4 @@
-import { convertTimeFormat, getFormattedCurrentTime } from '@/service/date';
+import { combineTo24Hour, getFormattedCurrentTime } from '@/service/date';
 import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
 import MeridiemPicker from './MeridiemPicker';
 import { formPlaceholderStyle, formTextStyle } from './Form';
@@ -17,13 +17,13 @@ interface TimePickerWithoutAmpmProps
 
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
   ({ isDesktop, value, onSetValue, ...rest }, ref) => {
-    const { meridiem, time24Hour, time12Hour } = getFormattedCurrentTime(value);
+    const { meridiem, time24Hour } = getFormattedCurrentTime(value);
 
     const [mer, setMer] = useState(meridiem);
     const [time, setTime] = useState(time24Hour);
 
     const handleMeridiemChange = (value: string) => {
-      const formatedTime = convertTimeFormat(value, time);
+      const formatedTime = combineTo24Hour(value, time);
       onSetValue(formatedTime);
       setMer(value);
     };
@@ -31,7 +31,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
     const handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       if (!isDesktop) return onSetValue(value);
-      const formatedTime = convertTimeFormat(mer, value);
+      const formatedTime = combineTo24Hour(mer, value);
       onSetValue(formatedTime);
       setTime(value);
     };

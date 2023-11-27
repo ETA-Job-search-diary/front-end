@@ -8,11 +8,7 @@ import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
-import {
-  convertToDateTime,
-  getFormatByDate,
-  getFormatCurrentDateTime,
-} from '@/service/date';
+import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
 import DateTimePicker from './DateTimePicker';
 import {
@@ -26,9 +22,7 @@ import EditNavBar from '../navbar/EditNavBar';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
-const today = new Date();
-const currentDay = getFormatByDate(today);
-const currentHour = today.getHours() + ':00';
+const { date: currentDate, time: currentTime } = getFormattedISODateTime();
 
 interface FormProps {
   originData?: {
@@ -45,7 +39,7 @@ interface FormProps {
 }
 
 const Form = ({ originData }: FormProps) => {
-  const router = useRouter();
+  const { refresh, replace } = useRouter();
   const { toast } = useToast();
 
   const { data: session } = useSession();
@@ -56,12 +50,12 @@ const Form = ({ originData }: FormProps) => {
   const [company, setCompany] = useState(originData?.company || '');
   const [position, setPosition] = useState(originData?.position || '');
   const [date, setDate] = useState<string>(
-    (originData && getFormatCurrentDateTime(originData.date).date) ||
-      currentDay,
+    (originData && getFormattedISODateTime(originData.date).date) ||
+      currentDate,
   );
   const [time, setTime] = useState<string>(
-    (originData && getFormatCurrentDateTime(originData.date).time) ||
-      currentHour,
+    (originData && getFormattedISODateTime(originData.date).time) ||
+      currentTime,
   );
   const [link, setLink] = useState(
     (originData?.link !== ' ' && originData?.link) || '',
@@ -87,7 +81,7 @@ const Form = ({ originData }: FormProps) => {
         originData.step !== step ||
         originData.company !== company ||
         originData.position !== position)) ||
-    originData?.date !== convertToDateTime(date, time) ||
+    originData?.date !== formatToISODateTime(date, time) ||
     originData.link.trim() !== link ||
     (originData.platform === null ? '' : originData.platform) !== platform ||
     originData.memo.trim() !== memo;
@@ -131,7 +125,7 @@ const Form = ({ originData }: FormProps) => {
       return;
     }
 
-    const stringDate = convertToDateTime(date, time);
+    const stringDate = formatToISODateTime(date, time);
     const data = {
       title,
       step,
@@ -143,8 +137,8 @@ const Form = ({ originData }: FormProps) => {
       memo: memo || ' ',
     };
 
-    if (originData) {
-      if (isEdit) editSchedule(originData.id, data, token);
+    if (originData && isEdit) {
+      editSchedule(originData.id, data, token);
       return;
     }
     newSchedule(data, token);
@@ -156,14 +150,14 @@ const Form = ({ originData }: FormProps) => {
     token: string,
   ) => {
     return putSchedule(id, data, token)
-      .then(() => router.replace(`/schedule/${id}`))
-      .then(() => router.refresh())
+      .then(() => replace(`/schedule/${id}`))
+      .then(() => refresh())
       .catch((e) => console.error(e));
   };
 
   const newSchedule = async (data: ScheduleDataType, token: string) => {
     return postSchedule(data, token)
-      .then(() => router.replace('/list'))
+      .then(() => replace('/list'))
       .catch((e) => console.error(e));
   };
 
