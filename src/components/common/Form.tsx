@@ -137,9 +137,9 @@ const Form = ({ originData }: FormProps) => {
       memo: memo || ' ',
     };
 
-    if (originData && isEdit) {
-      editSchedule(originData.id, data, token);
-      return;
+    if (originData) {
+      if (isEdit) editSchedule(originData.id, data, token);
+      return replace(`/schedule/${originData.id}`);
     }
     newSchedule(data, token);
   };
@@ -169,7 +169,7 @@ const Form = ({ originData }: FormProps) => {
   return (
     <>
       {originData ? (
-        <EditNavBar active={isEdit} onSubmit={handleSubmit} />
+        <EditNavBar active={isReady} onSubmit={handleSubmit} />
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
