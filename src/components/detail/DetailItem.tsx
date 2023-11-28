@@ -66,7 +66,7 @@ DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   );
 };
 
-const itemStyle = 'grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-5';
+const itemStyle = 'grid grid-cols-[90px_auto] web:grid-cols-[auto_308px] gap-5';
 const titleStyle =
   'text-black-800 font-semibold flex gap-3 items-center whitespace-nowrap leading5 text-xs web:text-sm';
 const iconStyle = 'w-4 h-4';

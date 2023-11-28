@@ -33,7 +33,7 @@ const Detail = ({
       {link !== ' ' && (link || platform) && (
         <DetailItem.Link
           title={FormType.LINK}
-          icon="global"
+          icon="globe"
           content={platform}
           link={link}
         />
