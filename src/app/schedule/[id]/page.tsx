@@ -39,8 +39,8 @@ export async function generateMetadata({
   const data = await getScheduleBy(id, token);
 
   return {
-    title: `${name}님의 일정 - ${data?.title}`,
-    description: `회사 : ${data?.company} | 직무 : ${
+    title: `${data?.title}`,
+    description: `${name}님의 일정 - 회사 : ${data?.company} | 직무 : ${
       data?.position
     } | 전형단계 : ${data?.step} | 일정 : ${
       getFormattedISODateTime(data?.date).date

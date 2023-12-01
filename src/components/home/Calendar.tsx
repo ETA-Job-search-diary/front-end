@@ -6,7 +6,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { BASE_URL } from '@/constants/service';
+
 import Icon from '@/assets/Icon';
 import useSWR from 'swr';
 
@@ -35,7 +35,7 @@ export const Calender = () => {
   const [current, setCurrent] = useState(today);
   const currentMonth = format(current, 'yyyy-MM');
   const { data: events } = useSWR<EventsType>([
-    `${BASE_URL}/schedules/calendar?date=${currentMonth}`,
+    `/schedules/calendar?date=${currentMonth}`,
   ]);
 
   const prevMonth = () => setCurrent(subMonths(current, 1));

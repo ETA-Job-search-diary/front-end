@@ -17,7 +17,7 @@ const UserProfileWidget = () => {
         <span>{'안녕하세요 :) '}</span>
       </div>
       <div className="col-start-2">
-        <button onClick={session ? handleAccount : () => signIn()}>
+        <button onClick={session?.user.accessToken ? handleAccount : () => signIn()}>
           <Icon
             aria-label="=user"
             name="user"

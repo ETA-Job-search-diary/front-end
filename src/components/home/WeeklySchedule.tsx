@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Schedule, { WeekType } from './Schedule';
 import { useSession } from 'next-auth/react';
-import { BASE_URL } from '@/constants/service';
+
 import EmptyItem from './EmptyItem';
 import useSWR from 'swr';
 import { WeeklyScheduleType } from '@/model/schedule';
@@ -15,7 +15,7 @@ const WeeklySchedule = () => {
   const token = session?.user.accessToken;
   const [offset, setOffset] = useState(0);
   const { data, isLoading, error } = useSWR<WeeklyScheduleType>([
-    `${BASE_URL}/schedules/listByWeek?offset=${offset}`,
+    `/schedules/listByWeek?offset=${offset}`,
   ]);
 
   return (

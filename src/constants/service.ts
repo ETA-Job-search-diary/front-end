@@ -5,4 +5,3 @@ export const TERMS_OF_SERVICE =
 export const SUPPORT_FORM = 'https://forms.gle/e44RzQ6fZGdsaLk59';
 export const SERVICE_DESCRIPTION =
   'https://almond-molybdenum-6b5.notion.site/9db7e347fce0410eb2d195dcc80b8bbc?pvs=4';
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;

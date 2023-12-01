@@ -1,27 +1,14 @@
-import { BASE_URL } from '@/constants/service';
 import { ScheduleDetailType } from '@/model/schedule';
-import axios from 'axios';
+import { api } from '@/service/api';
 import useSWR from 'swr';
 
 const deleteSchedule = async (checkedIds: string[], token: string) => {
-  return axios
-    .post(
-      `${BASE_URL}/schedules/deleteMany`,
-      {
-        ids: checkedIds,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    )
-    .then((res) => res.data);
+  return api('/schedules/deleteMany', 'post', token, { ids: checkedIds });
 };
 
 const useScheduleList = (filter: string[], offset: number) => {
   const { data, isLoading, error, mutate } = useSWR<ScheduleDetailType[]>([
-    `${BASE_URL}/schedules/list?offset=${offset}${
+    `/schedules/list?offset=${offset}${
       filter.length > 0 ? `&filter=${filter.join('&filter=')}` : ''
     }`,
   ]);
