@@ -11,14 +11,11 @@ import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
 import DateTimePicker from './DateTimePicker';
-import {
-  ScheduleDataType,
-  postSchedule,
-  putSchedule,
-} from '@/service/schedule';
+import { ScheduleDataType, postSchedule } from '@/service/schedule';
 import TextInputWithReset from './TextInputWithReset';
 import NewNavBar from '../navbar/NewNavBar';
 import EditNavBar from '../navbar/EditNavBar';
+import useScheduleList from '@/hook/scheduleList';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -44,6 +41,8 @@ const Form = ({ originData }: FormProps) => {
 
   const { data: session } = useSession();
   const token = session?.user.accessToken;
+
+  const { mutate, setEditSchedule } = useScheduleList([]);
 
   const [title, setTitle] = useState(originData?.title || '');
   const [step, setStep] = useState(originData?.step || '');
@@ -149,15 +148,20 @@ const Form = ({ originData }: FormProps) => {
     data: ScheduleDataType,
     token: string,
   ) => {
-    return putSchedule(id, data, token)
-      .then(() => replace(`/schedule/${id}`))
-      .then(() => refresh())
+    return setEditSchedule(id, data, token)
+      .then(() => {
+        replace(`/schedule/${id}`);
+        refresh();
+      })
       .catch((e) => console.error(e));
   };
 
   const newSchedule = async (data: ScheduleDataType, token: string) => {
     return postSchedule(data, token)
-      .then(() => replace('/list'))
+      .then(() => {
+        replace('/list');
+        mutate();
+      })
       .catch((e) => console.error(e));
   };
 

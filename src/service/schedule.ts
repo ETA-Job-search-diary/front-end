@@ -21,11 +21,3 @@ export const postSchedule = async (data: ScheduleDataType, token: string) => {
 export const deleteSchedule = async (id: string, token: string) => {
   return api(`/schedules/${id}`, 'delete', token);
 };
-
-export const putSchedule = async (
-  id: string,
-  data: ScheduleDataType,
-  token: string,
-) => {
-  return api(`/schedules/${id}`, 'put', token, data);
-};
