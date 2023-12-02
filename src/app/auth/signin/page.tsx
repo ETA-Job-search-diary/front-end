@@ -1,7 +1,5 @@
 import Icon from '@/assets/Icon';
 import SocialSiginButton from '@/components/signin/SocialSiginButton';
-import { authOptions } from '@/lib/authOptions';
-import { getServerSession } from 'next-auth';
 import { getProviders } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -9,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
 import NavBar from '@/components/common/NavBar';
 import BackButton from '@/components/navbar/BackButton';
+import { getToken } from '@/service/token';
 
 interface SignInProps {
   searchParams: {
@@ -19,8 +18,8 @@ interface SignInProps {
 export default async function SingInPage({
   searchParams: { callbackUrl },
 }: SignInProps) {
-  const session = await getServerSession(authOptions);
-  if (session) redirect('/');
+  const { token } = await getToken();
+  if (token) redirect('/');
 
   const providers = (await getProviders()) ?? {};
 

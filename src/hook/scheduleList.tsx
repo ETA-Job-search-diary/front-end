@@ -26,8 +26,11 @@ const useScheduleList = (filter: string[]) => {
     pageIndex: number,
     previousPageData: ScheduleSimpleType[],
   ) => {
-    if (pageIndex > 0 && !previousPageData.length) return null;
-    if (previousPageData && previousPageData.length < DATA_LIMIT) return null;
+    if (
+      (pageIndex > 0 && !previousPageData.length) ||
+      (previousPageData && previousPageData.length < DATA_LIMIT)
+    )
+      return null;
     return `/schedules/list?offset=${pageIndex * DATA_LIMIT}${filterQuery}`;
   };
 
