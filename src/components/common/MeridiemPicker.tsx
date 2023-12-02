@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { formTextStyle } from './Form';
 
-export enum MeridiemType {
-  AM = '오전',
-  PM = '오후',
-}
+export const meridiemItem = {
+  AM: '오전',
+  PM: '오후',
+};
 
 interface MeridiemPickerProps {
   meridiem: string;
@@ -41,17 +41,17 @@ const MeridiemPicker = ({ meridiem, onChange }: MeridiemPickerProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem
-            key={MeridiemType.AM}
-            onClick={() => handleMeridiemChange(MeridiemType.AM)}
+            key={meridiemItem.AM}
+            onClick={() => handleMeridiemChange(meridiemItem.AM)}
           >
-            {MeridiemType.AM}
+            {meridiemItem.AM}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
-            key={MeridiemType.PM}
-            onClick={() => handleMeridiemChange(MeridiemType.PM)}
+            key={meridiemItem.PM}
+            onClick={() => handleMeridiemChange(meridiemItem.PM)}
           >
-            {MeridiemType.PM}
+            {meridiemItem.PM}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

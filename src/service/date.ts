@@ -52,7 +52,6 @@ export const formatCalendarDate = (inputDate: Date) => {
   return `${year}-${month}-${day}`;
 };
 
-
 export const getFormattedCurrentTime = (current: string) => {
   const [hour, minute] = current.split(':');
   let formatedHour = hour;

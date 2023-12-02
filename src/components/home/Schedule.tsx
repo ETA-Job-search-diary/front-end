@@ -2,13 +2,13 @@ import ScheduleItem from './ScheduleItem';
 import SubScheduleTitle from '../list/SubScheduleTitle';
 import { ScheduleSimpleType } from '@/model/schedule';
 
-export enum WeekType {
-  this = '이번주',
-  next = '다음주',
-}
+const WeekTypes = {
+  THIS: '이번주',
+  NEXT: '다음주',
+};
 
 interface ScheduleProps {
-  week: WeekType;
+  week: keyof typeof WeekTypes;
   items: ScheduleSimpleType[];
 }
 
@@ -18,7 +18,7 @@ const Schedule = ({ week, items }: ScheduleProps) => {
 
   return (
     <section className="flex flex-col gap-2 web:gap-4">
-      <SubScheduleTitle label={week} count={count} />
+      <SubScheduleTitle label={WeekTypes[week]} count={count} />
       <ul className={`flex flex-col gap-3`}>
         {items.map((item) => (
           <li key={item.id}>

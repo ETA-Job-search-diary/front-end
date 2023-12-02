@@ -6,7 +6,7 @@ export interface ScheduleDataType {
   position: string;
   date: string;
   link?: string;
-  platform: string | null;
+  platform?: string;
   memo?: string;
 }
 

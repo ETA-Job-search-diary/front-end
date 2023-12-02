@@ -1,10 +1,12 @@
 import { MouseEvent } from 'react';
 import Button from '../common/Button';
 
+type MouseEventCallback = (e: MouseEvent<HTMLButtonElement>) => void;
+
 interface SubmitButtonProps {
   label?: string;
   active: boolean;
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick: MouseEventCallback;
 }
 
 const SubmitButton = ({
@@ -12,6 +14,16 @@ const SubmitButton = ({
   active,
   onClick,
 }: SubmitButtonProps) => {
+  const handleSubmitOnce = (onClick: MouseEventCallback) => {
+    let done = false;
+    return (e: MouseEvent<HTMLButtonElement>) => {
+      if (!done) {
+        done = true;
+        onClick(e);
+      }
+    };
+  };
+
   return (
     <Button
       type="submit"
@@ -19,7 +31,7 @@ const SubmitButton = ({
       label={label}
       color="primary-border"
       active={active}
-      onClick={onClick}
+      onClick={handleSubmitOnce(onClick)}
     />
   );
 };

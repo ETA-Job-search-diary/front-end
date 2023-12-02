@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Schedule, { WeekType } from './Schedule';
+import Schedule from './Schedule';
 import { useSession } from 'next-auth/react';
 
 import EmptyItem from './EmptyItem';
@@ -9,7 +9,6 @@ import useSWR from 'swr';
 import { WeeklyScheduleType } from '@/model/schedule';
 import Skeletone from '../common/Skeletone';
 
-//TODO: 페이지 네이션 안했따,.,,
 const WeeklySchedule = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
@@ -32,10 +31,10 @@ const WeeklySchedule = () => {
           data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
             <div className="w-full flex flex-col gap-8">
               {data.thisWeek.length > 0 && (
-                <Schedule week={WeekType.this} items={data.thisWeek} />
+                <Schedule week="THIS" items={data.thisWeek} />
               )}
               {data.nextWeek.length > 0 && (
-                <Schedule week={WeekType.next} items={data.nextWeek} />
+                <Schedule week="NEXT" items={data.nextWeek} />
               )}
             </div>
           ) : (

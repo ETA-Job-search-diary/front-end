@@ -1,8 +1,9 @@
 import { InputHTMLAttributes, forwardRef } from 'react';
 import FormLabel from './FormLabel';
-import { FormIdType } from '@/model/form';
+
 import useFocus from '@/hook/useFocus';
 import { formPlaceholderStyle, formTextStyle } from './Form';
+import { FormIdType } from '@/constants/form';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: FormIdType;

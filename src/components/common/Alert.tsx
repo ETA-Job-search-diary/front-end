@@ -3,18 +3,18 @@ import Button from './Button';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { MouseEvent } from 'react';
 
-export enum AlertType {
-  cancel = '취소',
-  delete = '삭제',
-  login = '로그인이 필요해요',
-  confirm = '확인',
-  edit = '수정',
-}
+export const alertTypes = {
+  CANCEL: '취소',
+  DELETE: '삭제',
+  LOGIN: '로그인이 필요해요',
+  CONFIRM: '확인',
+  EDIT: '수정',
+};
 
 interface AlertProps {
   message: string;
   type: {
-    value: AlertType;
+    value: string;
     onClick: () => void;
   }[];
   onClose: () => void;

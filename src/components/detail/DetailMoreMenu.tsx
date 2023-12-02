@@ -5,19 +5,14 @@ import Icon from '@/assets/Icon';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert, { AlertType } from '../common/Alert';
+import Alert, { alertTypes } from '../common/Alert';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { deleteSchedule } from '@/service/schedule';
-
-enum Menu {
-  edit = '수정',
-  delete = '삭제',
-}
+import MoreMenuItem from './MoreMenuItem';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -60,33 +55,21 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem
-            onClick={handleEditConfirm}
-            className="flex justify-center items-center gap-2"
-          >
-            <Icon name={'edit'} className="w-4 h-4 stroke-black600 fill-none" />
-            <span className="text-xxs web:text-sm">{Menu.edit}하기</span>
-          </DropdownMenuItem>
+          <MoreMenuItem label={alertTypes.EDIT} onClick={handleEditConfirm} />
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={openMenu}
-            className="flex justify-center items-center gap-2"
-          >
-            <Icon name={'delete'} className="w-4 h-4 stroke-black600" />
-            <span className="text-xxs web:text-sm">{Menu.delete}하기</span>
-          </DropdownMenuItem>
+          <MoreMenuItem label={alertTypes.DELETE} onClick={openMenu} />
         </DropdownMenuContent>
       </DropdownMenu>
       {isOpen && (
         <Alert
-          message={`등록된 일정을 ${Menu.delete}할까요?`}
+          message={`등록된 일정을 ${alertTypes.DELETE}할까요?`}
           type={[
             {
-              value: AlertType.cancel,
+              value: alertTypes.CANCEL,
               onClick: handleCloseMenu,
             },
             {
-              value: AlertType.delete,
+              value: alertTypes.DELETE,
               onClick: handleDeleteConfirm,
             },
           ]}
