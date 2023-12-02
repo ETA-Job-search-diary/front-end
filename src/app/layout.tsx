@@ -42,9 +42,6 @@ export const metadata: Metadata = {
   },
   description: '취업에 필요한 정보를 기록해보세요! 당신의 취뽀를 기원합니다.',
   manifest: '/manifest.json',
-  icons: {
-    icon: '/images/icons/icon-512x512.png',
-  },
   openGraph: {
     type: 'website',
     title: '취준로그',
@@ -52,20 +49,17 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: 'https://newjoblog.vercel.app',
     siteName: '취준로그',
-    images: [
-      {
-        url: '/images/share.png',
-        width: 800,
-        height: 400,
-        alt: '취준로그',
-      },
-    ],
+  },
+  verification: {
+    google: 'dLjI1nOFRDTqN1jRWJRLNZjzQzbvoIYMzOxY_hgWXaU',
+    other: {
+      'naver-site-verification': ['2cb9c39c2a52ef9d39338fe9f916e79553d87508'],
+    },
   },
   appleWebApp: {
     statusBarStyle: 'black-translucent',
     title: '취준로그',
     startupImage: [
-      '/images/startup/iphone_splash.png',
       {
         url: '/images/startup/iphone5_splash.png',
         media:
