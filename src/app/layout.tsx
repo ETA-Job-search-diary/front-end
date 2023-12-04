@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: '취준로그',
   },
   verification: {
-    google: 'dLjI1nOFRDTqN1jRWJRLNZjzQzbvoIYMzOxY_hgWXaU',
+    google: '0awmBR3ymVu_pHcxrXA2oF1zZjrwGRuxAlQdsF2OMMM',
     other: {
       'naver-site-verification': ['2cb9c39c2a52ef9d39338fe9f916e79553d87508'],
     },
