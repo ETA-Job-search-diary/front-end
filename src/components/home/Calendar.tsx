@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { format, addMonths, subMonths } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameDay, addDays } from 'date-fns';
@@ -29,9 +29,10 @@ interface MoveButtonProps {
   onClick: () => void;
 }
 
-const today = new Date();
+const getToday = () => new Date();
 
 export const Calender = () => {
+  const today = getToday();
   const [current, setCurrent] = useState(today);
   const currentMonth = format(current, 'yyyy-MM');
   const { data: events } = useSWR<EventsType>([
@@ -118,6 +119,16 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
   const from = startOfWeek(monthStart);
   const to = endOfWeek(monthEnd);
 
+  const weekEventsMap = useMemo(() => {
+    const map: Record<string, string[]> = {};
+    events?.forEach((event) => {
+      const [checkedDay] = event.split('T');
+      map[checkedDay] = map[checkedDay] || [];
+      map[checkedDay].push(event);
+    });
+    return map;
+  }, [events]);
+
   const rows = [];
   let day = from;
 
@@ -125,12 +136,8 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
     const formattedDate = format(day, 'd');
     const isToday = isSameDay(day, today);
 
-    const weekEvents = events?.filter((event) => {
-      const checkedDay = event.split('T')[0];
-      const currentDay = format(day, 'yyyy-MM-dd');
-      const isSameDay = currentDay === checkedDay;
-      return isSameDay;
-    });
+    const currentDay = format(day, 'yyyy-MM-dd');
+    const weekEvents = weekEventsMap[currentDay];
 
     const isDifferentMonths = format(current, 'M') !== format(day, 'M');
 

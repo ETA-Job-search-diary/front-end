@@ -1,5 +1,3 @@
-'use client';
-
 import ScheduleItem from './ScheduleItem';
 import { ScheduleSimpleType } from '@/model/schedule';
 import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
