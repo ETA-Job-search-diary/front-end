@@ -6,7 +6,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameDay, addDays } from 'date-fns';
 import { Button } from '../ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { BASE_URL } from '@/constants/service';
+
 import Icon from '@/assets/Icon';
 import useSWR from 'swr';
 
@@ -24,8 +24,9 @@ interface BodyProps {
   events?: EventsType;
 }
 
-interface TodayProps {
-  goToToday: () => void;
+interface MoveButtonProps {
+  direction: 'left' | 'right';
+  onClick: () => void;
 }
 
 const today = new Date();
@@ -34,7 +35,7 @@ export const Calender = () => {
   const [current, setCurrent] = useState(today);
   const currentMonth = format(current, 'yyyy-MM');
   const { data: events } = useSWR<EventsType>([
-    `${BASE_URL}/schedules/calendar?date=${currentMonth}`,
+    `/schedules/calendar?date=${currentMonth}`,
   ]);
 
   const prevMonth = () => setCurrent(subMonths(current, 1));
@@ -71,30 +72,28 @@ Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
         <span>월</span>
       </div>
       <div className="flex items-center gap-3.5">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={prevMonth}
-          className="w-[1.5rem] h-[1.5rem]"
-        >
-          <ChevronLeft
-            aria-label="left-button"
-            className="h-4 w-4 text-[#949494]"
-          />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={nextMonth}
-          className="w-[1.5rem] h-[1.5rem]"
-        >
-          <ChevronRight
-            aria-label="right-button"
-            className="h-4 w-4 text-[#949494]"
-          />
-        </Button>
+        <Calender.MoveButton direction="left" onClick={prevMonth} />
+        <Calender.MoveButton direction="right" onClick={nextMonth} />
       </div>
     </div>
+  );
+};
+
+Calender.MoveButton = ({ direction, onClick }: MoveButtonProps) => {
+  const isLeft = direction === 'left';
+  const ButtonType = isLeft ? ChevronLeft : ChevronRight;
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={onClick}
+      className="w-[1.5rem] h-[1.5rem]"
+    >
+      <ButtonType
+        aria-label={`${direction}-button`}
+        className="h-4 w-4 text-[#949494]"
+      />
+    </Button>
   );
 };
 
@@ -133,6 +132,8 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
       return isSameDay;
     });
 
+    const isDifferentMonths = format(current, 'M') !== format(day, 'M');
+
     return (
       <td
         key={day.toString()}
@@ -140,12 +141,14 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
       >
         <span className="flex flex-col justify-center items-center">
           {isToday && (
-            <span className="inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black" />
+            <span
+              className={`inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black`}
+            />
           )}
           <span
             className={`${
-              format(current, 'M') !== format(day, 'M')
-                ? 'text-black200 font-medium'
+              isDifferentMonths
+                ? 'text-black200 font-medium absolute'
                 : `${isToday ? `text-white font-bold absolute` : ''}`
             }`}
           >

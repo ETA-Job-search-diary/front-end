@@ -5,20 +5,24 @@ import GridChips from '@/components/list/GridChips';
 import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import { useState } from 'react';
-import { useCheckDispatch } from '@/context/CheckContext';
+import { useCheckDispatch } from '@/context/CheckProvider';
 import Skeletone from '../common/Skeletone';
 import useScheduleList from '@/hook/scheduleList';
+import useIntersectionObserver from '@/hook/useIntersectionObserver';
 
 const AllScheduleList = () => {
-  const [offset, setOffset] = useState(0);
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState(false);
   const { onCheckToggle, onCheckAll } = useCheckDispatch();
 
-  const { data, isLoading, setDeleteSchedule } = useScheduleList(
-    filter,
-    offset,
-  );
+  const {
+    data,
+    nextPage,
+    isLoading,
+    isLoadingMore,
+    isReachingEnd,
+    setDeleteSchedule,
+  } = useScheduleList(filter);
 
   const isFiltered = !!filter.length;
 
@@ -33,12 +37,14 @@ const AllScheduleList = () => {
 
   const handleEditToggle = () => setIsEdit((prev) => !prev);
 
-  const handleCheckToggleAll = () =>
-    data && onCheckToggle(data.map((d) => d.id));
+  const handleCheckToggleAll = () => onCheckToggle(data.map((d) => d.id));
 
-  const handleCheckAll = () => {
-    data && onCheckAll(data.map((d) => d.id));
-  };
+  const handleCheckAll = () => onCheckAll(data.map((d) => d.id));
+
+  const { setTarget } = useIntersectionObserver({
+    isReachingEnd,
+    nextPage,
+  });
 
   return (
     <>
@@ -52,12 +58,12 @@ const AllScheduleList = () => {
       />
       <section
         className={`group grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
-          isEdit ? '-translate-y-[90px] xs:-translate-y-16' : 'translate-y-0'
+          isEdit && '-translate-y-[90px] xs:-translate-y-16'
         }`}
       >
         <div
           className={`duration-300 ease-linear transition-all transform ${
-            isEdit ? 'opacity-0' : ''
+            isEdit && 'opacity-0'
           }`}
         >
           <GridChips checked={filter} onClick={handleFilter} />
@@ -65,7 +71,14 @@ const AllScheduleList = () => {
         {isLoading && <Skeletone.List />}
         {!isLoading &&
           (!!data?.length ? (
-            <ScheduleList items={data} isEdit={isEdit} />
+            <>
+              <ScheduleList items={data} isEdit={isEdit} />
+              {isLoadingMore && <Skeletone.Item />}
+              <div
+                ref={setTarget}
+                className="pb-[calc(env(safe-area-inset-bottom)+90px)]"
+              />
+            </>
           ) : isFiltered ? (
             <EmptyItem page="list" messageType="additional" />
           ) : (

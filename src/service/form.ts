@@ -1,10 +1,10 @@
 import { PLATFORM, STEPS } from '@/constants/form';
 
-export const getPlatformFromLink = (link: string): string | null => {
+export const getPlatformFromLink = (link: string): string | undefined => {
   const foundPlatform = Object.values(PLATFORM).find((platform) =>
     platform.value?.some((value) => link.includes(value)),
   );
-  return foundPlatform ? foundPlatform.name : null;
+  return foundPlatform ? foundPlatform.name : undefined;
 };
 
 export const isValidUrl = (url: string): boolean => {

@@ -8,11 +8,11 @@ interface BackButtonProps {
 }
 
 const BackButton = ({ onClose }: BackButtonProps) => {
-  const router = useRouter();
+  const { back } = useRouter();
 
   return (
     <button
-      onClick={onClose ? onClose : () => router.back()}
+      onClick={onClose ? onClose : () => back()}
       className="w-full h-full"
     >
       <Icon

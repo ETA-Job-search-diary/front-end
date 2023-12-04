@@ -1,9 +1,10 @@
 import Icon, { IconTypes } from '@/assets/Icon';
 import Link from 'next/link';
 import MarkDownViewer from '../common/MarkdownViewer';
+import { FormTypes } from '@/constants/form';
 
 interface DetailTitleProps {
-  title: string;
+  title: keyof typeof FormTypes;
   icon: IconTypes;
 }
 
@@ -12,7 +13,7 @@ interface DetailItemProps extends DetailTitleProps {
 }
 
 interface DetailItemLinkProps {
-  title: string;
+  title: keyof typeof FormTypes;
   icon: IconTypes;
   content?: string;
   link?: string;
@@ -23,7 +24,7 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
     <div className={`${itemStyle}`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {title}
+        {FormTypes[title]}
       </h3>
       <p className={`${detailContentStyle}`}>{content}</p>
     </div>
@@ -35,7 +36,7 @@ DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
     <div className={`${itemStyle}`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {title}
+        {FormTypes[title]}
       </h3>
       {content && (
         <p className={`${detailContentStyle} col-start-2`}>{content}</p>
@@ -59,14 +60,14 @@ DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
     <div className="flex flex-col gap-4 items-start">
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {title}
+        {FormTypes[title]}
       </h3>
       <MarkDownViewer content={content} />
     </div>
   );
 };
 
-const itemStyle = 'grid grid-cols-[80px_auto] web:grid-cols-[auto_308px] gap-5';
+const itemStyle = 'grid grid-cols-[90px_auto] web:grid-cols-[auto_308px] gap-5';
 const titleStyle =
   'text-black-800 font-semibold flex gap-3 items-center whitespace-nowrap leading5 text-xs web:text-sm';
 const iconStyle = 'w-4 h-4';

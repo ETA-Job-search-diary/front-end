@@ -1,8 +1,8 @@
 import SubScheduleTitle from './SubScheduleTitle';
-import { useCheckDispatch, useCheckState } from '@/context/CheckContext';
+import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import Alert, { AlertType } from '../common/Alert';
+import Alert, { alertTypes } from '../common/Alert';
 import { useToast } from '@/components/ui/use-toast';
 import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
@@ -54,7 +54,7 @@ const ScheduleListHeader = ({
 
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
-    onDelete && onDelete(checkedIds, token);
+    onDelete(checkedIds, token);
     deleteToast();
     handleCloseMenu();
     onUnCheckAll();
@@ -100,14 +100,14 @@ const ScheduleListHeader = ({
       </header>
       {isOpen && (
         <Alert
-          message={`${message} ${AlertType.delete}할까요?`}
+          message={`${message} ${alertTypes.DELETE}할까요?`}
           type={[
             {
-              value: AlertType.cancel,
+              value: alertTypes.CANCEL,
               onClick: handleCloseMenu,
             },
             {
-              value: AlertType.delete,
+              value: alertTypes.DELETE,
               onClick: handleDeleteConfirm,
             },
           ]}

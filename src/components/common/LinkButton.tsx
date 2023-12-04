@@ -5,25 +5,19 @@ import HomeIcon from '@/assets/HomeIcon';
 import ListIcon from '@/assets/ListIcon';
 import { usePathname } from 'next/navigation';
 
-export enum PathType {
-  home = 'home',
-  list = 'list',
-}
-
 interface LinkButtonProps {
-  path: PathType;
+  path: 'home' | 'list';
 }
 
-const PathMap: Record<
-  PathType,
-  {
-    href: string;
-    icon: JSX.Element;
-    activeIcon: JSX.Element;
-    name: string;
-    position: string;
-  }
-> = {
+interface PathMapItemType {
+  href: string;
+  icon: JSX.Element;
+  activeIcon: JSX.Element;
+  name: string;
+  position: 'left' | 'right';
+}
+
+const PathMap: Record<'home' | 'list', PathMapItemType> = {
   home: {
     href: '/',
     icon: <HomeIcon />,

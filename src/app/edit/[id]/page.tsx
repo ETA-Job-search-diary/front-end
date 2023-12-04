@@ -1,7 +1,6 @@
 import Form from '@/components/common/Form';
-import { authOptions } from '@/lib/authOptions';
 import { getScheduleBy } from '@/service/schedule';
-import { getServerSession } from 'next-auth';
+import { getToken } from '@/service/token';
 import { notFound } from 'next/navigation';
 
 interface EditPageProps {
@@ -11,8 +10,7 @@ interface EditPageProps {
 }
 
 export default async function EditPage({ params: { id } }: EditPageProps) {
-  const session = await getServerSession(authOptions);
-  const token = session?.user.accessToken;
+  const { token } = await getToken();
 
   if (!id || !token) return notFound();
   const data = await getScheduleBy(id, token);

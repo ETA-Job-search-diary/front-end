@@ -8,27 +8,20 @@ import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
-import {
-  convertToDateTime,
-  getFormatByDate,
-  getFormatCurrentDateTime,
-} from '@/service/date';
+import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
-import DateTimePicker from './DateTimePicker';
-import {
-  ScheduleDataType,
-  postSchedule,
-  putSchedule,
-} from '@/service/schedule';
-import TextInputWithReset from './TextInputWithReset';
+import { ScheduleDataType, postSchedule } from '@/service/schedule';
 import NewNavBar from '../navbar/NewNavBar';
 import EditNavBar from '../navbar/EditNavBar';
+import useScheduleList from '@/hook/scheduleList';
+import { FormTypes, PlaceholderTypes } from '@/constants/form';
+import CompanyForm from '../new/CompanyForm';
+import DateTimeForm from '../new/DateTimeForm';
+import LinkForm from '../new/LinkForm';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
-const today = new Date();
-const currentDay = getFormatByDate(today);
-const currentHour = today.getHours() + ':00';
+const { date: currentDate, time: currentTime } = getFormattedISODateTime();
 
 interface FormProps {
   originData?: {
@@ -45,23 +38,25 @@ interface FormProps {
 }
 
 const Form = ({ originData }: FormProps) => {
-  const router = useRouter();
+  const { refresh, replace } = useRouter();
   const { toast } = useToast();
 
   const { data: session } = useSession();
   const token = session?.user.accessToken;
+
+  const { mutate, setEditSchedule } = useScheduleList([]);
 
   const [title, setTitle] = useState(originData?.title || '');
   const [step, setStep] = useState(originData?.step || '');
   const [company, setCompany] = useState(originData?.company || '');
   const [position, setPosition] = useState(originData?.position || '');
   const [date, setDate] = useState<string>(
-    (originData && getFormatCurrentDateTime(originData.date).date) ||
-      currentDay,
+    (originData && getFormattedISODateTime(originData.date).date) ||
+      currentDate,
   );
   const [time, setTime] = useState<string>(
-    (originData && getFormatCurrentDateTime(originData.date).time) ||
-      currentHour,
+    (originData && getFormattedISODateTime(originData.date).time) ||
+      currentTime,
   );
   const [link, setLink] = useState(
     (originData?.link !== ' ' && originData?.link) || '',
@@ -87,7 +82,7 @@ const Form = ({ originData }: FormProps) => {
         originData.step !== step ||
         originData.company !== company ||
         originData.position !== position)) ||
-    originData?.date !== convertToDateTime(date, time) ||
+    originData?.date !== formatToISODateTime(date, time) ||
     originData.link.trim() !== link ||
     (originData.platform === null ? '' : originData.platform) !== platform ||
     originData.memo.trim() !== memo;
@@ -131,7 +126,7 @@ const Form = ({ originData }: FormProps) => {
       return;
     }
 
-    const stringDate = convertToDateTime(date, time);
+    const stringDate = formatToISODateTime(date, time);
     const data = {
       title,
       step,
@@ -145,7 +140,7 @@ const Form = ({ originData }: FormProps) => {
 
     if (originData) {
       if (isEdit) editSchedule(originData.id, data, token);
-      return;
+      return replace(`/schedule/${originData.id}`);
     }
     newSchedule(data, token);
   };
@@ -155,15 +150,20 @@ const Form = ({ originData }: FormProps) => {
     data: ScheduleDataType,
     token: string,
   ) => {
-    return putSchedule(id, data, token)
-      .then(() => router.replace(`/schedule/${id}`))
-      .then(() => router.refresh())
+    return setEditSchedule(id, data, token)
+      .then(() => {
+        replace(`/schedule/${id}`);
+        refresh();
+      })
       .catch((e) => console.error(e));
   };
 
   const newSchedule = async (data: ScheduleDataType, token: string) => {
     return postSchedule(data, token)
-      .then(() => router.replace('/list'))
+      .then(() => {
+        replace('/list');
+        mutate();
+      })
       .catch((e) => console.error(e));
   };
 
@@ -175,7 +175,7 @@ const Form = ({ originData }: FormProps) => {
   return (
     <>
       {originData ? (
-        <EditNavBar active={isEdit} onSubmit={handleSubmit} />
+        <EditNavBar active={isReady} onSubmit={handleSubmit} />
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
@@ -184,84 +184,45 @@ const Form = ({ originData }: FormProps) => {
           <>
             <TextInput
               id="title"
-              label="타이틀"
+              label={FormTypes.TITLE}
               value={title}
-              placeholder="타이틀을 입력해주세요"
+              placeholder={PlaceholderTypes.TITLE}
               onChange={(e) => setTitle(e.currentTarget.value)}
             />
-            <FormLabel must id="step" label="전형단계">
+            <FormLabel must id="step" label={FormTypes.STEP}>
               <GridChips checked={[step]} onClick={handleChipClick} />
             </FormLabel>
-            <FormLabel id="company-position" must label="지원하는 회사/직무">
-              <TextInput
-                id="company"
-                value={company}
-                placeholder="회사명을 입력해주세요"
-                onChange={(e) => setCompany(e.currentTarget.value)}
-              />
-              <TextInput
-                id="position"
-                value={position}
-                placeholder="직무를 입력해주세요"
-                onChange={(e) => setPosition(e.currentTarget.value)}
-              />
-            </FormLabel>
-            <FormLabel
-              id="date-time"
-              label="일정"
-              message="서류마감일, 면접일 등을 입력해 보세요!"
-            >
-              <DateTimePicker
-                date={date}
-                time={time}
-                onChange={(date, time) => {
-                  setDate(date);
-                  setTime(time);
-                }}
-              />
-            </FormLabel>
-            <FormLabel
-              must={false}
-              id="link-platform"
-              label="채용공고 링크"
-              message={`${
-                isLinkValid(link)
-                  ? autoPlatform
-                    ? '채용사이트 정보가 맞는지 확인 후 저장해주세요!'
-                    : '채용사이트를 직접 입력해주세요'
-                  : ''
-              }`}
-              errorMessage={`${
-                !!link.length && !isLinkValid(link) && !autoPlatform
-                  ? 'URL형식에 맞게 입력해주세요'
-                  : ''
-              }`}
-            >
-              <TextInputWithReset
-                id="link"
-                type="url"
-                value={link}
-                onChange={(e) => setLink(e.currentTarget.value)}
-                placeholder="지원한 채용 링크를 첨부해 주세요"
-                onReset={() => {
-                  setLink('');
-                  setPlatform('');
-                }}
-              />
-              {link && (
-                <TextInput
-                  id="platform"
-                  value={platform}
-                  onChange={(e) => setPlatform(e.currentTarget.value)}
-                  placeholder={autoPlatform || ''}
-                />
-              )}
-            </FormLabel>
-            <FormLabel must={false} id="memo" label="메모">
+            <CompanyForm
+              company={company}
+              position={position}
+              onChangeCompany={(e) => setCompany(e.currentTarget.value)}
+              onChangePosition={(e) => setPosition(e.currentTarget.value)}
+            />
+            <DateTimeForm
+              date={date}
+              time={time}
+              onChangeDateTime={(date, time) => {
+                setDate(date);
+                setTime(time);
+              }}
+            />
+            <LinkForm
+              link={link}
+              platform={platform}
+              autoPlatform={autoPlatform}
+              isLinkValid={isLinkValid(link)}
+              onChangeLink={(e) => setLink(e.currentTarget.value)}
+              onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
+              onReset={() => {
+                setLink('');
+                setPlatform('');
+              }}
+            />
+            <FormLabel must={false} id="memo" label={FormTypes.MEMO}>
               <TextArea
                 id="memo"
                 value={memo}
-                placeholder={`지원 관련 메모를 남겨 주세요. (최대 ${TEXTAREA_MAX_LENGTH}자)`}
+                placeholder={`${PlaceholderTypes.MEMO} (최대 ${TEXTAREA_MAX_LENGTH}자)`}
                 maxLength={TEXTAREA_MAX_LENGTH}
                 onChange={(e) => setMemo(e.currentTarget.value)}
               />

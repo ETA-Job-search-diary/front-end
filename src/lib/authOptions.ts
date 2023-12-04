@@ -58,7 +58,7 @@ export const authOptions: NextAuthOptions = {
       try {
         if (!email) return false;
         const { data } = await axios.post(
-          'http://track.bugilabs.com:3905/api/auth/login',
+          `https://newjoblog.bugilabs.com/api/auth/login`,
           { name, email },
         );
         user.accessToken = data.token;

@@ -1,4 +1,4 @@
-import CheckProvider from '@/context/CheckContext';
+import CheckProvider from '@/context/CheckProvider';
 import { ReactNode } from 'react';
 
 interface ListPagelayoutProps {

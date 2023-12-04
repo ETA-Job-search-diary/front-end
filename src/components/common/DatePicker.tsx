@@ -9,9 +9,8 @@ import {
 } from '@/components/ui/popover';
 import Icon from '@/assets/Icon';
 import {
-  getConvertToDate,
-  getFormatCurrentDateTime,
-  getFormatDateStringToSlash,
+  formatCalendarDate,
+  convertDateToAlternateFormat,
 } from '@/service/date';
 import { formTextStyle } from './Form';
 
@@ -26,7 +25,7 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
       <PopoverTrigger placeholder={date} asChild>
         <span className="h-full w-full flex justify-between items-center bg-primary-bg border-[0.8px] border-primary300 rounded-small pr-3">
           <span className={`py-2 px-[0.8rem] ${formTextStyle}`}>
-            {getFormatCurrentDateTime(date).date}
+            {convertDateToAlternateFormat(date)}
           </span>
           <Icon
             name="calendar"
@@ -39,9 +38,9 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
       <PopoverContent className="flex w-auto flex-col space-y-2 py-2 px-[0.8rem]">
         <Calendar
           mode="single"
-          selected={new Date(getFormatDateStringToSlash(date))}
+          selected={new Date(convertDateToAlternateFormat(date, '-'))}
           onSelect={(select) => {
-            setDate(getConvertToDate(select as Date));
+            setDate(formatCalendarDate(select as Date));
           }}
         />
       </PopoverContent>

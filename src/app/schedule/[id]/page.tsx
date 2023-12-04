@@ -1,8 +1,8 @@
 import Detail from '@/components/detail/Detail';
 import DetailNavBar from '@/components/navbar/DetailNavBar';
-import { authOptions } from '@/lib/authOptions';
 import { getScheduleBy } from '@/service/schedule';
-import { getServerSession } from 'next-auth';
+import { getToken } from '@/service/token';
+
 import { notFound } from 'next/navigation';
 
 interface SchedulePageProps {
@@ -14,10 +14,9 @@ interface SchedulePageProps {
 export default async function SchedulePage({
   params: { id },
 }: SchedulePageProps) {
-  const session = await getServerSession(authOptions);
-  const token = session?.user.accessToken;
-
+  const { token } = await getToken();
   if (!id || !token) return notFound();
+
   const data = await getScheduleBy(id, token);
 
   return (

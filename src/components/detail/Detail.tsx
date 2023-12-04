@@ -1,5 +1,4 @@
-import { FormType } from '@/constants/form';
-import { getFormattedDate } from '@/service/date';
+import { getFormattedDateTimeInfo } from '@/service/date';
 import DetailItem from './DetailItem';
 
 interface DetailProps {
@@ -19,27 +18,23 @@ const Detail = ({
   platform,
   memo,
 }: DetailProps) => {
-  const { endTime } = getFormattedDate(date);
+  const { endTime } = getFormattedDateTimeInfo(date);
 
   return (
     <section className="w-full h-full px-[22px] web:px-[28px] flex flex-col gap-7 pt-8 scroll-auto">
-      <DetailItem title={FormType.COMPANY} icon="briefcase" content={company} />
-      <DetailItem
-        title={FormType.POSITION}
-        icon="position"
-        content={position}
-      />
-      <DetailItem title={FormType.DATE} icon="clock" content={endTime} />
+      <DetailItem title="COMPANY" icon="briefcase" content={company} />
+      <DetailItem title="POSITION" icon="position" content={position} />
+      <DetailItem title="DATE" icon="clock" content={endTime} />
       {link !== ' ' && (link || platform) && (
         <DetailItem.Link
-          title={FormType.LINK}
-          icon="global"
+          title="LINK"
+          icon="globe"
           content={platform}
           link={link}
         />
       )}
       {memo !== ' ' && memo && (
-        <DetailItem.MarkDown title={FormType.MEMO} icon="memo" content={memo} />
+        <DetailItem.MarkDown title="MEMO" icon="memo" content={memo} />
       )}
     </section>
   );
