@@ -10,7 +10,6 @@ const currentDate = new Date();
 
 const ScheduleItem = ({
   id,
-  title,
   step,
   company,
   position,
@@ -35,11 +34,6 @@ const ScheduleItem = ({
         <span className="text-xxs web:text-xs">{day}</span>
       </div>
       <div className="w-full flex flex-col justify-center gap-1 pl-5 web:pl-6 pr-2 overflow-hidden">
-        <h3
-          className={`text-xs web:text-sm leading-5 truncate font-semibold ${accentStyle}`}
-        >
-          {title}
-        </h3>
         <p className="flex items-center gap-1">
           <Icon name="briefcase" className="web:w-4 web:h-4 w-2.5 h-2.5" />
           <span className="text-black500 text-xxxs web:text-xxs truncate">

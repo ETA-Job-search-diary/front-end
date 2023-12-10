@@ -1,6 +1,5 @@
 export interface ScheduleDetailType {
   id: string;
-  title: string;
   step: string;
   user?: string;
   company: string;
@@ -13,7 +12,6 @@ export interface ScheduleDetailType {
 
 export interface ScheduleSimpleType {
   id: string;
-  title: string;
   step: string;
   company: string;
   position: string;

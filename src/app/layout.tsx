@@ -7,6 +7,7 @@ import AuthSessionProvider from '@/context/AuthSessionProvider';
 import { Toaster } from '@/components/ui/toaster';
 import SWRContext from '@/context/SWRContext';
 import ThemeProvider from '@/context/ThemeProvider';
+import GoogleAnalytics from '@/components/common/GoogleAnalytics';
 
 const suitFont = suit({
   src: [
@@ -160,6 +161,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`w-screen h-full overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
+        <GoogleAnalytics />
         <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))]">
           <ThemeProvider>
             <AuthSessionProvider>

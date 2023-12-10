@@ -1,47 +1,47 @@
 type Size = 'sm' | 'md' | 'lg';
-interface SkeletoneProps {
+interface SkeletonProps {
   size?: Size;
 }
 
-const Skeletone = ({ size = 'sm' }: SkeletoneProps) => {
+const Skeleton = ({ size = 'sm' }: SkeletonProps) => {
   return (
-    <div className={`${skeletoneAnimaion} ${getSkeletonTextStyle(size)}`}></div>
+    <div className={`${SkeletonAnimaion} ${getSkeletonTextStyle(size)}`}></div>
   );
 };
 
-Skeletone.List = () => {
+Skeleton.List = () => {
   return (
     <ul className="flex flex-col gap-5">
-      <Skeletone.Item />
-      <Skeletone.Item />
-      <Skeletone.Item />
+      <Skeleton.Item />
+      <Skeleton.Item />
+      <Skeleton.Item />
     </ul>
   );
 };
 
-Skeletone.Item = () => {
+Skeleton.Item = () => {
   return (
     <li
       className={`relative w-full bg-white grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px] animate-pulse`}
     >
       <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100">
-        <Skeletone />
+        <Skeleton />
       </div>
       <div className="w-full flex flex-col justify-center gap-2 xs:pl-3 pl-6 web:pl-[30px]">
-        <Skeletone size="sm" />
+        <Skeleton size="sm" />
         <div>
-          <Skeletone size="md" />
+          <Skeleton size="md" />
         </div>
-        <Skeletone size="lg" />
+        <Skeleton size="lg" />
       </div>
       <div className="w-full place-self-center xs:pr-3 pr-6 web:pr-[30px]">
-        <Skeletone />
+        <Skeleton />
       </div>
     </li>
   );
 };
 
-const skeletoneAnimaion =
+const SkeletonAnimaion =
   'before:absolute before:animate-loading before:bg-gradient-to-r before:from-black50 before:via-light before:to-black50 before:h-10 before:w-3/4';
 
 const getSkeletonTextStyle = (size: Size) => {
@@ -53,4 +53,4 @@ const getSkeletonTextStyle = (size: Size) => {
   return `relative h-2.5 web:h-3.5 rounded-sm bg-black50 overflow-hidden ${sizes[size]}`;
 };
 
-export default Skeletone;
+export default Skeleton;

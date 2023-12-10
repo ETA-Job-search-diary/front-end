@@ -25,9 +25,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'gradient-pattern': 'url("/images/bg.png")',
-        'gradient-pattern-sm': 'url("/images/small-bg.png")',
-        'splash-pattern': 'url("/images/splash-bg.png")',
+        'gradient-pattern': 'url("/images/bg.webp")',
+        'gradient-pattern-sm': 'url("/images/small-bg.webp")',
       },
       backgroundPosition: {
         'top-right': 'right 0px',
