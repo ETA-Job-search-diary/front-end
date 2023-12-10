@@ -36,7 +36,7 @@ interface FormProps {
     memo: string;
   };
 }
-
+//TODO: 링크앞에 문자들 제거 (ex. https:// 부터 시작하도록 , NavBar 고정)
 const Form = ({ originData }: FormProps) => {
   const { refresh, replace } = useRouter();
   const { toast } = useToast();
@@ -92,6 +92,16 @@ const Form = ({ originData }: FormProps) => {
       /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
     );
     return regex.test(link);
+  };
+
+  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const link = e.currentTarget.value;
+    const index = link.indexOf('http');
+    if (!index) {
+      setLink(link);
+      return;
+    }
+    setLink(link.slice(index));
   };
 
   const handleChipClick = (value: string) => {
@@ -211,7 +221,7 @@ const Form = ({ originData }: FormProps) => {
               platform={platform}
               autoPlatform={autoPlatform}
               isLinkValid={isLinkValid(link)}
-              onChangeLink={(e) => setLink(e.currentTarget.value)}
+              onChangeLink={handleLinkChange}
               onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
               onReset={() => {
                 setLink('');
