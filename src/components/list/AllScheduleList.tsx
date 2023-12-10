@@ -6,7 +6,7 @@ import ScheduleList from '@/components/home/ScheduleList';
 import ScheduleListHeader from '@/components/list/ScheduleListHeader';
 import { useState } from 'react';
 import { useCheckDispatch } from '@/context/CheckProvider';
-import Skeletone from '../common/Skeletone';
+import Skeleton from '../common/Skeleton';
 import useScheduleList from '@/hook/scheduleList';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
 
@@ -68,12 +68,12 @@ const AllScheduleList = () => {
         >
           <GridChips checked={filter} onClick={handleFilter} />
         </div>
-        {isLoading && <Skeletone.List />}
+        {isLoading && <Skeleton.List />}
         {!isLoading &&
           (!!data?.length ? (
             <>
               <ScheduleList items={data} isEdit={isEdit} />
-              {isLoadingMore && <Skeletone.Item />}
+              {isLoadingMore && <Skeleton.Item />}
               <div
                 ref={setTarget}
                 className="pb-[calc(env(safe-area-inset-bottom)+90px)]"

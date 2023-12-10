@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import EmptyItem from './EmptyItem';
 import useSWR from 'swr';
 import { WeeklyScheduleType } from '@/model/schedule';
-import Skeletone from '../common/Skeletone';
+import Skeleton from '../common/Skeleton';
 
 const WeeklySchedule = () => {
   const { data: session } = useSession();
@@ -25,7 +25,7 @@ const WeeklySchedule = () => {
           : 'justify-center items-center'
       }`}
     >
-      {isLoading && <Skeletone.Item />}
+      {isLoading && <Skeleton.Item />}
       {!isLoading &&
         (!!token ? (
           data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
