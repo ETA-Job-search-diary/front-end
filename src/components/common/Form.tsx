@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
-import TextInput from './TextInput';
 import { useState, MouseEvent, useEffect } from 'react';
 import FormLabel from './FormLabel';
 import { getPlatformFromLink } from '@/service/form';
@@ -46,7 +45,6 @@ const Form = ({ originData }: FormProps) => {
 
   const { mutate, setEditSchedule } = useScheduleList([]);
 
-  const [title, setTitle] = useState(originData?.title || '');
   const [step, setStep] = useState(originData?.step || '');
   const [company, setCompany] = useState(originData?.company || '');
   const [position, setPosition] = useState(originData?.position || '');
@@ -69,7 +67,6 @@ const Form = ({ originData }: FormProps) => {
   const autoPlatform = getPlatformFromLink(link);
 
   const isReady =
-    title.length > 0 &&
     step.length > 0 &&
     company.length > 0 &&
     position.length > 0 &&
@@ -78,8 +75,7 @@ const Form = ({ originData }: FormProps) => {
 
   const isEdit =
     (originData &&
-      (originData.title !== title ||
-        originData.step !== step ||
+      (originData.step !== step ||
         originData.company !== company ||
         originData.position !== position)) ||
     originData?.date !== formatToISODateTime(date, time) ||
@@ -138,7 +134,7 @@ const Form = ({ originData }: FormProps) => {
 
     const stringDate = formatToISODateTime(date, time);
     const data = {
-      title,
+      title: ' ',
       step,
       company,
       position,
@@ -189,16 +185,9 @@ const Form = ({ originData }: FormProps) => {
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
-      <form className="h-full flex flex-col gap-12 px-[22px] web:px-[28px] pb-8">
+      <form className="pt-16 web:pt-[70px] flex flex-col gap-12 px-[22px] web:px-[28px] pb-8">
         {isClient && (
           <>
-            <TextInput
-              id="title"
-              label={FormTypes.TITLE}
-              value={title}
-              placeholder={PlaceholderTypes.TITLE}
-              onChange={(e) => setTitle(e.currentTarget.value)}
-            />
             <FormLabel must id="step" label={FormTypes.STEP}>
               <GridChips checked={[step]} onClick={handleChipClick} />
             </FormLabel>

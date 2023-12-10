@@ -10,7 +10,7 @@ interface EditNavBarProps {
 
 const EditNavBar = ({ active, onSubmit }: EditNavBarProps) => {
   return (
-    <div className="sticky top-0 bg-white z-20">
+    <div className="fixed w-full min-w-[280px] max-w-[500px] top-0 bg-white z-20">
       <NavBar
         label="일정수정"
         leftSection={<BackButton />}
