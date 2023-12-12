@@ -22,5 +22,5 @@ export const getBadgeByStep = (stepName: string): string | undefined => {
 };
 
 export const getStepByValue = (value: string): string => {
-  return STEPS.find((step) => step.value === value)?.name || '';
+  return STEPS.find((step) => step.type === value)?.name || '';
 };

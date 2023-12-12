@@ -16,39 +16,39 @@ export const PLATFORM = {
   JUMPIT: { value: ['jumpit'], name: '점핏' },
 };
 
-interface StepInfo {
-  value: string;
-  name: string;
-}
-
-const StepType = {
-  DOCUMENT: 'document',
-  ASSIGNMENT: 'assignment',
-  WRITTEN: 'written',
-  PERSONALITY: 'personality',
-  FIRST: 'first',
-  SECOND: 'second',
-  ETC: 'etc',
-};
-
-const StepTypes = {
-  DOCUMENT: '서류전형',
-  ASSIGNMENT: '사전과제',
-  WRITTEN: '필기전형',
-  PERSONALITY: '인적성',
-  FIRST: '1차면접',
-  SECOND: '2차면접',
-  ETC: '기타',
-};
-
-export const STEPS: StepInfo[] = [
-  { value: StepType.DOCUMENT, name: StepTypes.DOCUMENT },
-  { value: StepType.ASSIGNMENT, name: StepTypes.ASSIGNMENT },
-  { value: StepType.WRITTEN, name: StepTypes.WRITTEN },
-  { value: StepType.PERSONALITY, name: StepTypes.PERSONALITY },
-  { value: StepType.FIRST, name: StepTypes.FIRST },
-  { value: StepType.SECOND, name: StepTypes.SECOND },
-  { value: StepType.ETC, name: StepTypes.ETC },
+export const STEPS = [
+  {
+    type: 'document',
+    name: '서류전형',
+  },
+  {
+    type: 'assignment',
+    name: '사전과제',
+  },
+  {
+    type: 'written',
+    name: '필기전형',
+  },
+  {
+    type: 'personality',
+    name: '인적성',
+  },
+  {
+    type: 'first',
+    name: '1차면접',
+  },
+  {
+    type: 'second',
+    name: '2차면접',
+  },
+  {
+    type: 'final',
+    name: '최종면접',
+  },
+  {
+    type: 'etc',
+    name: '기타',
+  },
 ];
 
 export type FormIdType =
