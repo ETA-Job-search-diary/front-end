@@ -2,9 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
-import { useState, MouseEvent, useEffect } from 'react';
+import {
+  useState,
+  MouseEvent,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+} from 'react';
 import FormLabel from './FormLabel';
-import { getPlatformFromLink } from '@/service/form';
+import { crawlingLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
@@ -17,6 +23,8 @@ import { FormTypes, PlaceholderTypes } from '@/constants/form';
 import CompanyForm from '../new/CompanyForm';
 import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
+import { getPlatformBy } from '@/service/crawling';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -35,7 +43,7 @@ interface FormProps {
     memo: string;
   };
 }
-//TODO: 링크앞에 문자들 제거 (ex. https:// 부터 시작하도록 , NavBar 고정)
+
 const Form = ({ originData }: FormProps) => {
   const { refresh, replace } = useRouter();
   const { toast } = useToast();
@@ -64,7 +72,7 @@ const Form = ({ originData }: FormProps) => {
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
 
-  const autoPlatform = getPlatformFromLink(link);
+  const autoPlatform = getPlatformBy(link);
 
   const isReady =
     step.length > 0 &&
@@ -90,14 +98,20 @@ const Form = ({ originData }: FormProps) => {
     return regex.test(link);
   };
 
-  const handleLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLinkChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const link = e.currentTarget.value;
-    const index = link.indexOf('http');
-    if (!index) {
-      setLink(link);
-      return;
-    }
-    setLink(link.slice(index));
+    //TODO: 직접 입력하지 않고, 복사붙여넣기만 가능하도록
+    // const index = link.indexOf('http');
+    // if (!index) {
+    //   setLink(link);
+    //   return;
+    // }
+    // setLink(link.slice(index));
+    setLink(link);
+
+    if (!isLinkValid(link)) return;
+    const data = await crawlingLink(link);
+    console.log(data);
   };
 
   const handleChipClick = (value: string) => {
@@ -110,17 +124,17 @@ const Form = ({ originData }: FormProps) => {
 
   const handleTokenValidationToast = () => {
     toast({
-      title: '로그인이 만료되었어요. 다시 로그인해주세요',
+      title: TOAST_MESSAGE.TOKEN,
     });
   };
 
   const handleSubmitValidationToast = () => {
     toast({
-      title: '필수 항목을 입력해주세요',
+      title: TOAST_MESSAGE.VALIDATION_FORM,
     });
   };
 
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!token) {
@@ -149,7 +163,7 @@ const Form = ({ originData }: FormProps) => {
       return replace(`/schedule/${originData.id}`);
     }
     newSchedule(data, token);
-  };
+  }, []);
 
   const editSchedule = async (
     id: string,
@@ -191,6 +205,18 @@ const Form = ({ originData }: FormProps) => {
             <FormLabel must id="step" label={FormTypes.STEP}>
               <GridChips checked={[step]} onClick={handleChipClick} />
             </FormLabel>
+            <LinkForm
+              link={link}
+              platform={platform}
+              autoPlatform={autoPlatform}
+              isLinkValid={isLinkValid(link)}
+              onChangeLink={handleLinkChange}
+              onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
+              onReset={() => {
+                setLink('');
+                setPlatform('');
+              }}
+            />
             <CompanyForm
               company={company}
               position={position}
@@ -203,18 +229,6 @@ const Form = ({ originData }: FormProps) => {
               onChangeDateTime={(date, time) => {
                 setDate(date);
                 setTime(time);
-              }}
-            />
-            <LinkForm
-              link={link}
-              platform={platform}
-              autoPlatform={autoPlatform}
-              isLinkValid={isLinkValid(link)}
-              onChangeLink={handleLinkChange}
-              onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
-              onReset={() => {
-                setLink('');
-                setPlatform('');
               }}
             />
             <FormLabel must={false} id="memo" label={FormTypes.MEMO}>

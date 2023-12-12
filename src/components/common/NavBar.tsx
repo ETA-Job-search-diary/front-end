@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 
 interface NavBarProps {
   label?: string;
@@ -16,4 +16,4 @@ const NavBar = ({ label, leftSection, rightSection }: NavBarProps) => {
   );
 };
 
-export default NavBar;
+export default memo(NavBar);

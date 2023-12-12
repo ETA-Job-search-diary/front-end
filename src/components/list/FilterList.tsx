@@ -10,6 +10,7 @@ import Skeleton from '../common/Skeleton';
 import EmptyItem from '../home/EmptyItem';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import ScheduleList from '../home/ScheduleList';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 const FilterList = () => {
   const [filter, setFilter] = useState<string[]>([]);
@@ -67,7 +68,7 @@ const FilterList = () => {
 
   const deleteToast = () =>
     toast({
-      description: '삭제되었습니다.',
+      description: TOAST_MESSAGE.DELETE,
     });
 
   const { setTarget } = useIntersectionObserver({

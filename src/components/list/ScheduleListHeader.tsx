@@ -7,6 +7,7 @@ import { useToast } from '@/components/ui/use-toast';
 import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
 import ListEditButtons from './ListEditButtons';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 interface ScheduleListHeaderProps {
   count?: number;
@@ -62,7 +63,7 @@ const ScheduleListHeader = ({
 
   const deleteToast = () =>
     toast({
-      description: '삭제되었습니다.',
+      description: TOAST_MESSAGE.DELETE,
     });
 
   const handleComplete = () => {

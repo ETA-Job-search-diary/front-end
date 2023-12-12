@@ -4,7 +4,6 @@ import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import LinkButton from './LinkButton';
 import FloatNewButton from '../new/FloatNewButton';
-import { useCallback } from 'react';
 
 const TabBar = () => {
   const pathname = usePathname();
@@ -12,10 +11,10 @@ const TabBar = () => {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  const handleLoginClick = useCallback(() => {
+  const handleLoginClick = () => {
     if (token) push('/new');
     else push('/auth/signin');
-  }, []);
+  };
 
   if (
     pathname === '/auth/signin' ||

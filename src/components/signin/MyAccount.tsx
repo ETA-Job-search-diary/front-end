@@ -13,6 +13,7 @@ import { signOut } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
 import ServiceLink from './ServiceLink';
 import UserInfo from './UserInfo';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 interface MyAccountProps {
   session: Session | null;
@@ -46,8 +47,8 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const handleWithdrawToast = () => {
     toast({
-      title: '탈퇴 기능은 아직 개발중입니다...',
-      description: '죄송합니다. 🚪',
+      title: TOAST_MESSAGE.WITHDRAW.title,
+      description: TOAST_MESSAGE.WITHDRAW.description,
     });
   };
 
