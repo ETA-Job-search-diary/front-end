@@ -17,10 +17,10 @@ interface TimePickerWithoutAmpmProps
 
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
   ({ isDesktop, value, onSetValue, ...rest }, ref) => {
-    const { meridiem, time24Hour } = getFormattedCurrentTime(value);
+    const { meridiem } = getFormattedCurrentTime(value);
 
     const [mer, setMer] = useState(meridiem);
-    const [time, setTime] = useState(time24Hour);
+    const [time, setTime] = useState('00:00');
 
     const handleMeridiemChange = (value: string) => {
       const formatedTime = combineTo24Hour(value, time);

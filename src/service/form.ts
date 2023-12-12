@@ -1,11 +1,5 @@
-import { PLATFORM, STEPS } from '@/constants/form';
-
-export const getPlatformFromLink = (link: string): string | undefined => {
-  const foundPlatform = Object.values(PLATFORM).find(
-    (platform) => platform.value?.some((value) => link.includes(value)),
-  );
-  return foundPlatform ? foundPlatform.name : undefined;
-};
+import { STEPS } from '@/constants/form';
+import axios from 'axios';
 
 export const isValidUrl = (url: string): boolean => {
   const regex = new RegExp(
@@ -23,4 +17,9 @@ export const getBadgeByStep = (stepName: string): string | undefined => {
 
 export const getStepByValue = (value: string): string => {
   return STEPS.find((step) => step.type === value)?.name || '';
+};
+
+export const crawlingLink = async (url: string) => {
+  const { data } = await axios.post('/api/crawling', { url });
+  return data;
 };

@@ -27,12 +27,10 @@ const LinkForm = ({
     <FormLabel
       must={false}
       id="link-platform"
-      label="채용공고 링크"
+      label="채용공고"
       message={`${
-        isLinkValid
-          ? autoPlatform
-            ? '채용사이트 정보가 맞는지 확인 후 저장해주세요!'
-            : '채용사이트를 직접 입력해주세요'
+        isLinkValid && autoPlatform
+          ? '채용플랫폼 정보를 확인 후 저장해주세요'
           : ''
       }`}
       errorMessage={`${
@@ -54,7 +52,7 @@ const LinkForm = ({
           id="platform"
           value={platform}
           onChange={onChangePlatform}
-          placeholder={autoPlatform || ''}
+          placeholder={autoPlatform || PlaceholderTypes.PLATFORM}
         />
       )}
     </FormLabel>
