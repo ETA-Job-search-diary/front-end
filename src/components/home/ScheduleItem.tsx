@@ -5,6 +5,7 @@ import Icon from '@/assets/Icon';
 import { ScheduleSimpleType } from '@/model/schedule';
 import { getBadgeByStep, getStepByValue } from '@/service/form';
 import { isToday, isBefore } from 'date-fns';
+import { memo } from 'react';
 
 const currentDate = new Date();
 
@@ -59,4 +60,4 @@ const ScheduleItem = ({
 const borderStyle = 'border-black100';
 const accentStyle = 'text-black900';
 
-export default ScheduleItem;
+export default memo(ScheduleItem);

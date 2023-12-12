@@ -1,5 +1,6 @@
 import { STEPS } from '@/constants/form';
 import Chip from '../common/Chip';
+import { memo } from 'react';
 
 interface GridChipsProps {
   checked: string[];
@@ -24,4 +25,4 @@ const GridChips = ({ checked, onClick }: GridChipsProps) => {
   );
 };
 
-export default GridChips;
+export default memo(GridChips);

@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import HomeIcon from '@/assets/HomeIcon';
-import ListIcon from '@/assets/ListIcon';
 import { usePathname } from 'next/navigation';
+import { memo } from 'react';
+import Icon from '@/assets/Icon';
 
 interface LinkButtonProps {
   path: 'home' | 'list';
@@ -11,8 +11,6 @@ interface LinkButtonProps {
 
 interface PathMapItemType {
   href: string;
-  icon: JSX.Element;
-  activeIcon: JSX.Element;
   name: string;
   position: 'left' | 'right';
 }
@@ -20,15 +18,11 @@ interface PathMapItemType {
 const PathMap: Record<'home' | 'list', PathMapItemType> = {
   home: {
     href: '/',
-    icon: <HomeIcon />,
-    activeIcon: <HomeIcon active />,
     name: '홈',
     position: 'left',
   },
   list: {
     href: '/list',
-    icon: <ListIcon />,
-    activeIcon: <ListIcon active />,
     name: '취준기록',
     position: 'right',
   },
@@ -36,18 +30,23 @@ const PathMap: Record<'home' | 'list', PathMapItemType> = {
 
 const LinkButton = ({ path }: LinkButtonProps) => {
   const current = usePathname();
-  const { href, icon, activeIcon, name, position } = PathMap[path];
+  const { href, name, position } = PathMap[path];
   const isCurrent = current === href;
   const isLeft = position === 'left';
 
   return (
     <Link
       href={href}
-      className={`z-20 w-20 flex flex-col items-center justify-center web:text-xxs ${
+      className={`z-20 w-full h-full flex flex-col items-center justify-center web:text-xxs ${
         isLeft ? 'col-start-1' : 'col-start-3'
       }`}
     >
-      {isCurrent ? activeIcon : icon}
+      <Icon
+        name={path}
+        className={`fill-none hover:scale-110 transition-all ${
+          isCurrent ? 'stroke-primary500' : 'stroke-black200'
+        }`}
+      />
       <span
         className={`hidden web:inline ${
           isCurrent ? 'text-black900' : 'text-black200'
@@ -59,4 +58,4 @@ const LinkButton = ({ path }: LinkButtonProps) => {
   );
 };
 
-export default LinkButton;
+export default memo(LinkButton);

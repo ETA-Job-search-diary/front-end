@@ -1,4 +1,5 @@
 import Icon from '@/assets/Icon';
+import { memo } from 'react';
 
 interface FloatNewButtonProps {
   onClick: () => void;
@@ -21,4 +22,4 @@ const FloatNewButton = ({ onClick }: FloatNewButtonProps) => {
   );
 };
 
-export default FloatNewButton;
+export default memo(FloatNewButton);

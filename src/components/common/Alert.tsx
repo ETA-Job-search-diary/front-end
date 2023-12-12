@@ -37,7 +37,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
       onClick={handleBackGroundClick}
     >
       <section
-        className={`bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-4 py-4 shadow-md`}
+        className={`min-w-[60%] bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-4 py-4 shadow-md`}
       >
         <div className="grow flex justify-center items-center p-11 text-xs">
           {message}

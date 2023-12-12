@@ -36,8 +36,8 @@ const getButtonStyle = (
 
   const sizeStyle = {
     xxs: 'w-max px-2 text-xxs xs:text-xxxs',
-    xs: 'text-xs',
-    sm: 'w-max px-3 text-sm xs:text-xxs font-semibold',
+    xs: 'text-xxs font-semibold',
+    sm: 'w-max text-sm xs:text-xxs font-semibold',
     md: 'text-sm rounded-small',
   };
 
@@ -49,7 +49,7 @@ const getButtonStyle = (
         'bg-primary500 text-white hover:font-semibold rounded-small h-10 w-full',
     },
     'primary-border': {
-      inactive: 'text-black100 hover:font-extrabold',
+      inactive: 'text-black600 hover:font-extrabold',
       active: 'text-primary500 hover:font-extrabold',
     },
     gray: {
