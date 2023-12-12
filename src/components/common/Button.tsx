@@ -36,7 +36,7 @@ const getButtonStyle = (
 
   const sizeStyle = {
     xxs: 'w-max px-2 text-xxs xs:text-xxxs',
-    xs: 'text-xxs font-semibold',
+    xs: 'text-xxs web:text-xs font-semibold',
     sm: 'w-max text-sm xs:text-xxs font-semibold',
     md: 'text-sm rounded-small',
   };
