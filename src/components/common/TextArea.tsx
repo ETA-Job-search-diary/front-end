@@ -28,14 +28,14 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
           id={id}
-          className={`w-full h-36 web:h-64 bg-primary-bg border-[0.8px] border-primary300 rounded-small p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+          className={`h-36 w-full rounded-small border-[0.8px] border-primary300 bg-primary-bg p-[0.9rem] web:h-64 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}
           {...rest}
         />
         {maxLength && (
-          <span className="absolute bottom-1 right-2 text-black200 text-xxs">{`${count} / 200 자`}</span>
+          <span className="absolute bottom-1 right-2 text-xxs text-black200">{`${count} / 200 자`}</span>
         )}
       </label>
     );

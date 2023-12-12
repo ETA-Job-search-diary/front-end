@@ -33,16 +33,16 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
 
   return createPortal(
     <div
-      className={`fixed z-30 top-0 min-h-screen mx-auto min-w-[280px] w-full max-w-[500px] flex justify-center items-center bg-alert`}
+      className={`fixed top-0 z-30 mx-auto flex min-h-screen w-full min-w-[280px] max-w-[500px] items-center justify-center bg-alert`}
       onClick={handleBackGroundClick}
     >
       <section
-        className={`min-w-[60%] bg-white rounded-medium text-black800 flex flex-col justify-center items-center px-4 py-4 shadow-md`}
+        className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 text-black800 shadow-md`}
       >
-        <div className="grow flex justify-center items-center p-11 text-xs">
+        <div className="flex grow items-center justify-center p-11 text-xs">
           {message}
         </div>
-        <div className="w-full flex justify-between gap-1.5">
+        <div className="flex w-full justify-between gap-1.5">
           {type.map(({ value, onClick }, index) => (
             <Button
               key={value}

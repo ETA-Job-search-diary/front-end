@@ -10,11 +10,11 @@ interface MarkDownViewerProps {
 
 const MarkDownViewer = ({ content }: MarkDownViewerProps) => {
   const Li = ({ children }: any) => (
-    <li className="list-disc list-inside">{children}</li>
+    <li className="list-inside list-disc">{children}</li>
   );
   return (
     <Markdown
-      className={`prose max-w-none lg:prose-xl bg-primary-bg border-[0.8px] border-primary300 w-full min-h-[10rem] web:min-h-[13rem] rounded-small p-[0.8rem] ${detailContentStyle}`}
+      className={`prose lg:prose-xl min-h-[10rem] w-full max-w-none rounded-small border-[0.8px] border-primary300 bg-primary-bg p-[0.8rem] web:min-h-[13rem] ${detailContentStyle}`}
       remarkPlugins={[remarkGfm]}
       components={{
         li: Li,

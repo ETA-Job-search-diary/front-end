@@ -4,7 +4,7 @@ interface BadgeProps {
 
 const Badge = ({ label }: BadgeProps) => {
   return (
-    <div className="w-max whitespace-nowrap px-1 web:px-[6px] web:py-[1px] rounded-small bg-primary50 text-primary500 font-medium text-xxxs web:text-xxs">
+    <div className="w-max whitespace-nowrap rounded-small bg-primary50 px-1 text-xxxs font-medium text-primary500 web:px-[6px] web:py-[1px] web:text-xxs">
       {label}
     </div>
   );

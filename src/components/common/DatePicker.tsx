@@ -23,8 +23,8 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
   return (
     <Popover>
       <PopoverTrigger placeholder={date} asChild>
-        <span className="h-full w-full flex justify-between items-center bg-primary-bg border-[0.8px] border-primary300 rounded-small pr-3">
-          <span className={`py-2 px-[0.8rem] ${formTextStyle}`}>
+        <span className="flex h-full w-full items-center justify-between rounded-small border-[0.8px] border-primary300 bg-primary-bg pr-3">
+          <span className={`px-[0.8rem] py-2 ${formTextStyle}`}>
             {convertDateToAlternateFormat(date)}
           </span>
           <Icon
@@ -35,7 +35,7 @@ const DatePicker = ({ date, setDate }: TextInputProps) => {
           />
         </span>
       </PopoverTrigger>
-      <PopoverContent className="flex w-auto flex-col space-y-2 py-2 px-[0.8rem]">
+      <PopoverContent className="flex w-auto flex-col space-y-2 px-[0.8rem] py-2">
         <Calendar
           mode="single"
           selected={new Date(convertDateToAlternateFormat(date, '-'))}

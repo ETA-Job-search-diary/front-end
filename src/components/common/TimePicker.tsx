@@ -43,7 +43,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
             <div
               className={`${
                 isDesktop ? 'h-10 web:h-12' : 'h-full'
-              } w-full grid web:grid-cols-[1fr_2fr] gap-4 ${formTextStyle}`}
+              } grid w-full gap-4 web:grid-cols-[1fr_2fr] ${formTextStyle}`}
             >
               <MeridiemPicker
                 meridiem={meridiem}
@@ -78,7 +78,7 @@ const TimePickerWithoutAmpm = forwardRef<
       ref={ref}
       type="time"
       defaultValue={value}
-      className={`w-full h-full py-2 px-[0.8rem] text-left web:cursor-text bg-primary-bg border-[0.8px] border-primary300 rounded-small ${
+      className={`h-full w-full rounded-small border-[0.8px] border-primary300 bg-primary-bg px-[0.8rem] py-2 text-left web:cursor-text ${
         isFilled ? `${formTextStyle}` : `text-form ${formPlaceholderStyle}`
       }`}
       step="600"

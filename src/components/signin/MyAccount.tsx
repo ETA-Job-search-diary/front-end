@@ -54,32 +54,32 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed z-30 top-0 min-h-screen mx-auto min-w-[280px] w-full max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
+    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
       />
       <div className="px-[22px] web:px-[28px]">
         <UserInfo name={name} email={email} />
-        <div className="flex flex-col items-center px-1 web:px-3 pt-3">
+        <div className="flex flex-col items-center px-1 pt-3 web:px-3">
           <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
           <ServiceLink href={SUPPORT_FORM} label="문의하기" />
           <SignOutButton onClick={() => handleAlert(serviceTypes.LOGOUT)} />
           <button
             type="button"
-            className="w-full flex items-center gap-3 p-5"
+            className="flex w-full items-center gap-3 p-5"
             onClick={() => handleAlert(serviceTypes.WITHDRAW)}
           >
             <Icon
               name="withdraw"
-              className="w-5 h-4 web:w-5 web:h-4 stroke-black300"
+              className="h-4 w-5 stroke-black300 web:h-4 web:w-5"
             />
             <span className="text-xs text-black900">탈퇴하기</span>
           </button>
         </div>
         <Icon
           name="teamETA"
-          className="absolute bottom-20 right-7 web:right-10 web:w-[212px] web:h-[155px] h-[119px] w-40"
+          className="absolute bottom-20 right-7 h-[119px] w-40 web:right-10 web:h-[155px] web:w-[212px]"
         />
         {isOpen && (
           <Alert

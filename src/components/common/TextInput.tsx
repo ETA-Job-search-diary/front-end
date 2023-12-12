@@ -19,7 +19,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <FormLabel id={id} label={label} must={must}>
         <input
           id={id}
-          className={`w-full h-10 web:h-12 font-medium bg-primary-bg border-[0.8px] border-primary300 rounded-small py-2 px-[0.8rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+          className={`h-10 w-full rounded-small border-[0.8px] border-primary300 bg-primary-bg px-[0.8rem] py-2 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           onFocus={onFocus}
           onBlur={onBlur}

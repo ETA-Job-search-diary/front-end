@@ -46,9 +46,9 @@ DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
           href={link}
           rel="noopener noreferrer"
           target="_blank"
-          className={`${detailContentStyle} break-words min-w-full pr-2 col-start-2`}
+          className={`${detailContentStyle} col-start-2 min-w-full break-words pr-2`}
         >
-          <span className="border-b border-black-600">{link}</span>
+          <span className="border-black-600 border-b">{link}</span>
         </Link>
       )}
     </div>
@@ -57,7 +57,7 @@ DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
 
 DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   return (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col items-start gap-4">
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FormTypes[title]}

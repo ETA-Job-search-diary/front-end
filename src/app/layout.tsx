@@ -159,10 +159,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
       <body
-        className={`w-screen h-full overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
+        className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <GoogleAnalytics />
-        <main className="min-h-screen mx-auto min-w-[280px] max-w-[500px] bg-white flex flex-col pt-[calc(env(safe-area-inset-top))]">
+        <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
           <ThemeProvider>
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>

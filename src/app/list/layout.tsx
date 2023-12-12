@@ -13,7 +13,7 @@ interface ListPagelayoutProps {
 
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
-    <section className="h-screen w-full flex flex-col pb-[calc(env(safe-area-inset-bottom)+90px)]">
+    <section className="flex h-screen w-full flex-col pb-[calc(env(safe-area-inset-bottom)+90px)]">
       <CheckProvider>{children}</CheckProvider>
     </section>
   );

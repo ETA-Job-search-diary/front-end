@@ -8,10 +8,10 @@ const SignOutButton = ({ onClick }: SignOutButtonProps) => {
   return (
     <button
       type="button"
-      className="w-full flex items-center gap-3 p-5 border-b border-black100"
+      className="flex w-full items-center gap-3 border-b border-black100 p-5"
       onClick={onClick}
     >
-      <Icon name={'logout'} className="w-5 h-4 stroke-black300" />
+      <Icon name={'logout'} className="h-4 w-5 stroke-black300" />
       <span className="text-xs text-black900">{'로그아웃'}</span>
     </button>
   );

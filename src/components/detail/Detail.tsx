@@ -21,7 +21,7 @@ const Detail = ({
   const { endTime } = getFormattedDateTimeInfo(date);
 
   return (
-    <section className="w-full h-full px-[22px] web:px-[28px] flex flex-col gap-7 pt-8 scroll-auto">
+    <section className="flex h-full w-full flex-col gap-7 scroll-auto px-[22px] pt-8 web:px-[28px]">
       <DetailItem title="COMPANY" icon="briefcase" content={company} />
       <DetailItem title="POSITION" icon="position" content={position} />
       <DetailItem title="DATE" icon="clock" content={endTime} />

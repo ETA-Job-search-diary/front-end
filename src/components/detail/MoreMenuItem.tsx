@@ -10,9 +10,9 @@ const MoreMenuItem = ({ label, onClick }: MoreMenuItemProps) => {
   return (
     <DropdownMenuItem
       onClick={onClick}
-      className="flex justify-center items-center gap-2"
+      className="flex items-center justify-center gap-2"
     >
-      <Icon name={'delete'} className="w-4 h-4 stroke-black600" />
+      <Icon name={'delete'} className="h-4 w-4 stroke-black600" />
       <span className="text-xxs web:text-sm">{label}하기</span>
     </DropdownMenuItem>
   );

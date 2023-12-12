@@ -185,7 +185,7 @@ const Form = ({ originData }: FormProps) => {
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
-      <form className="pt-16 web:pt-[70px] flex flex-col gap-12 px-[22px] web:px-[28px] pb-8">
+      <form className="flex flex-col gap-12 px-[22px] pb-8 pt-16 web:px-[28px] web:pt-[70px]">
         {isClient && (
           <>
             <FormLabel must id="step" label={FormTypes.STEP}>

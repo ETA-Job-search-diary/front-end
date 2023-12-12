@@ -7,7 +7,7 @@ interface ServiceBackgroundProps {
 
 const ServiceBackground = ({ children }: ServiceBackgroundProps) => {
   return (
-    <section className="z-10 sticky top-0 bg-white pb-3 web:pb-5 bg-gradient-pattern-sm web:bg-gradient-pattern bg-top-right bg-no-repeat">
+    <section className="sticky top-0 z-10 bg-white bg-gradient-pattern-sm bg-top-right bg-no-repeat pb-3 web:bg-gradient-pattern web:pb-5">
       <ServiceTitle />
       <div className="mx-[22px] web:mx-[28px]">{children}</div>
     </section>

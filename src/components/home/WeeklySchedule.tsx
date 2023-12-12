@@ -19,17 +19,17 @@ const WeeklySchedule = () => {
 
   return (
     <section
-      className={`grow h-full w-full bg-white px-[22px] web:px-[28px] flex overflow-auto pb-[calc(env(safe-area-inset-bottom)+90px)] ${
+      className={`flex h-full w-full grow overflow-auto bg-white px-[22px] pb-[calc(env(safe-area-inset-bottom)+90px)] web:px-[28px] ${
         isLoading || !!data?.thisWeek.length || !!data?.nextWeek.length
           ? ''
-          : 'justify-center items-center'
+          : 'items-center justify-center'
       }`}
     >
       {isLoading && <Skeleton.Item />}
       {!isLoading &&
         (!!token ? (
           data && (data.thisWeek.length > 0 || data?.nextWeek.length > 0) ? (
-            <div className="w-full flex flex-col gap-8">
+            <div className="flex w-full flex-col gap-8">
               {data.thisWeek.length > 0 && (
                 <Schedule week="THIS" items={data.thisWeek} />
               )}

@@ -1,8 +1,8 @@
 import { PLATFORM, STEPS } from '@/constants/form';
 
 export const getPlatformFromLink = (link: string): string | undefined => {
-  const foundPlatform = Object.values(PLATFORM).find((platform) =>
-    platform.value?.some((value) => link.includes(value)),
+  const foundPlatform = Object.values(PLATFORM).find(
+    (platform) => platform.value?.some((value) => link.includes(value)),
   );
   return foundPlatform ? foundPlatform.name : undefined;
 };
