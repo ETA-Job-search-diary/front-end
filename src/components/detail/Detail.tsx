@@ -18,20 +18,19 @@ const Detail = ({
   platform,
   memo,
 }: DetailProps) => {
-  const { endTime } = getFormattedDateTimeInfo(date);
+  const { fullDate, shortDay, endTime } = getFormattedDateTimeInfo(date);
+  const fullDateEndTime = `${fullDate}(${shortDay}) ${endTime}`;
 
   return (
     <section className="flex h-full w-full flex-col gap-7 scroll-auto px-[22px] pt-8 web:px-[28px]">
       <DetailItem title="COMPANY" icon="briefcase" content={company} />
       <DetailItem title="POSITION" icon="position" content={position} />
-      <DetailItem title="DATE" icon="clock" content={endTime} />
-      {link !== ' ' && (link || platform) && (
-        <DetailItem.Link
-          title="LINK"
-          icon="globe"
-          content={platform}
-          link={link}
-        />
+      <DetailItem title="DATE" icon="clock" content={fullDateEndTime} />
+      {platform && (
+        <DetailItem title="PLATFORM" icon="position" content={platform} />
+      )}
+      {link !== ' ' && link && (
+        <DetailItem.Link title="LINK" icon="globe" content={link} />
       )}
       {memo !== ' ' && memo && (
         <DetailItem.MarkDown title="MEMO" icon="memo" content={memo} />
