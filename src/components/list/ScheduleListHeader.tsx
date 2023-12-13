@@ -7,6 +7,7 @@ import { useToast } from '@/components/ui/use-toast';
 import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
 import ListEditButtons from './ListEditButtons';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 interface ScheduleListHeaderProps {
   count?: number;
@@ -62,7 +63,7 @@ const ScheduleListHeader = ({
 
   const deleteToast = () =>
     toast({
-      description: '삭제되었습니다.',
+      description: TOAST_MESSAGE.DELETE,
     });
 
   const handleComplete = () => {
@@ -72,8 +73,8 @@ const ScheduleListHeader = ({
 
   return (
     <>
-      <header className="z-10 flex flex-col sticky top-0 bg-white">
-        <div className="z-20 bg-white pt-[2rem] pb-2 px-[22px] web:px-[28px] flex justify-between sticky top-0">
+      <header className="sticky top-0 z-10 flex flex-col bg-white">
+        <div className="sticky top-0 z-20 flex justify-between bg-white px-[22px] pb-2 pt-[2rem] web:px-[28px]">
           <SubScheduleTitle label={'전체'} count={token ? count : 0} />
           <ListEditButtons
             isEdit={isEdit}
@@ -82,13 +83,13 @@ const ScheduleListHeader = ({
           />
         </div>
         <div
-          className={`flex justify-between items-end sticky top-0 duration-300 ease-linear transition-all transform pb-1.5 web:pb-3 px-[22px] web:px-[28px] ${
-            isEdit ? 'translate-y-0' : '-translate-y-24 h-0 opacity-0'
+          className={`sticky top-0 flex transform items-end justify-between px-[22px] pb-1.5 transition-all duration-300 ease-linear web:px-[28px] web:pb-3 ${
+            isEdit ? 'translate-y-0' : 'h-0 -translate-y-24 opacity-0'
           }`}
         >
           <div className="flex items-center gap-3.5">
             <CheckButton all checked={allChecked} onClick={onCheckToggle} />
-            <span className="text-black900 text-sm xs:text-xxs font-bold">
+            <span className="text-sm font-bold text-black900 xs:text-xxs">
               전체 선택
             </span>
           </div>

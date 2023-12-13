@@ -10,7 +10,7 @@ interface DateTimeFormProps {
 
 const DateTimeForm = ({ date, time, onChangeDateTime }: DateTimeFormProps) => {
   return (
-    <FormLabel id="date-time" label="일정" message={PlaceholderTypes.DATE}>
+    <FormLabel must label="일정" message={PlaceholderTypes.DATE}>
       <DateTimePicker date={date} time={time} onChange={onChangeDateTime} />
     </FormLabel>
   );

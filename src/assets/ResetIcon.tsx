@@ -5,7 +5,7 @@ const ResetIcon = () => {
     <Icon
       name="close"
       aria-label="=close"
-      className={`w-4 h-4 web:w-5 web:h-5 fill-black900 ${defaultStyle}`}
+      className={`h-4 w-4 fill-black900 web:h-5 web:w-5 ${defaultStyle}`}
     />
   );
 };

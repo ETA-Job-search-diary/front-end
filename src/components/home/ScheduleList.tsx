@@ -16,12 +16,12 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
   const handleCheck = (id: string) => onCheck(id);
 
   return (
-    <ul className={`w-full flex flex-col gap-3`}>
+    <ul className={`flex w-full flex-col gap-3`}>
       {items.map((item) => (
         <li
           key={item.id}
-          className={`web:gap-3 items-center ${
-            isEdit ? 'grid grid-cols-[20px_auto] gap-3.5' : ''
+          className={`items-center web:gap-3 ${
+            isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
           }`}
         >
           {isEdit && (

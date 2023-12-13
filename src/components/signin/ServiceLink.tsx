@@ -12,11 +12,11 @@ const ServiceLink = ({ href, label }: ServiceLinkProps) => {
       href={href}
       rel="noopener noreferrer"
       target="_blank"
-      className="w-full flex items-center gap-3 p-5 border-b border-black100"
+      className="flex w-full items-center gap-3 border-b border-black100 p-5"
     >
       <Icon
         name="message"
-        className="w-5 h-4 web:w-5 web:h-4 stroke-black300"
+        className="h-4 w-5 stroke-black300 web:h-4 web:w-5"
       />
       <span className="text-xs text-black900">{label}</span>
     </Link>

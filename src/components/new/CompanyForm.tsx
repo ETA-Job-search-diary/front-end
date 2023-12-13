@@ -17,20 +17,24 @@ const CompanyForm = ({
   onChangePosition,
 }: CompanyFormProps) => {
   return (
-    <FormLabel id="company-position" must label="지원하는 회사/직무">
-      <TextInput
-        id="company"
-        value={company}
-        placeholder={`${PlaceholderTypes.COMPANY}`}
-        onChange={onChangeCompany}
-      />
-      <TextInput
-        id="position"
-        value={position}
-        placeholder={`${PlaceholderTypes.POSITION}`}
-        onChange={onChangePosition}
-      />
-    </FormLabel>
+    <div className="flex flex-col gap-3">
+      <FormLabel id="company" must label="지원하는 회사/직무">
+        <TextInput
+          id="company"
+          value={company}
+          placeholder={`${PlaceholderTypes.COMPANY}`}
+          onChange={onChangeCompany}
+        />
+      </FormLabel>
+      <FormLabel id="position">
+        <TextInput
+          id="position"
+          value={position}
+          placeholder={`${PlaceholderTypes.POSITION}`}
+          onChange={onChangePosition}
+        />
+      </FormLabel>
+    </div>
   );
 };
 

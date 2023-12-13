@@ -5,11 +5,11 @@ interface SubScheduleTitleProps {
 
 const SubScheduleTitle = ({ label, count }: SubScheduleTitleProps) => {
   return (
-    <div className="flex gap-[10px] text-sm xs:text-xxs pt-1">
-      <span className="text-black900 font-semibold">{label} 일정</span>
+    <div className="flex gap-[10px] pt-1 text-sm xs:text-xxs">
+      <span className="font-semibold text-black900">{label} 일정</span>
       {!!count && (
-        <span className="text-black500 flex">
-          총<span className="text-primary500 font-bold pl-1">{count}</span>건
+        <span className="flex text-black500">
+          총<span className="pl-1 font-bold text-primary500">{count}</span>건
         </span>
       )}
     </div>

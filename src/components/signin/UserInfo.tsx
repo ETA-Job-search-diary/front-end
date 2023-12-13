@@ -8,16 +8,16 @@ interface UserInfoProps {
 
 const UserInfo = ({ name, email }: UserInfoProps) => {
   return (
-    <div className="bg-ligtht-gray rounded-large flex flex-col justify-center gap-2 h-20 web:h-[115px] px-4 web:px-6">
-      <h1 className="text-black900 font-bold text-md">{name}</h1>
+    <div className="flex h-20 flex-col justify-center gap-2 rounded-large bg-ligtht-gray px-4 web:h-[115px] web:px-6">
+      <h1 className="text-md font-bold text-black900">{name}</h1>
       <div className="flex items-start gap-2">
         <span>
           <Icon
             name={`${getProviderByEmail(email).name}`}
-            className="w-[0.9rem] h-[0.9rem]"
+            className="h-[0.9rem] w-[0.9rem]"
           />
         </span>
-        <span className="text-black600 text-xs leading-3">{email}</span>
+        <span className="text-xs leading-3 text-black600">{email}</span>
       </div>
     </div>
   );

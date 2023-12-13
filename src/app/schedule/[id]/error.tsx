@@ -30,7 +30,7 @@ const error = ({ error }: errorProps) => {
   }, [error]);
 
   return (
-    <section className="w-full h-screen flex justify-center items-center"></section>
+    <section className="flex h-screen w-full items-center justify-center"></section>
   );
 };
 

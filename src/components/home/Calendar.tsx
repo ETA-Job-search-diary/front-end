@@ -43,10 +43,10 @@ export const Calender = () => {
   const nextMonth = () => setCurrent(addMonths(current, 1));
 
   return (
-    <div className="relative border border-black100 rounded-large flex flex-col justify-start gap-2 bg-white">
+    <div className="relative flex flex-col justify-start gap-2 rounded-large border border-black100 bg-white">
       <Icon
         name="mainCharacter"
-        className="absolute -top-[50px] web:-top-[80px] right-0 xs:w-14 w-24 h-16 web:w-36 web:h-28"
+        className="absolute -top-[50px] right-0 h-16 w-24 xs:w-14 web:-top-[80px] web:h-28 web:w-36"
       />
       <Calender.Caption
         current={current}
@@ -54,7 +54,7 @@ export const Calender = () => {
         nextMonth={nextMonth}
       />
       <table
-        className="h-full flex flex-col gap-2 text-xxxs web:text-xs px-4 web:px-5 pb-2.5"
+        className="flex h-full flex-col gap-2 px-4 pb-2.5 text-xxxs web:px-5 web:text-xs"
         suppressHydrationWarning
       >
         <Calender.Head />
@@ -66,8 +66,8 @@ export const Calender = () => {
 
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
-    <div className="flex justify-between pt-3.5 px-7 web:pt-5 web:px-[38px]">
-      <div className="grid grid-cols-[1fr_23px_auto] web:grid-cols-[1fr_27px_auto] text-sm web:text-md xs:text-xs font-bold text-black900">
+    <div className="flex justify-between px-7 pt-3.5 web:px-[38px] web:pt-5">
+      <div className="grid grid-cols-[1fr_23px_auto] text-sm font-bold text-black900 xs:text-xs web:grid-cols-[1fr_27px_auto] web:text-md">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
@@ -88,7 +88,7 @@ Calender.MoveButton = ({ direction, onClick }: MoveButtonProps) => {
       variant="outline"
       size="icon"
       onClick={onClick}
-      className="w-[1.5rem] h-[1.5rem]"
+      className="h-[1.5rem] w-[1.5rem]"
     >
       <ButtonType
         aria-label={`${direction}-button`}
@@ -104,7 +104,7 @@ Calender.Head = () => {
     <thead>
       <tr className="grid grid-cols-7 place-items-center">
         {date.map((d) => (
-          <th key={d} className="text-black900 font-semibold">
+          <th key={d} className="font-semibold text-black900">
             {d}
           </th>
         ))}
@@ -144,28 +144,28 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
     return (
       <td
         key={day.toString()}
-        className="flex flex-col gap-[3px] items-center justify-center font-medium"
+        className="flex flex-col items-center justify-center gap-[3px] font-medium"
       >
-        <span className="flex flex-col justify-center items-center">
+        <span className="flex flex-col items-center justify-center">
           {isToday && (
             <span
-              className={`inline-block xs:w-4 xs:h-4 w-5 h-5 web:w-6 web:h-6 rounded-full bg-black`}
+              className={`inline-block h-5 w-5 rounded-full bg-black xs:h-4 xs:w-4 web:h-6 web:w-6`}
             />
           )}
           <span
             className={`${
               isDifferentMonths
-                ? 'text-black200 font-medium absolute'
-                : `${isToday ? `text-white font-bold absolute` : ''}`
+                ? 'absolute font-medium text-black200'
+                : `${isToday ? `absolute font-bold text-white` : ''}`
             }`}
           >
             {formattedDate}
           </span>
         </span>
         {weekEvents && weekEvents.length > 0 ? (
-          <span className="rounded-full bg-primary500 mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
+          <span className="mx-auto h-1 w-1 rounded-full bg-primary500 web:h-[5px] web:w-[5px]"></span>
         ) : (
-          <span className="rounded-full mx-auto w-1 h-1 web:w-[5px] web:h-[5px]"></span>
+          <span className="mx-auto h-1 w-1 rounded-full web:h-[5px] web:w-[5px]"></span>
         )}
       </td>
     );
@@ -182,9 +182,9 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
   }
 
   return (
-    <tbody className="flex flex-col h-[11rem] web:h-max">
+    <tbody className="flex h-[11rem] flex-col web:h-max">
       {rows.map((week, index) => (
-        <tr key={index} className="grid grid-cols-7 h-full web:h-max">
+        <tr key={index} className="grid h-full grid-cols-7 web:h-max">
           {week}
         </tr>
       ))}

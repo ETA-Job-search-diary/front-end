@@ -2,10 +2,10 @@ import UserProfileWidget from './UserProfileWidget';
 
 const ServiceTitle = () => {
   return (
-    <div className="w-full h-max flex flex-col gap-1 web:gap-2 px-8 web:px-11 pt-7 web:pt-11 pb-3 web:pb-5">
+    <div className="flex h-max w-full flex-col gap-1 px-8 pb-3 pt-7 web:gap-2 web:px-11 web:pb-5 web:pt-11">
       <UserProfileWidget />
-      <p className="text-black700 font-light text-sm xs:text-xs">
-        이제 <span className="text-primary500 font-semibold">취준로그</span>
+      <p className="text-sm font-light text-black700 xs:text-xs">
+        이제 <span className="font-semibold text-primary500">취준로그</span>
         에서 취준 일정을
         <br />
         쉽고 편하게 관리해보세요

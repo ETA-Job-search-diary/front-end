@@ -22,19 +22,19 @@ Skeleton.List = () => {
 Skeleton.Item = () => {
   return (
     <li
-      className={`relative w-full bg-white grid grid-cols-[auto_1fr_auto] border border-black100 rounded-large py-3 web:py-6 h-[88px] web:h-[129px] animate-pulse`}
+      className={`relative grid h-[88px] w-full animate-pulse grid-cols-[auto_1fr_auto] rounded-large border border-black100 bg-white py-3 web:h-[129px] web:py-6`}
     >
-      <div className="w-full h-full flex flex-col justify-center items-center text-black900 xs:px-3 px-6 web:px-[30px] border-r border-black100">
+      <div className="flex h-full w-full flex-col items-center justify-center border-r border-black100 px-6 text-black900 xs:px-3 web:px-[30px]">
         <Skeleton />
       </div>
-      <div className="w-full flex flex-col justify-center gap-2 xs:pl-3 pl-6 web:pl-[30px]">
+      <div className="flex w-full flex-col justify-center gap-2 pl-6 xs:pl-3 web:pl-[30px]">
         <Skeleton size="sm" />
         <div>
           <Skeleton size="md" />
         </div>
         <Skeleton size="lg" />
       </div>
-      <div className="w-full place-self-center xs:pr-3 pr-6 web:pr-[30px]">
+      <div className="w-full place-self-center pr-6 xs:pr-3 web:pr-[30px]">
         <Skeleton />
       </div>
     </li>

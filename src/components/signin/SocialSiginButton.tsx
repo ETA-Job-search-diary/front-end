@@ -21,12 +21,12 @@ const SocialSiginButton = ({
 
         return (
           <button
-            className="z-10 w-full bg-white rounded-medium border-[0.7px] border-black100 py-3 px-4 web:py-4 web:px-6 grid grid-cols-[1fr_auto_1fr] items-center justify-center"
+            className="z-10 grid w-full grid-cols-[1fr_auto_1fr] items-center justify-center rounded-medium border-[0.7px] border-black100 bg-white px-4 py-3 web:px-6 web:py-4"
             key={name}
             onClick={() => signIn(id, { callbackUrl })}
           >
-            <Icon name={iconName} className="w-7 h-7 xs:w-5 xs:h-5" />
-            <span className="grow text-black800 text-xs xs:text-xxs font-medium pl-4">
+            <Icon name={iconName} className="h-7 w-7 xs:h-5 xs:w-5" />
+            <span className="grow pl-4 text-xs font-medium text-black800 xs:text-xxs">
               {label} 계정으로 로그인
             </span>
           </button>

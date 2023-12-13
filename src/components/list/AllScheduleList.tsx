@@ -57,12 +57,12 @@ const AllScheduleList = () => {
         onCheckAll={handleCheckAll}
       />
       <section
-        className={`group grow bg-white pt-1 web:pt-0 px-[22px] web:px-[28px] flex flex-col gap-5 duration-300 ease-linear transition-all transform ${
+        className={`group flex grow transform flex-col gap-5 bg-white px-[22px] pt-1 transition-all duration-300 ease-linear web:px-[28px] web:pt-0 ${
           isEdit && '-translate-y-[90px] xs:-translate-y-16'
         }`}
       >
         <div
-          className={`duration-300 ease-linear transition-all transform ${
+          className={`transform transition-all duration-300 ease-linear ${
             isEdit && 'opacity-0'
           }`}
         >

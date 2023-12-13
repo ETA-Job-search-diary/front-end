@@ -13,12 +13,12 @@ const BackButton = ({ onClose }: BackButtonProps) => {
   return (
     <button
       onClick={onClose ? onClose : () => back()}
-      className="w-full h-full"
+      className="h-full w-full"
     >
       <Icon
         aria-label="=back-button"
         name="arrowleft"
-        className="stroke-black900 w-6 mx-auto hover:scale-110 transition-all"
+        className="mx-auto w-6 stroke-black900 transition-all hover:scale-110"
       />
     </button>
   );
