@@ -13,6 +13,8 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { deleteSchedule } from '@/service/schedule';
 import MoreMenuItem from './MoreMenuItem';
+import { useToast } from '../ui/use-toast';
+import { TOAST_MESSAGE } from '@/constants/toast';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -22,6 +24,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const { push } = useRouter();
   const { data: session } = useSession();
   const token = session?.user.accessToken;
+  const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -35,13 +38,19 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
 
   const handleDeleteConfirm = () => {
     if (!token) return;
-
+    handleDeleteToast();
     deleteSchedule(scheduleId, token)
       .then(() => {
         handleCloseMenu();
         push('/list');
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleDeleteToast = () => {
+    toast({
+      title: TOAST_MESSAGE.DELETE,
+    });
   };
 
   return (

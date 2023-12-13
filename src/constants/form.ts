@@ -68,6 +68,7 @@ export const FormTypes = {
   PLATFORM: '플랫폼',
   LINK: '채용공고',
   MEMO: '메모',
+  STEP: '전형단계',
 };
 
 export const PlaceholderTypes = {
