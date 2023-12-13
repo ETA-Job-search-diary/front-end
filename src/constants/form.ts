@@ -64,11 +64,10 @@ export type FormIdType =
 export const FormTypes = {
   COMPANY: '회사',
   POSITION: '직무',
-  DATE: '시간',
+  DATE: '일정',
+  PLATFORM: '플랫폼',
   LINK: '채용공고',
   MEMO: '메모',
-  TITLE: '타이틀',
-  STEP: '전형단계',
 };
 
 export const PlaceholderTypes = {

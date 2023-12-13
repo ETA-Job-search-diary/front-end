@@ -18,10 +18,8 @@ const formatDateStringWithDot = (inputDate: Date) => {
     .slice(0, -1);
 };
 
-const formattedDayOfWeek = (inputDate: Date) => {
-  return new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(
-    inputDate,
-  );
+const formattedDayOfWeek = (inputDate: Date, type: 'short' | 'long') => {
+  return new Intl.DateTimeFormat('ko-KR', { weekday: type }).format(inputDate);
 };
 
 const formattedEndTime = (inputDate: Date) => {
@@ -35,12 +33,14 @@ export const getFormattedDateTimeInfo = (input: string) => {
   const inputDate = parseDateTimeString(input);
   const fullDate = formatDateStringWithDot(inputDate);
   const date = inputDate.getDate();
-  const day = formattedDayOfWeek(inputDate);
+  const day = formattedDayOfWeek(inputDate, 'long');
+  const shortDay = formattedDayOfWeek(inputDate, 'short');
   const endTime = formattedEndTime(inputDate);
   return {
     fullDate,
     date,
     day,
+    shortDay,
     endTime,
   };
 };

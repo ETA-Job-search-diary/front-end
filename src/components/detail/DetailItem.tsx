@@ -15,8 +15,7 @@ interface DetailItemProps extends DetailTitleProps {
 interface DetailItemLinkProps {
   title: keyof typeof FormTypes;
   icon: IconTypes;
-  content?: string;
-  link?: string;
+  content: string;
 }
 
 const DetailItem = ({ title, icon, content }: DetailItemProps) => {
@@ -31,26 +30,21 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
   );
 };
 
-DetailItem.Link = ({ title, icon, content, link }: DetailItemLinkProps) => {
+DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
   return (
     <div className={`${itemStyle}`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FormTypes[title]}
       </h3>
-      {content && (
-        <p className={`${detailContentStyle} col-start-2`}>{content}</p>
-      )}
-      {link && (
-        <Link
-          href={link}
-          rel="noopener noreferrer"
-          target="_blank"
-          className={`${detailContentStyle} col-start-2 min-w-full break-words pr-2`}
-        >
-          <span className="border-black-600 border-b">{link}</span>
-        </Link>
-      )}
+      <Link
+        href={content}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={`${detailContentStyle} col-start-2 min-w-full break-words pr-2`}
+      >
+        <span className="border-black-600 border-b">{content}</span>
+      </Link>
     </div>
   );
 };
