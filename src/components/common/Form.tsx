@@ -3,9 +3,8 @@
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
 import { useState, MouseEvent, useEffect } from 'react';
-import { useCallback, ChangeEvent, ClipboardEvent } from 'react';
+import { ChangeEvent, ClipboardEvent } from 'react';
 import FormLabel from './FormLabel';
-import { crawlingLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
@@ -20,6 +19,7 @@ import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
 import { TOAST_MESSAGE } from '@/constants/toast';
 import { ScheduleDetailType } from '@/model/schedule';
+import useCrawler from '@/hook/useCrawler';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -55,6 +55,8 @@ const Form = ({ originData }: FormProps) => {
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
 
+  const { isCrawling, crawlLink } = useCrawler();
+
   let isPasted = false;
 
   const isReady =
@@ -87,14 +89,13 @@ const Form = ({ originData }: FormProps) => {
       return;
     }
     if (isLinkValid(value)) {
-      const { company, platform } = await crawlingLink(value);
+      const { company, platform } = await crawlLink(value);
       setCompany(company);
       setPlatform(platform);
     }
     setLink(value);
   };
 
-  //TODO: 크롤링하는 동안 ... 로딩바를 표시해야될 듯?
   const handlePasteLink = async ({
     clipboardData,
   }: ClipboardEvent<HTMLInputElement>) => {
@@ -108,7 +109,7 @@ const Form = ({ originData }: FormProps) => {
       return;
     }
 
-    const { company, platform } = await crawlingLink(linkWithoutSpace);
+    const { company, platform } = await crawlLink(linkWithoutSpace);
     setLink(linkWithoutSpace);
     setCompany(company);
     setPlatform(platform);
@@ -133,7 +134,7 @@ const Form = ({ originData }: FormProps) => {
       title: TOAST_MESSAGE.VALIDATION_FORM,
     });
 
-  const handleSubmit = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!token) {
@@ -163,7 +164,7 @@ const Form = ({ originData }: FormProps) => {
       return;
     }
     newSchedule(data, token);
-  }, []);
+  };
 
   const editSchedule = async (
     id: string,

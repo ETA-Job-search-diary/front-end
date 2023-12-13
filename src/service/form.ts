@@ -19,7 +19,7 @@ export const getStepByValue = (value: string): string => {
   return STEPS.find((step) => step.type === value)?.name || '';
 };
 
-export const crawlingLink = async (url: string) => {
+export const getCrawlingData = async (url: string) => {
   const { data } = await axios.post('/api/crawling', { url });
   return data;
 };
