@@ -1,7 +1,7 @@
 'use client';
 
-import { fetcher, fetchWithToken } from '@/lib/fetcher';
-import { useSession } from 'next-auth/react';
+import useSession from '@/hook/useSession';
+import { fetchWithToken } from '@/lib/fetcher';
 import { ReactNode } from 'react';
 import { SWRConfig } from 'swr';
 
@@ -10,8 +10,7 @@ interface SWRProviderProps {
 }
 
 export default function SWRContext({ children }: SWRProviderProps) {
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
+  const { token } = useSession();
 
   if (!token) return <>{children}</>;
 

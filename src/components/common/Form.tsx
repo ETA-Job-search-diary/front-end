@@ -5,7 +5,6 @@ import TextArea from './TextArea';
 import { useState, MouseEvent, useEffect } from 'react';
 import { ChangeEvent, ClipboardEvent } from 'react';
 import FormLabel from './FormLabel';
-import { useSession } from 'next-auth/react';
 import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
@@ -20,6 +19,7 @@ import LinkForm from '../new/LinkForm';
 import { TOAST_MESSAGE } from '@/constants/toast';
 import { ScheduleDetailType } from '@/model/schedule';
 import useCrawler from '@/hook/useCrawler';
+import useSession from '@/hook/useSession';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -32,11 +32,9 @@ interface FormProps {
 const Form = ({ originData }: FormProps) => {
   const { refresh, replace } = useRouter();
   const { toast } = useToast();
-
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
+  const { token } = useSession();
   const { mutate, setEditSchedule } = useScheduleList([]);
+  const { isCrawling, crawlLink } = useCrawler();
 
   const [step, setStep] = useState(originData?.step || '');
   const [company, setCompany] = useState(originData?.company || '');
@@ -54,8 +52,6 @@ const Form = ({ originData }: FormProps) => {
   const [memo, setMemo] = useState(
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
-
-  const { isCrawling, crawlLink } = useCrawler();
 
   let isPasted = false;
 

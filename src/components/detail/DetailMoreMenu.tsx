@@ -9,12 +9,12 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Alert, { alertTypes } from '../common/Alert';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { deleteSchedule } from '@/service/schedule';
 import MoreMenuItem from './MoreMenuItem';
 import { useToast } from '../ui/use-toast';
 import { TOAST_MESSAGE } from '@/constants/toast';
+import useSession from '@/hook/useSession';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -22,8 +22,7 @@ interface DetailMoreMenuProps {
 
 const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const { push } = useRouter();
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
+  const { token } = useSession();
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState(false);

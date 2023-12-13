@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
 import SignOutButton from './SignOutButton';
-import { Session } from 'next-auth';
+import { User } from 'next-auth';
 import Icon from '@/assets/Icon';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
@@ -16,7 +16,7 @@ import UserInfo from './UserInfo';
 import { TOAST_MESSAGE } from '@/constants/toast';
 
 interface MyAccountProps {
-  session: Session | null;
+  session?: User;
   onClose: () => void;
 }
 
@@ -31,10 +31,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const { toast } = useToast();
 
   if (!session) redirect('/auth/signin');
-
-  const {
-    user: { name, email },
-  } = session;
+  const { name, email } = session;
 
   const handleAlert = (value: string) => {
     setMessage(value);

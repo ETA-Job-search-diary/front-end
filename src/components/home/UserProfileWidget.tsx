@@ -1,12 +1,13 @@
 'use client';
 
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Icon from '@/assets/Icon';
 import { useState } from 'react';
 import MyAccount from '../signin/MyAccount';
+import useSession from '@/hook/useSession';
 
 const UserProfileWidget = () => {
-  const { data: session } = useSession();
+  const { token, user } = useSession();
   const [isUserPageOpen, setIsUserPageOpen] = useState(false);
 
   const handleAccount = () => setIsUserPageOpen((prev) => !prev);
@@ -17,9 +18,7 @@ const UserProfileWidget = () => {
         <span>{'안녕하세요 :) '}</span>
       </div>
       <div className="col-start-2">
-        <button
-          onClick={session?.user.accessToken ? handleAccount : () => signIn()}
-        >
+        <button onClick={token ? handleAccount : () => signIn()}>
           <Icon
             aria-label="=user"
             name="user"
@@ -27,9 +26,7 @@ const UserProfileWidget = () => {
           />
         </button>
       </div>
-      {isUserPageOpen && (
-        <MyAccount session={session} onClose={handleAccount} />
-      )}
+      {isUserPageOpen && <MyAccount session={user} onClose={handleAccount} />}
     </div>
   );
 };

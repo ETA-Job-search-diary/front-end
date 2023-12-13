@@ -1,6 +1,5 @@
 import SubScheduleTitle from './SubScheduleTitle';
 import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import Alert, { alertTypes } from '../common/Alert';
 import { useToast } from '@/components/ui/use-toast';
@@ -8,6 +7,7 @@ import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
 import ListEditButtons from './ListEditButtons';
 import { TOAST_MESSAGE } from '@/constants/toast';
+import useSession from '@/hook/useSession';
 
 interface ScheduleListHeaderProps {
   count?: number;
@@ -26,10 +26,8 @@ const ScheduleListHeader = ({
   onDelete,
   onCheckAll,
 }: ScheduleListHeaderProps) => {
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
   const { toast } = useToast();
+  const { token } = useSession();
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<string>();

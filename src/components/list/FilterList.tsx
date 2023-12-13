@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import Alert, { alertTypes } from '../common/Alert';
 import EditButtons from './EditButtons';
 import GridChips from './GridChips';
@@ -11,16 +10,15 @@ import EmptyItem from '../home/EmptyItem';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import ScheduleList from '../home/ScheduleList';
 import { TOAST_MESSAGE } from '@/constants/toast';
+import useSession from '@/hook/useSession';
 
 const FilterList = () => {
+  const { token } = useSession();
+  const { toast } = useToast();
+
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
-  const { toast } = useToast();
 
   const {
     data,

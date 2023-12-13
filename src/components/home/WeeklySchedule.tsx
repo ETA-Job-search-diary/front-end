@@ -2,16 +2,14 @@
 
 import { useState } from 'react';
 import Schedule from './Schedule';
-import { useSession } from 'next-auth/react';
-
 import EmptyItem from './EmptyItem';
 import useSWR from 'swr';
 import { WeeklyScheduleType } from '@/model/schedule';
 import Skeleton from '../common/Skeleton';
+import useSession from '@/hook/useSession';
 
 const WeeklySchedule = () => {
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
+  const { token } = useSession();
   const [offset, setOffset] = useState(0);
   const { data, isLoading, error } = useSWR<WeeklyScheduleType>([
     `/schedules/listByWeek?offset=${offset}`,
