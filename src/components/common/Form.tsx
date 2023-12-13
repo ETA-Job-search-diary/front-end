@@ -5,7 +5,6 @@ import TextArea from './TextArea';
 import { useState, MouseEvent, useEffect } from 'react';
 import { ChangeEvent, ClipboardEvent } from 'react';
 import FormLabel from './FormLabel';
-import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
 import { ScheduleDataType, postSchedule } from '@/service/schedule';
@@ -16,10 +15,10 @@ import { FormTypes, PlaceholderTypes } from '@/constants/form';
 import CompanyForm from '../new/CompanyForm';
 import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
-import { TOAST_MESSAGE } from '@/constants/toast';
 import { ScheduleDetailType } from '@/model/schedule';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -31,7 +30,7 @@ interface FormProps {
 
 const Form = ({ originData }: FormProps) => {
   const { refresh, replace } = useRouter();
-  const { toast } = useToast();
+  const { showTokenExpirationToast, showFormValidationToast } = useShowToast();
   const { token } = useSession();
   const { mutate, setEditSchedule } = useScheduleList([]);
   const { isCrawling, crawlLink } = useCrawler();
@@ -120,25 +119,15 @@ const Form = ({ originData }: FormProps) => {
     setStep(value);
   };
 
-  const handleTokenValidationToast = () =>
-    toast({
-      title: TOAST_MESSAGE.TOKEN,
-    });
-
-  const handleSubmitValidationToast = () =>
-    toast({
-      title: TOAST_MESSAGE.VALIDATION_FORM,
-    });
-
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!token) {
-      handleTokenValidationToast();
+      showTokenExpirationToast();
       return;
     }
     if (!isReady) {
-      handleSubmitValidationToast();
+      showFormValidationToast();
       return;
     }
 

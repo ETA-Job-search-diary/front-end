@@ -1,7 +1,6 @@
 import Alert, { alertTypes } from '../common/Alert';
 import EditButtons from './EditButtons';
 import GridChips from './GridChips';
-import { useToast } from '../ui/use-toast';
 import useScheduleList from '@/hook/scheduleList';
 import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useCallback, useState } from 'react';
@@ -9,12 +8,12 @@ import Skeleton from '../common/Skeleton';
 import EmptyItem from '../home/EmptyItem';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import ScheduleList from '../home/ScheduleList';
-import { TOAST_MESSAGE } from '@/constants/toast';
 import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
 
 const FilterList = () => {
   const { token } = useSession();
-  const { toast } = useToast();
+  const { showDeleteConfirmToast } = useShowToast();
 
   const [filter, setFilter] = useState<string[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -54,7 +53,7 @@ const FilterList = () => {
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
     setDeleteSchedule(checkedIds, token);
-    deleteToast();
+    showDeleteConfirmToast();
     closeAlert();
     onUnCheckAll();
   };
@@ -63,11 +62,6 @@ const FilterList = () => {
     onUnCheckAll();
     setIsEdit(false);
   }, []);
-
-  const deleteToast = () =>
-    toast({
-      description: TOAST_MESSAGE.DELETE,
-    });
 
   const { setTarget } = useIntersectionObserver({
     isReachingEnd,

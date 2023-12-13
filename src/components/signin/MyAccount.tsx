@@ -10,10 +10,9 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import Alert, { alertTypes } from '../common/Alert';
 import { signOut } from 'next-auth/react';
-import { useToast } from '../ui/use-toast';
 import ServiceLink from './ServiceLink';
 import UserInfo from './UserInfo';
-import { TOAST_MESSAGE } from '@/constants/toast';
+import useShowToast from '@/hook/useShowToast';
 
 interface MyAccountProps {
   session?: User;
@@ -28,7 +27,7 @@ const serviceTypes = {
 const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const { toast } = useToast();
+  const { showWithdrawalToast } = useShowToast();
 
   if (!session) redirect('/auth/signin');
   const { name, email } = session;
@@ -42,14 +41,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const onWithdraw = () => {
     setIsOpen(false);
-    handleWithdrawToast();
-  };
-
-  const handleWithdrawToast = () => {
-    toast({
-      title: TOAST_MESSAGE.WITHDRAW.title,
-      description: TOAST_MESSAGE.WITHDRAW.description,
-    });
+    showWithdrawalToast();
   };
 
   useDisableBodyScroll();

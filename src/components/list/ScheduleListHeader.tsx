@@ -2,12 +2,11 @@ import SubScheduleTitle from './SubScheduleTitle';
 import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useState } from 'react';
 import Alert, { alertTypes } from '../common/Alert';
-import { useToast } from '@/components/ui/use-toast';
 import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
 import ListEditButtons from './ListEditButtons';
-import { TOAST_MESSAGE } from '@/constants/toast';
 import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
 
 interface ScheduleListHeaderProps {
   count?: number;
@@ -26,8 +25,8 @@ const ScheduleListHeader = ({
   onDelete,
   onCheckAll,
 }: ScheduleListHeaderProps) => {
-  const { toast } = useToast();
   const { token } = useSession();
+  const { showDeleteConfirmToast } = useShowToast();
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState<string>();
@@ -54,15 +53,10 @@ const ScheduleListHeader = ({
   const handleDeleteConfirm = () => {
     if (!token || !checkedIds.length) return;
     onDelete(checkedIds, token);
-    deleteToast();
+    showDeleteConfirmToast();
     handleCloseMenu();
     onUnCheckAll();
   };
-
-  const deleteToast = () =>
-    toast({
-      description: TOAST_MESSAGE.DELETE,
-    });
 
   const handleComplete = () => {
     onUnCheckAll();

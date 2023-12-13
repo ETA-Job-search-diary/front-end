@@ -12,9 +12,8 @@ import Alert, { alertTypes } from '../common/Alert';
 import { useRouter } from 'next/navigation';
 import { deleteSchedule } from '@/service/schedule';
 import MoreMenuItem from './MoreMenuItem';
-import { useToast } from '../ui/use-toast';
-import { TOAST_MESSAGE } from '@/constants/toast';
 import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -23,7 +22,7 @@ interface DetailMoreMenuProps {
 const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
   const { push } = useRouter();
   const { token } = useSession();
-  const { toast } = useToast();
+  const { showDeleteConfirmToast } = useShowToast();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -37,19 +36,13 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
 
   const handleDeleteConfirm = () => {
     if (!token) return;
-    handleDeleteToast();
+    showDeleteConfirmToast();
     deleteSchedule(scheduleId, token)
       .then(() => {
         handleCloseMenu();
         push('/list');
       })
       .catch((err) => console.log(err));
-  };
-
-  const handleDeleteToast = () => {
-    toast({
-      title: TOAST_MESSAGE.DELETE,
-    });
   };
 
   return (
