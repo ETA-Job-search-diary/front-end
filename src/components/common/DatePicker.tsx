@@ -22,7 +22,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const DatePicker = ({ date, setDate }: TextInputProps) => {
   return (
     <Popover>
-      <PopoverTrigger placeholder={date} asChild>
+      <PopoverTrigger>
         <span className="flex h-full w-full items-center justify-between rounded-small border-[0.8px] border-primary300 bg-primary-bg pr-3">
           <span className={`px-[0.8rem] py-2 ${formTextStyle}`}>
             {convertDateToAlternateFormat(date)}

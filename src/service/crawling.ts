@@ -22,7 +22,10 @@ export const getCompanyBy = (
       const index = title.indexOf('채용');
       return index > 0 ? title.slice(0, index).trim() : title;
     }
-    case '원티드':
+    case '원티드': {
+      const matchResult = title.match(/\[([^\]]+)\]/);
+      return matchResult?.[1].trim() || title;
+    }
     case '점핏': {
       return description.split('-')[0].trim();
     }
