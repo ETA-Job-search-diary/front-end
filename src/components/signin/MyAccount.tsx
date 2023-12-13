@@ -43,7 +43,10 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const onSignOut = () => signOut({ callbackUrl: '/' });
 
-  const onWithdraw = () => handleWithdrawToast();
+  const onWithdraw = () => {
+    setIsOpen(false);
+    handleWithdrawToast();
+  };
 
   const handleWithdrawToast = () => {
     toast({
