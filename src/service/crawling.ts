@@ -7,7 +7,7 @@ export const getPlatformBy = (url: string): string | undefined => {
   return foundPlatform ? foundPlatform.name : undefined;
 };
 
-export const getTitle = (
+export const getCompanyBy = (
   title: string,
   platform: string,
   description: string,
@@ -24,8 +24,7 @@ export const getTitle = (
     }
     case '원티드':
     case '점핏': {
-      const matchResult = title.match(/\[([^\]]+)\]/);
-      return matchResult?.[1].trim() || title;
+      return description.split('-')[0].trim();
     }
     case '링크드인': {
       const index = title.indexOf('hiring');

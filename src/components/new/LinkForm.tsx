@@ -2,13 +2,13 @@ import { PlaceholderTypes } from '@/constants/form';
 import FormLabel from '../common/FormLabel';
 import TextInputWithReset from '../common/TextInputWithReset';
 import TextInput from '../common/TextInput';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ClipboardEvent } from 'react';
 
 interface LinkFormProps {
   link: string;
   platform: string;
-  autoPlatform?: string;
   isLinkValid: boolean;
+  onPaste: (e: ClipboardEvent<HTMLInputElement>) => void;
   onChangeLink: (e: ChangeEvent<HTMLInputElement>) => void;
   onChangePlatform: (e: ChangeEvent<HTMLInputElement>) => void;
   onReset: () => void;
@@ -17,45 +17,45 @@ interface LinkFormProps {
 const LinkForm = ({
   link,
   platform,
-  autoPlatform,
   isLinkValid,
   onChangeLink,
+  onPaste,
   onChangePlatform,
   onReset,
 }: LinkFormProps) => {
   return (
-    <FormLabel
-      must={false}
-      id="link-platform"
-      label="채용공고"
-      message={`${
-        isLinkValid && autoPlatform
-          ? '채용플랫폼 정보를 확인 후 저장해주세요'
-          : ''
-      }`}
-      errorMessage={`${
-        !!link.length && !isLinkValid && !autoPlatform
-          ? 'URL형식에 맞게 입력해주세요'
-          : ''
-      }`}
-    >
-      <TextInputWithReset
+    <div className="flex flex-col gap-3">
+      <FormLabel
         id="link"
-        type="url"
-        value={link}
-        onChange={onChangeLink}
-        placeholder={PlaceholderTypes.LINK}
-        onReset={onReset}
-      />
-      {link && (
-        <TextInput
-          id="platform"
-          value={platform}
-          onChange={onChangePlatform}
-          placeholder={autoPlatform || PlaceholderTypes.PLATFORM}
+        label="채용공고"
+        message={`${
+          isLinkValid ? '채용플랫폼 정보를 확인 후 저장해주세요' : ''
+        }`}
+        errorMessage={`${
+          !!link.length && !isLinkValid ? 'URL형식에 맞게 입력해주세요' : ''
+        }`}
+      >
+        <TextInputWithReset
+          id="link"
+          type="url"
+          value={link}
+          onChange={onChangeLink}
+          placeholder={PlaceholderTypes.LINK}
+          onReset={onReset}
+          onPaste={onPaste}
         />
+      </FormLabel>
+      {link && (
+        <FormLabel id="platform">
+          <TextInput
+            id="platform"
+            value={platform}
+            onChange={onChangePlatform}
+            placeholder={PlaceholderTypes.PLATFORM}
+          />
+        </FormLabel>
       )}
-    </FormLabel>
+    </div>
   );
 };
 

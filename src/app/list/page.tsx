@@ -1,5 +1,7 @@
-import ScheduleListPage from '@/components/list/ScheduleListPage';
+import AllScheduleList from '@/components/list/AllScheduleList';
+// import ScheduleListPage from '@/components/list/ScheduleListPage';
 
 export default function ListPage() {
-  return <ScheduleListPage />;
+  // return <ScheduleListPage />;
+  return <AllScheduleList />;
 }

@@ -12,8 +12,9 @@ const TabBar = () => {
   const token = session?.user.accessToken;
 
   const handleLoginClick = () => {
-    if (token) push('/new');
-    else push('/auth/signin');
+    // if (token) push('/new');
+    // else push('/auth/signin');
+    push('/new');
   };
 
   if (

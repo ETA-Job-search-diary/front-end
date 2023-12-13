@@ -94,9 +94,7 @@ export const getFormattedISODateTime = (origin?: string) => {
   const date = origin
     ? origin.slice(0, 10).replaceAll('-', '.')
     : formatDateStringWithDot(dateObj);
-  const time = origin
-    ? origin.slice(11, 16)
-    : dateObj.getHours().toString().padStart(2, '0') + ':00';
+  const time = origin ? origin.slice(11, 16) : '00:00';
 
   return {
     date,

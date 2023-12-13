@@ -39,7 +39,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
       <section
         className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 text-black800 shadow-md`}
       >
-        <div className="flex grow items-center justify-center p-11 text-xs">
+        <div className="flex grow items-center justify-center p-8 text-xs">
           {message}
         </div>
         <div className="flex w-full justify-between gap-1.5">

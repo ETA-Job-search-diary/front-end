@@ -2,13 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import TextArea from './TextArea';
-import {
-  useState,
-  MouseEvent,
-  useEffect,
-  useCallback,
-  ChangeEvent,
-} from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
+import { useCallback, ChangeEvent, ClipboardEvent } from 'react';
 import FormLabel from './FormLabel';
 import { crawlingLink } from '@/service/form';
 import { useSession } from 'next-auth/react';
@@ -23,25 +18,15 @@ import { FormTypes, PlaceholderTypes } from '@/constants/form';
 import CompanyForm from '../new/CompanyForm';
 import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
-import { getPlatformBy } from '@/service/crawling';
 import { TOAST_MESSAGE } from '@/constants/toast';
+import { ScheduleDetailType } from '@/model/schedule';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
 const { date: currentDate, time: currentTime } = getFormattedISODateTime();
 
 interface FormProps {
-  originData?: {
-    id: string;
-    title: string;
-    step: string;
-    company: string;
-    position: string;
-    date: string;
-    link: string;
-    platform: string;
-    memo: string;
-  };
+  originData?: ScheduleDetailType;
 }
 
 const Form = ({ originData }: FormProps) => {
@@ -57,12 +42,10 @@ const Form = ({ originData }: FormProps) => {
   const [company, setCompany] = useState(originData?.company || '');
   const [position, setPosition] = useState(originData?.position || '');
   const [date, setDate] = useState<string>(
-    (originData && getFormattedISODateTime(originData.date).date) ||
-      currentDate,
+    getFormattedISODateTime(originData?.date).date || currentDate,
   );
   const [time, setTime] = useState<string>(
-    (originData && getFormattedISODateTime(originData.date).time) ||
-      currentTime,
+    getFormattedISODateTime(originData?.date).time || currentTime,
   );
   const [link, setLink] = useState(
     (originData?.link !== ' ' && originData?.link) || '',
@@ -72,7 +55,7 @@ const Form = ({ originData }: FormProps) => {
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
 
-  const autoPlatform = getPlatformBy(link);
+  let isPasted = false;
 
   const isReady =
     step.length > 0 &&
@@ -87,31 +70,49 @@ const Form = ({ originData }: FormProps) => {
         originData.company !== company ||
         originData.position !== position)) ||
     originData?.date !== formatToISODateTime(date, time) ||
-    originData.link.trim() !== link ||
+    originData.link?.trim() !== link ||
     (originData.platform === null ? '' : originData.platform) !== platform ||
-    originData.memo.trim() !== memo;
+    originData.memo?.trim() !== memo;
 
   const isLinkValid = (link: string) => {
-    const regex = new RegExp(
-      /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
-    );
+    const regex =
+      /^(https?:\/\/)?([-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?)$/;
     return regex.test(link);
   };
 
-  const handleLinkChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const link = e.currentTarget.value;
-    //TODO: 직접 입력하지 않고, 복사붙여넣기만 가능하도록
-    // const index = link.indexOf('http');
-    // if (!index) {
-    //   setLink(link);
-    //   return;
-    // }
-    // setLink(link.slice(index));
-    setLink(link);
+  const handleLinkChange = async ({
+    currentTarget: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
+    if (isPasted) {
+      return;
+    }
+    if (isLinkValid(value)) {
+      const { company, platform } = await crawlingLink(value);
+      setCompany(company);
+      setPlatform(platform);
+    }
+    setLink(value);
+  };
 
-    if (!isLinkValid(link)) return;
-    const data = await crawlingLink(link);
-    console.log(data);
+  //TODO: 크롤링하는 동안 ... 로딩바를 표시해야될 듯?
+  const handlePasteLink = async ({
+    clipboardData,
+  }: ClipboardEvent<HTMLInputElement>) => {
+    isPasted = true;
+    const link = clipboardData.getData('text');
+    const index = link.indexOf('http');
+    const linkWithoutSpace = link.slice(index);
+
+    if (!isLinkValid(linkWithoutSpace)) {
+      isPasted = false;
+      return;
+    }
+
+    const { company, platform } = await crawlingLink(linkWithoutSpace);
+    setLink(linkWithoutSpace);
+    setCompany(company);
+    setPlatform(platform);
+    isPasted = false;
   };
 
   const handleChipClick = (value: string) => {
@@ -122,17 +123,15 @@ const Form = ({ originData }: FormProps) => {
     setStep(value);
   };
 
-  const handleTokenValidationToast = () => {
+  const handleTokenValidationToast = () =>
     toast({
       title: TOAST_MESSAGE.TOKEN,
     });
-  };
 
-  const handleSubmitValidationToast = () => {
+  const handleSubmitValidationToast = () =>
     toast({
       title: TOAST_MESSAGE.VALIDATION_FORM,
     });
-  };
 
   const handleSubmit = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -154,13 +153,14 @@ const Form = ({ originData }: FormProps) => {
       position,
       date: stringDate,
       link: link || ' ',
-      platform: platform || autoPlatform,
+      platform: platform,
       memo: memo || ' ',
     };
 
     if (originData) {
       if (isEdit) editSchedule(originData.id, data, token);
-      return replace(`/schedule/${originData.id}`);
+      replace(`/schedule/${originData.id}`);
+      return;
     }
     newSchedule(data, token);
   }, []);
@@ -170,21 +170,18 @@ const Form = ({ originData }: FormProps) => {
     data: ScheduleDataType,
     token: string,
   ) => {
-    return setEditSchedule(id, data, token)
-      .then(() => {
-        replace(`/schedule/${id}`);
-        refresh();
-      })
-      .catch((e) => console.error(e));
+    return setEditSchedule(id, data, token).then(() => {
+      replace(`/schedule/${id}`);
+      refresh();
+    });
   };
 
+  // TODO: (기획) api로 통신해서 id를 받아와서 상세화면으로 이동?
   const newSchedule = async (data: ScheduleDataType, token: string) => {
-    return postSchedule(data, token)
-      .then(() => {
-        replace('/list');
-        mutate();
-      })
-      .catch((e) => console.error(e));
+    return postSchedule(data, token).then(() => {
+      replace('/list');
+      mutate();
+    });
   };
 
   const [isClient, setIsClient] = useState(false);
@@ -202,17 +199,19 @@ const Form = ({ originData }: FormProps) => {
       <form className="flex flex-col gap-12 px-[22px] pb-8 pt-16 web:px-[28px] web:pt-[70px]">
         {isClient && (
           <>
-            <FormLabel must id="step" label={FormTypes.STEP}>
+            <FormLabel must label={FormTypes.STEP}>
               <GridChips checked={[step]} onClick={handleChipClick} />
             </FormLabel>
             <LinkForm
               link={link}
               platform={platform}
-              autoPlatform={autoPlatform}
               isLinkValid={isLinkValid(link)}
+              onPaste={handlePasteLink}
               onChangeLink={handleLinkChange}
               onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
               onReset={() => {
+                setCompany('');
+                setPosition('');
                 setLink('');
                 setPlatform('');
               }}

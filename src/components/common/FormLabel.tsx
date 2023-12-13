@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { formLabelStyle } from './Form';
 
 interface FormLabelProps {
-  id: string;
+  id?: string;
   label?: string;
   must?: boolean;
   message?: string;
@@ -13,7 +13,7 @@ interface FormLabelProps {
 const FormLabel = ({
   id,
   label,
-  must = true,
+  must = false,
   message,
   errorMessage,
   children,
