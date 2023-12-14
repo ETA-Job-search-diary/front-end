@@ -53,6 +53,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
                 ref={ref}
                 value={time}
                 onChange={(e) => handleTimeChange(e)}
+                {...rest}
               />
             </div>
           )
@@ -61,6 +62,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
             ref={ref}
             value={time}
             onChange={(e) => handleTimeChange(e)}
+            {...rest}
           />
         )}
       </>

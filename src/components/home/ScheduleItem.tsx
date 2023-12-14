@@ -24,6 +24,7 @@ const ScheduleItem = ({
   return (
     <Link
       href={`/schedule/${id}`}
+      scroll={false}
       className={`${
         isBeforeToday ? 'bg-ligtht-gray' : 'bg-white'
       } grid grid-cols-[auto_1fr_auto] whitespace-nowrap rounded-large border py-3.5 transition-colors hover:bg-light web:py-4 ${borderStyle}`}

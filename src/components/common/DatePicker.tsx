@@ -1,18 +1,17 @@
-'use client';
-
 import { InputHTMLAttributes } from 'react';
-import { Calendar } from '@/components/ui/calendar';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import Icon from '@/assets/Icon';
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import DateInput from './DateInput';
+import { Calendar } from '@/components/ui/calendar';
 import {
   formatCalendarDate,
   convertDateToAlternateFormat,
 } from '@/service/date';
-import { formTextStyle } from './Form';
+import useScrollPointer from '@/hook/useScrollPointer';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   date: string;
@@ -20,31 +19,28 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const DatePicker = ({ date, setDate }: TextInputProps) => {
+  const { pointer, toggleScrollPointer } = useScrollPointer();
+
   return (
-    <Popover>
-      <PopoverTrigger>
-        <span className="flex h-full w-full items-center justify-between rounded-small border-[0.8px] border-primary300 bg-primary-bg pr-3">
-          <span className={`px-[0.8rem] py-2 ${formTextStyle}`}>
-            {convertDateToAlternateFormat(date)}
-          </span>
-          <Icon
-            name="calendar"
-            className={`h-4 w-4 web:h-5 web:w-5 ${
-              !!date ? 'stroke-black900' : 'stroke-black100'
-            }`}
-          />
-        </span>
-      </PopoverTrigger>
-      <PopoverContent className="flex w-auto flex-col space-y-2 px-[0.8rem] py-2">
-        <Calendar
-          mode="single"
-          selected={new Date(convertDateToAlternateFormat(date, '-'))}
-          onSelect={(select) => {
-            setDate(formatCalendarDate(select as Date));
-          }}
-        />
-      </PopoverContent>
-    </Popover>
+    <>
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger onClick={toggleScrollPointer}>
+            <DateInput date={date} />
+          </AccordionTrigger>
+          <AccordionContent className="h-full">
+            <Calendar
+              mode="single"
+              selected={new Date(convertDateToAlternateFormat(date, '-'))}
+              onSelect={(select) => {
+                setDate(formatCalendarDate(select as Date));
+              }}
+            />
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      <div ref={pointer} />
+    </>
   );
 };
 
