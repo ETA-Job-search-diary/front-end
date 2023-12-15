@@ -22,14 +22,14 @@ const EditButtons = ({
             size="xs"
             label="삭제"
             active={false}
-            color="primary-border"
+            color="secondary"
             onClick={onDelete}
           />
           <Button
             size="xs"
             label="완료"
             active
-            color="primary-border"
+            color="secondary"
             onClick={onCompleted}
           />
         </>
@@ -39,14 +39,14 @@ const EditButtons = ({
             size="xs"
             label="편집"
             active={false}
-            color="primary-border"
+            color="secondary"
             onClick={onEdit}
           />
           <Button
             size="xs"
             label="+ 일정등록"
             active
-            color="primary-border"
+            color="secondary"
             // onClick={onAdd}
           />
         </>

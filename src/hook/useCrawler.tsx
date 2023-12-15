@@ -10,7 +10,7 @@ const useCrawler = () => {
       const { company, platform } = await getCrawlingData(link);
       return { company, platform };
     } catch (error) {
-      throw error;
+      return { company: '', platform: '' };
     } finally {
       setIsCrawling(false);
     }

@@ -80,9 +80,8 @@ const Form = ({ originData }: FormProps) => {
   const handleLinkChange = async ({
     currentTarget: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (isPasted) {
-      return;
-    }
+    if (isPasted) return;
+
     if (isLinkValid(value)) {
       const { company, platform } = await crawlLink(value);
       setCompany(company);
@@ -94,16 +93,13 @@ const Form = ({ originData }: FormProps) => {
   const handlePasteLink = async ({
     clipboardData,
   }: ClipboardEvent<HTMLInputElement>) => {
-    isPasted = true;
+    if (!clipboardData) return;
     const link = clipboardData.getData('text');
     const index = link.indexOf('http');
     const linkWithoutSpace = link.slice(index);
+    if (!isLinkValid(linkWithoutSpace)) return;
 
-    if (!isLinkValid(linkWithoutSpace)) {
-      isPasted = false;
-      return;
-    }
-
+    isPasted = true;
     const { company, platform } = await crawlLink(linkWithoutSpace);
     setLink(linkWithoutSpace);
     setCompany(company);
