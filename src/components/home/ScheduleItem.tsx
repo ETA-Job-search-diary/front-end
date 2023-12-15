@@ -4,10 +4,7 @@ import Link from 'next/link';
 import Icon from '@/assets/Icon';
 import { ScheduleSimpleType } from '@/model/schedule';
 import { getStepByValue } from '@/service/form';
-import { isToday, isBefore } from 'date-fns';
 import { memo } from 'react';
-
-const currentDate = new Date();
 
 const ScheduleItem = ({
   id,
@@ -17,7 +14,6 @@ const ScheduleItem = ({
   date: dateInfo,
 }: ScheduleSimpleType) => {
   const { fullDate, date, day } = getFormattedDateTimeInfo(dateInfo);
-  const fullDateObj = new Date(fullDate);
   const formatStep = getStepByValue(step);
 
   return (

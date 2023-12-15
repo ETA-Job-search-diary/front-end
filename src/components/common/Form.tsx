@@ -199,6 +199,7 @@ const Form = ({ originData }: FormProps) => {
               }}
             />
             <CompanyForm
+              isLoading={isCrawling}
               company={company}
               position={position}
               onChangeCompany={(e) => setCompany(e.currentTarget.value)}

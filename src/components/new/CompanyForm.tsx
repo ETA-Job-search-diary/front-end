@@ -4,6 +4,7 @@ import TextInput from '../common/TextInput';
 import { PlaceholderTypes } from '@/constants/form';
 
 interface CompanyFormProps {
+  isLoading: boolean;
   company: string;
   position: string;
   onChangeCompany: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -11,6 +12,7 @@ interface CompanyFormProps {
 }
 
 const CompanyForm = ({
+  isLoading,
   company,
   position,
   onChangeCompany,
@@ -24,6 +26,7 @@ const CompanyForm = ({
           value={company}
           placeholder={`${PlaceholderTypes.COMPANY}`}
           onChange={onChangeCompany}
+          isLoading={isLoading}
         />
       </FormLabel>
       <FormLabel id="position">

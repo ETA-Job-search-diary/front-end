@@ -1,7 +1,7 @@
 import NavBar from '@/components/common/NavBar';
 import BackButton from './BackButton';
 import SubmitButton from './SubmitButton';
-import { MouseEvent, memo } from 'react';
+import { MouseEvent } from 'react';
 interface NewNavBarProps {
   active: boolean;
   onSubmit: (e: MouseEvent<HTMLButtonElement>) => void;
@@ -19,4 +19,4 @@ const NewNavBar = ({ active, onSubmit }: NewNavBarProps) => {
   );
 };
 
-export default memo(NewNavBar);
+export default NewNavBar;

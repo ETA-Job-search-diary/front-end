@@ -8,10 +8,14 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: FormIdType;
   must?: boolean;
   label?: string;
+  isLoading?: boolean;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ id, must, label, type = 'text', ...rest }, ref) => {
+  (
+    { id, must, label, type = 'text', isLoading, placeholder, ...rest },
+    ref,
+  ) => {
     const { isFocus, onFocus, onBlur } = useFocus();
 
     return (
@@ -22,6 +26,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         onFocus={onFocus}
         onBlur={onBlur}
         {...rest}
+        placeholder={`${isLoading ? '정보를 가져오고 있어요...' : placeholder} `}
       />
     );
   },
