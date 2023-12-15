@@ -28,7 +28,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
           id={id}
-          className={`h-36 w-full rounded-small border-[0.8px] border-primary300 bg-primary-bg p-[0.9rem] web:h-64 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+          className={`border-form h-36 w-full rounded-small border-primary300 bg-primary-bg p-[0.9rem] web:h-64 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}

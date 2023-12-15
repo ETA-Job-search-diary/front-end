@@ -25,11 +25,14 @@ function Calendar({
       formatters={{ formatCaption }}
       showOutsideDays={showOutsideDays}
       locale={ko}
-      className={cn('h-full p-4 web:p-5 web:pb-0', className)}
+      className={cn(
+        'h-80 w-full min-w-max p-4 web:h-full web:p-5 web:pb-0',
+        className,
+      )}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
-        caption: 'flex justify-between relative items-center pl-1.5',
+        caption: 'w-full flex justify-between items-center pl-1.5',
         caption_label: 'text-xs font-bold web:font-semibold',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
@@ -70,6 +73,7 @@ function Calendar({
     />
   );
 }
+
 Calendar.displayName = 'Calendar';
 
 export { Calendar };

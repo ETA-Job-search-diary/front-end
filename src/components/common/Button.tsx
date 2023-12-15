@@ -44,7 +44,7 @@ const getButtonStyle = (
   const colorStyle = {
     primary: {
       inactive:
-        'border-[1px] border-primary500 text-primary500 hover:font-semibold rounded-small h-10 w-full',
+        'border-1 border-primary500 text-primary500 hover:font-semibold rounded-small h-10 w-full',
       active:
         'bg-primary500 text-white hover:font-semibold rounded-small h-10 w-full',
     },
@@ -58,9 +58,9 @@ const getButtonStyle = (
     },
     border: {
       inactive:
-        'border-[1px] border-black100 text-black400 bg-body rounded-[3px] xs:h-6 h-7',
+        'border-1 border-black100 text-black400 bg-body rounded-[3px] xs:h-6 h-7',
       active:
-        'border-[1px] border-black100 text-black400 bg-white rounded-[3px] xs:h-6 h-7',
+        'border-1 border-black100 text-black400 bg-white rounded-[3px] xs:h-6 h-7',
     },
   };
 

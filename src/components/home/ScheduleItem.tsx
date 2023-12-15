@@ -17,17 +17,14 @@ const ScheduleItem = ({
   date: dateInfo,
 }: ScheduleSimpleType) => {
   const { fullDate, date, day } = getFormattedDateTimeInfo(dateInfo);
-  const isBeforeToday =
-    isBefore(new Date(fullDate), currentDate) && !isToday(new Date(fullDate));
+  const fullDateObj = new Date(fullDate);
   const formatStep = getStepByValue(step);
 
   return (
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`${
-        isBeforeToday ? 'bg-ligtht-gray' : 'bg-white'
-      } grid grid-cols-[auto_1fr_auto] whitespace-nowrap rounded-large border py-3.5 transition-colors hover:bg-light web:py-4 ${borderStyle}`}
+      className={`grid grid-cols-[auto_1fr_auto] whitespace-nowrap rounded-large border py-3.5 transition-colors hover:bg-light web:py-4 ${borderStyle}`}
     >
       <div
         className={`flex h-full w-full flex-col items-center justify-center border-r px-5 ${borderStyle} ${accentStyle}`}
@@ -47,18 +44,8 @@ const ScheduleItem = ({
             {position}
           </span>
         </p>
-        {/* {endTime && (
-          <div className="flex items-center gap-1.5 web:gap-2">
-            {badge && <Badge label={badge} />}
-            <span className="text-xxxs text-black700 web:text-xxs">
-              {endTime}
-            </span>
-          </div>
-        )} */}
       </div>
-      <div className="w-full place-self-center pr-6 text-xxs font-bold text-black600 web:pr-6 web:text-xs">
-        {/* {getStepByValue(step)} */}
-      </div>
+      <div className="w-full place-self-center pr-6 text-xxs font-bold text-black600 web:pr-6 web:text-xs"></div>
     </Link>
   );
 };

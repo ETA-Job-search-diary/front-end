@@ -1,7 +1,6 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
-import Icon from '@/assets/Icon';
 import { useState } from 'react';
 import MyAccount from '../signin/MyAccount';
 import useSession from '@/hook/useSession';
@@ -17,15 +16,14 @@ const UserProfileWidget = () => {
       <div className="text-md text-black xs:text-sm">
         <span>{'안녕하세요 :) '}</span>
       </div>
-      <div className="col-start-2">
-        <button onClick={token ? handleAccount : () => signIn()}>
-          <Icon
-            aria-label="=user"
-            name="user"
-            className="h-5 w-5 fill-black900 transition-all hover:scale-110 web:h-6 web:w-6"
-          />
-        </button>
-      </div>
+
+      <button
+        className="border-1 group col-start-2 rounded-3xl border-primary500 px-3.5 py-0.5 text-[0.75rem] text-primary500 hover:scale-105 web:text-xxxs"
+        onClick={token ? handleAccount : () => signIn()}
+      >
+        <span className="font-semibold group-hover:font-bold">My</span>
+      </button>
+
       {isUserPageOpen && <MyAccount session={user} onClose={handleAccount} />}
     </div>
   );

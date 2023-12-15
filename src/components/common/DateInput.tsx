@@ -8,7 +8,7 @@ interface DateInputProps {
 
 const DateInput = ({ date }: DateInputProps) => {
   return (
-    <span className="flex h-full w-full items-center justify-between rounded-small border-[0.8px] border-primary300 bg-primary-bg pr-3">
+    <span className="border-form flex h-full w-full items-center justify-between rounded-small border-primary300 bg-primary-bg pr-3">
       <span className={`px-[0.8rem] py-2 ${formTextStyle}`}>
         {convertDateToAlternateFormat(date)}
       </span>
