@@ -75,12 +75,6 @@
   }
 }
 
-:root {
-  --safe-area-top: env(safe-area-inset-top);
-  --safe-area-left: env(safe-area-inset-left, 0);
-  --safe-area-right: env(safe-area-inset-right, 0);
-}
-
 * {
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;

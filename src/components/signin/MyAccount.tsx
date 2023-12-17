@@ -47,7 +47,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white">
+    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
