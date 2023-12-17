@@ -38,3 +38,6 @@ const ScheduleList = ({ items, isEdit }: ScheduleListProps) => {
 };
 
 export default ScheduleList;
+
+// TODO: pending 상태이면, 합격하셨나요? 버튼을 보여준다. (합격, 불합격)
+// 합격을 누르면 pass 상태로 바뀌고, 불합격을 누르면 fail 상태로 바뀐다. POST /schedule/:id/status, body: { status: 'pass' | 'fail' }

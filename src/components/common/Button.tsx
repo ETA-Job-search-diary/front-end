@@ -19,6 +19,7 @@ const Button = ({
   return (
     <button
       type={type}
+      disabled={!active}
       className={`${getButtonStyle(active, size, color)}`}
       {...rest}
     >
@@ -44,17 +45,18 @@ const getButtonStyle = (
   const colorStyle = {
     primary: {
       inactive:
-        'border-1 border-primary500 text-primary500 hover:font-semibold rounded-small h-10 w-full',
+        'border-1 border-primary500 text-primary500 hover:font-semibold rounded-small h-9 w-full',
       active:
-        'bg-primary500 text-white hover:font-semibold rounded-small h-10 w-full',
+        'bg-primary500 text-white hover:font-semibold rounded-small h-9 w-full',
     },
     secondary: {
       inactive: 'text-black600 hover:font-extrabold',
       active: 'text-primary500 hover:font-extrabold',
     },
     gray: {
-      inactive: 'bg-black100 text-black200',
-      active: 'bg-black100 text-white hover:font-semibold',
+      inactive: 'bg-[#E8E8E8] text-black700 rounded-small h-9 w-full',
+      active:
+        'bg-black100 text-white hover:font-semibold rounded-small h-9 w-full',
     },
     border: {
       inactive:

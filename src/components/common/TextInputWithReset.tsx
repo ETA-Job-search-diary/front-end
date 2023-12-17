@@ -3,7 +3,7 @@ import FormLabel from './FormLabel';
 import useFocus from '@/hook/useFocus';
 import ResetIcon from '@/assets/ResetIcon';
 import { formPlaceholderStyle, formTextStyle } from './Form';
-import { FormIdType } from '@/constants/form';
+import { FormIdType } from './TextInput';
 
 interface TextInputWithResetProps
   extends InputHTMLAttributes<HTMLInputElement> {

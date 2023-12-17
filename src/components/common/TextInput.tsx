@@ -2,7 +2,16 @@ import { InputHTMLAttributes, forwardRef } from 'react';
 
 import useFocus from '@/hook/useFocus';
 import { formPlaceholderStyle, formTextStyle } from './Form';
-import { FormIdType } from '@/constants/form';
+
+export type FormIdType =
+  | 'title'
+  | 'step'
+  | 'company'
+  | 'position'
+  | 'link'
+  | 'platform'
+  | 'date'
+  | 'memo';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: FormIdType;
@@ -26,7 +35,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         onFocus={onFocus}
         onBlur={onBlur}
         {...rest}
-        placeholder={`${isLoading ? '정보를 가져오고 있어요...' : placeholder} `}
+        placeholder={`${
+          isLoading ? '정보를 가져오고 있어요...' : placeholder
+        } `}
       />
     );
   },

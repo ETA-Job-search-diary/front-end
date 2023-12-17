@@ -51,16 +51,6 @@ export const STEPS = [
   },
 ];
 
-export type FormIdType =
-  | 'title'
-  | 'step'
-  | 'company'
-  | 'position'
-  | 'link'
-  | 'platform'
-  | 'date'
-  | 'memo';
-
 export const FormTypes = {
   COMPANY: '회사',
   POSITION: '직무',

@@ -24,18 +24,21 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     return (
-      <label htmlFor={id} className={`relative flex flex-col gap-3`}>
+      <label
+        htmlFor={id}
+        className={`flex h-36 flex-col rounded-small border-form border-primary300 bg-primary-bg web:h-64`}
+      >
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
           id={id}
-          className={`border-form h-36 w-full rounded-small border-primary300 bg-primary-bg p-[0.9rem] web:h-64 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+          className={`w-full grow bg-transparent p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           maxLength={maxLength}
           onChange={handleTextArea}
           {...rest}
         />
         {maxLength && (
-          <span className="absolute bottom-1 right-2 text-xxs text-black200">{`${count} / 200 자`}</span>
+          <span className="pr-[0.9rem] text-end text-xxs text-black200">{`${count} / 200 자`}</span>
         )}
       </label>
     );
