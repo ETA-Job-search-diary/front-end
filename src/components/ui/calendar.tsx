@@ -26,7 +26,7 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       locale={ko}
       className={cn(
-        'h-80 w-full min-w-max p-4 web:h-full web:p-5 web:pb-0',
+        'h-80 w-full min-w-max p-4 web:h-full web:p-5 pb-0',
         className,
       )}
       classNames={{

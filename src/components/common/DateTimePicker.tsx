@@ -113,7 +113,7 @@ DateTimePicker.Mobile = ({
         </SheetTrigger>
         <SheetContent
           side="bottom"
-          className="rounded-t-3xl border-none pt-8 outline-none"
+          className="rounded-t-3xl border-none pb-[calc(env(safe-area-inset-bottom)+1rem)] pt-8 outline-none"
         >
           <Calendar mode="single" selected={selectedDate} onSelect={onDate} />
         </SheetContent>
