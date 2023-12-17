@@ -1,15 +1,14 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import LinkButton from './LinkButton';
 import FloatNewButton from '../new/FloatNewButton';
+import useSession from '@/hook/useSession';
 
 const TabBar = () => {
   const pathname = usePathname();
   const { push } = useRouter();
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
+  const { token } = useSession();
 
   const handleLoginClick = () => {
     if (token) push('/new');

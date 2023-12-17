@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
 import SignOutButton from './SignOutButton';
-import { Session } from 'next-auth';
+import { User } from 'next-auth';
 import Icon from '@/assets/Icon';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
@@ -10,13 +10,12 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import Alert, { alertTypes } from '../common/Alert';
 import { signOut } from 'next-auth/react';
-import { useToast } from '../ui/use-toast';
 import ServiceLink from './ServiceLink';
 import UserInfo from './UserInfo';
-import { TOAST_MESSAGE } from '@/constants/toast';
+import useShowToast from '@/hook/useShowToast';
 
 interface MyAccountProps {
-  session: Session | null;
+  session?: User;
   onClose: () => void;
 }
 
@@ -28,13 +27,10 @@ const serviceTypes = {
 const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const { toast } = useToast();
+  const { showWithdrawalToast } = useShowToast();
 
   if (!session) redirect('/auth/signin');
-
-  const {
-    user: { name, email },
-  } = session;
+  const { name, email } = session;
 
   const handleAlert = (value: string) => {
     setMessage(value);
@@ -45,20 +41,13 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
 
   const onWithdraw = () => {
     setIsOpen(false);
-    handleWithdrawToast();
-  };
-
-  const handleWithdrawToast = () => {
-    toast({
-      title: TOAST_MESSAGE.WITHDRAW.title,
-      description: TOAST_MESSAGE.WITHDRAW.description,
-    });
+    showWithdrawalToast();
   };
 
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
+    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}

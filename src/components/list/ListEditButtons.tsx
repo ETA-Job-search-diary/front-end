@@ -18,7 +18,7 @@ const ListEditButtons = ({
           size="sm"
           label="완료"
           active
-          color="primary-border"
+          color="secondary"
           onClick={onEditComplete}
         />
       ) : (
@@ -26,7 +26,7 @@ const ListEditButtons = ({
           size="sm"
           label="편집"
           active
-          color="primary-border"
+          color="secondary"
           onClick={onEditClick}
         />
       )}

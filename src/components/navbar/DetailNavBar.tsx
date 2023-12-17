@@ -15,7 +15,7 @@ const DetailNavBar = ({ id, company, position, step }: DetailNavBarProps) => {
   const bagdeName = getStepByValue(step);
 
   return (
-    <div className="sticky top-[calc(env(safe-area-inset-top))] bg-white">
+    <div className="sticky top-0 bg-white">
       <NavBar
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}

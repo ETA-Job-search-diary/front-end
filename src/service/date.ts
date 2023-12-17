@@ -73,16 +73,6 @@ export const getFormattedCurrentTime = (current: string) => {
   };
 };
 
-export const combineTo24Hour = (meridiem: string, time: string) => {
-  let [hour, minute] = time.split(':');
-  if (meridiem === '오후' && Number(hour) < 12) {
-    hour = String(Number(hour) + 12);
-  } else if (meridiem === '오전' && Number(hour) >= 12) {
-    hour = String(Number(hour) - 12);
-  }
-  return `${hour.padStart(2, '0')}:${minute}`;
-};
-
 export const formatToISODateTime = (inputDate: string, inputTime: string) => {
   const cleanedDateStr = inputDate.replaceAll('.', '-');
   const combinedDateTimeStr = `${cleanedDateStr}T${inputTime}:00.000Z`;

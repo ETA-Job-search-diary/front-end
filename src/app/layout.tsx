@@ -148,8 +148,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  minimumScale: 1,
-  maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
   themeColor: '#ffffff',
@@ -162,7 +160,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <GoogleAnalytics />
-        <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
+        <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white">
           <ThemeProvider>
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>

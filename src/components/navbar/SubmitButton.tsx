@@ -29,7 +29,7 @@ const SubmitButton = ({
       type="submit"
       size="sm"
       label={label}
-      color="primary-border"
+      color="secondary"
       active={active}
       onClick={handleSubmitOnce(onClick)}
     />

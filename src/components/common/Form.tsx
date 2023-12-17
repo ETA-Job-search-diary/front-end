@@ -5,8 +5,6 @@ import TextArea from './TextArea';
 import { useState, MouseEvent, useEffect } from 'react';
 import { ChangeEvent, ClipboardEvent } from 'react';
 import FormLabel from './FormLabel';
-import { useSession } from 'next-auth/react';
-import { useToast } from '../ui/use-toast';
 import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
 import GridChips from '../list/GridChips';
 import { ScheduleDataType, postSchedule } from '@/service/schedule';
@@ -17,9 +15,10 @@ import { FormTypes, PlaceholderTypes } from '@/constants/form';
 import CompanyForm from '../new/CompanyForm';
 import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
-import { TOAST_MESSAGE } from '@/constants/toast';
 import { ScheduleDetailType } from '@/model/schedule';
 import useCrawler from '@/hook/useCrawler';
+import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -31,12 +30,10 @@ interface FormProps {
 
 const Form = ({ originData }: FormProps) => {
   const { refresh, replace } = useRouter();
-  const { toast } = useToast();
-
-  const { data: session } = useSession();
-  const token = session?.user.accessToken;
-
+  const { showTokenExpirationToast, showFormValidationToast } = useShowToast();
+  const { token } = useSession();
   const { mutate, setEditSchedule } = useScheduleList([]);
+  const { isCrawling, crawlLink } = useCrawler();
 
   const [step, setStep] = useState(originData?.step || '');
   const [company, setCompany] = useState(originData?.company || '');
@@ -54,8 +51,6 @@ const Form = ({ originData }: FormProps) => {
   const [memo, setMemo] = useState(
     (originData?.memo !== ' ' && originData?.memo) || '',
   );
-
-  const { isCrawling, crawlLink } = useCrawler();
 
   let isPasted = false;
 
@@ -85,9 +80,8 @@ const Form = ({ originData }: FormProps) => {
   const handleLinkChange = async ({
     currentTarget: { value },
   }: ChangeEvent<HTMLInputElement>) => {
-    if (isPasted) {
-      return;
-    }
+    if (isPasted) return;
+
     if (isLinkValid(value)) {
       const { company, platform } = await crawlLink(value);
       setCompany(company);
@@ -99,16 +93,13 @@ const Form = ({ originData }: FormProps) => {
   const handlePasteLink = async ({
     clipboardData,
   }: ClipboardEvent<HTMLInputElement>) => {
-    isPasted = true;
+    if (!clipboardData) return;
     const link = clipboardData.getData('text');
     const index = link.indexOf('http');
     const linkWithoutSpace = link.slice(index);
+    if (!isLinkValid(linkWithoutSpace)) return;
 
-    if (!isLinkValid(linkWithoutSpace)) {
-      isPasted = false;
-      return;
-    }
-
+    isPasted = true;
     const { company, platform } = await crawlLink(linkWithoutSpace);
     setLink(linkWithoutSpace);
     setCompany(company);
@@ -124,25 +115,15 @@ const Form = ({ originData }: FormProps) => {
     setStep(value);
   };
 
-  const handleTokenValidationToast = () =>
-    toast({
-      title: TOAST_MESSAGE.TOKEN,
-    });
-
-  const handleSubmitValidationToast = () =>
-    toast({
-      title: TOAST_MESSAGE.VALIDATION_FORM,
-    });
-
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     if (!token) {
-      handleTokenValidationToast();
+      showTokenExpirationToast();
       return;
     }
     if (!isReady) {
-      handleSubmitValidationToast();
+      showFormValidationToast();
       return;
     }
 
@@ -218,6 +199,7 @@ const Form = ({ originData }: FormProps) => {
               }}
             />
             <CompanyForm
+              isLoading={isCrawling}
               company={company}
               position={position}
               onChangeCompany={(e) => setCompany(e.currentTarget.value)}

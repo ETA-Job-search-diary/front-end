@@ -51,16 +51,6 @@ export const STEPS = [
   },
 ];
 
-export type FormIdType =
-  | 'title'
-  | 'step'
-  | 'company'
-  | 'position'
-  | 'link'
-  | 'platform'
-  | 'date'
-  | 'memo';
-
 export const FormTypes = {
   COMPANY: '회사',
   POSITION: '직무',
@@ -75,7 +65,7 @@ export const PlaceholderTypes = {
   COMPANY: '회사명을 입력해주세요',
   POSITION: '직무를 입력해주세요',
   DATE: '서류마감일, 면접일을 입력해주세요',
-  LINK: '채용공고 링크를 붙여 넣어 보세요',
+  LINK: '지원한 채용링크를 붙여넣기 해주세요',
   MEMO: '지원 관련 메모를 남겨주세요',
   PLATFORM: '채용플랫폼을 입력해 주세요',
 };

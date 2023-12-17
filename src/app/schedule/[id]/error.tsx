@@ -1,9 +1,7 @@
 'use client';
 
-import { ToastAction } from '@/components/ui/toast';
-import { useToast } from '@/components/ui/use-toast';
+import useShowToast from '@/hook/useShowToast';
 import Error from 'next/error';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 interface errorProps {
@@ -11,26 +9,15 @@ interface errorProps {
 }
 
 const error = ({ error }: errorProps) => {
-  const { push } = useRouter();
-  const { toast } = useToast();
+  const { showErrorHomeToast } = useShowToast();
 
   useEffect(() => {
-    const handleRedirectToast = () => {
-      toast({
-        description: '에러가 발생했어요. 홈화면으로 돌아갈게요.',
-        action: (
-          <ToastAction onClick={() => push('/')} altText="홈">
-            홈으로
-          </ToastAction>
-        ),
-      });
-    };
-    handleRedirectToast();
+    showErrorHomeToast();
     console.log(error);
-  }, [error]);
+  }, [error, showErrorHomeToast]);
 
   return (
-    <section className="flex h-screen w-full items-center justify-center"></section>
+    <section className="flex h-screen w-full items-center justify-center" />
   );
 };
 

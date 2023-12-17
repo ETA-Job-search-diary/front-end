@@ -20,10 +20,12 @@ module.exports = {
       xs: { max: '350px' },
       web: '500px',
     },
-    borderWidth: {
-      DEFAULT: '0.5px',
-    },
     extend: {
+      borderWidth: {
+        DEFAULT: '0.5px',
+        form: '0.8px',
+        1: '1px',
+      },
       backgroundImage: {
         'gradient-pattern': 'url("/images/bg.webp")',
         'gradient-pattern-sm': 'url("/images/small-bg.webp")',

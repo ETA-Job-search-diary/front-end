@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 import { formLabelStyle } from './Form';
 
 interface FormLabelProps {
@@ -40,4 +40,4 @@ const FormLabel = ({
   );
 };
 
-export default FormLabel;
+export default memo(FormLabel);
