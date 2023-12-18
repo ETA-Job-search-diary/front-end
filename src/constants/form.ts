@@ -1,3 +1,6 @@
+import { StatisticsProps } from '@/components/signin/ApplicationStatistics';
+import { PassRateProps } from '@/components/signin/PassRate';
+
 export const PLATFORM = {
   SARAMIN: { value: ['saramin', 'saram.in'], name: '사람인' },
   JOBKOREA: { value: ['jobkorea'], name: '잡코리아' },
@@ -69,3 +72,38 @@ export const PlaceholderTypes = {
   MEMO: '지원 관련 메모를 남겨주세요',
   PLATFORM: '채용플랫폼을 입력해 주세요',
 };
+
+export const STEP_STATISTICS: { type: keyof StatisticsProps; name: string }[] =
+  [
+    {
+      type: 'document',
+      name: '서류/과제',
+    },
+    {
+      type: 'personality',
+      name: '인적성/필기',
+    },
+    {
+      type: 'interview',
+      name: '면접',
+    },
+    {
+      type: 'etc',
+      name: '기타',
+    },
+  ];
+
+export const STEP_RATE: { type: keyof PassRateProps; name: string }[] = [
+  {
+    type: 'document',
+    name: '서류',
+  },
+  {
+    type: 'interview',
+    name: '면접',
+  },
+  {
+    type: 'total',
+    name: '전체',
+  },
+];

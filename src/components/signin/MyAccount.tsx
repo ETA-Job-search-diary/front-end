@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
-import SignOutButton from './SignOutButton';
 import { User } from 'next-auth';
 import Icon from '@/assets/Icon';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
@@ -13,6 +12,7 @@ import { signOut } from 'next-auth/react';
 import ServiceLink from './ServiceLink';
 import UserInfo from './UserInfo';
 import useShowToast from '@/hook/useShowToast';
+import ServiceButton from './SignOutButton';
 
 interface MyAccountProps {
   session?: User;
@@ -57,18 +57,14 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         <div className="flex flex-col items-center px-1 pt-3 web:px-3">
           <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
           <ServiceLink href={SUPPORT_FORM} label="문의하기" />
-          <SignOutButton onClick={() => handleAlert(serviceTypes.LOGOUT)} />
-          <button
-            type="button"
-            className="flex w-full items-center gap-3 p-5"
+          <ServiceButton
+            lebel="logout"
+            onClick={() => handleAlert(serviceTypes.LOGOUT)}
+          />
+          <ServiceButton
+            lebel="withdraw"
             onClick={() => handleAlert(serviceTypes.WITHDRAW)}
-          >
-            <Icon
-              name="withdraw"
-              className="h-4 w-5 stroke-black300 web:h-4 web:w-5"
-            />
-            <span className="text-xs text-black900">탈퇴하기</span>
-          </button>
+          />
         </div>
         <Icon
           name="teamETA"
