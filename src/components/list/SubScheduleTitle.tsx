@@ -5,7 +5,7 @@ interface SubScheduleTitleProps {
 
 const SubScheduleTitle = ({ label, count }: SubScheduleTitleProps) => {
   return (
-    <div className="flex gap-[10px] pt-1 text-sm xs:text-xxs">
+    <div className="xs:text-0.85 text-1.1 flex gap-[10px] pt-1">
       <span className="font-semibold text-black900">{label} 일정</span>
       {!!count && (
         <span className="flex text-black500">

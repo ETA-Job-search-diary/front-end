@@ -54,7 +54,7 @@ export const Calender = () => {
         nextMonth={nextMonth}
       />
       <table
-        className="flex h-full flex-col gap-2 px-4 pb-2.5 text-xxxs web:px-5 web:text-xs"
+        className="text-0.8 web:text-1 flex h-full flex-col gap-2 px-4 pb-2.5 web:px-5"
         suppressHydrationWarning
       >
         <Calender.Head />
@@ -67,7 +67,7 @@ export const Calender = () => {
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
     <div className="flex justify-between px-7 pt-3.5 web:px-[38px] web:pt-5">
-      <div className="grid grid-cols-[1fr_23px_auto] text-sm font-bold text-black900 xs:text-xs web:grid-cols-[1fr_27px_auto] web:text-md">
+      <div className="xs:text-1 text-1.1 web:text-1.2 grid grid-cols-[1fr_23px_auto] font-bold text-black900 web:grid-cols-[1fr_27px_auto]">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>

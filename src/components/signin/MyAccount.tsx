@@ -52,7 +52,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
       />
-      <div className="px-[22px] web:px-[28px]">
+      <div className="px-page web:px-[28px]">
         <UserInfo name={name} email={email} />
         <div className="flex flex-col items-center px-1 pt-3 web:px-3">
           <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />

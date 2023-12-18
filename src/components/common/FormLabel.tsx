@@ -25,11 +25,11 @@ const FormLabel = ({
           {label}
           {must && <sup className="text-primary500"> *</sup>}
           {message ? (
-            <span className="pl-2 text-xxs font-normal text-black400 xs:text-[0.7rem]">
+            <span className="xs:text-0.7 text-0.85 pl-2 font-normal text-black400">
               {message}
             </span>
           ) : errorMessage ? (
-            <span className="h-3 pl-2 text-xxs font-normal text-primary500 xs:text-[0.7rem]">
+            <span className="xs:text-0.7 text-0.85 h-3 pl-2 font-normal text-primary500">
               {errorMessage}
             </span>
           ) : null}

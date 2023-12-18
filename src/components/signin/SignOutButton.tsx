@@ -20,7 +20,7 @@ const ServiceButton = ({ lebel, onClick }: ServiceButtonProps) => {
       onClick={onClick}
     >
       <Icon name={lebel} className="h-4 w-5 stroke-black300" />
-      <span className="text-xs text-black900">{ServiceLabel[lebel]}</span>
+      <span className="text-1 text-black900">{ServiceLabel[lebel]}</span>
     </button>
   );
 };

@@ -26,7 +26,7 @@ const SocialSiginButton = ({
             onClick={() => signIn(id, { callbackUrl })}
           >
             <Icon name={iconName} className="h-7 w-7 xs:h-5 xs:w-5" />
-            <span className="grow pl-4 text-xs font-medium text-black800 xs:text-xxs">
+            <span className="xs:text-0.85 text-1 grow pl-4 font-medium text-black800">
               {label} 계정으로 로그인
             </span>
           </button>

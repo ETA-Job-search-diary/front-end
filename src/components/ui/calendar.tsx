@@ -26,14 +26,14 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       locale={ko}
       className={cn(
-        'h-80 w-full min-w-max p-4 web:h-full web:p-5 pb-0',
+        'h-80 w-full min-w-max p-4 pb-0 web:h-full web:p-5',
         className,
       )}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
         caption: 'w-full flex justify-between items-center pl-1.5',
-        caption_label: 'text-xs font-bold web:font-semibold',
+        caption_label: 'text-1 font-bold web:font-semibold',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'ghost' }),
@@ -44,9 +44,9 @@ function Calendar({
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex justify-between w-full',
         head_cell:
-          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-xxs',
+          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-0.85',
         row: 'flex justify-between w-full mt-1 web:mt-2',
-        cell: 'rounded-[9999px] text-center text-xs web:text-xxs p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
+        cell: 'rounded-[9999px] text-center text-1 web:text-0.85 p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
           'h-9 w-9 p-0 web:p-3 font-normal aria-selected:opacity-100 rounded-[9999px]',

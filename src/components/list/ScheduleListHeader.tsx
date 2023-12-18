@@ -66,7 +66,7 @@ const ScheduleListHeader = ({
   return (
     <>
       <header className="sticky top-0 z-10 flex flex-col bg-white">
-        <div className="sticky top-0 z-20 flex justify-between bg-white px-[22px] pb-2 pt-[2rem] web:px-[28px]">
+        <div className="px-page sticky top-0 z-20 flex justify-between bg-white pb-2 pt-[2rem] web:px-[28px]">
           <SubScheduleTitle label={'전체'} count={token ? count : 0} />
           <ListEditButtons
             isEdit={isEdit}
@@ -75,13 +75,13 @@ const ScheduleListHeader = ({
           />
         </div>
         <div
-          className={`sticky top-0 flex transform items-end justify-between px-[22px] pb-1.5 transition-all duration-300 ease-linear web:px-[28px] web:pb-3 ${
+          className={`px-page sticky top-0 flex transform items-end justify-between pb-1.5 transition-all duration-300 ease-linear web:px-[28px] web:pb-3 ${
             isEdit ? 'translate-y-0' : 'h-0 -translate-y-24 opacity-0'
           }`}
         >
           <div className="flex items-center gap-3.5">
             <CheckButton all checked={allChecked} onClick={onCheckToggle} />
-            <span className="text-sm font-bold text-black900 xs:text-xxs">
+            <span className="xs:text-0.85 text-1.1 font-bold text-black900">
               전체 선택
             </span>
           </div>

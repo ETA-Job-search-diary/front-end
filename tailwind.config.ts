@@ -21,6 +21,13 @@ module.exports = {
       web: '500px',
     },
     extend: {
+      padding: {
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
+        page: '1.25rem',
+      },
       borderWidth: {
         DEFAULT: '0.5px',
         form: '0.8px',
@@ -102,14 +109,8 @@ module.exports = {
         },
       },
       fontSize: {
-        xxxs: '0.8rem',
-        xxs: '0.87rem',
-        xs: '1rem',
-        sm: '1.1rem',
-        md: '1.2rem',
-        lg: '1.3rem',
-        xl: '1.5rem',
-        form: '0.95rem',
+        0.55: '0.55rem',
+        0.7: '0.7rem',
         0.75: '0.75rem',
         0.8: '0.8rem',
         0.85: '0.85rem',
@@ -119,7 +120,7 @@ module.exports = {
         1.1: '1.1rem',
         1.2: '1.2rem',
         1.3: '1.3rem',
-        1.4: '1.4rem',
+        1.5: '1.5rem',
       },
       borderRadius: {
         large: '15px',

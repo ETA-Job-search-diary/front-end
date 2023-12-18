@@ -17,7 +17,7 @@ const PassRate = (rate: PassRateProps) => {
         {STEP_RATE.map(({ type, name }) => (
           <div className="flex h-full w-full flex-col items-center justify-center">
             <DoughnutChart rate={rate[type]} />
-            <span className="text-xxxs text-black700">{name}</span>
+            <span className="text-0.8 text-black700">{name}</span>
           </div>
         ))}
       </div>

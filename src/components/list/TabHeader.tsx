@@ -32,7 +32,7 @@ const TabHeader = ({
         return (
           <button
             key={type}
-            className={`h-16 w-full border-b-[2px] border-black100 text-xs font-bold ${
+            className={`text-1 h-16 w-full border-b-[2px] border-black100 font-bold ${
               isActive ? 'text-black900' : 'text-black300'
             }`}
             onClick={() => onSwitch(type)}

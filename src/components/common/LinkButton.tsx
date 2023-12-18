@@ -37,7 +37,7 @@ const LinkButton = ({ path }: LinkButtonProps) => {
   return (
     <Link
       href={href}
-      className={`z-20 flex h-full w-full flex-col items-center justify-center web:text-xxs ${
+      className={`web:text-0.85 z-20 flex h-full w-full flex-col items-center justify-center ${
         isLeft ? 'col-start-1' : 'col-start-3'
       }`}
     >

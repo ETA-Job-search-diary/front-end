@@ -26,16 +26,16 @@ export default async function SingInPage({
   return (
     <>
       <NavBar leftSection={<BackButton />} />
-      <section className="h-[calc(100vh-70px)] w-full overflow-x-hidden px-[22px] web:px-[28px]">
+      <section className="px-page h-[calc(100vh-70px)] w-full overflow-x-hidden">
         <div className="relative top-[10%]">
           <div className="flex flex-col gap-28 web:gap-32">
             <div className="flex flex-col gap-6 text-black900">
-              <p className="text-xl font-bold xs:text-sm">
+              <p className="xs:text-1.1 text-1.5 font-bold">
                 <span className="text-primary500">취준로그</span>
                 는 로그인 후<br />
                 이용이 가능해요
               </p>
-              <p className="text-sm text-black700 xs:text-xxs">
+              <p className="xs:text-0.85 text-1.1 text-black700">
                 간편한 SNS 로그인 후<br />
                 취준 일정을 쉽고 편하게 관리해보세요!
               </p>
@@ -53,7 +53,7 @@ export default async function SingInPage({
           </div>
           <p className="flex w-full items-center justify-center gap-2 py-7 text-black400">
             <Icon name="alert" className="h-4 w-4 leading-4" />
-            <span className="text-[0.7rem] xs:text-[0.55rem] web:text-xxxs">
+            <span className="web:text-0.8 text-0.7 xs:text-0.55">
               로그인 시{' '}
               <Link
                 href={TERMS_OF_SERVICE}

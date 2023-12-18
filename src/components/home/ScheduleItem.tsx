@@ -68,8 +68,8 @@ ScheduleItem.Date = ({ date: dateInfo }: ScheduleDate) => {
     <div
       className={`flex h-full w-full flex-col items-center justify-center border-r pr-5 ${borderStyle} ${accentStyle}`}
     >
-      <h3 className="text-lg font-bold xs:text-sm web:text-xl">{date}</h3>
-      <span className="text-xxs web:text-xs">{day}</span>
+      <h3 className="xs:text-1.1 text-1.3 web:text-1.5 font-bold">{date}</h3>
+      <span className="text-0.85 web:text-1">{day}</span>
     </div>
   );
 };
@@ -79,13 +79,13 @@ ScheduleItem.Content = ({ company, position, step }: ScheduleContentProps) => {
   return (
     <div className="flex w-full flex-col justify-between overflow-hidden py-1.5 pl-6 pr-2">
       <h3
-        className={`truncate text-xs font-semibold leading-5 web:text-sm ${accentStyle}`}
+        className={`text-1 web:text-1.1 truncate font-semibold leading-5 ${accentStyle}`}
       >
         {company} {formatStep}
       </h3>
       <p className="flex items-center gap-1">
         <Icon name="briefcase" className="h-2.5 w-2.5 web:h-4 web:w-4" />
-        <span className="truncate text-xxxs text-black500 web:text-xxs">
+        <span className="text-0.8 web:text-0.85 truncate text-black500">
           {position}
         </span>
       </p>

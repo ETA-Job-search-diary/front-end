@@ -18,10 +18,8 @@ const ApplicationStatistics = (statistics: StatisticsProps) => {
       >
         {STEP_STATISTICS.map(({ name, type }) => (
           <div>
-            <p className="text-xs font-bold text-black800">
-              {statistics[type]}
-            </p>
-            <p className="text-xxs text-black600">{name}</p>
+            <p className="text-1 font-bold text-black800">{statistics[type]}</p>
+            <p className="text-0.85 text-black600">{name}</p>
           </div>
         ))}
       </div>

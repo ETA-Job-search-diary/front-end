@@ -13,12 +13,12 @@ const UserProfileWidget = () => {
 
   return (
     <div className="grid w-full grid-cols-[1fr_auto] items-center">
-      <div className="text-md text-black xs:text-sm">
+      <div className="xs:text-1.1 text-1.2 text-black">
         <span>{'안녕하세요 :) '}</span>
       </div>
 
       <button
-        className="border-1 group col-start-2 rounded-3xl border-primary500 px-3.5 py-0.5 text-[0.75rem] text-primary500 hover:scale-105 web:text-xxxs"
+        className="web:text-0.8 text-0.75 group col-start-2 rounded-3xl border-1 border-primary500 px-3.5 py-0.5 text-primary500 hover:scale-105"
         onClick={token ? handleAccount : () => signIn()}
       >
         <span className="font-semibold group-hover:font-bold">My</span>

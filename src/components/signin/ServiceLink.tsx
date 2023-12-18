@@ -18,7 +18,7 @@ const ServiceLink = ({ href, label }: ServiceLinkProps) => {
         name="message"
         className="h-4 w-5 stroke-black300 web:h-4 web:w-5"
       />
-      <span className="text-xs text-black900">{label}</span>
+      <span className="text-1 text-black900">{label}</span>
     </Link>
   );
 };

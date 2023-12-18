@@ -21,7 +21,7 @@ interface DoughnutChartProps {
 const DoughnutChart = ({ rate }: DoughnutChartProps) => {
   return (
     <div className="relative h-16 w-16">
-      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[0.7rem] text-black700">
+      <span className="text-0.7 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-black700">
         {rate}%
       </span>
       <svg viewBox="0 0 200 200" className="h-full w-full">

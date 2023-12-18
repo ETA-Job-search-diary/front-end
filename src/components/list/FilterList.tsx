@@ -70,7 +70,7 @@ const FilterList = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 bg-white px-[22px] pt-6 web:px-[28px]">
+      <div className="px-page flex flex-col gap-4 bg-white pt-6 web:px-[28px]">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
           isEdit={isEdit}

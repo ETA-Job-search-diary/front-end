@@ -22,7 +22,7 @@ const DetailNavBar = ({ id, company, position, step }: DetailNavBarProps) => {
       />
       <div className="mx-[22px] flex flex-col gap-2 border-b border-black100 pb-8 web:mx-[28px]">
         <div className="flex items-center gap-3">
-          <h1 className="text-md font-bold text-black900 web:text-xl">
+          <h1 className="text-1.2 web:text-1.5 font-bold text-black900">
             {company} {position}
           </h1>
           {bagdeName && <Badge label={bagdeName} />}

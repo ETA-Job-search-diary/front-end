@@ -178,7 +178,7 @@ const Form = ({ originData }: FormProps) => {
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
-      <form className="flex flex-col gap-12 px-[22px] pb-8 pt-16 web:px-[28px] web:pt-[70px]">
+      <form className="px-page flex flex-col gap-12 pb-8 pt-16 web:px-[28px] web:pt-[70px]">
         {isClient && (
           <>
             <FormLabel must label={FormTypes.STEP}>
@@ -230,8 +230,8 @@ const Form = ({ originData }: FormProps) => {
 };
 
 export const formLabelStyle =
-  'font-semibold w-max text-xs xs:text-xxs text-black900';
-export const formTextStyle = 'text-form text-black900';
+  'font-semibold w-max text-1 xs:text-0.85 text-black900';
+export const formTextStyle = 'text-0.95 text-black900';
 export const formPlaceholderStyle = 'text-black300';
 
 export default Form;

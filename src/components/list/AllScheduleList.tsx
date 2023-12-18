@@ -57,7 +57,7 @@ const AllScheduleList = () => {
         onCheckAll={handleCheckAll}
       />
       <section
-        className={`group flex grow transform flex-col gap-5 bg-white px-[22px] pt-1 transition-all duration-300 ease-linear web:px-[28px] web:pt-0 ${
+        className={`px-page group flex grow transform flex-col gap-5 bg-white pt-1 transition-all duration-300 ease-linear web:px-[28px] web:pt-0 ${
           isEdit && '-translate-y-[90px] xs:-translate-y-16'
         }`}
       >
