@@ -15,18 +15,16 @@ const ListEditButtons = ({
     <>
       {isEdit ? (
         <Button
-          size="sm"
           label="완료"
-          active
-          color="secondary"
+          width="max"
+          color="primary-border"
           onClick={onEditComplete}
         />
       ) : (
         <Button
-          size="sm"
           label="편집"
-          active
-          color="secondary"
+          width="max"
+          color="primary-border"
           onClick={onEditClick}
         />
       )}

@@ -19,34 +19,32 @@ const EditButtons = ({
       {isEdit ? (
         <>
           <Button
-            size="xs"
             label="삭제"
-            active={false}
-            color="secondary"
+            color="gray-border"
+            width="max"
             onClick={onDelete}
           />
           <Button
-            size="xs"
             label="완료"
+            color="primary-border"
             active
-            color="secondary"
+            width="max"
             onClick={onCompleted}
           />
         </>
       ) : (
         <>
           <Button
-            size="xs"
             label="편집"
-            active={false}
-            color="secondary"
+            color="gray-border"
+            width="max"
             onClick={onEdit}
           />
           <Button
-            size="xs"
             label="+ 일정등록"
             active
-            color="secondary"
+            width="max"
+            color="primary-border"
             // onClick={onAdd}
           />
         </>

@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert, { alertTypes } from '../common/Alert';
+import Alert from '../common/Alert';
 import { useRouter } from 'next/navigation';
 import { deleteSchedule } from '@/service/schedule';
 import MoreMenuItem from './MoreMenuItem';
@@ -56,21 +56,21 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <MoreMenuItem label={alertTypes.EDIT} onClick={handleEditConfirm} />
+          <MoreMenuItem label={'수정'} onClick={handleEditConfirm} />
           <DropdownMenuSeparator />
-          <MoreMenuItem label={alertTypes.DELETE} onClick={openMenu} />
+          <MoreMenuItem label={'삭제'} onClick={openMenu} />
         </DropdownMenuContent>
       </DropdownMenu>
       {isOpen && (
         <Alert
-          message={`등록된 일정을 ${alertTypes.DELETE}할까요?`}
+          message={`등록된 일정을 삭제할까요?`}
           type={[
             {
-              value: alertTypes.CANCEL,
+              value: 'CANCEL',
               onClick: handleCloseMenu,
             },
             {
-              value: alertTypes.DELETE,
+              value: 'DELETE',
               onClick: handleDeleteConfirm,
             },
           ]}

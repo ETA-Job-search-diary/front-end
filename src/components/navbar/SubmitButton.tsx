@@ -26,10 +26,10 @@ const SubmitButton = ({
 
   return (
     <Button
+      size="lg"
       type="submit"
-      size="sm"
       label={label}
-      color="secondary"
+      color={active ? 'primary-border' : 'gray-border'}
       active={active}
       onClick={handleSubmitOnce(onClick)}
     />

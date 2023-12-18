@@ -7,7 +7,7 @@ import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
-import Alert, { alertTypes } from '../common/Alert';
+import Alert from '../common/Alert';
 import { signOut } from 'next-auth/react';
 import ServiceLink from './ServiceLink';
 import UserInfo from './UserInfo';
@@ -75,11 +75,11 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
             message={message}
             type={[
               {
-                value: alertTypes.CANCEL,
+                value: 'CANCEL',
                 onClick: () => setIsOpen(false),
               },
               {
-                value: alertTypes.CONFIRM,
+                value: 'CONFIRM',
                 onClick:
                   message === serviceTypes.LOGOUT ? onSignOut : onWithdraw,
               },

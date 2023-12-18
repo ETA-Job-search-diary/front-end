@@ -1,7 +1,7 @@
 import SubScheduleTitle from './SubScheduleTitle';
 import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
 import { useState } from 'react';
-import Alert, { alertTypes } from '../common/Alert';
+import Alert from '../common/Alert';
 import CheckButton from '@/components/list/CheckButton';
 import DeleteButtons from './DeleteButtons';
 import ListEditButtons from './ListEditButtons';
@@ -93,14 +93,14 @@ const ScheduleListHeader = ({
       </header>
       {isOpen && (
         <Alert
-          message={`${message} ${alertTypes.DELETE}할까요?`}
+          message={`${message} 삭제할까요?`}
           type={[
             {
-              value: alertTypes.CANCEL,
+              value: 'CANCEL',
               onClick: handleCloseMenu,
             },
             {
-              value: alertTypes.DELETE,
+              value: 'DELETE',
               onClick: handleDeleteConfirm,
             },
           ]}

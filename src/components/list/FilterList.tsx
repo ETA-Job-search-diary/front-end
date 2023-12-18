@@ -1,4 +1,4 @@
-import Alert, { alertTypes } from '../common/Alert';
+import Alert from '../common/Alert';
 import EditButtons from './EditButtons';
 import GridChips from './GridChips';
 import useScheduleList from '@/hook/scheduleList';
@@ -70,7 +70,7 @@ const FilterList = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 px-[22px] pt-6 web:px-[28px]">
+      <div className="flex flex-col gap-4 bg-white px-[22px] pt-6 web:px-[28px]">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
           isEdit={isEdit}
@@ -97,14 +97,14 @@ const FilterList = () => {
       </div>
       {isAlertOpen && (
         <Alert
-          message={`선택한 일정을 ${alertTypes.DELETE}할까요?`}
+          message={`선택한 일정을 삭제할까요?`}
           type={[
             {
-              value: alertTypes.CANCEL,
+              value: 'CANCEL',
               onClick: closeAlert,
             },
             {
-              value: alertTypes.DELETE,
+              value: 'DELETE',
               onClick: handleDeleteConfirm,
             },
           ]}

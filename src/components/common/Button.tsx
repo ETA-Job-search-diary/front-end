@@ -1,26 +1,38 @@
 import { ButtonHTMLAttributes } from 'react';
 
+export type ColorTypes =
+  | 'primary'
+  | 'gray'
+  | 'primary-border'
+  | 'gray-border'
+  | 'light-gray';
+type SizeTypes = 'sm' | 'md' | 'lg';
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'gray' | 'border' | 'secondary';
+  width?: 'full' | 'max';
+  color?: ColorTypes;
   label?: string;
-  size?: 'sm' | 'md' | 'xs' | 'xxs';
+  size?: SizeTypes;
   active?: boolean;
+  border?: boolean;
 }
 
 const Button = ({
   type = 'button',
+  width = 'full',
   color = 'primary',
   label,
   size = 'md',
-  active = false,
+  active = true,
+  border = false,
   ...rest
 }: ButtonProps) => {
   return (
     <button
       type={type}
       disabled={!active}
-      className={`${getButtonStyle(active, size, color)}`}
+      className={`${getButtonStyle(width, size, color, border)}`}
       {...rest}
     >
       {label}
@@ -29,46 +41,33 @@ const Button = ({
 };
 
 const getButtonStyle = (
-  active: boolean,
-  size: 'sm' | 'md' | 'xs' | 'xxs',
-  color: 'primary' | 'gray' | 'border' | 'secondary',
+  width: 'full' | 'max',
+  size: SizeTypes,
+  color: ColorTypes,
+  border: boolean,
 ) => {
-  const defaultStyle = 'font-medium';
+  const widthStyle = {
+    full: 'w-full rounded-small py-2',
+    max: 'w-max px-2',
+  };
 
   const sizeStyle = {
-    xxs: 'w-max px-2 text-xxs xs:text-xxxs',
-    xs: 'text-xxs web:text-xs font-semibold',
-    sm: 'w-max text-sm xs:text-xxs font-semibold',
-    md: 'text-sm rounded-small',
+    sm: 'text-0.85',
+    md: 'text-1',
+    lg: 'text-1.1',
   };
 
   const colorStyle = {
-    primary: {
-      inactive:
-        'border-1 border-primary500 text-primary500 hover:font-semibold rounded-small h-9 w-full',
-      active:
-        'bg-primary500 text-white hover:font-semibold rounded-small h-9 w-full',
-    },
-    secondary: {
-      inactive: 'text-black600 hover:font-extrabold',
-      active: 'text-primary500 hover:font-extrabold',
-    },
-    gray: {
-      inactive: 'bg-[#E8E8E8] text-black700 rounded-small h-9 w-full',
-      active:
-        'bg-black100 text-white hover:font-semibold rounded-small h-9 w-full',
-    },
-    border: {
-      inactive:
-        'border-1 border-black100 text-black400 bg-body rounded-[3px] xs:h-6 h-7',
-      active:
-        'border-1 border-black100 text-black400 bg-white rounded-[3px] xs:h-6 h-7',
-    },
+    primary: 'bg-primary500 text-white',
+    gray: 'bg-black500 text-white',
+    'primary-border': 'text-primary500',
+    'gray-border': 'text-black600',
+    'light-gray': 'bg-[#E8E8E8] text-black700',
   };
 
-  return `${defaultStyle} ${sizeStyle[size]} ${
-    active ? colorStyle[color].active : colorStyle[color].inactive
-  }`;
+  const borderStyle = border ? 'border-1 border-primary500' : '';
+
+  return `font-semibold hover:font-extrabold ${borderStyle} ${widthStyle[width]} ${sizeStyle[size]} ${colorStyle[color]}`;
 };
 
 export default Button;

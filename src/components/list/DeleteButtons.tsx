@@ -9,13 +9,17 @@ const DeleteButtons = ({ onDeleteAll, onDelete }: DeleteButtonsProps) => {
   return (
     <div className="flex gap-3">
       <Button
-        size="xxs"
+        size="sm"
         label="전체삭제"
-        color="border"
-        active
+        color="gray-border"
         onClick={onDeleteAll}
       />
-      <Button size="xxs" label="선택삭제" color="border" onClick={onDelete} />
+      <Button
+        size="sm"
+        label="선택삭제"
+        color="gray-border"
+        onClick={onDelete}
+      />
     </div>
   );
 };

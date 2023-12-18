@@ -25,31 +25,29 @@ const TabHeader = ({
   onSwitch,
 }: TabHeaderProps) => {
   return (
-    <>
-      <div className="relative flex w-full justify-between">
-        {eventTypes.map(({ type, name }) => {
-          const count = type === 'UPCOMING' ? upcomingCount : completedCount;
-          const isActive = current === type;
-          return (
-            <button
-              key={type}
-              className={`h-16 w-full border-b-[2px] border-black100 text-xs font-bold ${
-                isActive ? 'text-black900' : 'text-black300'
-              }`}
-              onClick={() => onSwitch(type)}
-            >
-              <span className="pr-1">{name}</span>
-              <span>{count}</span>
-            </button>
-          );
-        })}
-        <p
-          className={`absolute bottom-0 w-1/2 border-b-[2px] border-primary500 transition-all duration-200 ease-linear ${
-            current === 'UPCOMING' ? '' : 'translate-x-full'
-          }`}
-        />
-      </div>
-    </>
+    <div className="relative flex w-full justify-between">
+      {eventTypes.map(({ type, name }) => {
+        const count = type === 'UPCOMING' ? upcomingCount : completedCount;
+        const isActive = current === type;
+        return (
+          <button
+            key={type}
+            className={`h-16 w-full border-b-[2px] border-black100 text-xs font-bold ${
+              isActive ? 'text-black900' : 'text-black300'
+            }`}
+            onClick={() => onSwitch(type)}
+          >
+            <span className="pr-1">{name}</span>
+            <span>{count}</span>
+          </button>
+        );
+      })}
+      <p
+        className={`absolute bottom-0 w-1/2 border-b-[2px] border-primary500 transition-all duration-200 ease-linear ${
+          current === 'UPCOMING' ? '' : 'translate-x-full'
+        }`}
+      />
+    </div>
   );
 };
 

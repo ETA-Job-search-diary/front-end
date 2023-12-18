@@ -1,26 +1,31 @@
 import { createPortal } from 'react-dom';
-import Button from './Button';
+import Button, { ColorTypes } from './Button';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { MouseEvent } from 'react';
 
-export const alertTypes = {
+const AlertTypes = {
   CANCEL: '취소',
   DELETE: '삭제',
-  LOGIN: '로그인이 필요해요',
   CONFIRM: '확인',
-  EDIT: '수정',
+};
+
+const ButtonColors: Record<keyof typeof AlertTypes, ColorTypes> = {
+  CANCEL: 'primary-border',
+  DELETE: 'primary',
+  CONFIRM: 'primary',
 };
 
 interface AlertProps {
   message: string;
+  submessage?: string;
   type: {
-    value: string;
+    value: keyof typeof AlertTypes;
     onClick: () => void;
   }[];
   onClose: () => void;
 }
 
-const Alert = ({ message, type, onClose }: AlertProps) => {
+const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
   if (typeof window === 'undefined') return null;
 
   useDisableBodyScroll();
@@ -37,22 +42,28 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
       onClick={handleBackGroundClick}
     >
       <section
-        className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 text-black800 shadow-md`}
+        className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 shadow-md`}
       >
-        <div className="flex grow items-center justify-center p-8 text-xs">
-          {message}
+        <div className="grow p-8 pb-7 text-center">
+          <h1 className="text-1 text-black800">{message}</h1>
+          {submessage && (
+            <div className="text-0.85 whitespace-pre pt-0.5 text-black500">
+              {submessage}
+            </div>
+          )}
         </div>
         <div className="flex w-full justify-between gap-1.5">
-          {type.map(({ value, onClick }, index) => (
-            <Button
-              key={value}
-              color="primary"
-              label={value}
-              active={type.length === 1 || index !== 0 ? true : false}
-              size="xs"
-              onClick={onClick}
-            />
-          ))}
+          {type.map(({ value, onClick }) => {
+            return (
+              <Button
+                key={value}
+                color={ButtonColors[value]}
+                label={AlertTypes[value]}
+                border={value === 'CANCEL'}
+                onClick={onClick}
+              />
+            );
+          })}
         </div>
       </section>
     </div>,
