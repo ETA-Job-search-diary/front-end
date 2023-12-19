@@ -1,11 +1,10 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { format, addMonths, subMonths } from 'date-fns';
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { isSameDay, addDays } from 'date-fns';
-import { Button } from '../ui/button';
+import { addDays, addMonths, endOfMonth, endOfWeek, format } from 'date-fns';
+import { isSameDay, startOfMonth, startOfWeek, subMonths } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Button } from '../ui/button';
 
 import Icon from '@/assets/Icon';
 import useSWR from 'swr';
@@ -54,7 +53,7 @@ export const Calender = () => {
         nextMonth={nextMonth}
       />
       <table
-        className="text-0.8 web:text-1 flex h-full flex-col gap-2 px-4 pb-2.5 web:px-5"
+        className="flex h-full flex-col gap-2 px-4 pb-2.5 text-0.8 web:px-5 web:text-1"
         suppressHydrationWarning
       >
         <Calender.Head />
@@ -67,7 +66,7 @@ export const Calender = () => {
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
     <div className="flex justify-between px-7 pt-3.5 web:px-[38px] web:pt-5">
-      <div className="xs:text-1 text-1.1 web:text-1.2 grid grid-cols-[1fr_23px_auto] font-bold text-black900 web:grid-cols-[1fr_27px_auto]">
+      <div className="grid grid-cols-[1fr_23px_auto] text-1.1 font-bold text-black900 xs:text-1 web:grid-cols-[1fr_27px_auto] web:text-1.2">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>

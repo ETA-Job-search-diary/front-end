@@ -7,17 +7,33 @@ import { DateFormatter, DayPicker } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { ko } from 'date-fns/locale';
-import { format } from 'date-fns';
+import { format, isSameDay } from 'date-fns';
+import { StatisticsProps } from '../signin/ApplicationStatistics';
+
+type Event = {
+  date: string;
+  company: string;
+};
+
+interface EventsType {
+  events?: Partial<Record<keyof StatisticsProps, Event[]>>;
+}
+
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & EventsType;
 
 const formatCaption: DateFormatter = (month, options) =>
   format(month, 'yyyy년 M월', { locale: options?.locale });
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
-//TODO: 터치 이벤트 추가
 function Calendar({
   className,
   classNames,
   showOutsideDays = true,
+  events = {
+    document: [],
+    personality: [],
+    interview: [],
+    etc: [],
+  },
   ...props
 }: CalendarProps) {
   return (
@@ -68,11 +84,44 @@ function Calendar({
         IconRight: ({ ...props }) => (
           <ChevronRight className=" h-5 w-5 text-[#949494] hover:text-black active:scale-110" />
         ),
+        DayContent: ({ date }) => {
+          const eventTypes = Object.keys(events) as Array<keyof typeof events>;
+          return (
+            <div className="relative">
+              <div>{format(date, 'd')}</div>
+              <div className="flex w-9 flex-col truncate text-0.55">
+                {eventTypes.map((eventType) => {
+                  const eventInfo = events[eventType]?.find(
+                    ({ date: eventDate }) =>
+                      isSameDay(date, new Date(eventDate)),
+                  );
+                  return (
+                    eventInfo && (
+                      <span
+                        key={eventType}
+                        className={`rounded-[0.1rem] ${eventStyle[eventType]}`}
+                      >
+                        {eventInfo.company}
+                      </span>
+                    )
+                  );
+                })}
+              </div>
+            </div>
+          );
+        },
       }}
       {...props}
     />
   );
 }
+
+const eventStyle = {
+  document: 'bg-[#FFF5E6] text-[#FFAE33]',
+  personality: 'bg-[#EAF4FE] text-[#4DA6F3]',
+  interview: 'bg-[#E9F9FA] text-[#47D1D5]',
+  etc: 'bg-[#F1EFFC] text-[#907AED]',
+};
 
 Calendar.displayName = 'Calendar';
 
