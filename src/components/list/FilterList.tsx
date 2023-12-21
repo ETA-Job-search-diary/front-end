@@ -70,7 +70,7 @@ const FilterList = () => {
 
   return (
     <>
-      <div className="px-page flex flex-col gap-4 bg-white pt-6 web:px-[28px]">
+      <div className="flex flex-col gap-4 bg-white px-page pt-6 web:px-[28px]">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
           isEdit={isEdit}
@@ -83,11 +83,14 @@ const FilterList = () => {
           (!!data?.length ? (
             <>
               <ScheduleList items={data} isEdit={isEdit} />
-              {isLoadingMore && <Skeleton.Item />}
-              <div
-                ref={setTarget}
-                className="pb-[calc(env(safe-area-inset-bottom)+90px)]"
-              />
+              {isLoadingMore ? (
+                <Skeleton.Item />
+              ) : (
+                <div
+                  ref={setTarget}
+                  className="pb-[calc(env(safe-area-inset-bottom)+90px)]"
+                />
+              )}
             </>
           ) : isFiltered ? (
             <EmptyItem page="list" messageType="additional" />

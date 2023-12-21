@@ -10,12 +10,15 @@ export interface ScheduleDetailType {
   memo?: string;
 }
 
+export type ScheduleStatus = 'pending' | 'pass' | 'fail';
+
 export interface ScheduleSimpleType {
   id: string;
   step: string;
   company: string;
   position: string;
   date: string;
+  status: ScheduleStatus;
 }
 
 export interface ScheduleFilterType {

@@ -9,7 +9,7 @@ interface NewNavBarProps {
 
 const NewNavBar = ({ active, onSubmit }: NewNavBarProps) => {
   return (
-    <div className="fixed top-0 z-20 w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
+    <div className="max-w-500 min-w-280 fixed top-0 z-20 w-full bg-white pt-[calc(env(safe-area-inset-top))]">
       <NavBar
         label="일정등록"
         leftSection={<BackButton />}

@@ -38,7 +38,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
 
   return createPortal(
     <div
-      className={`fixed top-0 z-30 mx-auto flex min-h-screen w-full min-w-[280px] max-w-[500px] items-center justify-center bg-alert`}
+      className={`max-w-500 min-w-280 fixed top-0 z-30 mx-auto flex min-h-screen w-full items-center justify-center bg-alert`}
       onClick={handleBackGroundClick}
     >
       <section
@@ -47,7 +47,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
         <div className="grow p-8 pb-7 text-center">
           <h1 className="text-1 text-black800">{message}</h1>
           {submessage && (
-            <div className="text-0.85 whitespace-pre pt-0.5 text-black500">
+            <div className="whitespace-pre pt-0.5 text-0.85 text-black500">
               {submessage}
             </div>
           )}
@@ -67,7 +67,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
         </div>
       </section>
     </div>,
-    document.body.querySelector('main') || document.body,
+    document.body.querySelector('main')!,
   );
 };
 

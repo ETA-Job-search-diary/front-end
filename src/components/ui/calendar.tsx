@@ -7,8 +7,9 @@ import { DateFormatter, DayPicker } from 'react-day-picker';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { ko } from 'date-fns/locale';
-import { format, isSameDay } from 'date-fns';
+import { format } from 'date-fns';
 import { StatisticsProps } from '../signin/ApplicationStatistics';
+import { ComponentProps } from 'react';
 
 type Event = {
   date: string;
@@ -19,15 +20,11 @@ interface EventsType {
   events?: Partial<Record<keyof StatisticsProps, Event[]>>;
 }
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker> & EventsType;
-
-const formatCaption: DateFormatter = (month, options) =>
-  format(month, 'yyyy년 M월', { locale: options?.locale });
+export type CalendarProps = ComponentProps<typeof DayPicker> & EventsType;
 
 function Calendar({
   className,
   classNames,
-  showOutsideDays = true,
   events = {
     document: [],
     personality: [],
@@ -38,9 +35,10 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
-      formatters={{ formatCaption }}
-      showOutsideDays={showOutsideDays}
+      fixedWeeks
+      showOutsideDays
       locale={ko}
+      formatters={{ formatCaption }}
       className={cn(
         'h-80 w-full min-w-max p-4 pb-0 web:h-full web:p-5',
         className,
@@ -78,50 +76,21 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => (
-          <ChevronLeft className="h-5 w-5 text-[#949494] hover:text-black active:scale-110" />
-        ),
-        IconRight: ({ ...props }) => (
-          <ChevronRight className=" h-5 w-5 text-[#949494] hover:text-black active:scale-110" />
-        ),
-        DayContent: ({ date }) => {
-          const eventTypes = Object.keys(events) as Array<keyof typeof events>;
-          return (
-            <div className="relative">
-              <div>{format(date, 'd')}</div>
-              <div className="flex w-9 flex-col truncate text-0.55">
-                {eventTypes.map((eventType) => {
-                  const eventInfo = events[eventType]?.find(
-                    ({ date: eventDate }) =>
-                      isSameDay(date, new Date(eventDate)),
-                  );
-                  return (
-                    eventInfo && (
-                      <span
-                        key={eventType}
-                        className={`rounded-[0.1rem] ${eventStyle[eventType]}`}
-                      >
-                        {eventInfo.company}
-                      </span>
-                    )
-                  );
-                })}
-              </div>
-            </div>
-          );
-        },
+        IconLeft: Calendar.LeftButton,
+        IconRight: Calendar.RightButton,
       }}
       {...props}
     />
   );
 }
 
-const eventStyle = {
-  document: 'bg-[#FFF5E6] text-[#FFAE33]',
-  personality: 'bg-[#EAF4FE] text-[#4DA6F3]',
-  interview: 'bg-[#E9F9FA] text-[#47D1D5]',
-  etc: 'bg-[#F1EFFC] text-[#907AED]',
-};
+const formatCaption: DateFormatter = (month, options) =>
+  format(month, 'yyyy.MM', { locale: options?.locale });
+
+const chevronStyle = 'h-5 w-5 text-[#949494] hover:text-black active:scale-110';
+
+Calendar.LeftButton = () => <ChevronLeft className={`${chevronStyle}`} />;
+Calendar.RightButton = () => <ChevronRight className={`${chevronStyle}`} />;
 
 Calendar.displayName = 'Calendar';
 

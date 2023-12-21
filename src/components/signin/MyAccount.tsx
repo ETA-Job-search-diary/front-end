@@ -30,7 +30,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   const { showWithdrawalToast } = useShowToast();
 
   if (!session) redirect('/auth/signin');
-  const { name, email } = session;
+  const { name, email } = session; // TODO: session정보 말고 합격률, 지원현황 정보 받아와야됨 (UerInfo.tsx)
 
   const handleAlert = (value: string) => {
     setMessage(value);
@@ -47,14 +47,14 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
+    <section className="fixed top-0 z-30 mx-auto h-full min-h-screen w-full min-w-280 max-w-500 overflow-auto bg-[#FAFAFA] pt-safe-top">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
       />
-      <div className="px-page web:px-[28px]">
+      <div className="flex flex-col gap-8 px-page">
         <UserInfo name={name} email={email} />
-        <div className="flex flex-col items-center px-1 pt-3 web:px-3">
+        <div className="grid grid-rows-4 divide-y-[0.5px] divide-black100 rounded-xl border border-black100 bg-white px-4">
           <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
           <ServiceLink href={SUPPORT_FORM} label="문의하기" />
           <ServiceButton
@@ -68,7 +68,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         </div>
         <Icon
           name="teamETA"
-          className="absolute bottom-20 right-7 h-[119px] w-40 web:right-10 web:h-[155px] web:w-[212px]"
+          className="mb-16 mt-20 h-[119px] w-40 place-self-end web:h-[155px] web:w-[212px]"
         />
         {isOpen && (
           <Alert
@@ -89,7 +89,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         )}
       </div>
     </section>,
-    document.body.querySelector('main') || document.body,
+    document.body.querySelector('main')!,
   );
 };
 

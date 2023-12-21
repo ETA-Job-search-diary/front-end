@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import Button from '../common/Button';
-
-export type ScheduleStatus = 'pending' | 'pass' | 'fail';
+import { ScheduleStatus } from '@/model/schedule';
 
 const StatusButton = {
   pending: '합격여부 입력하기',

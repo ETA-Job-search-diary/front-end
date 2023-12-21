@@ -15,7 +15,7 @@ const PassRate = (rate: PassRateProps) => {
     <StatisticsSection label="rate">
       <div className={`grid grid-cols-${COLUMN_COUNT}`}>
         {STEP_RATE.map(({ type, name }) => (
-          <div className="flex h-full w-full flex-col items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center">
             <DoughnutChart rate={rate[type]} />
             <span className="text-0.8 text-black700">{name}</span>
           </div>

@@ -160,7 +160,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <GoogleAnalytics />
-        <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
+        <main className="max-w-500 min-w-280 mx-auto flex min-h-screen flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
           <ThemeProvider>
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>

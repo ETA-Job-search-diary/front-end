@@ -40,13 +40,6 @@ const EditButtons = ({
             width="max"
             onClick={onEdit}
           />
-          <Button
-            label="+ 일정등록"
-            active
-            width="max"
-            color="primary-border"
-            // onClick={onAdd}
-          />
         </>
       )}
     </div>

@@ -1,10 +1,15 @@
 interface BadgeProps {
+  isPassed?: boolean;
   label: string;
 }
 
-const Badge = ({ label }: BadgeProps) => {
+const Badge = ({ isPassed = false, label }: BadgeProps) => {
   return (
-    <div className="text-0.8 web:text-0.85 w-max whitespace-nowrap rounded-small bg-primary50 px-1 font-medium text-primary500 web:px-[6px] web:py-[1px]">
+    <div
+      className={`m-auto h-max w-max whitespace-nowrap rounded-small p-1 text-0.85 font-medium  ${
+        isPassed ? 'bg-[#F1F1F1] text-black300' : 'bg-primary50 text-primary500'
+      }`}
+    >
       {label}
     </div>
   );
