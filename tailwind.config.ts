@@ -58,6 +58,7 @@ module.exports = {
         'ligtht-gray': 'rgba(234, 234, 234, 0.30)',
         alert: 'rgba(0, 0, 0, 0.30)',
         toast: 'rgba(0, 0, 0, 0.75)',
+        tooltip: 'rgba(0, 0, 0, 0.65)',
         'primary-bg': 'rgba(47, 201, 100, 0.03)',
         'primary-light': 'rgba(126, 230, 119, 0.15)',
         black50: '#EAEAEA',

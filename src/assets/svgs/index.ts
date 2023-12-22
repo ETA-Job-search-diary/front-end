@@ -37,3 +37,4 @@ export { default as groupB1 } from './group-2.svg';
 export { default as groupB2 } from './group-3.svg';
 export { default as groupP2 } from './group-4.svg';
 export { default as ellipse } from './ellipse.svg';
+export { default as helpcircle } from './help-circle.svg';

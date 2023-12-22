@@ -13,16 +13,16 @@ const ApplicationStatistics = (statistics: StatisticsProps) => {
 
   return (
     <StatisticsSection label="application">
-      <div
+      <ul
         className={`grid grid-cols-${COLUMN_COUNT} divide-x divide-black100 rounded-xl border border-black100 py-4 text-center`}
       >
         {STEP_STATISTICS.map(({ name, type }) => (
-          <div>
+          <li key={name}>
             <p className="text-1 font-bold text-black800">{statistics[type]}</p>
             <p className="text-0.85 text-black600">{name}</p>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </StatisticsSection>
   );
 };
