@@ -24,17 +24,19 @@ const PassRate = (rate: PassRateProps) => {
         </Tooltip>
       }
     >
-      <ul className={`grid grid-cols-${COLUMN_COUNT}`}>
-        {STEP_RATE.map(({ type, name }) => (
-          <li
-            key={name}
-            className="flex w-full flex-col items-center justify-center"
-          >
-            <DoughnutChart rate={rate[type]} />
-            <span className="text-0.8 text-black700">{name}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col gap-8 rounded-xl border border-black100 bg-white p-5">
+        <div className="flex flex-col gap-2">
+          <p className="text-1 text-black800">{`충분히 잘 하고 있어요!`}</p>
+          <p className="text-0.9 text-black500">{`취준로그와 함께 취뽀길만 걸어 보세요 :)`}</p>
+        </div>
+        <ul className={`grid grid-cols-${COLUMN_COUNT}`}>
+          {STEP_RATE.map(({ type, name }) => (
+            <li className="flex flex-col items-center justify-center">
+              <DoughnutChart rate={rate[type]} label={name} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </StatisticsSection>
   );
 };
