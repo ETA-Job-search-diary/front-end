@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import cheerio from 'cheerio';
 import axios from 'axios';
-import { getPlatformBy, getCompanyBy } from '@/service/crawling';
+import { getPlatformBy, getCompanyAndPositionBy } from '@/service/crawling';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const { url } = await req.json();
@@ -17,13 +17,17 @@ const fetchLinkInfo = async (url: string) => {
 
   const $ = cheerio.load(html);
   const title =
-    $('meta[property="og:title"]').attr('content') ||
     $('title').text() ||
+    $('meta[property="og:title"]').attr('content') ||
     $('meta[name="title"]').attr('content');
-  const description = $('meta[property="og:description"]').attr('content');
+  const description = $('meta[property="og:description"]').attr('content')!;
 
-  if (!title || !platform || !description) return;
-  const company = getCompanyBy(title, platform, description);
+  if (!title || !platform) return;
+  const { company, position } = getCompanyAndPositionBy(
+    title,
+    platform,
+    description,
+  );
 
-  return { company, platform };
+  return { company, position, platform };
 };

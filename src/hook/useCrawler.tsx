@@ -7,10 +7,10 @@ const useCrawler = () => {
   const crawlLink = async (link: string) => {
     try {
       setIsCrawling(true);
-      const { company, platform } = await getCrawlingData(link);
-      return { company, platform };
+      const { company, position, platform } = await getCrawlingData(link);
+      return { company, position, platform };
     } catch (error) {
-      return { company: '', platform: '' };
+      return { company: '', position: '', platform: '' };
     } finally {
       setIsCrawling(false);
     }

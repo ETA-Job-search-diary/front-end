@@ -15,7 +15,7 @@ export const PLATFORM = {
   BLINDHIRE: { value: ['blindhire'], name: '블라인드하이어' },
   JASOSEOL: { value: ['jasoseol'], name: '자소설닷컴' },
   SUPEROOKIE: { value: ['superookie'], name: '슈퍼루키' },
-  INTHISWORK: { value: ['inthistwork'], name: '인디스워크' },
+  INTHISWORK: { value: ['inthiswork'], name: '인디스워크' },
   JUMPIT: { value: ['jumpit'], name: '점핏' },
 };
 

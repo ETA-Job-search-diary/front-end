@@ -12,13 +12,14 @@ import NewNavBar from '../navbar/NewNavBar';
 import EditNavBar from '../navbar/EditNavBar';
 import useScheduleList from '@/hook/scheduleList';
 import { FormTypes, PlaceholderTypes } from '@/constants/form';
-import CompanyForm from '../new/CompanyForm';
 import DateTimeForm from '../new/DateTimeForm';
 import LinkForm from '../new/LinkForm';
 import { ScheduleDetailType } from '@/model/schedule';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
+import TextInput from './TextInput';
+import TextInputWithReset from './TextInputWithReset';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
@@ -83,8 +84,9 @@ const Form = ({ originData }: FormProps) => {
     if (isPasted) return;
 
     if (isLinkValid(value)) {
-      const { company, platform } = await crawlLink(value);
+      const { company, position, platform } = await crawlLink(value);
       setCompany(company);
+      setPosition(position);
       setPlatform(platform);
     }
     setLink(value);
@@ -100,9 +102,10 @@ const Form = ({ originData }: FormProps) => {
     if (!isLinkValid(linkWithoutSpace)) return;
 
     isPasted = true;
-    const { company, platform } = await crawlLink(linkWithoutSpace);
+    const { company, position, platform } = await crawlLink(linkWithoutSpace);
     setLink(linkWithoutSpace);
     setCompany(company);
+    setPosition(position);
     setPlatform(platform);
     isPasted = false;
   };
@@ -178,7 +181,7 @@ const Form = ({ originData }: FormProps) => {
       ) : (
         <NewNavBar active={isReady} onSubmit={handleSubmit} />
       )}
-      <form className="px-page flex flex-col gap-12 pb-8 pt-16 web:px-[28px] web:pt-[70px]">
+      <form className="flex flex-col gap-12 px-page pb-8 pt-16 web:px-[28px] web:pt-[70px]">
         {isClient && (
           <>
             <FormLabel must label={FormTypes.STEP}>
@@ -198,13 +201,24 @@ const Form = ({ originData }: FormProps) => {
                 setPlatform('');
               }}
             />
-            <CompanyForm
-              isLoading={isCrawling}
-              company={company}
-              position={position}
-              onChangeCompany={(e) => setCompany(e.currentTarget.value)}
-              onChangePosition={(e) => setPosition(e.currentTarget.value)}
-            />
+            <FormLabel id="company" must label="지원하는 회사">
+              <TextInput
+                id="company"
+                value={company}
+                placeholder={`${PlaceholderTypes.COMPANY}`}
+                onChange={(e) => setCompany(e.currentTarget.value)}
+                isLoading={isCrawling}
+              />
+            </FormLabel>
+            <FormLabel id="position" must label="지원하는 직무">
+              <TextInputWithReset
+                id="position"
+                value={position}
+                placeholder={`${PlaceholderTypes.POSITION}`}
+                onChange={(e) => setPosition(e.currentTarget.value)}
+                onReset={() => setPosition('')}
+              />
+            </FormLabel>
             <DateTimeForm
               date={date}
               time={time}
