@@ -1,73 +1,62 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
-export type ColorTypes =
-  | 'primary'
-  | 'gray'
-  | 'primary-border'
-  | 'gray-border'
-  | 'light-gray';
-type SizeTypes = 'sm' | 'md' | 'lg';
+export type ButtonVariantTypes = VariantProps<typeof buttonVariants>['variant'];
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type?: 'button' | 'submit' | 'reset';
-  width?: 'full' | 'max';
-  color?: ColorTypes;
+interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
   label?: string;
-  size?: SizeTypes;
-  active?: boolean;
-  border?: boolean;
 }
 
-const Button = ({
-  type = 'button',
-  width = 'full',
-  color = 'primary',
-  label,
-  size = 'md',
-  active = true,
-  border = false,
-  ...rest
-}: ButtonProps) => {
-  return (
-    <button
-      type={type}
-      disabled={!active}
-      className={`${getButtonStyle(width, size, color, border)}`}
-      {...rest}
-    >
-      {label}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ type, width, variant, label, size, border, className, ...rest }, ref) => {
+    return (
+      <button
+        ref={ref}
+        type={type}
+        className={cn(
+          buttonVariants({ width, size, variant, border }),
+          className,
+        )}
+        {...rest}
+      >
+        {label}
+      </button>
+    );
+  },
+);
 
-const getButtonStyle = (
-  width: 'full' | 'max',
-  size: SizeTypes,
-  color: ColorTypes,
-  border: boolean,
-) => {
-  const widthStyle = {
-    full: 'w-full rounded-small py-2',
-    max: 'w-max px-2',
-  };
-
-  const sizeStyle = {
-    sm: 'text-0.85',
-    md: 'text-1',
-    lg: 'text-1.1',
-  };
-
-  const colorStyle = {
-    primary: 'bg-primary500 text-white',
-    gray: 'bg-black500 text-white',
-    'primary-border': 'text-primary500',
-    'gray-border': 'text-black600',
-    'light-gray': 'bg-[#E8E8E8] text-black700',
-  };
-
-  const borderStyle = border ? 'border-1 border-primary500' : '';
-
-  return `font-semibold hover:font-extrabold ${borderStyle} ${widthStyle[width]} ${sizeStyle[size]} ${colorStyle[color]}`;
-};
+const buttonVariants = cva('font-semibold hover:font-extrabold', {
+  variants: {
+    width: {
+      full: 'w-full rounded-small py-2',
+      max: 'w-max px-2',
+    },
+    size: {
+      sm: 'text-0.85',
+      md: 'text-1',
+      lg: 'text-1.1',
+    },
+    variant: {
+      primary: 'bg-primary500 text-white',
+      gray: 'bg-black500 text-white',
+      'primary-border': 'text-primary500',
+      'gray-border': 'text-black600',
+      'light-gray': 'bg-[#E8E8E8] text-black700',
+    },
+    border: {
+      true: 'border-1 border-primary500',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    width: 'full',
+    size: 'md',
+    variant: 'primary',
+    border: false,
+  },
+});
 
 export default Button;

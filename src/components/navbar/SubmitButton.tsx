@@ -29,8 +29,8 @@ const SubmitButton = ({
       size="lg"
       type="submit"
       label={label}
-      color={active ? 'primary-border' : 'gray-border'}
-      active={active}
+      variant={active ? 'primary-border' : 'gray-border'}
+      disabled={!active}
       onClick={handleSubmitOnce(onClick)}
     />
   );

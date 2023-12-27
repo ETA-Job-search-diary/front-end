@@ -1,13 +1,32 @@
-type Size = 'sm' | 'md' | 'lg';
-interface SkeletonProps {
-  size?: Size;
+import { HTMLAttributes } from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+
+interface SkeletonProps
+  extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof skeletonVariants> {
+  className?: string;
 }
 
-const Skeleton = ({ size = 'sm' }: SkeletonProps) => {
-  return (
-    <div className={`${SkeletonAnimaion} ${getSkeletonTextStyle(size)}`}></div>
-  );
+const Skeleton = ({ size, className }: SkeletonProps) => {
+  return <div className={cn(skeletonVariants({ size }), className)}></div>;
 };
+
+const skeletonVariants = cva(
+  'before:absolute before:animate-loading before:bg-gradient-to-r before:from-black50 before:via-light before:to-black50 before:h-10 before:w-3/4 relative rounded-sm bg-black50 overflow-hidden',
+  {
+    variants: {
+      size: {
+        sm: 'h-2.5 web:h-3.5 w-10',
+        md: 'h-2.5 web:h-3.5 w-20',
+        lg: 'h-2.5 web:h-3.5 w-32',
+      },
+    },
+    defaultVariants: {
+      size: 'sm',
+    },
+  },
+);
 
 Skeleton.List = () => {
   return (
@@ -39,18 +58,6 @@ Skeleton.Item = () => {
       </div>
     </li>
   );
-};
-
-const SkeletonAnimaion =
-  'before:absolute before:animate-loading before:bg-gradient-to-r before:from-black50 before:via-light before:to-black50 before:h-10 before:w-3/4';
-
-const getSkeletonTextStyle = (size: Size) => {
-  const sizes = {
-    sm: 'w-10',
-    md: 'w-20',
-    lg: 'w-32',
-  };
-  return `relative h-2.5 web:h-3.5 rounded-sm bg-black50 overflow-hidden ${sizes[size]}`;
 };
 
 export default Skeleton;

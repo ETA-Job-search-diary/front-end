@@ -17,14 +17,14 @@ const ListEditButtons = ({
         <Button
           label="완료"
           width="max"
-          color="primary-border"
+          variant="primary-border"
           onClick={onEditComplete}
         />
       ) : (
         <Button
           label="편집"
           width="max"
-          color="primary-border"
+          variant="primary-border"
           onClick={onEditClick}
         />
       )}

@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import Button, { ColorTypes } from './Button';
+import Button, { ButtonVariantTypes } from './Button';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { MouseEvent } from 'react';
 
@@ -9,7 +9,7 @@ const AlertTypes = {
   CONFIRM: '확인',
 };
 
-const ButtonColors: Record<keyof typeof AlertTypes, ColorTypes> = {
+const ButtonColors: Record<keyof typeof AlertTypes, ButtonVariantTypes> = {
   CANCEL: 'primary-border',
   DELETE: 'primary',
   CONFIRM: 'primary',
@@ -38,7 +38,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
 
   return createPortal(
     <div
-      className={`max-w-500 min-w-280 fixed top-0 z-30 mx-auto flex min-h-screen w-full items-center justify-center bg-alert`}
+      className={`fixed top-0 z-30 mx-auto flex min-h-screen w-full min-w-280 max-w-500 items-center justify-center bg-alert`}
       onClick={handleBackGroundClick}
     >
       <section
@@ -53,17 +53,15 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
           )}
         </div>
         <div className="flex w-full justify-between gap-1.5">
-          {type.map(({ value, onClick }) => {
-            return (
-              <Button
-                key={value}
-                color={ButtonColors[value]}
-                label={AlertTypes[value]}
-                border={value === 'CANCEL'}
-                onClick={onClick}
-              />
-            );
-          })}
+          {type.map(({ value, onClick }) => (
+            <Button
+              key={value}
+              variant={ButtonColors[value]}
+              label={AlertTypes[value]}
+              border={value === 'CANCEL'}
+              onClick={onClick}
+            />
+          ))}
         </div>
       </section>
     </div>,

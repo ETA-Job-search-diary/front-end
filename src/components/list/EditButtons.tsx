@@ -20,14 +20,13 @@ const EditButtons = ({
         <>
           <Button
             label="삭제"
-            color="gray-border"
+            variant="gray-border"
             width="max"
             onClick={onDelete}
           />
           <Button
             label="완료"
-            color="primary-border"
-            active
+            variant="primary-border"
             width="max"
             onClick={onCompleted}
           />
@@ -36,7 +35,7 @@ const EditButtons = ({
         <>
           <Button
             label="편집"
-            color="gray-border"
+            variant="gray-border"
             width="max"
             onClick={onEdit}
           />

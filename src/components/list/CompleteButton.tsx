@@ -20,8 +20,8 @@ const CompleteButton = ({ status, onClick }: CompleteButtonProps) => {
   return (
     <Button
       size="sm"
-      color={isPending ? 'primary' : 'light-gray'}
-      active={isPending}
+      variant={isPending ? 'primary' : 'light-gray'}
+      disabled={!isPending}
       label={buttonText}
       onClick={onClick}
     />

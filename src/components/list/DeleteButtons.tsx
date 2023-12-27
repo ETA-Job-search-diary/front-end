@@ -11,13 +11,13 @@ const DeleteButtons = ({ onDeleteAll, onDelete }: DeleteButtonsProps) => {
       <Button
         size="sm"
         label="전체삭제"
-        color="gray-border"
+        variant="gray-border"
         onClick={onDeleteAll}
       />
       <Button
         size="sm"
         label="선택삭제"
-        color="gray-border"
+        variant="gray-border"
         onClick={onDelete}
       />
     </div>

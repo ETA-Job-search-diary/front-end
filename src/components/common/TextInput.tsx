@@ -30,7 +30,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     return (
       <input
         id={id}
-        className={`border-form h-10 w-full rounded-small border-primary300 bg-primary-bg px-[0.8rem] py-2 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+        className={`h-10 w-full rounded-small border-form border-primary300 bg-primary-bg px-[0.8rem] py-2 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`}
         ref={ref}
         onFocus={onFocus}
         onBlur={onBlur}
