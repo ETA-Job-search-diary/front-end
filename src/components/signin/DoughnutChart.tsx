@@ -20,10 +20,10 @@ const DoughnutChart = ({ rate, label }: DoughnutChartProps) => {
         className={`absolute left-1/2 top-1/2 h-[4.5rem] w-[4.5rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white`}
       />
       <div className="absolute flex h-full w-full flex-col items-center justify-center gap-1">
-        <p className="text-1 font-semibold text-black900">
+        <p className="text-black-900 text-1 font-semibold">
           {rate ? `${rate}%` : `-`}
         </p>
-        <p className="text-0.85 text-black500">{label}</p>
+        <p className="text-black-500 text-0.85">{label}</p>
       </div>
     </div>
   );

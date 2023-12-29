@@ -14,12 +14,14 @@ const ApplicationStatistics = (statistics: StatisticsProps) => {
   return (
     <StatisticsSection label="application">
       <ul
-        className={`grid grid-cols-${COLUMN_COUNT} divide-x divide-black100 rounded-xl border border-black100 py-4 text-center`}
+        className={`grid grid-cols-${COLUMN_COUNT} divide-black-100 border-black-100 divide-x rounded-xl border py-4 text-center`}
       >
         {STEP_STATISTICS.map(({ name, type }) => (
           <li key={name}>
-            <p className="text-1 font-bold text-black800">{statistics[type]}</p>
-            <p className="text-0.85 text-black600">{name}</p>
+            <p className="text-black-800 text-1 font-bold">
+              {statistics[type]}
+            </p>
+            <p className="text-black-600 text-0.85">{name}</p>
           </li>
         ))}
       </ul>

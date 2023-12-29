@@ -244,8 +244,8 @@ const Form = ({ originData }: FormProps) => {
 };
 
 export const formLabelStyle =
-  'font-semibold w-max text-1 xs:text-0.85 text-black900';
-export const formTextStyle = 'text-0.95 text-black900';
-export const formPlaceholderStyle = 'text-black300';
+  'font-semibold w-max text-1 xs:text-0.85 text-black-900';
+export const formTextStyle = 'text-0.95 text-black-900';
+export const formPlaceholderStyle = 'text-black-300';
 
 export default Form;

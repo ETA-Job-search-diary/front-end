@@ -16,11 +16,11 @@ const ServiceButton = ({ lebel, onClick }: ServiceButtonProps) => {
   return (
     <button
       type="button"
-      className="flex w-full items-center gap-3 border-b border-black100 p-5"
+      className="flex w-full items-center gap-3 px-3 py-5"
       onClick={onClick}
     >
-      <Icon name={lebel} className="h-4 w-5 stroke-black300" />
-      <span className="text-1 text-black900">{ServiceLabel[lebel]}</span>
+      <Icon name={lebel} className="stroke-black-300 h-4 w-5" />
+      <span className="text-black-900 text-1">{ServiceLabel[lebel]}</span>
     </button>
   );
 };

@@ -29,8 +29,8 @@ const chipVariants = cva(
   {
     variants: {
       checked: {
-        true: 'border-primary500 text-primary500',
-        false: 'border-black100 text-black900',
+        true: 'border-primary-500 text-primary-500',
+        false: 'border-black-100 text-black-900',
       },
     },
     defaultVariants: {},

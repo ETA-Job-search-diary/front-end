@@ -29,13 +29,13 @@ export default async function SingInPage({
       <section className="h-[calc(100vh-70px)] w-full overflow-x-hidden px-page">
         <div className="relative top-[10%]">
           <div className="flex flex-col gap-28 web:gap-32">
-            <div className="flex flex-col gap-6 text-black900">
+            <div className="text-black-900 flex flex-col gap-6">
               <p className="text-1.5 font-bold xs:text-1.1">
-                <span className="text-primary500">취준로그</span>
+                <span className="text-primary-500">취준로그</span>
                 는 로그인 후<br />
                 이용이 가능해요
               </p>
-              <p className="text-1.1 text-black700 xs:text-0.85">
+              <p className="text-black-700 text-1.1 xs:text-0.85">
                 간편한 SNS 로그인 후<br />
                 취준 일정을 쉽고 편하게 관리해보세요!
               </p>
@@ -51,15 +51,15 @@ export default async function SingInPage({
               />
             </div>
           </div>
-          <p className="flex w-full items-center justify-center gap-2 py-7 text-black400">
+          <p className="text-black-400 flex w-full items-center justify-center gap-2 py-7">
             <Icon name="alert" className="h-4 w-4 leading-4" />
-            <span className="xs:text-0.6 text-0.7 web:text-0.8">
+            <span className="text-0.7 xs:text-0.6 web:text-0.8">
               로그인 시{' '}
               <Link
                 href={TERMS_OF_SERVICE}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="border-b border-black500 font-medium text-black500"
+                className="border-black-500 text-black-500 border-b font-medium"
               >
                 이용약관
               </Link>
@@ -68,7 +68,7 @@ export default async function SingInPage({
                 href={PRIVACY_POLICY}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="border-b border-black500 font-medium text-black500"
+                className="border-black-500 text-black-500 border-b font-medium"
               >
                 개인정보 처리 방침
               </Link>

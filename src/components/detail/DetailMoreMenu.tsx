@@ -52,7 +52,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           <Icon
             aria-label="=more-menu"
             name="moreVertical"
-            className="mx-auto w-5 fill-none stroke-black900 transition-all hover:scale-110"
+            className="stroke-black-900 mx-auto w-5 fill-none transition-all hover:scale-110"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

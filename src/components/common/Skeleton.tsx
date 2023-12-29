@@ -13,7 +13,7 @@ const Skeleton = ({ size, className }: SkeletonProps) => {
 };
 
 const skeletonVariants = cva(
-  'before:absolute before:animate-loading before:bg-gradient-to-r before:from-black50 before:via-light before:to-black50 before:h-10 before:w-3/4 relative rounded-sm bg-black50 overflow-hidden',
+  'before:absolute before:animate-loading before:bg-gradient-to-r before:from-black-50 before:via-gray-100 before:to-black-50 before:h-10 before:w-3/4 relative rounded-sm bg-black-50 overflow-hidden',
   {
     variants: {
       size: {
@@ -41,16 +41,13 @@ Skeleton.List = () => {
 Skeleton.Item = () => {
   return (
     <li
-      className={`relative grid h-[88px] w-full animate-pulse grid-cols-[auto_1fr_auto] rounded-large border border-black100 bg-white py-3 web:h-[129px] web:py-6`}
+      className={`border-black-100 relative grid h-[88px] w-full animate-pulse grid-cols-[auto_1fr_auto] rounded-large border bg-white py-3 web:h-[129px] web:py-6`}
     >
-      <div className="flex h-full w-full flex-col items-center justify-center border-r border-black100 px-6 text-black900 xs:px-3 web:px-[30px]">
+      <div className="border-black-100 text-black-900 flex h-full w-full flex-col items-center justify-center border-r px-6 xs:px-3 web:px-[30px]">
         <Skeleton />
       </div>
       <div className="flex w-full flex-col justify-center gap-2 pl-6 xs:pl-3 web:pl-[30px]">
-        <Skeleton size="sm" />
-        <div>
-          <Skeleton size="md" />
-        </div>
+        <Skeleton size="md" />
         <Skeleton size="lg" />
       </div>
       <div className="w-full place-self-center pr-6 xs:pr-3 web:pr-[30px]">

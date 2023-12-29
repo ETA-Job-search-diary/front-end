@@ -20,9 +20,9 @@ const DetailNavBar = ({ id, company, position, step }: DetailNavBarProps) => {
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}
       />
-      <div className="mx-[22px] flex flex-col gap-2 border-b border-black100 pb-8 web:mx-[28px]">
+      <div className="border-black-100 mx-[22px] flex flex-col gap-2 border-b pb-8 web:mx-[28px]">
         <div className="flex items-center gap-3">
-          <h1 className="text-1.2 web:text-1.5 font-bold text-black900">
+          <h1 className="text-black-900 text-1.2 font-bold web:text-1.5">
             {company} {position}
           </h1>
           {bagdeName && <Badge label={bagdeName} />}

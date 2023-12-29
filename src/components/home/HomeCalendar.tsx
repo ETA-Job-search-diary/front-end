@@ -21,9 +21,9 @@ const HomeCalendar = ({ events }: HomeCalendarProps) => {
       events={events}
       classNames={{
         day: 'h-16 w-12 text-1 grid grid-rows-[1fr,2fr] justify-center',
-        day_today: 'font-bold text-primary500 pointer-events-none',
+        day_today: 'font-bold text-primary-500 pointer-events-none',
         head_row: 'flex justify-between w-full pb-4 border-b border-gray100',
-        head_cell: 'w-12 text-1 font-medium text-black900',
+        head_cell: 'w-12 text-1 font-medium text-black-900',
         row: 'flex justify-between w-full first:pt-4',
       }}
       components={{
@@ -32,7 +32,7 @@ const HomeCalendar = ({ events }: HomeCalendarProps) => {
           return (
             <div className="flex items-end justify-between pt-5">
               <div className="grid grid-cols-[minmax(8rem,1fr)_1fr] gap-2">
-                <h1 className="pl-2 text-[1.8rem] font-bold text-black900 web:font-semibold">
+                <h1 className="text-black-900 pl-2 text-[1.8rem] font-bold web:font-semibold">
                   {format(displayMonth, 'yyyy.MM')}
                 </h1>
                 <div className="flex items-end gap-4">
@@ -69,7 +69,7 @@ const HomeCalendar = ({ events }: HomeCalendarProps) => {
                     eventInfo && (
                       <span
                         key={eventType}
-                        className={`text-0.6 truncate rounded-[0.1rem] px-[0.1rem] py-0.5 font-semibold ${eventStyle[eventType]}`}
+                        className={`truncate rounded-[0.1rem] px-[0.1rem] py-0.5 text-0.6 font-semibold ${eventStyle[eventType]}`}
                       >
                         {eventInfo.company}
                       </span>
@@ -88,8 +88,8 @@ const HomeCalendar = ({ events }: HomeCalendarProps) => {
 export default HomeCalendar;
 
 const eventStyle = {
-  document: 'bg-light-orange text-orange',
-  personality: 'bg-light-blue text-blue',
-  interview: 'bg-light-mint text-mint',
-  etc: 'bg-light-purple text-purple',
+  document: 'bg-orange-50 text-orange-100',
+  personality: 'bg-blue-100 text-blue-200',
+  interview: 'bg-mint-50 text-mint-100',
+  etc: 'bg-purple-50 text-purple-100',
 };

@@ -26,7 +26,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <label
         htmlFor={id}
-        className={`flex h-36 flex-col rounded-small border-form border-primary300 bg-primary-bg web:h-64`}
+        className={`bg-primary-light-50 border-primary-300 flex h-36 flex-col rounded-small border-form web:h-64`}
       >
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
@@ -38,7 +38,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...rest}
         />
         {maxLength && (
-          <span className="pb-0.5 pr-[0.9rem] text-end text-0.85 text-black200">{`${count} / 200 자`}</span>
+          <span className="text-black-200 pb-0.5 pr-[0.9rem] text-end text-0.85">{`${count} / 200 자`}</span>
         )}
       </label>
     );

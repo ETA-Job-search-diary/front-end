@@ -35,11 +35,11 @@ const ScheduleItem = ({
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors hover:bg-light ${borderStyle}`}
+      className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors hover:bg-gray-100 ${borderStyle}`}
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      <Badge label={time} />
+      <Badge label={time} className="m-auto" />
     </Link>
   );
 };
@@ -57,12 +57,12 @@ ScheduleItem.WithStatus = ({ ...props }: ScheduleItemProps) => {
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`flex flex-col rounded-large border bg-[#FBFBFB] px-5 py-4 transition-colors ${borderStyle}`}
+      className={`flex flex-col rounded-large border bg-gray-50 px-5 py-4 transition-colors ${borderStyle}`}
     >
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap pb-4 ">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, date, tab }} />
-        <Badge label={time} isPassed />
+        <Badge label={time} variant="fail" className="m-auto" />
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>
@@ -99,17 +99,17 @@ ScheduleItem.Content = ({
         <Icon
           name="briefcase"
           className={`h-2.5 w-2.5 web:h-4 web:w-4 ${
-            tab === 'upcoming' ? 'stroke-primary300' : 'stroke-black300'
+            tab === 'upcoming' ? 'stroke-primary-300' : 'stroke-black-300'
           }`}
         />
-        <span className="text-xxxs web:text-xxs truncate text-black500">
+        <span className="text-xxxs web:text-xxs text-black-500 truncate">
           {position}
         </span>
       </div>
     </div>
   );
 };
-const borderStyle = 'border-black100';
-const accentStyle = 'text-black900';
+const borderStyle = 'border-black-100';
+const accentStyle = 'text-black-900';
 
 export default memo(ScheduleItem);

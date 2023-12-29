@@ -11,15 +11,12 @@ interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ type, width, variant, label, size, border, className, ...rest }, ref) => {
+  ({ type, width, variant, label, size, className, ...rest }, ref) => {
     return (
       <button
         ref={ref}
         type={type}
-        className={cn(
-          buttonVariants({ width, size, variant, border }),
-          className,
-        )}
+        className={cn(buttonVariants({ width, size, variant }), className)}
         {...rest}
       >
         {label}
@@ -40,22 +37,17 @@ const buttonVariants = cva('font-semibold hover:font-extrabold', {
       lg: 'text-1.1',
     },
     variant: {
-      primary: 'bg-primary500 text-white',
-      gray: 'bg-black500 text-white',
-      'primary-border': 'text-primary500',
-      'gray-border': 'text-black600',
-      'light-gray': 'bg-[#E8E8E8] text-black700',
-    },
-    border: {
-      true: 'border-1 border-primary500',
-      false: '',
+      primary: 'bg-primary-500 text-white',
+      gray: 'bg-black-500 text-white',
+      'primary-border': 'text-primary-500',
+      'gray-border': 'text-black-600',
+      'light-gray': 'bg-gray-300 text-black-700',
     },
   },
   defaultVariants: {
     width: 'full',
     size: 'md',
     variant: 'primary',
-    border: false,
   },
 });
 

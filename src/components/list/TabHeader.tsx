@@ -29,8 +29,8 @@ const TabHeader = ({ current, counts, onSwitch }: TabHeaderProps) => {
         return (
           <button
             key={tab}
-            className={`h-16 w-full border-b-[2px] border-black100 text-1 font-bold ${
-              isActive ? 'text-black900' : 'text-black300'
+            className={`border-black-100 h-16 w-full border-b-[2px] text-1 font-bold ${
+              isActive ? 'text-black-900' : 'text-black-300'
             }`}
             onClick={() => onSwitch(tab)}
           >
@@ -40,7 +40,7 @@ const TabHeader = ({ current, counts, onSwitch }: TabHeaderProps) => {
         );
       })}
       <p
-        className={`absolute bottom-0 w-1/2 border-b-[2px] border-primary500 transition-all duration-200 ease-linear ${
+        className={`border-primary-500 absolute bottom-0 w-1/2 border-b-[2px] transition-all duration-200 ease-linear ${
           current === 'upcoming' ? '' : 'translate-x-full'
         }`}
       />

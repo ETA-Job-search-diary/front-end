@@ -18,7 +18,7 @@ const StatisticsSection = ({
 }: StatisticsSectionProps) => {
   return (
     <section className="flex flex-col gap-3">
-      <h1 className="flex gap-1 text-xs font-semibold text-black900">
+      <h1 className="text-black-900 flex gap-1 text-xs font-semibold">
         {StatisticsLabel[label]}
         {icon && icon}
       </h1>

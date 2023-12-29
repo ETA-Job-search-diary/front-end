@@ -17,7 +17,7 @@ const CheckButton = ({
         aria-label={`${all ? 'all-check' : 'check'}`}
         name="check"
         className={`h-full w-full hover:animate-wiggle ${
-          checked ? 'fill-primary500' : 'fill-black100'
+          checked ? 'fill-primary-500' : 'fill-black-100'
         }`}
       />
     </button>

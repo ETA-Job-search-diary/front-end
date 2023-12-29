@@ -24,10 +24,10 @@ const PassRate = (rate: PassRateProps) => {
         </Tooltip>
       }
     >
-      <div className="flex flex-col gap-8 rounded-xl border border-black100 bg-white p-5">
+      <div className="border-black-100 flex flex-col gap-8 rounded-xl border bg-white p-5">
         <div className="flex flex-col gap-2">
-          <p className="text-1 text-black800">{`충분히 잘 하고 있어요!`}</p>
-          <p className="text-0.9 text-black500">{`취준로그와 함께 취뽀길만 걸어 보세요 :)`}</p>
+          <p className="text-black-800 text-1">{`충분히 잘 하고 있어요!`}</p>
+          <p className="text-black-500 text-0.9">{`취준로그와 함께 취뽀길만 걸어 보세요 :)`}</p>
         </div>
         <ul className={`grid grid-cols-${COLUMN_COUNT}`}>
           {STEP_RATE.map(({ type, name }) => (

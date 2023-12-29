@@ -45,9 +45,9 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
         className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 shadow-md`}
       >
         <div className="grow p-8 pb-7 text-center">
-          <h1 className="text-1 text-black800">{message}</h1>
+          <h1 className="text-black-800 text-1">{message}</h1>
           {submessage && (
-            <div className="whitespace-pre pt-0.5 text-0.85 text-black500">
+            <div className="text-black-500 whitespace-pre pt-0.5 text-0.85">
               {submessage}
             </div>
           )}
@@ -58,8 +58,8 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
               key={value}
               variant={ButtonColors[value]}
               label={AlertTypes[value]}
-              border={value === 'CANCEL'}
               onClick={onClick}
+              className={value === 'DELETE' ? 'border-primary-500 border' : ''}
             />
           ))}
         </div>

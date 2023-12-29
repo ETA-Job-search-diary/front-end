@@ -47,14 +47,14 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
   useDisableBodyScroll();
 
   return createPortal(
-    <section className="fixed top-0 z-30 mx-auto h-full min-h-screen w-full min-w-280 max-w-500 overflow-auto bg-[#FAFAFA] pt-safe-top">
+    <section className="fixed top-0 z-30 mx-auto h-full min-h-screen w-full min-w-280 max-w-500 overflow-auto bg-gray-100 pt-safe-top">
       <NavBar
         label="마이페이지"
         leftSection={<BackButton onClose={onClose} />}
       />
       <div className="flex flex-col gap-8 px-page">
         <UserInfo name={name} email={email} />
-        <div className="grid grid-rows-4 divide-y-[0.5px] divide-black100 rounded-xl border border-black100 bg-white px-4">
+        <div className="border-black-100 grid grid-rows-4 divide-y-[0.5px] divide-black100 rounded-xl border bg-white px-4">
           <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
           <ServiceLink href={SUPPORT_FORM} label="문의하기" />
           <ServiceButton

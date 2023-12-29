@@ -66,6 +66,6 @@ const titleStyle =
   'text-black-800 font-semibold flex gap-3 items-center whitespace-nowrap leading5 text-1 web:text-1.1';
 const iconStyle = 'w-4 h-4';
 export const detailContentStyle =
-  'text-black600 font-medium text-1 web:text-1.1';
+  'text-black-600 font-medium text-1 web:text-1.1';
 
 export default DetailItem;

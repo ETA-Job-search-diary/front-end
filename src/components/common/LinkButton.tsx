@@ -37,19 +37,19 @@ const LinkButton = ({ path }: LinkButtonProps) => {
   return (
     <Link
       href={href}
-      className={`web:text-0.85 z-20 flex h-full w-full flex-col items-center justify-center ${
+      className={`z-20 flex h-full w-full flex-col items-center justify-center web:text-0.85 ${
         isLeft ? 'col-start-1' : 'col-start-3'
       }`}
     >
       <Icon
         name={path}
         className={`fill-none transition-all hover:scale-110 ${
-          isCurrent ? 'stroke-primary500' : 'stroke-black200'
+          isCurrent ? 'stroke-primary-500' : 'stroke-black-200'
         }`}
       />
       <span
         className={`hidden web:inline ${
-          isCurrent ? 'text-black900' : 'text-black200'
+          isCurrent ? 'text-black-900' : 'text-black-200'
         }`}
       >
         {name}

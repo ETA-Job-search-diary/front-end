@@ -22,10 +22,10 @@ const TextInputWithReset = forwardRef<
   return (
     <FormLabel id={id} label={label} must={must}>
       {onReset && (
-        <span className="border-form relative h-10 w-full rounded-small border-primary300 web:h-12">
+        <span className="border-primary-300 relative h-10 w-full rounded-small border-form web:h-12">
           <input
             id={id}
-            className={`h-full w-full bg-primary-bg py-2 pl-[0.8rem] pr-10 font-medium ${formTextStyle} placeholder:${formPlaceholderStyle}`}
+            className={`bg-primary-light-50 h-full w-full py-2 pl-[0.8rem] pr-10 font-medium ${formTextStyle} placeholder:${formPlaceholderStyle}`}
             ref={ref}
             onFocus={onFocus}
             onBlur={onBlur}
