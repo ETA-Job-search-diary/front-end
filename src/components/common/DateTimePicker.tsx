@@ -10,6 +10,7 @@ import { Calendar } from '@/components/ui/calendar';
 import {
   formatCalendarDate,
   convertDateToAlternateFormat,
+  getFormattedISODateTime,
 } from '@/service/date';
 import useScrollPointer from '@/hook/useScrollPointer';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -25,24 +26,30 @@ interface PickerProps {
 
 interface DateTimePickerProps {
   date: string;
-  time: string;
-  onChange: (date: string, time: string) => void;
+  onChange: (date: string) => void;
 }
 
 const DESKTOP_MEDIAQUERY = '(min-width: 500px)';
 
-const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
+const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
+
+  const { date, time } = getFormattedISODateTime(inputDate);
+
   const selectedDate = new Date(convertDateToAlternateFormat(date, '-'));
 
   const handleCalendarSelect = (value?: Date) => {
     if (!value) return;
     const date = formatCalendarDate(value);
     if (!date) return;
-    onChange(date, time);
+    const fullDate = `${date}T${time}:00.000Z`;
+    onChange(fullDate);
   };
 
-  const handleTimeChange = (value: string) => onChange(date, value);
+  const handleTimeChange = (value: string) => {
+    const fullDate = `${date}T${value}:00.000Z`;
+    onChange(fullDate);
+  };
 
   return (
     <>
@@ -58,8 +65,8 @@ const DateTimePicker = ({ date, time, onChange }: DateTimePickerProps) => {
         <DateTimePicker.Mobile
           selectedDate={selectedDate}
           date={date}
-          onDate={handleCalendarSelect}
           time={time}
+          onDate={handleCalendarSelect}
           onTime={handleTimeChange}
         />
       )}

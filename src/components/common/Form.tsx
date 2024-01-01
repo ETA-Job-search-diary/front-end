@@ -1,153 +1,118 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import TextArea from './TextArea';
-import { useState, MouseEvent, useEffect } from 'react';
-import { ChangeEvent, ClipboardEvent } from 'react';
-import FormLabel from './FormLabel';
-import { formatToISODateTime, getFormattedISODateTime } from '@/service/date';
-import GridChips from '../list/GridChips';
+import {
+  KeyboardEvent,
+  useEffect,
+  useState,
+  ClipboardEvent,
+  ChangeEvent,
+} from 'react';
+import { getFormattedISODateTime } from '@/service/date';
 import { ScheduleDataType, postSchedule } from '@/service/schedule';
-import NewNavBar from '../navbar/NewNavBar';
-import EditNavBar from '../navbar/EditNavBar';
 import useScheduleList from '@/hook/scheduleList';
-import { FormTypes, PlaceholderTypes } from '@/constants/form';
-import DateTimeForm from '../new/DateTimeForm';
-import LinkForm from '../new/LinkForm';
-import { ScheduleDetailType } from '@/model/schedule';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
+import { PLACE_HOLDER } from '@/constants/form';
+import { ScheduleDetailType } from '@/model/schedule';
+import TextArea from './TextArea';
+import FormLabel from './FormLabel';
+import GridChips from '../list/GridChips';
 import TextInput from './TextInput';
+import NewNavBar from '../navbar/NewNavBar';
+import DateTimePicker from './DateTimePicker';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import TextInputWithReset from './TextInputWithReset';
+import { REGEX } from '@/constants/regex';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
-const { date: currentDate, time: currentTime } = getFormattedISODateTime();
+type FormValues = {
+  step: string;
+  link: string;
+  platform: string;
+  company: string;
+  position: string;
+  date: string;
+  memo: string;
+};
+
+type PostFormValues = FormValues & { title: string };
 
 interface FormProps {
   originData?: ScheduleDetailType;
 }
 
 const Form = ({ originData }: FormProps) => {
+  const { fullDate: currentDate } = getFormattedISODateTime();
   const { refresh, replace } = useRouter();
-  const { showTokenExpirationToast, showFormValidationToast } = useShowToast();
+  const { showTokenExpirationToast } = useShowToast();
   const { token } = useSession();
   const { mutate, setEditSchedule } = useScheduleList([]);
   const { isCrawling, crawlLink } = useCrawler();
 
-  const [step, setStep] = useState(originData?.step || '');
-  const [company, setCompany] = useState(originData?.company || '');
-  const [position, setPosition] = useState(originData?.position || '');
-  const [date, setDate] = useState<string>(
-    getFormattedISODateTime(originData?.date).date || currentDate,
-  );
-  const [time, setTime] = useState<string>(
-    getFormattedISODateTime(originData?.date).time || currentTime,
-  );
-  const [link, setLink] = useState(
-    (originData?.link !== ' ' && originData?.link) || '',
-  );
-  const [platform, setPlatform] = useState(originData?.platform || '');
-  const [memo, setMemo] = useState(
-    (originData?.memo !== ' ' && originData?.memo) || '',
-  );
-
   let isPasted = false;
 
-  const isReady =
-    step.length > 0 &&
-    company.length > 0 &&
-    position.length > 0 &&
-    !!date &&
-    !!time;
+  const methods = useForm<FormValues>({
+    mode: 'onChange',
+    defaultValues: {
+      step: originData?.step ?? '',
+      link: originData?.link ?? '',
+      platform: originData?.platform ?? '',
+      company: originData?.company ?? '',
+      position: originData?.position ?? '',
+      date: originData?.date ?? currentDate,
+      memo: originData?.memo ?? '',
+    },
+  });
 
-  const isEdit =
-    (originData &&
-      (originData.step !== step ||
-        originData.company !== company ||
-        originData.position !== position)) ||
-    originData?.date !== formatToISODateTime(date, time) ||
-    originData.link?.trim() !== link ||
-    (originData.platform === null ? '' : originData.platform) !== platform ||
-    originData.memo?.trim() !== memo;
+  const {
+    control,
+    setValue,
+    watch,
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
 
-  const isLinkValid = (link: string) => {
-    const regex =
-      /^(https?:\/\/)?([-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{1,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)?)$/;
-    return regex.test(link);
+  const handleKeyDown = (
+    e: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    if (e.key === 'Enter') e.preventDefault();
   };
 
-  const handleLinkChange = async ({
-    currentTarget: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
-    if (isPasted) return;
-
-    if (isLinkValid(value)) {
-      const { company, position, platform } = await crawlLink(value);
-      setCompany(company);
-      setPosition(position);
-      setPlatform(platform);
-    }
-    setLink(value);
+  const getCrawlingInfo = async (link: string) => {
+    const { company, position, platform } = await crawlLink(link);
+    setValue('company', company);
+    setValue('position', position);
+    setValue('platform', platform);
   };
 
-  const handlePasteLink = async ({
-    clipboardData,
-  }: ClipboardEvent<HTMLInputElement>) => {
-    if (!clipboardData) return;
-    const link = clipboardData.getData('text');
-    const index = link.indexOf('http');
-    const linkWithoutSpace = link.slice(index);
-    if (!isLinkValid(linkWithoutSpace)) return;
-
-    isPasted = true;
-    const { company, position, platform } = await crawlLink(linkWithoutSpace);
-    setLink(linkWithoutSpace);
-    setCompany(company);
-    setPosition(position);
-    setPlatform(platform);
-    isPasted = false;
-  };
-
-  const handleChipClick = (value: string) => {
-    if (step === value) {
-      setStep('');
-      return;
-    }
-    setStep(value);
-  };
-
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     if (!token) {
       showTokenExpirationToast();
       return;
     }
-    if (!isReady) {
-      showFormValidationToast();
-      return;
-    }
 
-    const stringDate = formatToISODateTime(date, time);
-    const data = {
+    const { link, memo, ...rest } = data;
+    const postData: PostFormValues = {
+      ...rest,
       title: ' ',
-      step,
-      company,
-      position,
-      date: stringDate,
       link: link || ' ',
-      platform: platform,
       memo: memo || ' ',
     };
 
     if (originData) {
-      if (isEdit) editSchedule(originData.id, data, token);
+      const isEdit = Object.keys(originData).some(
+        (key) =>
+          originData[key as keyof ScheduleDetailType] !==
+          postData[key as keyof PostFormValues],
+      );
+      if (isEdit) editSchedule(originData.id, postData, token);
       replace(`/schedule/${originData.id}`);
       return;
     }
-    newSchedule(data, token);
+    newSchedule(postData, token);
   };
 
   const editSchedule = async (
@@ -169,6 +134,13 @@ const Form = ({ originData }: FormProps) => {
     });
   };
 
+  const resetCrawlingValues = () => {
+    setValue('link', '');
+    setValue('platform', '');
+    setValue('company', '');
+    setValue('position', '');
+  };
+
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
@@ -176,69 +148,205 @@ const Form = ({ originData }: FormProps) => {
 
   return (
     <>
-      {originData ? (
-        <EditNavBar active={isReady} onSubmit={handleSubmit} />
-      ) : (
-        <NewNavBar active={isReady} onSubmit={handleSubmit} />
+      {isClient && (
+        <form
+          className="pb-8 pt-[calc(env(safe-area-inset-top))]"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <NewNavBar hasOrigin={!!originData} isValid={isValid} />
+          <div className="flex flex-col gap-12 px-page web:px-[28px]">
+            {/* 전형 단계 */}
+            <Controller
+              control={control}
+              name="step"
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <FormLabel must label="전형단계">
+                  <GridChips
+                    checked={[value]}
+                    onClick={(step: string) => {
+                      if (step === value) {
+                        onChange('');
+                        return;
+                      }
+                      onChange(step);
+                    }}
+                  />
+                </FormLabel>
+              )}
+            />
+
+            {/* 채용공고 - 플랫폼 */}
+            <div className="flex flex-col gap-3">
+              <Controller
+                control={control}
+                name="link"
+                rules={{
+                  required: true,
+                  pattern: {
+                    value: REGEX.URL,
+                    message: 'URL형식에 맞게 입력해주세요',
+                  },
+                }}
+                render={({
+                  field: { value, onChange },
+                  fieldState: { error },
+                }) => (
+                  <FormLabel
+                    id="link"
+                    must
+                    label="채용공고"
+                    message={
+                      value.length > 0 && watch('platform')
+                        ? '플랫폼 정보를 확인 후 저장해주세요'
+                        : ''
+                    }
+                    errorMessage={error?.message}
+                    className="relative"
+                  >
+                    <TextInputWithReset
+                      id="link"
+                      type="url"
+                      value={value}
+                      placeholder={`${PLACE_HOLDER.LINK}`}
+                      onResetInput={() => {
+                        resetCrawlingValues();
+                        onChange('');
+                      }}
+                      onKeyDown={handleKeyDown}
+                      onPaste={async (e: ClipboardEvent<HTMLInputElement>) => {
+                        if (!e.clipboardData) return;
+                        const link = e.clipboardData.getData('text');
+                        const index = link.indexOf('http');
+                        const linkWithoutSpace = link.slice(index);
+
+                        if (!REGEX.URL.test(linkWithoutSpace)) return;
+                        isPasted = true;
+                        await getCrawlingInfo(linkWithoutSpace);
+                        setValue('link', linkWithoutSpace);
+                        isPasted = false;
+                      }}
+                      onChange={async (e: ChangeEvent<HTMLInputElement>) => {
+                        const { value } = e.currentTarget;
+                        onChange(value);
+                        if (isPasted || !REGEX.URL.test(value)) return;
+                        await getCrawlingInfo(value);
+                        setValue('link', value);
+                      }}
+                    />
+                  </FormLabel>
+                )}
+              />
+              {!!watch('link') && (
+                <Controller
+                  control={control}
+                  name="platform"
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <FormLabel id="platform" className="relative">
+                      <TextInput
+                        id="platform"
+                        placeholder={PLACE_HOLDER.PLATFORM}
+                        isLoading={isCrawling}
+                        disabled={isCrawling}
+                        onKeyDown={handleKeyDown}
+                        {...field}
+                      />
+                    </FormLabel>
+                  )}
+                />
+              )}
+            </div>
+
+            {/* 회사 - 직무 */}
+            <Controller
+              control={control}
+              name="company"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormLabel
+                  id="company"
+                  must
+                  label="지원하는 회사"
+                  className="relative"
+                >
+                  <TextInput
+                    id="company"
+                    placeholder={`${PLACE_HOLDER.COMPANY}`}
+                    isLoading={isCrawling}
+                    disabled={isCrawling}
+                    onKeyDown={handleKeyDown}
+                    {...field}
+                  />
+                </FormLabel>
+              )}
+            />
+            <Controller
+              control={control}
+              name="position"
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormLabel
+                  id="position"
+                  must
+                  label="지원 직무"
+                  className="relative"
+                >
+                  <TextInputWithReset
+                    id="position"
+                    placeholder={`${PLACE_HOLDER.POSITION}`}
+                    onResetInput={() => {
+                      setValue('position', '');
+                    }}
+                    onKeyDown={handleKeyDown}
+                    {...field}
+                  />
+                </FormLabel>
+              )}
+            />
+
+            {/* 일정 */}
+            <Controller
+              control={control}
+              name="date"
+              rules={{ required: true }}
+              render={({ field: { value, onChange } }) => (
+                <FormLabel
+                  id="date"
+                  must
+                  label="일정"
+                  message={PLACE_HOLDER.DATE}
+                >
+                  <DateTimePicker
+                    date={value}
+                    onChange={(datetime: string) => {
+                      onChange(datetime);
+                    }}
+                  />
+                </FormLabel>
+              )}
+            />
+
+            {/* 메모 */}
+            <Controller
+              control={control}
+              name="memo"
+              rules={{ maxLength: TEXTAREA_MAX_LENGTH }}
+              render={({ field }) => (
+                <FormLabel id="memo" label="메모">
+                  <TextArea
+                    id="memo"
+                    placeholder={`${PLACE_HOLDER.MEMO} (최대 ${TEXTAREA_MAX_LENGTH}자)`}
+                    maxLength={TEXTAREA_MAX_LENGTH}
+                    onKeyDown={handleKeyDown}
+                    {...field}
+                  />
+                </FormLabel>
+              )}
+            />
+          </div>
+        </form>
       )}
-      <form className="flex flex-col gap-12 px-page pb-8 pt-16 web:px-[28px] web:pt-[70px]">
-        {isClient && (
-          <>
-            <FormLabel must label={FormTypes.STEP}>
-              <GridChips checked={[step]} onClick={handleChipClick} />
-            </FormLabel>
-            <LinkForm
-              link={link}
-              platform={platform}
-              isLinkValid={isLinkValid(link)}
-              onPaste={handlePasteLink}
-              onChangeLink={handleLinkChange}
-              onChangePlatform={(e) => setPlatform(e.currentTarget.value)}
-              onReset={() => {
-                setCompany('');
-                setPosition('');
-                setLink('');
-                setPlatform('');
-              }}
-            />
-            <FormLabel id="company" must label="지원하는 회사">
-              <TextInput
-                id="company"
-                value={company}
-                placeholder={`${PlaceholderTypes.COMPANY}`}
-                onChange={(e) => setCompany(e.currentTarget.value)}
-                isLoading={isCrawling}
-              />
-            </FormLabel>
-            <FormLabel id="position" must label="지원하는 직무">
-              <TextInputWithReset
-                id="position"
-                value={position}
-                placeholder={`${PlaceholderTypes.POSITION}`}
-                onChange={(e) => setPosition(e.currentTarget.value)}
-                onReset={() => setPosition('')}
-              />
-            </FormLabel>
-            <DateTimeForm
-              date={date}
-              time={time}
-              onChangeDateTime={(date, time) => {
-                setDate(date);
-                setTime(time);
-              }}
-            />
-            <FormLabel must={false} id="memo" label={FormTypes.MEMO}>
-              <TextArea
-                id="memo"
-                value={memo}
-                placeholder={`${PlaceholderTypes.MEMO} (최대 ${TEXTAREA_MAX_LENGTH}자)`}
-                maxLength={TEXTAREA_MAX_LENGTH}
-                onChange={(e) => setMemo(e.currentTarget.value)}
-              />
-            </FormLabel>
-          </>
-        )}
-      </form>
     </>
   );
 };

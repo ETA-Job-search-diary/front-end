@@ -1,10 +1,10 @@
 import Icon, { IconTypes } from '@/assets/Icon';
 import Link from 'next/link';
 import MarkDownViewer from '../common/MarkdownViewer';
-import { FormTypes } from '@/constants/form';
+import { FORM_LABEL } from '@/constants/form';
 
 interface DetailTitleProps {
-  title: keyof typeof FormTypes;
+  title: keyof typeof FORM_LABEL;
   icon: IconTypes;
 }
 
@@ -13,7 +13,7 @@ interface DetailItemProps extends DetailTitleProps {
 }
 
 interface DetailItemLinkProps {
-  title: keyof typeof FormTypes;
+  title: keyof typeof FORM_LABEL;
   icon: IconTypes;
   content: string;
 }
@@ -23,7 +23,7 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
     <div className={`${itemStyle}`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {FormTypes[title]}
+        {FORM_LABEL[title]}
       </h3>
       <p className={`${detailContentStyle}`}>{content}</p>
     </div>
@@ -35,7 +35,7 @@ DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
     <div className={`${itemStyle}`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {FormTypes[title]}
+        {FORM_LABEL[title]}
       </h3>
       <Link
         href={content}
@@ -43,7 +43,7 @@ DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
         target="_blank"
         className={`${detailContentStyle} col-start-2 min-w-full break-words pr-2`}
       >
-        <span className="border-black-600 border-b">{content}</span>
+        <span className="border-b border-black-600">{content}</span>
       </Link>
     </div>
   );
@@ -54,7 +54,7 @@ DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
     <div className="flex flex-col items-start gap-4">
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
-        {FormTypes[title]}
+        {FORM_LABEL[title]}
       </h3>
       <MarkDownViewer content={content} />
     </div>

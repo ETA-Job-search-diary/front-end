@@ -17,6 +17,7 @@ export const PLATFORM = {
   SUPEROOKIE: { value: ['superookie'], name: '슈퍼루키' },
   INTHISWORK: { value: ['inthiswork'], name: '인디스워크' },
   JUMPIT: { value: ['jumpit'], name: '점핏' },
+  RALLIT: { value: ['rallit'], name: '랠릿' },
 };
 
 export const STEPS = [
@@ -54,7 +55,7 @@ export const STEPS = [
   },
 ];
 
-export const FormTypes = {
+export const FORM_LABEL = {
   COMPANY: '회사',
   POSITION: '직무',
   DATE: '일정',
@@ -64,7 +65,7 @@ export const FormTypes = {
   STEP: '전형단계',
 };
 
-export const PlaceholderTypes = {
+export const PLACE_HOLDER = {
   COMPANY: '회사명을 입력해주세요',
   POSITION: '직무를 입력해주세요',
   DATE: '서류마감일, 면접일을 입력해주세요',

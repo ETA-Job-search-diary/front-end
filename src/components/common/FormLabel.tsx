@@ -1,5 +1,6 @@
 import { ReactNode, memo } from 'react';
 import { formLabelStyle } from './Form';
+import { cn } from '@/lib/utils';
 
 interface FormLabelProps {
   id?: string;
@@ -7,6 +8,7 @@ interface FormLabelProps {
   must?: boolean;
   message?: string;
   errorMessage?: string;
+  className?: string;
   children?: ReactNode;
 }
 
@@ -16,21 +18,22 @@ const FormLabel = ({
   must = false,
   message,
   errorMessage,
+  className,
   children,
 }: FormLabelProps) => {
   return (
-    <label htmlFor={id} className="flex flex-col gap-3">
+    <label htmlFor={id} className={cn('flex flex-col gap-3', className)}>
       {label && (
         <span className={`${formLabelStyle}`}>
           {label}
           {must && <sup className="text-primary-500"> *</sup>}
-          {message ? (
-            <span className="text-black-400 pl-2 text-0.85 font-normal xs:text-0.7">
-              {message}
-            </span>
-          ) : errorMessage ? (
-            <span className="text-primary-500 h-3 pl-2 text-0.85 font-normal xs:text-0.7">
+          {errorMessage ? (
+            <span className="h-3 pl-2 text-0.85 font-normal text-primary-500 xs:text-0.7">
               {errorMessage}
+            </span>
+          ) : message ? (
+            <span className="pl-2 text-0.85 font-normal text-black-400 xs:text-0.7">
+              {message}
             </span>
           ) : null}
         </span>
