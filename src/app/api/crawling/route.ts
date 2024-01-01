@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import cheerio from 'cheerio';
-import axios from 'axios';
 import { getCompanyAndPositionBy } from '@/service/crawling';
+import axios from 'axios';
+import cheerio from 'cheerio';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const { url, platform } = await req.json();

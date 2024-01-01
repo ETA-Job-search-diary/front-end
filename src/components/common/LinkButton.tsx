@@ -1,9 +1,9 @@
 'use client';
 
+import Icon from '@/assets/Icon';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo } from 'react';
-import Icon from '@/assets/Icon';
 
 interface LinkButtonProps {
   path: 'home' | 'list';

@@ -1,13 +1,13 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
-import { ReactNode } from 'react';
-import suit from 'next/font/local';
+import GoogleAnalytics from '@/components/common/GoogleAnalytics';
 import TabBar from '@/components/common/TabBar';
-import AuthSessionProvider from '@/context/AuthSessionProvider';
 import { Toaster } from '@/components/ui/toaster';
+import AuthSessionProvider from '@/context/AuthSessionProvider';
 import SWRContext from '@/context/SWRContext';
 import ThemeProvider from '@/context/ThemeProvider';
-import GoogleAnalytics from '@/components/common/GoogleAnalytics';
+import type { Metadata, Viewport } from 'next';
+import suit from 'next/font/local';
+import { ReactNode } from 'react';
+import './globals.css';
 
 const suitFont = suit({
   src: [
@@ -159,15 +159,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
-        <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
-          <ThemeProvider>
+        <ThemeProvider>
+          <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>
               <TabBar />
               <Toaster />
             </AuthSessionProvider>
-          </ThemeProvider>
-        </main>
+          </main>
+        </ThemeProvider>
         <GoogleAnalytics />
       </body>
     </html>

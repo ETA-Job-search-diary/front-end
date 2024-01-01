@@ -1,8 +1,8 @@
+import Icon from '@/assets/Icon';
 import { STEP_RATE } from '@/constants/form';
+import Tooltip from '../common/Tooltip';
 import DoughnutChart from './DoughnutChart';
 import StatisticsSection from './StatisticsSection';
-import Tooltip from '../common/Tooltip';
-import Icon from '@/assets/Icon';
 
 export interface PassRateProps {
   document: number;
@@ -24,19 +24,15 @@ const PassRate = (rate: PassRateProps) => {
         </Tooltip>
       }
     >
-      <div className="border-black-100 flex flex-col gap-8 rounded-xl border bg-white p-5">
-        <div className="flex flex-col gap-2">
-          <p className="text-black-800 text-1">{`충분히 잘 하고 있어요!`}</p>
-          <p className="text-black-500 text-0.9">{`취준로그와 함께 취뽀길만 걸어 보세요 :)`}</p>
-        </div>
-        <ul className={`grid grid-cols-${COLUMN_COUNT}`}>
-          {STEP_RATE.map(({ type, name }) => (
-            <li className="flex flex-col items-center justify-center">
-              <DoughnutChart rate={rate[type]} label={name} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul
+        className={`grid grid-cols-${COLUMN_COUNT} rounded-xl border border-black-100 bg-white p-5`}
+      >
+        {STEP_RATE.map(({ type, name }) => (
+          <li key={name} className="flex flex-col items-center justify-center">
+            <DoughnutChart rate={rate[type]} label={name} />
+          </li>
+        ))}
+      </ul>
     </StatisticsSection>
   );
 };

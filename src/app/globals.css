@@ -33,7 +33,7 @@
     --ring: 224 71.4% 4.1%;
 
     --radius: 0.5rem;
-
+    --app-white: 255, 255, 255;
     --app-web-bg: 246, 246, 246;
 
     --app-black-50: 234, 234, 234;
@@ -59,6 +59,7 @@
     --app-primary-900: 9, 40, 20;
 
     --app-primary-light-50: 47, 201, 100, 0.03;
+    --app-primary-light-100: 243, 250, 246;
 
     --app-orange-50: 255, 245, 230;
     --app-orange-100: 255, 174, 51;

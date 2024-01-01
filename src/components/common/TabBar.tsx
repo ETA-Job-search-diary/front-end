@@ -1,9 +1,9 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
-import LinkButton from './LinkButton';
-import FloatNewButton from '../new/FloatNewButton';
 import useSession from '@/hook/useSession';
+import { usePathname, useRouter } from 'next/navigation';
+import FloatNewButton from '../new/FloatNewButton';
+import LinkButton from './LinkButton';
 
 const TabBar = () => {
   const pathname = usePathname();
@@ -23,7 +23,7 @@ const TabBar = () => {
     return null;
 
   return (
-    <nav className="max-w-500 min-w-280 fixed bottom-0 z-0 mx-auto h-20 w-full bg-white shadow-tab">
+    <nav className="fixed bottom-0 z-0 mx-auto h-20 w-full min-w-280 max-w-500 bg-white shadow-tab">
       <div className="relative grid h-full w-full grid-cols-3 place-items-center pb-6 web:pb-4">
         <LinkButton path="home" />
         <FloatNewButton onClick={handleLoginClick} />

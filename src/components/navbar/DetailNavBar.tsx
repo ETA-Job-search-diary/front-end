@@ -1,34 +1,43 @@
+import { getStepByValue } from '@/service/form';
 import Badge from '../common/Badge';
-import BackButton from './BackButton';
 import NavBar from '../common/NavBar';
 import DetailMoreMenu from '../detail/DetailMoreMenu';
-import { getStepByValue } from '@/service/form';
+import BackButton from './BackButton';
 
 interface DetailNavBarProps {
   id: string;
   company: string;
   position: string;
   step: string;
+  status: string;
 }
 
-const DetailNavBar = ({ id, company, position, step }: DetailNavBarProps) => {
+const DetailNavBar = ({
+  id,
+  company,
+  position,
+  step,
+  status,
+}: DetailNavBarProps) => {
   const bagdeName = getStepByValue(step);
 
   return (
-    <div className="sticky top-[calc(env(safe-area-inset-top))] bg-white">
+    <>
       <NavBar
+        className="sticky top-[calc(env(safe-area-inset-top))] bg-white"
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}
       />
-      <div className="border-black-100 mx-[22px] flex flex-col gap-2 border-b pb-8 web:mx-[28px]">
-        <div className="flex items-center gap-3">
-          <h1 className="text-black-900 text-1.2 font-bold web:text-1.5">
-            {company} {position}
-          </h1>
-          {bagdeName && <Badge label={bagdeName} />}
-        </div>
+      <div className="mx-page flex items-center gap-3 border-b border-black-100 pb-8 web:mx-7">
+        <h1 className="text-1.2 font-bold text-black-900 web:text-1.5">
+          {company} {position}
+        </h1>
+        {bagdeName && <Badge label={bagdeName} />}
+        {(status === 'pass' || status === 'fail') && (
+          <Badge label={status} variant={status} />
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

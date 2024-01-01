@@ -1,15 +1,13 @@
 'use client';
 
-import * as React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { DateFormatter, DayPicker } from 'react-day-picker';
-
-import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { ko } from 'date-fns/locale';
+import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
-import { StatisticsProps } from '../signin/ApplicationStatistics';
+import { ko } from 'date-fns/locale';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ComponentProps } from 'react';
+import { DateFormatter, DayPicker } from 'react-day-picker';
+import { StatisticsProps } from '../signin/StepStatistics';
 
 type Event = {
   date: string;

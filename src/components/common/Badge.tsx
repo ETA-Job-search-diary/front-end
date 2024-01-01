@@ -1,6 +1,6 @@
-import { HTMLAttributes, forwardRef } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { HTMLAttributes, forwardRef } from 'react';
 
 interface BadgeProps
   extends HTMLAttributes<HTMLDivElement>,

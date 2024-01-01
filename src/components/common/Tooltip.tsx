@@ -23,7 +23,7 @@ Tooltip.Trigger = ({ children }: { children: ReactNode }) => {
 
 Tooltip.Content = ({ message }: TooltipContentProps) => {
   return (
-    <div className="text-black-50 absolute -left-1 top-1/2 z-30 hidden h-max w-max -translate-y-1/2 translate-x-10 scale-0 whitespace-pre-wrap rounded-sm bg-tooltip p-3 text-[0.7rem] leading-4 opacity-0 transition-all duration-1000 group-hover:block group-hover:scale-100 group-hover:opacity-100">
+    <div className="absolute -left-1 top-1/2 z-30 hidden h-max w-max -translate-y-1/2 translate-x-10 scale-0 whitespace-pre-wrap rounded-sm bg-tooltip p-3 text-[0.7rem] leading-4 text-black-50 opacity-0 transition-all duration-1000 group-hover:block group-hover:scale-100 group-hover:opacity-100">
       <Tooltip.Arrow />
       {message}
     </div>

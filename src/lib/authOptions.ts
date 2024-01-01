@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { NextAuthOptions } from 'next-auth';
 
-import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
+import NaverProvider from 'next-auth/providers/naver';
 
 export const authOptions: NextAuthOptions = {
   providers: [

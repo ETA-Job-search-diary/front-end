@@ -1,18 +1,24 @@
-import { createPortal } from 'react-dom';
-import Button, { ButtonVariantTypes } from './Button';
 import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { MouseEvent } from 'react';
+import { createPortal } from 'react-dom';
+import Button, { ButtonVariantTypes } from './Button';
 
-const AlertTypes = {
+export const AlertTypes = {
   CANCEL: '취소',
   DELETE: '삭제',
   CONFIRM: '확인',
+  EDIT: '수정',
+  PASS: '합격',
+  FAIL: '불합격',
 };
 
 const ButtonColors: Record<keyof typeof AlertTypes, ButtonVariantTypes> = {
   CANCEL: 'primary-border',
   DELETE: 'primary',
   CONFIRM: 'primary',
+  EDIT: 'primary',
+  PASS: 'primary',
+  FAIL: 'gray',
 };
 
 interface AlertProps {
@@ -45,9 +51,9 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
         className={`flex min-w-[60%] flex-col items-center justify-center rounded-medium bg-white px-4 py-4 shadow-md`}
       >
         <div className="grow p-8 pb-7 text-center">
-          <h1 className="text-black-800 text-1">{message}</h1>
+          <h1 className="text-1 text-black-800">{message}</h1>
           {submessage && (
-            <div className="text-black-500 whitespace-pre pt-0.5 text-0.85">
+            <div className="whitespace-pre pt-0.5 text-0.85 text-black-500">
               {submessage}
             </div>
           )}
@@ -59,7 +65,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
               variant={ButtonColors[value]}
               label={AlertTypes[value]}
               onClick={onClick}
-              className={value === 'DELETE' ? 'border-primary-500 border' : ''}
+              className={value === 'DELETE' ? 'border border-primary-500' : ''}
             />
           ))}
         </div>

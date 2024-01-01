@@ -1,5 +1,5 @@
-import { StatisticsProps } from '@/components/signin/ApplicationStatistics';
 import { PassRateProps } from '@/components/signin/PassRate';
+import { StatisticsProps } from '@/components/signin/StepStatistics';
 
 export const PLATFORM = {
   SARAMIN: { value: ['saramin', 'saram.in'], name: '사람인' },

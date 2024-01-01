@@ -1,7 +1,7 @@
-import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
 import ResetIcon from '@/assets/ResetIcon';
-import { formPlaceholderStyle, formTextStyle } from './Form';
 import { cn } from '@/lib/utils';
+import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
+import { formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TextInputWithResetProps
   extends InputHTMLAttributes<HTMLInputElement> {

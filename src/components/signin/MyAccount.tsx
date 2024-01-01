@@ -1,18 +1,17 @@
-import { createPortal } from 'react-dom';
-import NavBar from '../common/NavBar';
-import BackButton from '../navbar/BackButton';
-import { User } from 'next-auth';
 import Icon from '@/assets/Icon';
-import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
 import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
+import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
+import useShowToast from '@/hook/useShowToast';
+import { User } from 'next-auth';
+import { signOut } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import Alert from '../common/Alert';
-import { signOut } from 'next-auth/react';
-import ServiceLink from './ServiceLink';
+import NavBar from '../common/NavBar';
+import BackButton from '../navbar/BackButton';
+import ServiceButton from './ServiceButton';
 import UserInfo from './UserInfo';
-import useShowToast from '@/hook/useShowToast';
-import ServiceButton from './SignOutButton';
 
 interface MyAccountProps {
   session?: User;
@@ -53,16 +52,16 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
         leftSection={<BackButton onClose={onClose} />}
       />
       <div className="flex flex-col gap-8 px-page">
-        <UserInfo name={name} email={email} />
-        <div className="border-black-100 grid grid-rows-4 divide-y-[0.5px] divide-black100 rounded-xl border bg-white px-4">
-          <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
-          <ServiceLink href={SUPPORT_FORM} label="문의하기" />
+        <UserInfo />
+        <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4">
+          <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
+          <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
           <ServiceButton
-            lebel="logout"
+            label="logout"
             onClick={() => handleAlert(serviceTypes.LOGOUT)}
           />
           <ServiceButton
-            lebel="withdraw"
+            label="withdraw"
             onClick={() => handleAlert(serviceTypes.WITHDRAW)}
           />
         </div>

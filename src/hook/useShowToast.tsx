@@ -1,6 +1,6 @@
 import { ToastAction } from '@/components/ui/toast';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export const TOAST_MESSAGE = {

@@ -1,26 +1,25 @@
+import Icon from '@/assets/Icon';
+import { ScheduleSimpleType } from '@/model/schedule';
 import {
   getFormattedDateTimeInfo,
   getFormattedISODateTime,
 } from '@/service/date';
-import Link from 'next/link';
-import Badge from '../common/Badge';
-import Icon from '@/assets/Icon';
-import { ScheduleSimpleType } from '@/model/schedule';
 import { getStepByValue } from '@/service/form';
-import { memo } from 'react';
-import CompleteButton from '../list/CompleteButton';
+import Link from 'next/link';
 import { MouseEvent } from 'react';
-import { TabTypes } from '../list/TabHeader';
+import Badge from '../common/Badge';
+import CompleteButton from './CompleteButton';
+import { EventType } from './TabHeader';
 
 type ScheduleDate = Pick<ScheduleSimpleType, 'date'>;
-type ScheduleContent = Pick<
+type ScheduleContentProps = Pick<
   ScheduleSimpleType,
-  'company' | 'position' | 'step'
+  'company' | 'position' | 'step' | 'date'
 >;
 
 interface ScheduleItemProps extends ScheduleSimpleType {
-  tab?: TabTypes;
-  onClick: () => void;
+  tab: EventType;
+  onClick?: () => void;
 }
 
 const ScheduleItem = ({
@@ -35,11 +34,11 @@ const ScheduleItem = ({
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors hover:bg-gray-100 ${borderStyle}`}
+      className={`hover:bg-light grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      <Badge label={time} className="m-auto" />
+      <Badge label={time} />
     </Link>
   );
 };
@@ -61,8 +60,8 @@ ScheduleItem.WithStatus = ({ ...props }: ScheduleItemProps) => {
     >
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap pb-4 ">
         <ScheduleItem.Date date={date} />
-        <ScheduleItem.Content {...{ company, position, step, date, tab }} />
-        <Badge label={time} variant="fail" className="m-auto" />
+        <ScheduleItem.Content {...{ company, position, step, tab, date }} />
+        <Badge label={time} variant="fail" />
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>
@@ -86,7 +85,7 @@ ScheduleItem.Content = ({
   position,
   step,
   tab = 'upcoming',
-}: ScheduleContent & { tab?: TabTypes }) => {
+}: ScheduleContentProps & { tab?: EventType }) => {
   const formatStep = getStepByValue(step);
   return (
     <div className="flex w-full flex-col justify-between gap-1.5 overflow-hidden py-1.5 pl-6 pr-2 web:gap-2">
@@ -102,7 +101,7 @@ ScheduleItem.Content = ({
             tab === 'upcoming' ? 'stroke-primary-300' : 'stroke-black-300'
           }`}
         />
-        <span className="text-xxxs web:text-xxs text-black-500 truncate">
+        <span className="text-xxxs web:text-xxs truncate text-black-500">
           {position}
         </span>
       </div>
@@ -112,4 +111,4 @@ ScheduleItem.Content = ({
 const borderStyle = 'border-black-100';
 const accentStyle = 'text-black-900';
 
-export default memo(ScheduleItem);
+export default ScheduleItem;

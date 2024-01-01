@@ -1,6 +1,6 @@
+import { cn } from '@/lib/utils';
 import { ReactNode, memo } from 'react';
 import { formLabelStyle } from './Form';
-import { cn } from '@/lib/utils';
 
 interface FormLabelProps {
   id?: string;

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
   DropdownMenu,
@@ -8,12 +7,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert from '../common/Alert';
-import { useRouter } from 'next/navigation';
-import { deleteSchedule } from '@/service/schedule';
-import MoreMenuItem from './MoreMenuItem';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
+import { deleteSchedule } from '@/service/schedule';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Alert from '../common/Alert';
+import MoreMenuItem from './MoreMenuItem';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -52,7 +52,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           <Icon
             aria-label="=more-menu"
             name="moreVertical"
-            className="stroke-black-900 mx-auto w-5 fill-none transition-all hover:scale-110"
+            className="mx-auto w-5 fill-none stroke-black-900 transition-all hover:scale-110"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

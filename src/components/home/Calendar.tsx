@@ -1,7 +1,16 @@
 'use client';
 
-import { addDays, addMonths, endOfMonth, endOfWeek, format } from 'date-fns';
-import { isSameDay, startOfMonth, startOfWeek, subMonths } from 'date-fns';
+import {
+  addDays,
+  addMonths,
+  endOfMonth,
+  endOfWeek,
+  format,
+  isSameDay,
+  startOfMonth,
+  startOfWeek,
+  subMonths,
+} from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Button } from '../ui/button';
@@ -42,7 +51,7 @@ export const Calender = () => {
   const nextMonth = () => setCurrent(addMonths(current, 1));
 
   return (
-    <div className="border-black-100 relative flex flex-col justify-start gap-2 rounded-large border bg-white">
+    <div className="relative flex flex-col justify-start gap-2 rounded-large border border-black-100 bg-white">
       <Icon
         name="mainCharacter"
         className="absolute -top-[50px] right-0 h-16 w-24 xs:w-14 web:-top-[80px] web:h-28 web:w-36"
@@ -66,7 +75,7 @@ export const Calender = () => {
 Calender.Caption = ({ current, prevMonth, nextMonth }: CaptionProps) => {
   return (
     <div className="flex justify-between px-7 pt-3.5 web:px-[38px] web:pt-5">
-      <div className="text-black-900 grid grid-cols-[1fr_23px_auto] text-1.1 font-bold xs:text-1 web:grid-cols-[1fr_27px_auto] web:text-1.2">
+      <div className="grid grid-cols-[1fr_23px_auto] text-1.1 font-bold text-black-900 xs:text-1 web:grid-cols-[1fr_27px_auto] web:text-1.2">
         <span>{format(current, 'yyyy')}년</span>
         <span className="place-self-end">{format(current, 'LL')}</span>
         <span>월</span>
@@ -91,7 +100,7 @@ Calender.MoveButton = ({ direction, onClick }: MoveButtonProps) => {
     >
       <ButtonType
         aria-label={`${direction}-button`}
-        className="text-black-400 h-4 w-4"
+        className="h-4 w-4 text-black-400"
       />
     </Button>
   );
@@ -103,7 +112,7 @@ Calender.Head = () => {
     <thead>
       <tr className="grid grid-cols-7 place-items-center">
         {date.map((d) => (
-          <th key={d} className="text-black-900 font-semibold">
+          <th key={d} className="font-semibold text-black-900">
             {d}
           </th>
         ))}
@@ -154,7 +163,7 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
           <span
             className={`${
               isDifferentMonths
-                ? 'text-black-200 absolute font-medium'
+                ? 'absolute font-medium text-black-200'
                 : `${isToday ? `absolute font-bold text-white` : ''}`
             }`}
           >
@@ -162,7 +171,7 @@ Calender.Body = ({ today, current, events }: BodyProps) => {
           </span>
         </span>
         {weekEvents && weekEvents.length > 0 ? (
-          <span className="bg-primary-500 mx-auto h-1 w-1 rounded-full web:h-[5px] web:w-[5px]"></span>
+          <span className="mx-auto h-1 w-1 rounded-full bg-primary-500 web:h-[5px] web:w-[5px]"></span>
         ) : (
           <span className="mx-auto h-1 w-1 rounded-full web:h-[5px] web:w-[5px]"></span>
         )}

@@ -10,7 +10,7 @@ const FloatNewButton = ({ onClick }: FloatNewButtonProps) => {
     <div className="absolute bottom-3.5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-tab">
       <button
         onClick={onClick}
-        className="bg-primary-500 group z-20 m-auto h-16 w-16 rounded-full hover:drop-shadow-md"
+        className="group z-20 m-auto h-16 w-16 rounded-full bg-primary-500 hover:drop-shadow-md"
       >
         <Icon
           aria-label="=new-button"

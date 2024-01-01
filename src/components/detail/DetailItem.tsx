@@ -1,7 +1,7 @@
 import Icon, { IconTypes } from '@/assets/Icon';
+import { FORM_LABEL } from '@/constants/form';
 import Link from 'next/link';
 import MarkDownViewer from '../common/MarkdownViewer';
-import { FORM_LABEL } from '@/constants/form';
 
 interface DetailTitleProps {
   title: keyof typeof FORM_LABEL;

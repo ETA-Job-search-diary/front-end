@@ -1,6 +1,6 @@
-import { HTMLAttributes } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { HTMLAttributes } from 'react';
 
 interface SkeletonProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -41,9 +41,9 @@ Skeleton.List = () => {
 Skeleton.Item = () => {
   return (
     <li
-      className={`border-black-100 relative grid h-[88px] w-full animate-pulse grid-cols-[auto_1fr_auto] rounded-large border bg-white py-3 web:h-[129px] web:py-6`}
+      className={`relative grid h-[88px] w-full animate-pulse grid-cols-[auto_1fr_auto] rounded-large border border-black-100 bg-white py-3 web:h-[129px] web:py-6`}
     >
-      <div className="border-black-100 text-black-900 flex h-full w-full flex-col items-center justify-center border-r px-6 xs:px-3 web:px-[30px]">
+      <div className="flex h-full w-full flex-col items-center justify-center border-r border-black-100 px-6 text-black-900 xs:px-3 web:px-[30px]">
         <Skeleton />
       </div>
       <div className="flex w-full flex-col justify-center gap-2 pl-6 xs:pl-3 web:pl-[30px]">
