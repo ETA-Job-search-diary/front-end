@@ -32,7 +32,7 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
 
 DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
   return (
-    <div className={`${itemStyle}`}>
+    <div className={`${itemStyle} items-start`}>
       <h3 className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FORM_LABEL[title]}

@@ -1,9 +1,10 @@
 import { STEPS } from '@/constants/form';
+import { StepTypes } from '@/model/schedule';
 import Chip from '../common/Chip';
 
 interface GridChipsProps {
-  checked: string[];
-  onClick: (value: string) => void;
+  checked: StepTypes[];
+  onClick: (value: StepTypes) => void;
 }
 
 const GridChips = ({ checked, onClick }: GridChipsProps) => {

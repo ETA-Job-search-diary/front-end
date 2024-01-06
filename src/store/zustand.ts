@@ -1,6 +1,6 @@
 import { SortTypes } from '@/components/list/FilterList';
 import { EventType } from '@/components/list/TabHeader';
-import { StepTypes } from '@/model/schedule';
+import { ScheduleDetailType, StepTypes } from '@/model/schedule';
 import { create } from 'zustand';
 
 type ListStore = {
@@ -8,18 +8,21 @@ type ListStore = {
   filter: StepTypes[];
   sort: SortTypes;
   checkedIds: string[];
+  resultItem: ScheduleDetailType | null;
   setTab: (tab: EventType) => void;
   setFilter: (filter: StepTypes) => void;
   setSort: (sort: SortTypes) => void;
   toggleCheck: (checkedIds: string) => void;
-  removeAll: () => void;
+  unCheckAll: () => void;
+  submitResult: (resultItem: ScheduleDetailType) => void;
 };
 
 export const useListStore = create<ListStore>((set) => ({
   tab: 'coming',
   filter: [],
-  sort: 'newest',
+  sort: 'latest',
   checkedIds: [],
+  resultItem: null,
   setTab: (tab: EventType) => {
     set({ tab });
     set({ filter: [] });
@@ -37,6 +40,9 @@ export const useListStore = create<ListStore>((set) => ({
     if (prevSort === sort) return;
     set({ sort: sort });
   },
+  check: (checkedIds: string) => {
+    set({ checkedIds: [checkedIds] });
+  },
   toggleCheck: (checkedIds: string) => {
     const { checkedIds: prevCheckedIds } = useListStore.getState();
     const updateCheckedIds = prevCheckedIds.includes(checkedIds)
@@ -44,7 +50,11 @@ export const useListStore = create<ListStore>((set) => ({
       : [...prevCheckedIds, checkedIds];
     set({ checkedIds: updateCheckedIds });
   },
-  removeAll: () => {
+  unCheckAll: () => {
     set({ checkedIds: [] });
+  },
+  submitResult: (resultItem: ScheduleDetailType) => {
+    set({ checkedIds: [resultItem.id] });
+    set({ resultItem });
   },
 }));

@@ -44,7 +44,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
 
   return createPortal(
     <div
-      className={`fixed top-0 z-30 mx-auto flex min-h-screen w-full min-w-280 max-w-500 items-center justify-center bg-alert`}
+      className={`fixed top-0 z-50 mx-auto flex min-h-screen w-full min-w-280 max-w-500 items-center justify-center bg-alert`}
       onClick={handleBackGroundClick}
     >
       <section
@@ -65,7 +65,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
               variant={ButtonColors[value]}
               label={AlertTypes[value]}
               onClick={onClick}
-              className={value === 'DELETE' ? 'border border-primary-500' : ''}
+              className={value === 'CANCEL' ? 'border border-primary-500' : ''}
             />
           ))}
         </div>

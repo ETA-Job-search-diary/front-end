@@ -24,7 +24,7 @@ const TabBar = () => {
     return null;
 
   return (
-    <nav className="fixed bottom-0 z-0 mx-auto h-20 w-full min-w-280 max-w-500 bg-white shadow-tab">
+    <nav className="fixed bottom-0 z-40 mx-auto h-20 w-full min-w-280 max-w-500 bg-white shadow-tab">
       <div className="relative grid h-full w-full grid-cols-3 place-items-center pb-6 web:pb-4">
         <LinkButton path="home" />
         <FloatNewButton onClick={handleLoginClick} />

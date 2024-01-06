@@ -6,9 +6,9 @@ import useScheduleList from '@/hook/scheduleList';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
-import { ScheduleDetailType } from '@/model/schedule';
+import { CompleteFormType, ScheduleDetailType } from '@/model/schedule';
 import { getFormattedISODateTime } from '@/service/date';
-import { ScheduleDataType, postSchedule } from '@/service/schedule';
+import { postSchedule } from '@/service/schedule';
 import { useRouter } from 'next/navigation';
 import {
   ChangeEvent,
@@ -28,36 +28,23 @@ import TextInputWithReset from './TextInputWithReset';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
-type FormValues = {
-  step: string;
-  link: string;
-  platform: string;
-  company: string;
-  position: string;
-  date: string;
-  memo: string;
-};
-
-type PostFormValues = FormValues & { title: string };
-
 interface FormProps {
   originData?: ScheduleDetailType;
 }
-
 const Form = ({ originData }: FormProps) => {
   const { fullDate: currentDate } = getFormattedISODateTime();
   const { refresh, replace } = useRouter();
   const { showTokenExpirationToast } = useShowToast();
   const { token } = useSession();
-  const { mutate, setEditSchedule } = useScheduleList([]);
+  const { mutate, setEditSchedule } = useScheduleList({});
   const { isCrawling, crawlLink } = useCrawler();
 
   let isPasted = false;
 
-  const methods = useForm<FormValues>({
+  const methods = useForm<CompleteFormType>({
     mode: 'onChange',
     defaultValues: {
-      step: originData?.step ?? '',
+      step: originData?.step ?? undefined,
       link: originData?.link ?? '',
       platform: originData?.platform ?? '',
       company: originData?.company ?? '',
@@ -88,16 +75,15 @@ const Form = ({ originData }: FormProps) => {
     setValue('platform', platform);
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<CompleteFormType> = (data) => {
     if (!token) {
       showTokenExpirationToast();
       return;
     }
 
     const { link, memo, ...rest } = data;
-    const postData: PostFormValues = {
+    const postData: CompleteFormType = {
       ...rest,
-      title: ' ',
       link: link || ' ',
       memo: memo || ' ',
     };
@@ -106,7 +92,7 @@ const Form = ({ originData }: FormProps) => {
       const isEdit = Object.keys(originData).some(
         (key) =>
           originData[key as keyof ScheduleDetailType] !==
-          postData[key as keyof PostFormValues],
+          postData[key as keyof CompleteFormType],
       );
       if (isEdit) editSchedule(originData.id, postData, token);
       replace(`/schedule/${originData.id}`);
@@ -117,21 +103,21 @@ const Form = ({ originData }: FormProps) => {
 
   const editSchedule = async (
     id: string,
-    data: ScheduleDataType,
+    data: CompleteFormType,
     token: string,
   ) => {
-    return setEditSchedule(id, data, token).then(() => {
-      replace(`/schedule/${id}`);
-      refresh();
-    });
+    const res = await setEditSchedule(id, data, token);
+    if (!res) return;
+
+    replace(`/schedule/${id}`);
+    refresh();
   };
 
-  // TODO: (기획) api로 통신해서 id를 받아와서 상세화면으로 이동?
-  const newSchedule = async (data: ScheduleDataType, token: string) => {
-    return postSchedule(data, token).then(() => {
-      replace('/list');
-      mutate();
-    });
+  const newSchedule = async (data: CompleteFormType, token: string) => {
+    const res = await postSchedule(data, token);
+    if (!res) return;
+    replace(`/schedule/${res.id}`);
+    mutate();
   };
 
   const resetCrawlingValues = () => {
@@ -197,7 +183,7 @@ const Form = ({ originData }: FormProps) => {
                     must
                     label="채용공고"
                     message={
-                      value.length > 0 && watch('platform')
+                      value && value.length > 0 && watch('platform')
                         ? '플랫폼 정보를 확인 후 저장해주세요'
                         : '채용공고 링크를 넣으면 정보를 자동으로 가져와요 :)'
                     }

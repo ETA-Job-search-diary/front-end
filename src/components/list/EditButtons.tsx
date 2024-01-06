@@ -1,15 +1,14 @@
-import Icon from '@/assets/Icon';
-import { memo } from 'react';
 import Button from '../common/Button';
-import { AbsStatus } from './FilterList';
+import { SortTypes } from './FilterList';
+import SortButtons from './SortButtons';
 
 interface EditButtonsProps {
-  currentOrder: AbsStatus;
+  currentOrder: SortTypes;
   isEdit: boolean;
   onEdit: () => void;
   onDelete: () => void;
   onCompleted: () => void;
-  onOrder: (abs: AbsStatus) => void;
+  onOrder: (abs: SortTypes) => void;
 }
 
 const EditButtons = ({
@@ -41,52 +40,7 @@ const EditButtons = ({
         </>
       ) : (
         <>
-          <div className="flex gap-3">
-            <button
-              className="flex items-center justify-center gap-1"
-              onClick={() => onOrder('newest')}
-            >
-              <Icon
-                name="ellipse"
-                className={`${
-                  currentOrder === 'newest'
-                    ? 'fill-primary-500'
-                    : 'fill-black-300'
-                }`}
-              />
-              <span
-                className={`${
-                  currentOrder === 'newest'
-                    ? 'text-primary-500'
-                    : 'text-black-300'
-                } text-0.85 font-medium`}
-              >
-                최신순
-              </span>
-            </button>
-            <button
-              className="flex items-center justify-center gap-1"
-              onClick={() => onOrder('created')}
-            >
-              <Icon
-                name="ellipse"
-                className={`${
-                  currentOrder === 'created'
-                    ? 'fill-primary-500'
-                    : 'fill-black-300'
-                }`}
-              />
-              <span
-                className={`${
-                  currentOrder === 'created'
-                    ? 'text-primary-500'
-                    : 'text-black-300'
-                } text-0.85 font-medium`}
-              >
-                등록순
-              </span>
-            </button>
-          </div>
+          <SortButtons current={currentOrder} onSort={onOrder} />
           <Button
             size="sm"
             label="편집"
@@ -100,4 +54,4 @@ const EditButtons = ({
   );
 };
 
-export default memo(EditButtons);
+export default EditButtons;

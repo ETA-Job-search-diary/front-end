@@ -1,4 +1,4 @@
-import { ScheduleStatus } from '@/model/schedule';
+import { ScheduleStatusType } from '@/model/schedule';
 import { MouseEvent } from 'react';
 import Button from '../common/Button';
 
@@ -9,7 +9,7 @@ const StatusButton = {
 };
 
 interface CompleteButtonProps {
-  status: ScheduleStatus;
+  status: ScheduleStatusType;
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 

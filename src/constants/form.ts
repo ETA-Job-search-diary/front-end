@@ -1,5 +1,6 @@
 import { PassRateProps } from '@/components/signin/PassRate';
 import { StatisticsProps } from '@/components/signin/StepStatistics';
+import { StepTypes } from '@/model/schedule';
 
 export const PLATFORM = {
   SARAMIN: { value: ['saramin', 'saram.in'], name: '사람인' },
@@ -20,7 +21,7 @@ export const PLATFORM = {
   RALLIT: { value: ['rallit'], name: '랠릿' },
 };
 
-export const STEPS = [
+export const STEPS: { type: StepTypes; name: string }[] = [
   {
     type: 'document',
     name: '서류전형',

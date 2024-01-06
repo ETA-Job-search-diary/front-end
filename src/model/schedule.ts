@@ -27,3 +27,14 @@ export interface ScheduleDetailType extends CompleteFormType {
   id: string;
   status: ScheduleStatusType;
 }
+
+export interface EditScheduleType {
+  step?: StepTypes;
+  company?: string;
+  position?: string;
+  date?: string;
+  link?: string;
+  platform?: string;
+  memo?: string;
+  status?: ScheduleStatusType;
+}

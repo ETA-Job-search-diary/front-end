@@ -7,30 +7,12 @@ import { ko } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ComponentProps } from 'react';
 import { DateFormatter, DayPicker } from 'react-day-picker';
-import { StatisticsProps } from '../signin/StepStatistics';
-
-type Event = {
-  date: string;
-  company: string;
-};
-
-interface EventsType {
-  events?: Partial<Record<keyof StatisticsProps, Event[]>>;
-}
-
-export type CalendarProps = ComponentProps<typeof DayPicker> & EventsType;
 
 function Calendar({
   className,
   classNames,
-  events = {
-    document: [],
-    personality: [],
-    interview: [],
-    etc: [],
-  },
   ...props
-}: CalendarProps) {
+}: ComponentProps<typeof DayPicker>) {
   return (
     <DayPicker
       fixedWeeks

@@ -1,8 +1,8 @@
-export type EventType = 'upcoming' | 'past';
+export type EventType = 'coming' | 'past';
 
 const eventTypes: { type: EventType; name: string }[] = [
   {
-    type: 'upcoming',
+    type: 'coming',
     name: '다가오는 일정',
   },
   {
@@ -13,28 +13,28 @@ const eventTypes: { type: EventType; name: string }[] = [
 
 interface TabHeaderProps {
   current: EventType;
-  upcomingCount?: number;
+  comingCount?: number;
   pastCount?: number;
   onSwitch: (type: EventType) => void;
 }
 
 const TabHeader = ({
   current,
-  upcomingCount,
+  comingCount,
   pastCount,
   onSwitch,
 }: TabHeaderProps) => {
   return (
     <div className="fixed top-0 flex w-full min-w-[280px] max-w-[500px] justify-between bg-white pt-safe-top">
       {eventTypes.map(({ type, name }) => {
-        const count = type === 'upcoming' ? upcomingCount : pastCount;
+        const count = type === 'coming' ? comingCount : pastCount;
         const isActive = current === type;
         const handleClick = () => onSwitch(type);
         return (
           <button
             key={type}
-            className={`border-black100 h-16 w-full border-b-[2px] text-1 font-bold ${
-              isActive ? 'text-black900' : 'text-black300'
+            className={`h-16 w-full border-b-[2px] border-black-100 text-1 font-bold ${
+              isActive ? 'text-black-900' : 'text-black-300'
             }`}
             onClick={handleClick}
           >
@@ -44,8 +44,8 @@ const TabHeader = ({
         );
       })}
       <p
-        className={`border-primary500 absolute bottom-0 w-1/2 border-b-[2px] transition-all duration-200 ease-linear ${
-          current === 'upcoming' ? '' : 'translate-x-full'
+        className={`absolute bottom-0 w-1/2 border-b-[2px] border-primary-500 transition-all duration-200 ease-linear ${
+          current === 'coming' ? '' : 'translate-x-full'
         }`}
       />
     </div>

@@ -32,9 +32,9 @@ const buttonVariants = cva('font-semibold hover:font-extrabold', {
       max: 'w-max px-2',
     },
     size: {
-      sm: 'text-0.85',
-      md: 'text-1',
-      lg: 'text-1.1',
+      sm: 'text-[0.85rem]',
+      md: 'text-[0.9rem]',
+      lg: 'text-[1.1rem]',
     },
     variant: {
       primary: 'bg-primary-500 text-white',

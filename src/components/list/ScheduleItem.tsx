@@ -1,5 +1,5 @@
 import Icon from '@/assets/Icon';
-import { ScheduleSimpleType } from '@/model/schedule';
+import { ScheduleDetailType } from '@/model/schedule';
 import {
   getFormattedDateTimeInfo,
   getFormattedISODateTime,
@@ -11,24 +11,23 @@ import Badge from '../common/Badge';
 import CompleteButton from './CompleteButton';
 import { EventType } from './TabHeader';
 
-type ScheduleDate = Pick<ScheduleSimpleType, 'date'>;
-type ScheduleContentProps = Pick<
-  ScheduleSimpleType,
-  'company' | 'position' | 'step' | 'date'
->;
+type ScheduleDate = Pick<ScheduleDetailType, 'date'>;
 
-interface ScheduleItemProps extends ScheduleSimpleType {
+type ScheduleContent = Omit<ScheduleDetailType, 'status' | 'id' | 'date'> & {
+  tab?: EventType;
+};
+
+interface ItemWithStatusProps extends ScheduleDetailType {
   tab: EventType;
-  onClick?: () => void;
+  onResult?: () => void;
 }
-
 const ScheduleItem = ({
   id,
   step,
   company,
   position,
   date,
-}: ScheduleSimpleType) => {
+}: ScheduleDetailType) => {
   const { time } = getFormattedISODateTime(date);
   return (
     <Link
@@ -43,13 +42,13 @@ const ScheduleItem = ({
   );
 };
 
-ScheduleItem.WithStatus = ({ ...props }: ScheduleItemProps) => {
-  const { id, step, company, position, date, status, onClick, tab } = props;
+ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
+  const { id, step, company, position, date, status, onResult, tab } = props;
   const { time } = getFormattedISODateTime(date);
 
   const handleComplete = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    onClick && onClick();
+    onResult?.();
   };
 
   return (
@@ -72,10 +71,10 @@ ScheduleItem.Date = ({ date: dateInfo }: ScheduleDate) => {
   const { date, day } = getFormattedDateTimeInfo(dateInfo);
   return (
     <div
-      className={`flex h-full w-full flex-col items-center justify-center border-r pr-5 ${borderStyle} ${accentStyle}`}
+      className={`flex h-full w-full flex-col items-center justify-center border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
     >
       <h3 className="text-1.3 font-bold xs:text-1.1 web:text-1.5">{date}</h3>
-      <span className="text-0.85 web:text-1">{day}</span>
+      <span className="text-0.85 web:text-0.95">{day}</span>
     </div>
   );
 };
@@ -84,13 +83,13 @@ ScheduleItem.Content = ({
   company,
   position,
   step,
-  tab = 'upcoming',
-}: ScheduleContentProps & { tab?: EventType }) => {
+  tab = 'coming',
+}: ScheduleContent) => {
   const formatStep = getStepByValue(step);
   return (
-    <div className="flex w-full flex-col justify-between gap-1.5 overflow-hidden py-1.5 pl-6 pr-2 web:gap-2">
+    <div className="flex w-full flex-col justify-between gap-1.5 overflow-hidden py-1.5 pl-4 pr-2 web:gap-2 web:pl-6">
       <h3
-        className={`truncate text-xs font-semibold leading-5 web:text-sm ${accentStyle}`}
+        className={`truncate text-0.9 font-semibold leading-5 web:text-1 ${accentStyle}`}
       >
         {company} {formatStep}
       </h3>
@@ -98,10 +97,10 @@ ScheduleItem.Content = ({
         <Icon
           name="briefcase"
           className={`h-2.5 w-2.5 web:h-4 web:w-4 ${
-            tab === 'upcoming' ? 'stroke-primary-300' : 'stroke-black-300'
+            tab === 'coming' ? 'stroke-primary-300' : 'stroke-black-300'
           }`}
         />
-        <span className="text-xxxs web:text-xxs truncate text-black-500">
+        <span className="truncate text-0.8 text-black-500 web:text-0.85">
           {position}
         </span>
       </div>
