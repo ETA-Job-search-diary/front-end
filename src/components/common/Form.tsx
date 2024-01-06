@@ -28,6 +28,8 @@ import TextInputWithReset from './TextInputWithReset';
 
 const TEXTAREA_MAX_LENGTH = 200;
 
+export type EditedScheduleType = Omit<ScheduleDetailType, 'id'>;
+
 interface FormProps {
   originData?: ScheduleDetailType;
 }
@@ -50,7 +52,7 @@ const Form = ({ originData }: FormProps) => {
       company: originData?.company ?? '',
       position: originData?.position ?? '',
       date: originData?.date ?? currentDate,
-      memo: originData?.memo ?? '',
+      memo: originData?.memo === ' ' ? '' : originData?.memo,
     },
   });
 
@@ -89,21 +91,35 @@ const Form = ({ originData }: FormProps) => {
     };
 
     if (originData) {
-      const isEdit = Object.keys(originData).some(
-        (key) =>
-          originData[key as keyof ScheduleDetailType] !==
-          postData[key as keyof CompleteFormType],
-      );
-      if (isEdit) editSchedule(originData.id, postData, token);
+      const isEdit = areObjectEqual(originData, postData);
+      if (isEdit) {
+        const editedData = {
+          ...postData,
+          status: originData.status,
+        };
+        editSchedule(originData.id, editedData, token);
+      }
       replace(`/schedule/${originData.id}`);
       return;
     }
     newSchedule(postData, token);
   };
 
+  const areObjectEqual = (
+    origin: ScheduleDetailType,
+    newPost: CompleteFormType,
+  ) =>
+    origin.date !== newPost.date ||
+    origin.company !== newPost.company ||
+    origin.position !== newPost.position ||
+    origin.step !== newPost.step ||
+    origin.link !== newPost.link ||
+    origin.platform !== newPost.platform ||
+    origin.memo !== newPost.memo;
+
   const editSchedule = async (
     id: string,
-    data: CompleteFormType,
+    data: EditedScheduleType,
     token: string,
   ) => {
     const res = await setEditSchedule(id, data, token);

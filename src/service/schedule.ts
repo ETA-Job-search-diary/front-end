@@ -1,7 +1,10 @@
-import { CompleteFormType } from '@/model/schedule';
+import { CompleteFormType, ScheduleDetailType } from '@/model/schedule';
 import { api } from './api';
 
-export const getScheduleBy = async (id: string, token: string) => {
+export const getScheduleBy = async (
+  id: string,
+  token: string,
+): Promise<ScheduleDetailType> => {
   return api(`/schedules/detail/${id}`, 'get', token);
 };
 

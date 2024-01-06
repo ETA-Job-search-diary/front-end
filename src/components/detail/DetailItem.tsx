@@ -41,9 +41,9 @@ DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
         href={content}
         rel="noopener noreferrer"
         target="_blank"
-        className={`${detailContentStyle} col-start-2 min-w-full break-words pr-2`}
+        className={`${detailContentStyle} col-start-2 w-full pr-2`}
       >
-        <span className="border-b border-black-600">{content}</span>
+        <span className="break-words border-b border-black-600">{content}</span>
       </Link>
     </div>
   );
