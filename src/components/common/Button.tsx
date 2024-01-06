@@ -1,74 +1,54 @@
-import { ButtonHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'gray' | 'border' | 'secondary';
+export type ButtonVariantTypes = VariantProps<typeof buttonVariants>['variant'];
+
+interface ButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
   label?: string;
-  size?: 'sm' | 'md' | 'xs' | 'xxs';
-  active?: boolean;
 }
 
-const Button = ({
-  type = 'button',
-  color = 'primary',
-  label,
-  size = 'md',
-  active = false,
-  ...rest
-}: ButtonProps) => {
-  return (
-    <button
-      type={type}
-      disabled={!active}
-      className={`${getButtonStyle(active, size, color)}`}
-      {...rest}
-    >
-      {label}
-    </button>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ type, width, variant, label, size, className, ...rest }, ref) => {
+    return (
+      <button
+        ref={ref}
+        type={type}
+        className={cn(buttonVariants({ width, size, variant }), className)}
+        {...rest}
+      >
+        {label}
+      </button>
+    );
+  },
+);
 
-const getButtonStyle = (
-  active: boolean,
-  size: 'sm' | 'md' | 'xs' | 'xxs',
-  color: 'primary' | 'gray' | 'border' | 'secondary',
-) => {
-  const defaultStyle = 'font-medium';
-
-  const sizeStyle = {
-    xxs: 'w-max px-2 text-xxs xs:text-xxxs',
-    xs: 'text-xxs web:text-xs font-semibold',
-    sm: 'w-max text-sm xs:text-xxs font-semibold',
-    md: 'text-sm rounded-small',
-  };
-
-  const colorStyle = {
-    primary: {
-      inactive:
-        'border-1 border-primary500 text-primary500 hover:font-semibold rounded-small h-9 w-full',
-      active:
-        'bg-primary500 text-white hover:font-semibold rounded-small h-9 w-full',
+const buttonVariants = cva('font-semibold hover:font-extrabold', {
+  variants: {
+    width: {
+      full: 'w-full rounded-small py-2',
+      max: 'w-max px-2',
     },
-    secondary: {
-      inactive: 'text-black600 hover:font-extrabold',
-      active: 'text-primary500 hover:font-extrabold',
+    size: {
+      sm: 'text-[0.85rem]',
+      md: 'text-[0.9rem]',
+      lg: 'text-[1.1rem]',
     },
-    gray: {
-      inactive: 'bg-[#E8E8E8] text-black700 rounded-small h-9 w-full',
-      active:
-        'bg-black100 text-white hover:font-semibold rounded-small h-9 w-full',
+    variant: {
+      primary: 'bg-primary-500 text-white',
+      gray: 'bg-black-500 text-white',
+      'primary-border': 'text-primary-500',
+      'gray-border': 'text-black-600',
+      'light-gray': 'bg-gray-300 text-black-700',
     },
-    border: {
-      inactive:
-        'border-1 border-black100 text-black400 bg-body rounded-[3px] xs:h-6 h-7',
-      active:
-        'border-1 border-black100 text-black400 bg-white rounded-[3px] xs:h-6 h-7',
-    },
-  };
-
-  return `${defaultStyle} ${sizeStyle[size]} ${
-    active ? colorStyle[color].active : colorStyle[color].inactive
-  }`;
-};
+  },
+  defaultVariants: {
+    width: 'full',
+    size: 'md',
+    variant: 'primary',
+  },
+});
 
 export default Button;

@@ -1,14 +1,11 @@
 import { ToastAction } from '@/components/ui/toast';
-import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
+import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 export const TOAST_MESSAGE = {
   TOKEN: {
     title: '로그인이 만료되었어요. 다시 로그인해주세요.',
-  },
-  VALIDATION_FORM: {
-    title: '필수 항목을 입력해주세요.',
   },
   DELETE: {
     title: '등록된 일정이 삭제되었어요.',
@@ -31,11 +28,6 @@ const useShowToast = () => {
 
   const showTokenExpirationToast = useCallback(
     () => toast(TOAST_MESSAGE.TOKEN),
-    [],
-  );
-
-  const showFormValidationToast = useCallback(
-    () => toast(TOAST_MESSAGE.VALIDATION_FORM),
     [],
   );
 
@@ -69,7 +61,6 @@ const useShowToast = () => {
 
   return {
     showTokenExpirationToast,
-    showFormValidationToast,
     showDeleteConfirmToast,
     showWithdrawalToast,
     showPassingRateToast,

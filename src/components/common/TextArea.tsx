@@ -9,8 +9,6 @@ import { formLabelStyle, formPlaceholderStyle, formTextStyle } from './Form';
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   id: string;
   label?: string;
-  maxLength: number;
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -19,26 +17,25 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const handleTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
       const { value } = e.currentTarget;
-      onChange(e);
+      onChange && onChange(e);
       setCount(value.length);
     };
 
     return (
       <label
         htmlFor={id}
-        className={`flex h-36 flex-col rounded-small border-form border-primary300 bg-primary-bg web:h-64`}
+        className={`flex h-36 flex-col rounded-small border-form border-primary-300 bg-primary-light-50 web:h-64`}
       >
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
           id={id}
           className={`w-full grow bg-transparent p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
-          maxLength={maxLength}
           onChange={handleTextArea}
           {...rest}
         />
         {maxLength && (
-          <span className="pb-0.5 pr-[0.9rem] text-end text-xxs text-black200">{`${count} / 200 자`}</span>
+          <span className="pb-2.5 pr-[0.9rem] text-end text-0.85 text-black-200">{`${count} / ${maxLength} 자`}</span>
         )}
       </label>
     );

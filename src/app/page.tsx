@@ -1,14 +1,16 @@
-import { Calender } from '@/components/home/Calendar';
-import WeeklySchedule from '@/components/home/WeeklySchedule';
-import ServiceBackground from '@/components/home/ServiceBackground';
+'use client';
+
+import HomeCalendar from '@/components/home/HomeCalendar';
+import StepStatistics from '@/components/signin/StepStatistics';
+import useSWR from 'swr';
 
 export default function Home() {
+  const { data: statistics } = useSWR('/schedules/statistics');
+
   return (
-    <>
-      <ServiceBackground>
-        <Calender />
-      </ServiceBackground>
-      <WeeklySchedule />
-    </>
+    <section className="flex h-full min-h-screen flex-col justify-center gap-3 overflow-y-auto bg-primary-500 px-page pb-[calc(env(safe-area-inset-bottom)+90px)] pt-[calc(env(safe-area-inset-top)+0.5rem)]">
+      <HomeCalendar />
+      <StepStatistics statistics={statistics} variant="colorful" />
+    </section>
   );
 }

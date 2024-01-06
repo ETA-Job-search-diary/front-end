@@ -1,48 +1,47 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
-import FormLabel from './FormLabel';
-import useFocus from '@/hook/useFocus';
 import ResetIcon from '@/assets/ResetIcon';
+import { cn } from '@/lib/utils';
+import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
 import { formPlaceholderStyle, formTextStyle } from './Form';
-import { FormIdType } from './TextInput';
 
 interface TextInputWithResetProps
   extends InputHTMLAttributes<HTMLInputElement> {
-  id: FormIdType;
-  must?: boolean;
-  label?: string;
-  onReset?: () => void;
+  onResetInput: () => void;
 }
 
 const TextInputWithReset = forwardRef<
   HTMLInputElement,
   TextInputWithResetProps
->(({ id, must, label, type = 'text', onReset, ...rest }, ref) => {
-  const { isFocus, onFocus, onBlur } = useFocus();
+>(({ id, onChange, onResetInput, className, ...rest }, ref) => {
+  const [isFilled, setIsFilled] = useState(false);
+
+  const handleFilled = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+    onChange && onChange(e);
+    setIsFilled(value.length > 0);
+  };
 
   return (
-    <FormLabel id={id} label={label} must={must}>
-      {onReset && (
-        <span className="border-form relative h-10 w-full rounded-small border-primary300 web:h-12">
-          <input
-            id={id}
-            className={`h-full w-full bg-primary-bg py-2 pl-[0.8rem] pr-10 font-medium ${formTextStyle} placeholder:${formPlaceholderStyle}`}
-            ref={ref}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            {...rest}
-          />
-          {!!rest.value && (
-            <button
-              type="button"
-              onClick={onReset}
-              className="absolute right-3 h-10 web:h-12"
-            >
-              <ResetIcon />
-            </button>
-          )}
-        </span>
+    <>
+      <input
+        ref={ref}
+        id={id}
+        className={cn(
+          `h-10 w-full rounded-small border-[0.8px] border-primary-300 bg-primary-light-50 py-2 pl-[0.8rem] pr-10 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`,
+          className,
+        )}
+        onChange={handleFilled}
+        {...rest}
+      />
+      {isFilled && (
+        <button
+          type="button"
+          className="absolute bottom-1 right-3 -translate-y-1/2"
+          onClick={onResetInput}
+        >
+          <ResetIcon />
+        </button>
       )}
-    </FormLabel>
+    </>
   );
 });
 

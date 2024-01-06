@@ -1,53 +1,52 @@
-import { memo } from 'react';
 import Button from '../common/Button';
+import { SortTypes } from './FilterList';
+import SortButtons from './SortButtons';
 
 interface EditButtonsProps {
+  currentOrder: SortTypes;
   isEdit: boolean;
   onEdit: () => void;
   onDelete: () => void;
   onCompleted: () => void;
+  onOrder: (abs: SortTypes) => void;
 }
-//TODO: 일정 추가 할지 기획논의 필요
+
 const EditButtons = ({
+  currentOrder,
   isEdit,
   onEdit,
   onDelete,
   onCompleted,
+  onOrder,
 }: EditButtonsProps) => {
   return (
     <div className="flex items-center justify-between">
       {isEdit ? (
         <>
           <Button
-            size="xs"
+            size="sm"
             label="삭제"
-            active={false}
-            color="secondary"
+            width="max"
+            variant="gray-border"
             onClick={onDelete}
           />
           <Button
-            size="xs"
+            size="sm"
             label="완료"
-            active
-            color="secondary"
+            width="max"
+            variant="primary-border"
             onClick={onCompleted}
           />
         </>
       ) : (
         <>
+          <SortButtons current={currentOrder} onSort={onOrder} />
           <Button
-            size="xs"
+            size="sm"
             label="편집"
-            active={false}
-            color="secondary"
+            width="max"
+            variant="gray-border"
             onClick={onEdit}
-          />
-          <Button
-            size="xs"
-            label="+ 일정등록"
-            active
-            color="secondary"
-            // onClick={onAdd}
           />
         </>
       )}
@@ -55,4 +54,4 @@ const EditButtons = ({
   );
 };
 
-export default memo(EditButtons);
+export default EditButtons;

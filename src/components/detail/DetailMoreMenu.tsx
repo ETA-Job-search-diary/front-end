@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Icon from '@/assets/Icon';
 import {
   DropdownMenu,
@@ -8,12 +7,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Alert, { alertTypes } from '../common/Alert';
-import { useRouter } from 'next/navigation';
-import { deleteSchedule } from '@/service/schedule';
-import MoreMenuItem from './MoreMenuItem';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
+import { deleteSchedule } from '@/service/schedule';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Alert from '../common/Alert';
+import MoreMenuItem from './MoreMenuItem';
 
 interface DetailMoreMenuProps {
   scheduleId: string;
@@ -52,25 +52,25 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           <Icon
             aria-label="=more-menu"
             name="moreVertical"
-            className="mx-auto w-5 fill-none stroke-black900 transition-all hover:scale-110"
+            className="mx-auto w-5 fill-none stroke-black-900 transition-all hover:scale-110"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <MoreMenuItem label={alertTypes.EDIT} onClick={handleEditConfirm} />
+          <MoreMenuItem label={'수정'} onClick={handleEditConfirm} />
           <DropdownMenuSeparator />
-          <MoreMenuItem label={alertTypes.DELETE} onClick={openMenu} />
+          <MoreMenuItem label={'삭제'} onClick={openMenu} />
         </DropdownMenuContent>
       </DropdownMenu>
       {isOpen && (
         <Alert
-          message={`등록된 일정을 ${alertTypes.DELETE}할까요?`}
+          message={`등록된 일정을 삭제할까요?`}
           type={[
             {
-              value: alertTypes.CANCEL,
+              value: 'CANCEL',
               onClick: handleCloseMenu,
             },
             {
-              value: alertTypes.DELETE,
+              value: 'DELETE',
               onClick: handleDeleteConfirm,
             },
           ]}

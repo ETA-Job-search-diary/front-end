@@ -1,8 +1,21 @@
-import { ScheduleSimpleType } from '@/model/schedule';
+import { SortTypes } from '@/components/list/FilterList';
+import { EventType } from '@/components/list/TabHeader';
+import {
+  EditScheduleType,
+  ScheduleDetailType,
+  StepTypes,
+} from '@/model/schedule';
 import { api } from '@/service/api';
-import { ScheduleDataType } from '@/service/schedule';
 import { useCallback } from 'react';
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite';
+
+const DATA_LIMIT = 20;
+
+interface ScheduleListHook {
+  tab?: EventType;
+  filter?: StepTypes[];
+  sort?: SortTypes;
+}
 
 const deleteSchedule = async (checkedIds: string[], token: string) => {
   return api('/schedules/deleteMany', 'post', token, { ids: checkedIds });
@@ -10,32 +23,33 @@ const deleteSchedule = async (checkedIds: string[], token: string) => {
 
 const putSchedule = async (
   id: string,
-  data: ScheduleDataType,
+  data: EditScheduleType,
   token: string,
 ) => {
   return api(`/schedules/${id}`, 'put', token, data);
 };
 
-const DATA_LIMIT = 20;
-
-const useScheduleList = (filter: string[]) => {
-  const filterQuery =
-    filter.length > 0 ? `&filter=${filter.join('&filter=')}` : '';
+const useScheduleList = ({ tab, filter, sort }: ScheduleListHook) => {
+  const filterQuery = filter ? `&filter=${filter.join('&filter=')}` : '';
+  const tabQuery = tab === 'past' ? `&tab=${tab}` : '';
+  const sortQuery = sort === 'createdAt' ? `&sort=${sort}` : '';
 
   const getKey: SWRInfiniteKeyLoader = (
     pageIndex: number,
-    previousPageData: ScheduleSimpleType[],
+    previousPageData: ScheduleDetailType[],
   ) => {
     if (
       (pageIndex > 0 && !previousPageData.length) ||
       (previousPageData && previousPageData.length < DATA_LIMIT)
     )
       return null;
-    return `/schedules/list?offset=${pageIndex * DATA_LIMIT}${filterQuery}`;
+    return `/schedules/list?offset=${
+      pageIndex * DATA_LIMIT
+    }${filterQuery}${sortQuery}${tabQuery}`;
   };
 
   const { data, size, setSize, isLoading, error, mutate } =
-    useSWRInfinite<ScheduleSimpleType[]>(getKey);
+    useSWRInfinite<ScheduleDetailType[]>(getKey);
 
   const isLoadingMore =
     isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');
@@ -61,10 +75,11 @@ const useScheduleList = (filter: string[]) => {
   );
 
   const setEditSchedule = useCallback(
-    (id: string, schedule: ScheduleDataType, token: string) => {
+    (id: string, schedule: EditScheduleType, token: string) => {
       const newSchedule = data?.map((page) => {
         return page.map((s) => (s.id === id ? { ...s, ...schedule } : s));
       });
+
       return mutate(putSchedule(id, schedule, token), {
         optimisticData: newSchedule,
         populateCache: false,

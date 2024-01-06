@@ -1,21 +1,22 @@
-import NavBar from '@/components/common/NavBar';
+import NavBar from '../common/NavBar';
 import BackButton from './BackButton';
 import SubmitButton from './SubmitButton';
-import { MouseEvent } from 'react';
+
 interface NewNavBarProps {
-  active: boolean;
-  onSubmit: (e: MouseEvent<HTMLButtonElement>) => void;
+  hasOrigin: boolean;
+  isValid: boolean;
 }
 
-const NewNavBar = ({ active, onSubmit }: NewNavBarProps) => {
+const NewNavBar = ({ hasOrigin, isValid }: NewNavBarProps) => {
   return (
-    <div className="fixed top-0 z-20 w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
-      <NavBar
-        label="일정등록"
-        leftSection={<BackButton />}
-        rightSection={<SubmitButton active={active} onClick={onSubmit} />}
-      />
-    </div>
+    <NavBar
+      className="sticky top-0 z-20 w-full bg-white"
+      label={hasOrigin ? '일정수정' : '일정등록'}
+      leftSection={<BackButton />}
+      rightSection={
+        <SubmitButton label={hasOrigin ? '수정' : '저장'} active={isValid} />
+      }
+    />
   );
 };
 

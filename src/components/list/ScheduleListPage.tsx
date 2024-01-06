@@ -1,25 +1,18 @@
 'use client';
 
-import { useState } from 'react';
-import ListHeader, { EventType } from './TabHeader';
+import { useListStore } from '@/store/zustand';
 import FilterList from './FilterList';
+import ListHeader from './TabHeader';
 
 const ScheduleListPage = () => {
-  //TODO: 다가오는, 완료된 일정 Count API 연동
-  const [tab, setTab] = useState<EventType>('UPCOMING');
-
-  const handleSwitchTab = (type: EventType) => setTab(type);
+  const currentTab = useListStore((state) => state.tab);
+  const handleSwitchTab = useListStore((state) => state.setTab);
 
   //TODO: api key context value로 전달
   return (
     <>
-      <ListHeader
-        current={tab}
-        upcomingCount={1}
-        completedCount={1}
-        onSwitch={handleSwitchTab}
-      />
-      <FilterList key={tab} />
+      <ListHeader current={currentTab} onSwitch={handleSwitchTab} />
+      <FilterList key={currentTab} tab={currentTab} />
     </>
   );
 };

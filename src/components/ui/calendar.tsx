@@ -1,39 +1,33 @@
 'use client';
 
-import * as React from 'react';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ComponentProps } from 'react';
 import { DateFormatter, DayPicker } from 'react-day-picker';
 
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { ko } from 'date-fns/locale';
-import { format } from 'date-fns';
-
-const formatCaption: DateFormatter = (month, options) =>
-  format(month, 'yyyy년 M월', { locale: options?.locale });
-
-export type CalendarProps = React.ComponentProps<typeof DayPicker>;
-//TODO: 터치 이벤트 추가
 function Calendar({
   className,
   classNames,
-  showOutsideDays = true,
   ...props
-}: CalendarProps) {
+}: ComponentProps<typeof DayPicker>) {
   return (
     <DayPicker
-      formatters={{ formatCaption }}
-      showOutsideDays={showOutsideDays}
+      fixedWeeks
+      showOutsideDays
       locale={ko}
+      formatters={{ formatCaption }}
       className={cn(
-        'h-80 w-full min-w-max p-4 web:h-full web:p-5 pb-0',
+        'h-80 w-full min-w-max p-4 pb-0 web:h-full web:p-5',
         className,
       )}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
         caption: 'w-full flex justify-between items-center pl-1.5',
-        caption_label: 'text-xs font-bold web:font-semibold',
+        caption_label: 'text-1 font-bold web:font-semibold',
         nav: 'space-x-1 flex items-center',
         nav_button: cn(
           buttonVariants({ variant: 'ghost' }),
@@ -44,9 +38,9 @@ function Calendar({
         table: 'w-full border-collapse space-y-1',
         head_row: 'flex justify-between w-full',
         head_cell:
-          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-xxs',
+          'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-0.85',
         row: 'flex justify-between w-full mt-1 web:mt-2',
-        cell: 'rounded-[9999px] text-center text-xs web:text-xxs p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
+        cell: 'rounded-[9999px] text-center text-1 web:text-0.85 p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
           'h-9 w-9 p-0 web:p-3 font-normal aria-selected:opacity-100 rounded-[9999px]',
@@ -62,17 +56,21 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => (
-          <ChevronLeft className="h-5 w-5 text-[#949494] hover:text-black active:scale-110" />
-        ),
-        IconRight: ({ ...props }) => (
-          <ChevronRight className=" h-5 w-5 text-[#949494] hover:text-black active:scale-110" />
-        ),
+        IconLeft: Calendar.LeftButton,
+        IconRight: Calendar.RightButton,
       }}
       {...props}
     />
   );
 }
+
+const formatCaption: DateFormatter = (month, options) =>
+  format(month, 'yyyy.MM', { locale: options?.locale });
+
+const chevronStyle = 'h-5 w-5 text-black-400 hover:text-black active:scale-110';
+
+Calendar.LeftButton = () => <ChevronLeft className={`${chevronStyle}`} />;
+Calendar.RightButton = () => <ChevronRight className={`${chevronStyle}`} />;
 
 Calendar.displayName = 'Calendar';
 

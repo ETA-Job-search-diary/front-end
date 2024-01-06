@@ -1,10 +1,10 @@
 import { STEPS } from '@/constants/form';
+import { StepTypes } from '@/model/schedule';
 import Chip from '../common/Chip';
-import { memo } from 'react';
 
 interface GridChipsProps {
-  checked: string[];
-  onClick: (value: string) => void;
+  checked: StepTypes[];
+  onClick: (value: StepTypes) => void;
 }
 
 const GridChips = ({ checked, onClick }: GridChipsProps) => {
@@ -25,4 +25,4 @@ const GridChips = ({ checked, onClick }: GridChipsProps) => {
   );
 };
 
-export default memo(GridChips);
+export default GridChips;

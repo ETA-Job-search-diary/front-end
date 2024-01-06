@@ -1,3 +1,7 @@
+import { PassRateProps } from '@/components/signin/PassRate';
+import { StatisticsProps } from '@/components/signin/StepStatistics';
+import { StepTypes } from '@/model/schedule';
+
 export const PLATFORM = {
   SARAMIN: { value: ['saramin', 'saram.in'], name: '사람인' },
   JOBKOREA: { value: ['jobkorea'], name: '잡코리아' },
@@ -12,11 +16,12 @@ export const PLATFORM = {
   BLINDHIRE: { value: ['blindhire'], name: '블라인드하이어' },
   JASOSEOL: { value: ['jasoseol'], name: '자소설닷컴' },
   SUPEROOKIE: { value: ['superookie'], name: '슈퍼루키' },
-  INTHISWORK: { value: ['inthistwork'], name: '인디스워크' },
+  INTHISWORK: { value: ['inthiswork'], name: '인디스워크' },
   JUMPIT: { value: ['jumpit'], name: '점핏' },
+  RALLIT: { value: ['rallit'], name: '랠릿' },
 };
 
-export const STEPS = [
+export const STEPS: { type: StepTypes; name: string }[] = [
   {
     type: 'document',
     name: '서류전형',
@@ -51,7 +56,7 @@ export const STEPS = [
   },
 ];
 
-export const FormTypes = {
+export const FORM_LABEL = {
   COMPANY: '회사',
   POSITION: '직무',
   DATE: '일정',
@@ -61,11 +66,46 @@ export const FormTypes = {
   STEP: '전형단계',
 };
 
-export const PlaceholderTypes = {
+export const PLACE_HOLDER = {
   COMPANY: '회사명을 입력해주세요',
   POSITION: '직무를 입력해주세요',
-  DATE: '서류마감일, 면접일을 입력해주세요',
-  LINK: '지원한 채용링크를 붙여넣기 해주세요',
+  DATE: '서류 마감일, 면접일 등을 입력해 보세요',
+  LINK: '채용공고 링크를 붙여 넣어 보세요',
   MEMO: '지원 관련 메모를 남겨주세요',
   PLATFORM: '채용플랫폼을 입력해 주세요',
 };
+
+export const STEP_STATISTICS: { type: keyof StatisticsProps; name: string }[] =
+  [
+    {
+      type: 'documentAssignment',
+      name: '서류/과제',
+    },
+    {
+      type: 'personalityWritten',
+      name: '인적성/필기',
+    },
+    {
+      type: 'interview',
+      name: '면접',
+    },
+    {
+      type: 'etc',
+      name: '기타',
+    },
+  ];
+
+export const STEP_RATE: { type: keyof PassRateProps; name: string }[] = [
+  {
+    type: 'document',
+    name: '서류',
+  },
+  {
+    type: 'interview',
+    name: '면접',
+  },
+  {
+    type: 'total',
+    name: '전체',
+  },
+];

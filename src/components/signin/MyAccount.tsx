@@ -1,36 +1,29 @@
-import { createPortal } from 'react-dom';
+'use client';
+
+import Icon from '@/assets/Icon';
+import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
+import useSession from '@/hook/useSession';
+import useShowToast from '@/hook/useShowToast';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Alert from '../common/Alert';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
-import SignOutButton from './SignOutButton';
-import { User } from 'next-auth';
-import Icon from '@/assets/Icon';
-import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
-import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
-import { redirect } from 'next/navigation';
-import { useState } from 'react';
-import Alert, { alertTypes } from '../common/Alert';
-import { signOut } from 'next-auth/react';
-import ServiceLink from './ServiceLink';
+import ServiceButton from './ServiceButton';
 import UserInfo from './UserInfo';
-import useShowToast from '@/hook/useShowToast';
-
-interface MyAccountProps {
-  session?: User;
-  onClose: () => void;
-}
 
 const serviceTypes = {
   LOGOUT: '로그아웃 하시겠습니까?',
   WITHDRAW: '서비스를 탈퇴 하시겠습니까?',
 };
 
-const MyAccount = ({ session, onClose }: MyAccountProps) => {
+const MyAccount = () => {
+  const { user } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const { showWithdrawalToast } = useShowToast();
-
-  if (!session) redirect('/auth/signin');
-  const { name, email } = session;
+  const { replace } = useRouter();
 
   const handleAlert = (value: string) => {
     setMessage(value);
@@ -44,46 +37,42 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
     showWithdrawalToast();
   };
 
-  useDisableBodyScroll();
-
-  return createPortal(
-    <section className="fixed top-0 z-30 mx-auto min-h-screen w-full min-w-[280px] max-w-[500px] bg-white pt-[calc(env(safe-area-inset-top))]">
-      <NavBar
-        label="마이페이지"
-        leftSection={<BackButton onClose={onClose} />}
-      />
-      <div className="px-[22px] web:px-[28px]">
-        <UserInfo name={name} email={email} />
-        <div className="flex flex-col items-center px-1 pt-3 web:px-3">
-          <ServiceLink href={SERVICE_DESCRIPTION} label="서비스 소개" />
-          <ServiceLink href={SUPPORT_FORM} label="문의하기" />
-          <SignOutButton onClick={() => handleAlert(serviceTypes.LOGOUT)} />
-          <button
-            type="button"
-            className="flex w-full items-center gap-3 p-5"
+  return (
+    <>
+      <div className="sticky top-0 z-20 h-full w-full bg-gray-100 pt-[calc(env(safe-area-inset-top))]">
+        <NavBar
+          label="마이페이지"
+          leftSection={<BackButton onClose={() => replace('/')} />}
+        />
+      </div>
+      <div className="flex flex-col gap-8 px-page">
+        <UserInfo user={user} />
+        <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4">
+          <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
+          <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
+          <ServiceButton
+            label="logout"
+            onClick={() => handleAlert(serviceTypes.LOGOUT)}
+          />
+          <ServiceButton
+            label="withdraw"
             onClick={() => handleAlert(serviceTypes.WITHDRAW)}
-          >
-            <Icon
-              name="withdraw"
-              className="h-4 w-5 stroke-black300 web:h-4 web:w-5"
-            />
-            <span className="text-xs text-black900">탈퇴하기</span>
-          </button>
+          />
         </div>
         <Icon
           name="teamETA"
-          className="absolute bottom-20 right-7 h-[119px] w-40 web:right-10 web:h-[155px] web:w-[212px]"
+          className="mb-16 mt-20 h-[119px] w-40 place-self-end web:h-[155px] web:w-[212px]"
         />
         {isOpen && (
           <Alert
             message={message}
             type={[
               {
-                value: alertTypes.CANCEL,
+                value: 'CANCEL',
                 onClick: () => setIsOpen(false),
               },
               {
-                value: alertTypes.CONFIRM,
+                value: 'CONFIRM',
                 onClick:
                   message === serviceTypes.LOGOUT ? onSignOut : onWithdraw,
               },
@@ -92,8 +81,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           />
         )}
       </div>
-    </section>,
-    document.body.querySelector('main') || document.body,
+    </>
   );
 };
 

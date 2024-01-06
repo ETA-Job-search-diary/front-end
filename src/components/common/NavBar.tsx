@@ -1,19 +1,29 @@
-import { ReactNode, memo } from 'react';
+import { cn } from '@/lib/utils';
+import { HTMLAttributes, ReactNode, forwardRef, memo } from 'react';
 
-interface NavBarProps {
+interface NavBarProps extends HTMLAttributes<HTMLDivElement> {
   label?: string;
   leftSection?: ReactNode;
   rightSection?: ReactNode;
 }
 
-const NavBar = ({ label, leftSection, rightSection }: NavBarProps) => {
-  return (
-    <nav className="grid h-16 w-full grid-cols-[1fr_5fr_1fr] place-items-stretch items-center justify-center px-1 text-sm text-black900 web:h-[70px]">
-      <p className="col-start-1">{leftSection}</p>
-      <p className="col-start-2 text-center font-semibold">{label}</p>
-      <p className="col-start-3 text-center">{rightSection}</p>
-    </nav>
-  );
-};
+const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
+  ({ label, leftSection, rightSection, className, ...rest }, ref) => {
+    return (
+      <nav
+        ref={ref}
+        className={cn(
+          'grid h-16 w-full grid-cols-[1fr_5fr_1fr] place-items-stretch items-center justify-center px-1 text-1.1 text-black-900 web:h-[70px]',
+          className,
+        )}
+        {...rest}
+      >
+        <p className="col-start-1">{leftSection}</p>
+        <p className="col-start-2 text-center font-semibold">{label}</p>
+        <p className="col-start-3 text-center">{rightSection}</p>
+      </nav>
+    );
+  },
+);
 
 export default memo(NavBar);

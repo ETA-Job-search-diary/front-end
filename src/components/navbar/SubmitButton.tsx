@@ -1,39 +1,25 @@
-import { MouseEvent } from 'react';
+import { ButtonHTMLAttributes, forwardRef } from 'react';
 import Button from '../common/Button';
 
-type MouseEventCallback = (e: MouseEvent<HTMLButtonElement>) => void;
-
-interface SubmitButtonProps {
+interface SubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
   active: boolean;
-  onClick: MouseEventCallback;
 }
 
-const SubmitButton = ({
-  label = '저장',
-  active,
-  onClick,
-}: SubmitButtonProps) => {
-  const handleSubmitOnce = (onClick: MouseEventCallback) => {
-    let done = false;
-    return (e: MouseEvent<HTMLButtonElement>) => {
-      if (!done) {
-        done = true;
-        onClick(e);
-      }
-    };
-  };
-
-  return (
-    <Button
-      type="submit"
-      size="sm"
-      label={label}
-      color="secondary"
-      active={active}
-      onClick={handleSubmitOnce(onClick)}
-    />
-  );
-};
+const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
+  ({ label = '저장', active, ...rest }, ref) => {
+    return (
+      <Button
+        ref={ref}
+        size="lg"
+        type="submit"
+        label={label}
+        variant={active ? 'primary-border' : 'gray-border'}
+        disabled={!active}
+        {...rest}
+      />
+    );
+  },
+);
 
 export default SubmitButton;

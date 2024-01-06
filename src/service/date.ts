@@ -73,12 +73,6 @@ export const getFormattedCurrentTime = (current: string) => {
   };
 };
 
-export const formatToISODateTime = (inputDate: string, inputTime: string) => {
-  const cleanedDateStr = inputDate.replaceAll('.', '-');
-  const combinedDateTimeStr = `${cleanedDateStr}T${inputTime}:00.000Z`;
-  return combinedDateTimeStr;
-};
-
 export const getFormattedISODateTime = (origin?: string) => {
   const dateObj = origin ? new Date(origin) : new Date();
   const date = origin
@@ -87,6 +81,7 @@ export const getFormattedISODateTime = (origin?: string) => {
   const time = origin ? origin.slice(11, 16) : '00:00';
 
   return {
+    fullDate: `${date.replaceAll('.', '-')}T${time}:00.000Z`,
     date,
     time,
   };

@@ -1,6 +1,6 @@
+import { authOptions } from '@/lib/authOptions';
 import { getServerSession } from 'next-auth';
 import { cache } from 'react';
-import { authOptions } from '@/lib/authOptions';
 
 import 'server-only';
 

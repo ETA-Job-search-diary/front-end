@@ -1,7 +1,6 @@
+import { ScheduleStatusType } from '@/model/schedule';
 import { MouseEvent } from 'react';
 import Button from '../common/Button';
-
-export type ScheduleStatus = 'pending' | 'pass' | 'fail';
 
 const StatusButton = {
   pending: '합격여부 입력하기',
@@ -10,7 +9,7 @@ const StatusButton = {
 };
 
 interface CompleteButtonProps {
-  status: ScheduleStatus;
+  status: ScheduleStatusType;
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -20,9 +19,9 @@ const CompleteButton = ({ status, onClick }: CompleteButtonProps) => {
 
   return (
     <Button
-      size="xs"
-      color={isPending ? 'primary' : 'gray'}
-      active={isPending}
+      size="sm"
+      variant={isPending ? 'primary' : 'light-gray'}
+      disabled={!isPending}
       label={buttonText}
       onClick={onClick}
     />

@@ -1,23 +1,56 @@
-import Alert, { alertTypes } from '../common/Alert';
-import EditButtons from './EditButtons';
-import GridChips from './GridChips';
 import useScheduleList from '@/hook/scheduleList';
-import { useCheckDispatch, useCheckState } from '@/context/CheckProvider';
-import { useCallback, useState } from 'react';
-import Skeleton from '../common/Skeleton';
-import EmptyItem from '../home/EmptyItem';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
-import ScheduleList from '../home/ScheduleList';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
+import {
+  EditScheduleType,
+  ScheduleDetailType,
+  ScheduleStatusType,
+} from '@/model/schedule';
+import { useListStore } from '@/store/zustand';
+import { useCallback, useState } from 'react';
+import Alert, { AlertTypes } from '../common/Alert';
+import Skeleton from '../common/Skeleton';
+import CheckButton from './CheckButton';
+import DateLine from './DateLine';
+import EditButtons from './EditButtons';
+import EmptyItem from './EmptyItem';
+import GridChips from './GridChips';
+import ScheduleItem from './ScheduleItem';
+import { EventType } from './TabHeader';
 
-const FilterList = () => {
-  const { token } = useSession();
-  const { showDeleteConfirmToast } = useShowToast();
+interface FilterListProps {
+  tab: EventType;
+  list?: ScheduleDetailType[];
+  isLoading?: boolean;
+}
 
-  const [filter, setFilter] = useState<string[]>([]);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [isAlertOpen, setIsAlertOpen] = useState(false);
+interface SubmitResultProps {
+  id: string;
+  data: EditScheduleType;
+  token: string;
+}
+
+type AlertStatus = 'delete' | 'result';
+export type SortTypes = 'latest' | 'createdAt';
+
+const Message = {
+  delete: '선택한 일정을 삭제할까요?',
+  result: '해당전형에 합격하셨나요?',
+};
+//TODO: Refactoring 필요함
+const FilterList = ({ tab }: FilterListProps) => {
+  const {
+    filter,
+    sort,
+    checkedIds,
+    resultItem,
+    setFilter: handleStepFilter,
+    setSort: handleOrder,
+    toggleCheck: handleCheck,
+    unCheckAll,
+    submitResult: submitResultClick,
+  } = useListStore();
 
   const {
     data,
@@ -26,88 +59,177 @@ const FilterList = () => {
     isLoadingMore,
     isReachingEnd,
     setDeleteSchedule,
-  } = useScheduleList(filter);
+    setEditSchedule,
+  } = useScheduleList({ tab, filter, sort });
 
-  const isFiltered = !!filter.length;
+  const { showDeleteConfirmToast, showPassingRateToast } = useShowToast();
 
-  const { allChecked, checkedIds } = useCheckState();
-  const { onUnCheckAll } = useCheckDispatch();
+  const { token } = useSession();
 
-  const handleStepFilter = useCallback(
-    (step: string) =>
-      setFilter((prevFilter) => {
-        const updatedFilter = prevFilter.includes(step)
-          ? prevFilter.filter((item) => item !== step)
-          : [...prevFilter, step];
-        return updatedFilter;
-      }),
-    [],
-  );
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [alertStatus, setAlertStatus] = useState<AlertStatus | null>(null);
 
-  const handleEdit = useCallback(() => setIsEdit(true), []);
+  const handleEditStart = useCallback(() => setIsEdit(true), []);
 
-  const handleDeleteAlert = useCallback(() => setIsAlertOpen(true), []);
+  const handleDeleteAlert = useCallback(() => {
+    setAlertStatus('delete');
+  }, []);
 
-  const closeAlert = () => setIsAlertOpen(false);
+  const closeAlert = () => setAlertStatus(null);
 
-  const handleDeleteConfirm = () => {
-    if (!token || !checkedIds.length) return;
-    setDeleteSchedule(checkedIds, token);
-    showDeleteConfirmToast();
+  const handleDeleteConfirm = async () => {
+    if (!token) return;
     closeAlert();
-    onUnCheckAll();
+    const res = await deleteSchedule(token);
+    if (res) {
+      showDeleteConfirmToast();
+      unCheckAll();
+    }
   };
 
-  const handleComplete = useCallback(() => {
-    onUnCheckAll();
+  const deleteSchedule = (token: string) =>
+    setDeleteSchedule(checkedIds, token);
+
+  const handleResultBtnClick = (item: ScheduleDetailType) => {
+    setAlertStatus('result');
+    submitResultClick(item);
+  };
+  //TODO: sumbit 후 서버사이드로 된 상세 페이지 데이터 변경 필요함....
+  const handleSubmitComplete = async (result: ScheduleStatusType) => {
+    if (!token) return;
+    closeAlert();
+    const newResultItem = {
+      step: resultItem?.step,
+      company: resultItem?.company,
+      position: resultItem?.position,
+      date: resultItem?.date,
+      link: resultItem?.link,
+      platform: resultItem?.platform,
+      memo: resultItem?.memo,
+      status: result,
+    };
+    const res = await submitResult({
+      id: checkedIds[0],
+      data: newResultItem,
+      token,
+    });
+    if (res) {
+      showPassingRateToast();
+      unCheckAll();
+    }
+  };
+
+  const submitResult = ({ id, data, token }: SubmitResultProps) =>
+    setEditSchedule(id, data, token);
+
+  const handleEditComplete = useCallback(() => {
+    unCheckAll();
     setIsEdit(false);
   }, []);
+
+  const AlertActions: Record<
+    AlertStatus,
+    {
+      value: keyof typeof AlertTypes;
+      onClick: () => void;
+    }[]
+  > = {
+    delete: [
+      {
+        value: 'CANCEL',
+        onClick: closeAlert,
+      },
+      {
+        value: 'DELETE',
+        onClick: handleDeleteConfirm,
+      },
+    ],
+    result: [
+      {
+        value: 'FAIL',
+        onClick: () => handleSubmitComplete('fail'),
+      },
+      {
+        value: 'PASS',
+        onClick: () => handleSubmitComplete('pass'),
+      },
+    ],
+  };
 
   const { setTarget } = useIntersectionObserver({
     isReachingEnd,
     nextPage,
   });
 
+  let lastMonth = '';
+
   return (
     <>
-      <div className="flex flex-col gap-4 px-[22px] pt-6 web:px-[28px]">
+      <div className="flex flex-col gap-5 bg-white px-page pt-20">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
+          currentOrder={sort}
           isEdit={isEdit}
-          onEdit={handleEdit}
+          onEdit={handleEditStart}
           onDelete={handleDeleteAlert}
-          onCompleted={handleComplete}
+          onCompleted={handleEditComplete}
+          onOrder={handleOrder}
         />
         {isLoading && <Skeleton.List />}
         {!isLoading &&
           (!!data?.length ? (
             <>
-              <ScheduleList items={data} isEdit={isEdit} />
+              <ul className={`flex w-full flex-col gap-3`}>
+                {data.map((item) => {
+                  const month = item.date.slice(0, 7);
+                  const isNewMonth = lastMonth !== month;
+                  const isChecked = checkedIds.includes(item.id);
+                  if (isNewMonth) lastMonth = month;
+                  return (
+                    <>
+                      {isNewMonth && (
+                        <DateLine key={month} date={month} tab={tab} />
+                      )}
+                      <li
+                        key={item.id}
+                        className={`items-center web:gap-3 ${
+                          isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
+                        }`}
+                      >
+                        {isEdit && (
+                          <CheckButton
+                            checked={isChecked}
+                            onClick={() => handleCheck(item.id)}
+                          />
+                        )}
+                        {tab === 'coming' ? (
+                          <ScheduleItem {...item} />
+                        ) : (
+                          <ScheduleItem.WithStatus
+                            {...item}
+                            tab={tab}
+                            onResult={() => handleResultBtnClick(item)}
+                          />
+                        )}
+                      </li>
+                    </>
+                  );
+                })}
+              </ul>
               {isLoadingMore && <Skeleton.Item />}
               <div
                 ref={setTarget}
                 className="pb-[calc(env(safe-area-inset-bottom)+90px)]"
               />
             </>
-          ) : isFiltered ? (
-            <EmptyItem page="list" messageType="additional" />
           ) : (
-            <EmptyItem page="list" messageType="empty" />
+            <EmptyItem messageType={tab} />
           ))}
       </div>
-      {isAlertOpen && (
+      {alertStatus !== null && (
         <Alert
-          message={`선택한 일정을 ${alertTypes.DELETE}할까요?`}
-          type={[
-            {
-              value: alertTypes.CANCEL,
-              onClick: closeAlert,
-            },
-            {
-              value: alertTypes.DELETE,
-              onClick: handleDeleteConfirm,
-            },
-          ]}
+          message={Message[alertStatus]}
+          type={AlertActions[alertStatus]}
           onClose={closeAlert}
         />
       )}

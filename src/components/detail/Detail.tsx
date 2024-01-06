@@ -22,7 +22,7 @@ const Detail = ({
   const fullDateEndTime = `${fullDate}(${shortDay}) ${endTime}`;
 
   return (
-    <section className="flex h-full w-full flex-col gap-7 scroll-auto px-[22px] pt-8 web:px-[28px]">
+    <section className="flex h-full w-full flex-col gap-7 scroll-auto px-page pt-8 web:px-[28px]">
       <DetailItem title="COMPANY" icon="briefcase" content={company} />
       <DetailItem title="POSITION" icon="position" content={position} />
       <DetailItem title="DATE" icon="clock" content={fullDateEndTime} />
