@@ -19,7 +19,7 @@ const UserInfo = ({ user }: UserInfoProps) => {
   return (
     <>
       <section className="flex h-20 flex-col justify-center gap-2 rounded-xl border border-black-100 bg-white px-4 py-5 web:h-[115px] web:px-6">
-        <h1 className="text-1.2 font-bold text-black-900">{user?.name}</h1>
+        <h1 className="text-1.1 font-bold text-black-900">{user?.name}</h1>
         <div className="flex items-start gap-2">
           <span>
             <Icon

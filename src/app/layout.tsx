@@ -150,7 +150,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#ffffff',
+  themeColor: '#2FC964',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -160,7 +160,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <ThemeProvider>
-          <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col bg-white pt-[calc(env(safe-area-inset-top))]">
+          <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white">
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>
               <TabBar />

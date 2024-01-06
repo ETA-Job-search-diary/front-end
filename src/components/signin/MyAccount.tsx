@@ -39,7 +39,7 @@ const MyAccount = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-20 h-full w-full bg-gray-100 pt-[calc(env(safe-area-inset-top))]">
+      <div className="sticky top-0 z-20 h-full w-full bg-gray-100 pt-safe-top">
         <NavBar
           label="마이페이지"
           leftSection={<BackButton onClose={() => replace('/')} />}
