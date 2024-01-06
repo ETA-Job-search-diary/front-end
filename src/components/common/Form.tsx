@@ -2,7 +2,7 @@
 
 import { PLACE_HOLDER } from '@/constants/form';
 import { REGEX } from '@/constants/regex';
-import useScheduleList from '@/hook/scheduleList';
+import useScheduleList, { EditedScheduleType } from '@/hook/scheduleList';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
@@ -27,8 +27,6 @@ import TextInput from './TextInput';
 import TextInputWithReset from './TextInputWithReset';
 
 const TEXTAREA_MAX_LENGTH = 200;
-
-export type EditedScheduleType = Omit<ScheduleDetailType, 'id'>;
 
 interface FormProps {
   originData?: ScheduleDetailType;
@@ -124,16 +122,14 @@ const Form = ({ originData }: FormProps) => {
   ) => {
     const res = await setEditSchedule(id, data, token);
     if (!res) return;
-
-    replace(`/schedule/${id}`);
     refresh();
+    replace(`/schedule/${id}`);
   };
 
   const newSchedule = async (data: CompleteFormType, token: string) => {
     const res = await postSchedule(data, token);
     if (!res) return;
     replace(`/schedule/${res.id}`);
-    mutate();
   };
 
   const resetCrawlingValues = () => {

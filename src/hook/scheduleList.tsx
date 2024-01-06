@@ -1,4 +1,3 @@
-import { EditedScheduleType } from '@/components/common/Form';
 import { SortTypes } from '@/components/list/FilterList';
 import { EventType } from '@/components/list/TabHeader';
 import { ScheduleDetailType, StepTypes } from '@/model/schedule';
@@ -7,6 +6,8 @@ import { useCallback } from 'react';
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite';
 
 const DATA_LIMIT = 20;
+
+export type EditedScheduleType = Omit<ScheduleDetailType, 'id'>;
 
 interface ScheduleListHook {
   tab?: EventType;
