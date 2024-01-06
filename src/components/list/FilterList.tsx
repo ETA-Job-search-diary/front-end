@@ -1,14 +1,11 @@
-import useScheduleList from '@/hook/scheduleList';
+import useScheduleList, { EditedScheduleType } from '@/hook/scheduleList';
 import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
-import {
-  EditScheduleType,
-  ScheduleDetailType,
-  ScheduleStatusType,
-} from '@/model/schedule';
+import { ScheduleDetailType, ScheduleStatusType } from '@/model/schedule';
 import { useListStore } from '@/store/zustand';
 import { useCallback, useState } from 'react';
+import { useSWRConfig } from 'swr';
 import Alert, { AlertTypes } from '../common/Alert';
 import Skeleton from '../common/Skeleton';
 import CheckButton from './CheckButton';
@@ -27,7 +24,7 @@ interface FilterListProps {
 
 interface SubmitResultProps {
   id: string;
-  data: EditScheduleType;
+  data: EditedScheduleType;
   token: string;
 }
 
@@ -94,10 +91,11 @@ const FilterList = ({ tab }: FilterListProps) => {
     setAlertStatus('result');
     submitResultClick(item);
   };
-  //TODO: sumbit 후 서버사이드로 된 상세 페이지 데이터 변경 필요함....
+
   const handleSubmitComplete = async (result: ScheduleStatusType) => {
-    if (!token) return;
+    if (!token || !resultItem) return;
     closeAlert();
+
     const newResultItem = {
       step: resultItem?.step,
       company: resultItem?.company,
@@ -118,9 +116,13 @@ const FilterList = ({ tab }: FilterListProps) => {
       unCheckAll();
     }
   };
-
-  const submitResult = ({ id, data, token }: SubmitResultProps) =>
-    setEditSchedule(id, data, token);
+  //TODO: sumbit 후 서버사이드로 된 상세 페이지 데이터 변경 필요함... 수정
+  const { mutate } = useSWRConfig();
+  const submitResult = async ({ id, data, token }: SubmitResultProps) => {
+    const res = await setEditSchedule(id, data, token);
+    await mutate(`/schedules/passRate`);
+    return res;
+  };
 
   const handleEditComplete = useCallback(() => {
     unCheckAll();

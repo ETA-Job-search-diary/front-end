@@ -2,7 +2,7 @@
 
 import { PLACE_HOLDER } from '@/constants/form';
 import { REGEX } from '@/constants/regex';
-import useScheduleList from '@/hook/scheduleList';
+import useScheduleList, { EditedScheduleType } from '@/hook/scheduleList';
 import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
@@ -50,7 +50,7 @@ const Form = ({ originData }: FormProps) => {
       company: originData?.company ?? '',
       position: originData?.position ?? '',
       date: originData?.date ?? currentDate,
-      memo: originData?.memo ?? '',
+      memo: originData?.memo === ' ' ? '' : originData?.memo,
     },
   });
 
@@ -89,35 +89,47 @@ const Form = ({ originData }: FormProps) => {
     };
 
     if (originData) {
-      const isEdit = Object.keys(originData).some(
-        (key) =>
-          originData[key as keyof ScheduleDetailType] !==
-          postData[key as keyof CompleteFormType],
-      );
-      if (isEdit) editSchedule(originData.id, postData, token);
+      const isEdit = areObjectEqual(originData, postData);
+      if (isEdit) {
+        const editedData = {
+          ...postData,
+          status: originData.status,
+        };
+        editSchedule(originData.id, editedData, token);
+      }
       replace(`/schedule/${originData.id}`);
       return;
     }
     newSchedule(postData, token);
   };
 
+  const areObjectEqual = (
+    origin: ScheduleDetailType,
+    newPost: CompleteFormType,
+  ) =>
+    origin.date !== newPost.date ||
+    origin.company !== newPost.company ||
+    origin.position !== newPost.position ||
+    origin.step !== newPost.step ||
+    origin.link !== newPost.link ||
+    origin.platform !== newPost.platform ||
+    origin.memo !== newPost.memo;
+
   const editSchedule = async (
     id: string,
-    data: CompleteFormType,
+    data: EditedScheduleType,
     token: string,
   ) => {
     const res = await setEditSchedule(id, data, token);
     if (!res) return;
-
-    replace(`/schedule/${id}`);
     refresh();
+    replace(`/schedule/${id}`);
   };
 
   const newSchedule = async (data: CompleteFormType, token: string) => {
     const res = await postSchedule(data, token);
     if (!res) return;
     replace(`/schedule/${res.id}`);
-    mutate();
   };
 
   const resetCrawlingValues = () => {

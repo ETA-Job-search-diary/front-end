@@ -1,15 +1,13 @@
 import { SortTypes } from '@/components/list/FilterList';
 import { EventType } from '@/components/list/TabHeader';
-import {
-  EditScheduleType,
-  ScheduleDetailType,
-  StepTypes,
-} from '@/model/schedule';
+import { ScheduleDetailType, StepTypes } from '@/model/schedule';
 import { api } from '@/service/api';
 import { useCallback } from 'react';
 import useSWRInfinite, { SWRInfiniteKeyLoader } from 'swr/infinite';
 
 const DATA_LIMIT = 20;
+
+export type EditedScheduleType = Omit<ScheduleDetailType, 'id'>;
 
 interface ScheduleListHook {
   tab?: EventType;
@@ -23,7 +21,7 @@ const deleteSchedule = async (checkedIds: string[], token: string) => {
 
 const putSchedule = async (
   id: string,
-  data: EditScheduleType,
+  data: EditedScheduleType,
   token: string,
 ) => {
   return api(`/schedules/${id}`, 'put', token, data);
@@ -75,7 +73,7 @@ const useScheduleList = ({ tab, filter, sort }: ScheduleListHook) => {
   );
 
   const setEditSchedule = useCallback(
-    (id: string, schedule: EditScheduleType, token: string) => {
+    (id: string, schedule: EditedScheduleType, token: string) => {
       const newSchedule = data?.map((page) => {
         return page.map((s) => (s.id === id ? { ...s, ...schedule } : s));
       });
