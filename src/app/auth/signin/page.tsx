@@ -30,7 +30,9 @@ export default async function SingInPage({
 
   return (
     <>
-      <NavBar leftSection={<BackButton />} />
+      <div className="sticky top-0 z-20 h-full w-full bg-white pt-safe-top">
+        <NavBar leftSection={<BackButton />} />
+      </div>
       <section className="h-[calc(100vh-70px)] w-full overflow-x-hidden px-page">
         <div className="relative top-[10%]">
           <div className="flex flex-col gap-28 web:gap-32">
