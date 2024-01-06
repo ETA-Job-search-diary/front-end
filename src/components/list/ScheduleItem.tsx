@@ -71,7 +71,7 @@ ScheduleItem.Date = ({ date: dateInfo }: ScheduleDate) => {
   const { date, day } = getFormattedDateTimeInfo(dateInfo);
   return (
     <div
-      className={`flex h-full w-full flex-col items-center justify-center border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
+      className={`flex w-full flex-col items-center justify-center gap-1.5 border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
     >
       <h3 className="text-1.3 font-bold xs:text-1.1 web:text-1.5">{date}</h3>
       <span className="text-0.85 web:text-0.95">{day}</span>

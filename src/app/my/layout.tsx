@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: 'var(--app-gray-100)',
+  themeColor: '#FAFAFA',
 };
 
 interface MyLayoutProps {

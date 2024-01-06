@@ -165,7 +165,7 @@ const FilterList = ({ tab }: FilterListProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-5 bg-white px-page pt-20">
+      <div className="flex h-full flex-col gap-5 bg-white px-page pt-20">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
           currentOrder={sort}

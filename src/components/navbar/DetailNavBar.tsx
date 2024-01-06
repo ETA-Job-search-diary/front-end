@@ -22,7 +22,7 @@ const DetailNavBar = ({
   const bagdeName = getStepByValue(step);
 
   return (
-    <div className="sticky top-0 z-20 h-full w-full bg-white pt-[calc(env(safe-area-inset-top))]">
+    <div className="sticky top-0 z-20 h-full w-full bg-white pt-safe-top">
       <NavBar
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}

@@ -135,10 +135,7 @@ const Form = ({ originData }: FormProps) => {
   return (
     <>
       {isClient && (
-        <form
-          className="pb-8 pt-[calc(env(safe-area-inset-top))]"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="pb-8" onSubmit={handleSubmit(onSubmit)}>
           <NewNavBar hasOrigin={!!originData} isValid={isValid} />
           <div className="flex flex-col gap-12 px-page web:px-[28px]">
             {/* 전형 단계 */}

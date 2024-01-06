@@ -13,6 +13,8 @@ import {
   formatCalendarDate,
   getFormattedISODateTime,
 } from '@/service/date';
+import { format } from 'date-fns';
+import { useNavigation } from 'react-day-picker';
 import DateInput from './DateInput';
 import TimePicker from './TimePicker';
 
@@ -122,7 +124,39 @@ DateTimePicker.Mobile = ({
           side="bottom"
           className="rounded-t-3xl border-none pb-[calc(env(safe-area-inset-bottom)+1rem)] pt-8 outline-none"
         >
-          <Calendar mode="single" selected={selectedDate} onSelect={onDate} />
+          <Calendar
+            mode="single"
+            selected={selectedDate}
+            onSelect={onDate}
+            components={{
+              Caption: ({ displayMonth }) => {
+                const { goToMonth, nextMonth, previousMonth } = useNavigation();
+                return (
+                  <div className="grid grid-cols-[minmax(4.5rem,auto)_1fr] gap-2">
+                    <h1 className="pl-2 text-1 font-bold text-black-900">
+                      {format(displayMonth, 'yyyy.MM')}
+                    </h1>
+                    <div className="flex gap-3">
+                      <button
+                        disabled={!previousMonth}
+                        onClick={() =>
+                          previousMonth && goToMonth(previousMonth)
+                        }
+                      >
+                        <Calendar.LeftButton />
+                      </button>
+                      <button
+                        disabled={!nextMonth}
+                        onClick={() => nextMonth && goToMonth(nextMonth)}
+                      >
+                        <Calendar.RightButton />
+                      </button>
+                    </div>
+                  </div>
+                );
+              },
+            }}
+          />
         </SheetContent>
       </Sheet>
       <TimePicker time={time} onTime={onTime} />
