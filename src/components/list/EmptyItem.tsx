@@ -1,11 +1,16 @@
+'use client';
+
 import Icon from '@/assets/Icon';
 import { SCHEDULE_MESSAGE } from '@/constants/schedule';
+import useSession from '@/hook/useSession';
+import Link from 'next/link';
 
 interface EmptyItemProps {
   messageType: keyof typeof SCHEDULE_MESSAGE;
 }
 
 const EmptyItem = ({ messageType }: EmptyItemProps) => {
+  const { token } = useSession();
   const { title, suggestion } = SCHEDULE_MESSAGE[messageType];
 
   return (
@@ -15,6 +20,14 @@ const EmptyItem = ({ messageType }: EmptyItemProps) => {
       <p className="whitespace-pre-line text-center text-0.9 leading-6 text-black-500">
         {suggestion}
       </p>
+      {!token && (
+        <Link
+          href={'/auth/signin'}
+          className="rounded-small bg-primary-500 px-6 py-2 font-semibold text-white hover:font-extrabold"
+        >
+          1초 만에 로그인 하기
+        </Link>
+      )}
     </div>
   );
 };

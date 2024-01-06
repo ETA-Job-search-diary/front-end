@@ -34,6 +34,9 @@ module.exports = {
         'safe-right': 'env(safe-area-inset-right)',
         page: '1.25rem',
       },
+      margin: {
+        page: '1.25rem',
+      },
       borderWidth: {
         DEFAULT: '0.5px',
         form: '0.8px',

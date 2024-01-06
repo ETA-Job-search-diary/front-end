@@ -22,13 +22,12 @@ const DetailNavBar = ({
   const bagdeName = getStepByValue(step);
 
   return (
-    <>
+    <div className="sticky top-0 z-20 h-full w-full bg-white pt-[calc(env(safe-area-inset-top))]">
       <NavBar
-        className="sticky top-[calc(env(safe-area-inset-top))] bg-white"
         leftSection={<BackButton />}
         rightSection={<DetailMoreMenu scheduleId={id} />}
       />
-      <div className="mx-page flex items-center gap-3 border-b border-black-100 pb-8 web:mx-7">
+      <div className="mx-page flex items-center gap-3 border-b border-black-100 pb-8">
         <h1 className="text-1.2 font-bold text-black-900 web:text-1.5">
           {company} {position}
         </h1>
@@ -37,7 +36,7 @@ const DetailNavBar = ({
           <Badge label={status} variant={status} />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

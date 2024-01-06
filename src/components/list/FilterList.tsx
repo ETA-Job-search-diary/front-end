@@ -94,7 +94,7 @@ const FilterList = ({ tab }: FilterListProps) => {
     setAlertStatus('result');
     submitResultClick(item);
   };
-
+  //TODO: sumbit 후 서버사이드로 된 상세 페이지 데이터 변경 필요함....
   const handleSubmitComplete = async (result: ScheduleStatusType) => {
     if (!token) return;
     closeAlert();
@@ -165,7 +165,7 @@ const FilterList = ({ tab }: FilterListProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-5 bg-white px-[22px] pt-20 web:px-[28px]">
+      <div className="flex flex-col gap-5 bg-white px-page pt-20">
         <GridChips checked={filter} onClick={handleStepFilter} />
         <EditButtons
           currentOrder={sort}

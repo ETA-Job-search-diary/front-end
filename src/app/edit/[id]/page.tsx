@@ -1,7 +1,16 @@
 import Form from '@/components/common/Form';
 import { getScheduleBy } from '@/service/schedule';
 import { getToken } from '@/service/token';
+import { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: '일정 편집',
+};
+
+export const viewport: Viewport = {
+  themeColor: 'var(--app-white)',
+};
 
 interface EditPageProps {
   params: {

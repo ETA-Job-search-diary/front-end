@@ -17,16 +17,13 @@ const serviceTypes = {
   LOGOUT: '로그아웃 하시겠습니까?',
   WITHDRAW: '서비스를 탈퇴 하시겠습니까?',
 };
-//TODO: 새로고침 에러 무슨일이지 왜지 왜 오스로 가지..
+
 const MyAccount = () => {
+  const { user } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const { showWithdrawalToast } = useShowToast();
   const { replace } = useRouter();
-  const { user } = useSession();
-
-  // if (!user) redirect('/auth/signin');
-  if (!user) return null;
 
   const handleAlert = (value: string) => {
     setMessage(value);
