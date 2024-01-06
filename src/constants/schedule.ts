@@ -1,6 +1,6 @@
 const MESSAGE_TYPES = {
   title: {
-    upcoming: '다가오는 일정이 없어요',
+    coming: '다가오는 일정이 없어요',
     past: '지난 일정이 없어요',
     category: '해당 카테고리에 등록된 일정이 없어요',
   },
@@ -11,8 +11,8 @@ const MESSAGE_TYPES = {
 };
 
 export const SCHEDULE_MESSAGE = {
-  upcoming: {
-    title: MESSAGE_TYPES.title.upcoming,
+  coming: {
+    title: MESSAGE_TYPES.title.coming,
     suggestion: MESSAGE_TYPES.suggestion.add,
   },
   past: {

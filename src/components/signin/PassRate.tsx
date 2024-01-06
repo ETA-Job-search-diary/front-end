@@ -5,10 +5,16 @@ import DoughnutChart from './DoughnutChart';
 import StatisticsSection from './StatisticsSection';
 
 export interface PassRateProps {
-  document: number;
-  interview: number;
-  total: number;
+  document: RateTypes;
+  interview: RateTypes;
+  total: RateTypes;
 }
+
+type RateTypes = {
+  passRate: number;
+  totalCount: number;
+  totalPassCount: number;
+};
 
 const PassRate = (rate: PassRateProps) => {
   const COLUMN_COUNT = STEP_RATE.length;
@@ -29,7 +35,7 @@ const PassRate = (rate: PassRateProps) => {
       >
         {STEP_RATE.map(({ type, name }) => (
           <li key={name} className="flex flex-col items-center justify-center">
-            <DoughnutChart rate={rate[type]} label={name} />
+            <DoughnutChart rate={rate?.[type]?.passRate} label={name} />
           </li>
         ))}
       </ul>

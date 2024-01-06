@@ -44,7 +44,7 @@ ServiceButton.Link = ({ href, label }: ServiceButtonLinkProps) => {
       className="flex w-full items-center gap-3 px-3 py-5"
     >
       <Icon name={label} className="h-4 w-5 stroke-black-300 web:h-4 web:w-5" />
-      <span className="text-1 text-black-900">{label}</span>
+      <span className="text-1 text-black-900">{ServiceLabel[label]}</span>
     </Link>
   );
 };

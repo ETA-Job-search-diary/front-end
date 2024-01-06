@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { HTMLAttributes, forwardRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 
 interface ChipProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -25,7 +25,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
 );
 
 const chipVariants = cva(
-  'rounded-full cursor-pointer border-[0.6px] web:border text-center xs:text-0.7 text-0.85 web:text-1 xs:h-6 xs:leading-6 h-8 leading-8 web:h-10 web:leading-10',
+  'rounded-full cursor-pointer border-[0.8px] web:border text-center xs:text-0.7 text-0.85 web:text-1 xs:h-6 xs:leading-6 h-8 leading-8 web:h-10 web:leading-10',
   {
     variants: {
       checked: {

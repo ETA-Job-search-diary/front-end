@@ -1,13 +1,21 @@
 import Icon from '@/assets/Icon';
-import { mockUserInfo } from '@/mock/user';
 import { getProviderByEmail } from '@/service/signin';
+import useSWR from 'swr';
 import PassRate from './PassRate';
 import StatisticsSection from './StatisticsSection';
 import StepStatistics from './StepStatistics';
 
-//TODO: mock data 없애고 실제 유저 정보 받아오기 (지원현황, 합격률)
-const UserInfo = () => {
-  const { name, email, passRate, statistics } = mockUserInfo;
+interface UserInfoProps {
+  user: {
+    name: string;
+    email: string;
+  };
+}
+//TODO: 병렬로 요청하는게 맞는지 확인 아니면 캐싱하기
+const UserInfo = ({ user: { name, email } }: UserInfoProps) => {
+  const { data: statistics } = useSWR('/schedules/statistics');
+  const { data: passRate } = useSWR('/schedules/passRate');
+
   return (
     <>
       <section className="flex h-20 flex-col justify-center gap-2 rounded-xl border border-black-100 bg-white px-4 py-5 web:h-[115px] web:px-6">

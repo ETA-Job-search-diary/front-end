@@ -3,7 +3,11 @@ import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
 import { forwardRef, HTMLAttributes } from 'react';
 
-export type StatisticsType = 'document' | 'personality' | 'interview' | 'etc';
+export type StatisticsType =
+  | 'documentAssignment'
+  | 'personalityWritten'
+  | 'interview'
+  | 'etc';
 
 export type StatisticsProps = Record<StatisticsType, number>;
 
@@ -22,11 +26,13 @@ const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
         {...rest}
       >
         {STEP_STATISTICS.map(({ name, type }) => (
-          <div className={cn(typeBoxVariants({ variant }))}>
+          <div key={name} className={cn(typeBoxVariants({ variant }))}>
             {variant === 'colorful' && (
               <p className={`${eventStyle[type]} h-1.5 w-1.5 rounded-full`} />
             )}
-            <p className={cn(countVariants({ variant }))}>{statistics[type]}</p>
+            <p className={cn(countVariants({ variant }))}>
+              {statistics?.[type]}
+            </p>
             <p className="text-0.9 text-black-600 ">{name}</p>
           </div>
         ))}
@@ -51,9 +57,9 @@ const statisticsVariants = cva('grid bg-white', {
 const typeBoxVariants = cva('', {
   variants: {
     variant: {
-      default: 'flex flex-col gap-3',
+      default: 'flex flex-col gap-1 web:gap-3',
       colorful:
-        'grid grid-cols-[auto_1fr_auto] gap-2 items-center py-1 px-6 odd:border-r border-black-100',
+        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-6 odd:border-r border-black-100 h-6',
     },
   },
   defaultVariants: {
@@ -64,8 +70,8 @@ const typeBoxVariants = cva('', {
 const countVariants = cva('text-1 font-bold text-black-800', {
   variants: {
     variant: {
-      default: '',
-      colorful: 'order-1',
+      default: 'h-5',
+      colorful: 'order-1 min-w-4 text-center',
     },
   },
   defaultVariants: {
@@ -74,8 +80,8 @@ const countVariants = cva('text-1 font-bold text-black-800', {
 });
 
 const eventStyle = {
-  document: 'bg-orange-100',
-  personality: 'bg-blue-200',
+  documentAssignment: 'bg-orange-100',
+  personalityWritten: 'bg-blue-200',
   interview: 'bg-mint-100',
   etc: 'bg-purple-100',
 };

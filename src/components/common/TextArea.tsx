@@ -35,7 +35,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...rest}
         />
         {maxLength && (
-          <span className="pb-0.5 pr-[0.9rem] text-end text-0.85 text-black-200">{`${count} / ${maxLength} 자`}</span>
+          <span className="pb-2.5 pr-[0.9rem] text-end text-0.85 text-black-200">{`${count} / ${maxLength} 자`}</span>
         )}
       </label>
     );

@@ -16,12 +16,12 @@ const datelineVariants = cva(
   {
     variants: {
       tab: {
-        upcoming: 'text-primary-500 bg-primary-light-100',
+        coming: 'text-primary-500 bg-primary-light-100',
         past: 'bg-body text-black-300',
       },
     },
     defaultVariants: {
-      tab: 'upcoming',
+      tab: 'coming',
     },
   },
 );

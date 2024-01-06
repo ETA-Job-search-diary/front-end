@@ -1,35 +1,32 @@
+'use client';
+
 import Icon from '@/assets/Icon';
 import { SERVICE_DESCRIPTION, SUPPORT_FORM } from '@/constants/service';
-import useDisableBodyScroll from '@/hook/useDisableBodyScroll';
+import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
-import { User } from 'next-auth';
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { createPortal } from 'react-dom';
 import Alert from '../common/Alert';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
 import ServiceButton from './ServiceButton';
 import UserInfo from './UserInfo';
 
-interface MyAccountProps {
-  session?: User;
-  onClose: () => void;
-}
-
 const serviceTypes = {
   LOGOUT: '로그아웃 하시겠습니까?',
   WITHDRAW: '서비스를 탈퇴 하시겠습니까?',
 };
-
-const MyAccount = ({ session, onClose }: MyAccountProps) => {
+//TODO: 새로고침 에러 무슨일이지 왜지 왜 오스로 가지..
+const MyAccount = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
   const { showWithdrawalToast } = useShowToast();
+  const { replace } = useRouter();
+  const { user } = useSession();
 
-  if (!session) redirect('/auth/signin');
-  const { name, email } = session; // TODO: session정보 말고 합격률, 지원현황 정보 받아와야됨 (UerInfo.tsx)
+  // if (!user) redirect('/auth/signin');
+  if (!user) return null;
 
   const handleAlert = (value: string) => {
     setMessage(value);
@@ -43,16 +40,16 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
     showWithdrawalToast();
   };
 
-  useDisableBodyScroll();
-
-  return createPortal(
-    <section className="fixed top-0 z-30 mx-auto h-full min-h-screen w-full min-w-280 max-w-500 overflow-auto bg-gray-100 pt-safe-top">
-      <NavBar
-        label="마이페이지"
-        leftSection={<BackButton onClose={onClose} />}
-      />
+  return (
+    <>
+      <div className="sticky top-0 z-20 h-full w-full bg-gray-100 pt-[calc(env(safe-area-inset-top))]">
+        <NavBar
+          label="마이페이지"
+          leftSection={<BackButton onClose={() => replace('/')} />}
+        />
+      </div>
       <div className="flex flex-col gap-8 px-page">
-        <UserInfo />
+        <UserInfo user={user} />
         <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4">
           <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
           <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
@@ -87,8 +84,7 @@ const MyAccount = ({ session, onClose }: MyAccountProps) => {
           />
         )}
       </div>
-    </section>,
-    document.body.querySelector('main')!,
+    </>
   );
 };
 

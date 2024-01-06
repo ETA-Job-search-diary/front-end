@@ -68,8 +68,8 @@ export const FORM_LABEL = {
 export const PLACE_HOLDER = {
   COMPANY: '회사명을 입력해주세요',
   POSITION: '직무를 입력해주세요',
-  DATE: '서류마감일, 면접일을 입력해주세요',
-  LINK: '지원한 채용링크를 붙여넣기 해주세요',
+  DATE: '서류 마감일, 면접일 등을 입력해 보세요',
+  LINK: '채용공고 링크를 붙여 넣어 보세요',
   MEMO: '지원 관련 메모를 남겨주세요',
   PLATFORM: '채용플랫폼을 입력해 주세요',
 };
@@ -77,11 +77,11 @@ export const PLACE_HOLDER = {
 export const STEP_STATISTICS: { type: keyof StatisticsProps; name: string }[] =
   [
     {
-      type: 'document',
+      type: 'documentAssignment',
       name: '서류/과제',
     },
     {
-      type: 'personality',
+      type: 'personalityWritten',
       name: '인적성/필기',
     },
     {

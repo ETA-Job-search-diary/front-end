@@ -43,12 +43,12 @@ export async function GET(_: NextRequest, context: Context) {
   const [status, query] = slug;
 
   let data;
-  if (status === 'upcoming') {
+  if (status === 'coming') {
     const random = Math.floor(Math.random() * 10);
     data = {
       schedules: random % 2 !== 0 ? schedules : [],
       schedulesCount: {
-        upcoming: random % 2 !== 0 ? 3 : 0,
+        coming: random % 2 !== 0 ? 3 : 0,
         past: 5,
       },
     };
@@ -103,7 +103,7 @@ export async function GET(_: NextRequest, context: Context) {
       ],
       // 무한스크롤에 Count를 같이 받아야할까? 계속 필요한 값인가?
       schedulesCount: {
-        upcoming: 3,
+        coming: 3,
         past: 5,
       },
     };

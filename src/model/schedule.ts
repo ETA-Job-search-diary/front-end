@@ -1,30 +1,29 @@
-export interface ScheduleDetailType {
-  id: string;
-  step: string;
+export type StepTypes =
+  | 'document'
+  | 'assignment'
+  | 'written'
+  | 'personality'
+  | 'first'
+  | 'second'
+  | 'final'
+  | 'etc';
+
+export interface EssentialFormType {
+  step: StepTypes;
   company: string;
   position: string;
   date: string;
+}
+
+export interface CompleteFormType extends EssentialFormType {
   link?: string;
   platform?: string;
   memo?: string;
 }
 
-export type ScheduleStatus = 'pending' | 'pass' | 'fail';
+export type ScheduleStatusType = 'pending' | 'pass' | 'fail';
 
-export interface ScheduleSimpleType {
+export interface ScheduleDetailType extends CompleteFormType {
   id: string;
-  step: string;
-  company: string;
-  position: string;
-  date: string;
-  status: ScheduleStatus;
-}
-
-export interface ScheduleFilterType {
-  value: string;
-}
-
-export interface WeeklyScheduleType {
-  thisWeek: ScheduleDetailType[];
-  nextWeek: ScheduleDetailType[];
+  status: ScheduleStatusType;
 }

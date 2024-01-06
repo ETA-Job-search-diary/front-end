@@ -1,4 +1,3 @@
-import CheckProvider from '@/context/CheckProvider';
 import { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
@@ -18,7 +17,7 @@ interface ListPagelayoutProps {
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
     <section className="flex h-screen w-full flex-col bg-white pt-safe-top">
-      <CheckProvider>{children}</CheckProvider>
+      {children}
     </section>
   );
 }

@@ -18,6 +18,7 @@ const TabBar = () => {
   if (
     pathname === '/auth/signin' ||
     pathname === '/new' ||
+    pathname === '/my' ||
     pathname.startsWith('/edit')
   )
     return null;

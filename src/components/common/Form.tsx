@@ -199,7 +199,7 @@ const Form = ({ originData }: FormProps) => {
                     message={
                       value.length > 0 && watch('platform')
                         ? '플랫폼 정보를 확인 후 저장해주세요'
-                        : ''
+                        : '채용공고 링크를 넣으면 정보를 자동으로 가져와요 :)'
                     }
                     errorMessage={error?.message}
                     className="relative"
@@ -338,7 +338,6 @@ const Form = ({ originData }: FormProps) => {
                     id="memo"
                     placeholder={`${PLACE_HOLDER.MEMO} (최대 ${TEXTAREA_MAX_LENGTH}자)`}
                     maxLength={TEXTAREA_MAX_LENGTH}
-                    onKeyDown={handleKeyDown}
                     {...field}
                   />
                 </FormLabel>
