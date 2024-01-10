@@ -20,7 +20,7 @@ const SortButtons = ({ current, onSort }: SortButtonsProps) => {
         const isCurrent = current === label;
         return (
           <button
-            aria-label={`sort-${label}-button`}
+            aria-label={`sort ${label} button`}
             key={label}
             className="flex items-center justify-center gap-1"
             onClick={() => onSort(label)}
@@ -32,7 +32,7 @@ const SortButtons = ({ current, onSort }: SortButtonsProps) => {
             <span
               className={`${
                 isCurrent ? 'text-primary-500' : 'text-black-300'
-              } text-0.85 font-medium`}
+              } text-0.85 font-semibold`}
             >
               {sortLabel[label]}
             </span>

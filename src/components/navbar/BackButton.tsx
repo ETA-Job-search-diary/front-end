@@ -12,7 +12,7 @@ const BackButton = ({ onClose }: BackButtonProps) => {
 
   return (
     <button
-      aria-label="back-button"
+      aria-label="back button"
       onClick={onClose ? onClose : () => back()}
       className="h-full w-full"
     >

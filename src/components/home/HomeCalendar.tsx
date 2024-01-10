@@ -38,7 +38,7 @@ const HomeCalendar = () => {
       onMonthChange={setMonth}
       className="h-max rounded-2xl bg-white px-3 pb-2 pt-6"
       classNames={{
-        day: 'h-full w-11 flex flex-col gap-0.5 justify-center',
+        day: 'h-full w-11 flex flex-col gap-0.5 justify-center font-medium',
         day_today: 'font-extrabold text-primary-500 pointer-events-none',
         head_row: 'flex justify-between w-full pb-2 border-b border-black-100',
         head_cell: 'w-11 text-0.9 font-medium text-black-900',
@@ -55,14 +55,14 @@ const HomeCalendar = () => {
                 </h1>
                 <div className="flex items-end gap-4">
                   <button
-                    aria-label="previous-month-button"
+                    aria-label="previous month move button"
                     disabled={!previousMonth}
                     onClick={() => previousMonth && goToMonth(previousMonth)}
                   >
                     <Calendar.LeftButton />
                   </button>
                   <button
-                    aria-label="next-month-button"
+                    aria-label="next month move button"
                     disabled={!nextMonth}
                     onClick={() => nextMonth && goToMonth(nextMonth)}
                   >
@@ -85,14 +85,14 @@ const HomeCalendar = () => {
               </p>
               <p className="flex h-12 w-11 flex-col gap-[1px]">
                 {isHoliday && (
-                  <span className="overflow-hidden whitespace-nowrap text-0.6 text-red-500">
+                  <span className="overflow-hidden whitespace-nowrap text-0.6 font-bold text-red-500">
                     {isHoliday}
                   </span>
                 )}
                 {isEvents?.map(({ company, step }) => (
                   <span
                     key={company}
-                    className={`overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[1px] text-0.6 font-bold ${
+                    className={`overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[1px] text-0.6 font-extrabold ${
                       eventStyle[getSteps(step)]
                     }`}
                   >

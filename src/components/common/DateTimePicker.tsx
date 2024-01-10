@@ -138,7 +138,7 @@ DateTimePicker.Mobile = ({
                     </h1>
                     <div className="flex gap-3">
                       <button
-                        aria-label="previous-month-button"
+                        aria-label="previous month move button"
                         disabled={!previousMonth}
                         onClick={() =>
                           previousMonth && goToMonth(previousMonth)
@@ -147,7 +147,7 @@ DateTimePicker.Mobile = ({
                         <Calendar.LeftButton />
                       </button>
                       <button
-                        aria-label="next-month-button"
+                        aria-label="next month move button"
                         disabled={!nextMonth}
                         onClick={() => nextMonth && goToMonth(nextMonth)}
                       >

@@ -13,7 +13,7 @@ const CheckButton = ({
 }: CheckButtonProps) => {
   return (
     <button
-      aria-label={`${all ? 'all-check' : 'check'}`}
+      aria-label={`${all ? 'all check' : 'check'} button`}
       type="button"
       onClick={onClick}
       className="h-4 w-4"

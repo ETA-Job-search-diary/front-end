@@ -48,7 +48,7 @@ const LinkButton = ({ path }: LinkButtonProps) => {
         }`}
       />
       <span
-        className={`hidden web:inline ${
+        className={`hidden font-medium web:inline ${
           isCurrent ? 'text-black-900' : 'text-black-400'
         }`}
       >
