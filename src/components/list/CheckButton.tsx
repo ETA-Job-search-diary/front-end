@@ -12,9 +12,13 @@ const CheckButton = ({
   onClick,
 }: CheckButtonProps) => {
   return (
-    <button type="button" onClick={onClick} className="h-4 w-4">
+    <button
+      aria-label={`${all ? 'all-check' : 'check'}`}
+      type="button"
+      onClick={onClick}
+      className="h-4 w-4"
+    >
       <Icon
-        aria-label={`${all ? 'all-check' : 'check'}`}
         name="check"
         className={`h-full w-full hover:animate-wiggle ${
           checked ? 'fill-primary-500' : 'fill-black-100'

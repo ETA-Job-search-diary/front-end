@@ -55,12 +55,14 @@ const HomeCalendar = () => {
                 </h1>
                 <div className="flex items-end gap-4">
                   <button
+                    aria-label="previous-month-button"
                     disabled={!previousMonth}
                     onClick={() => previousMonth && goToMonth(previousMonth)}
                   >
                     <Calendar.LeftButton />
                   </button>
                   <button
+                    aria-label="next-month-button"
                     disabled={!nextMonth}
                     onClick={() => nextMonth && goToMonth(nextMonth)}
                   >
@@ -78,10 +80,10 @@ const HomeCalendar = () => {
           const isEvents = events?.[day];
           return (
             <>
-              <div className={`text-0.9 ${isHoliday ? 'text-red-500' : ''}`}>
+              <p className={`text-0.9 ${isHoliday ? 'text-red-500' : ''}`}>
                 {format(date, 'd')}
-              </div>
-              <div className="flex h-12 w-11 flex-col">
+              </p>
+              <p className="flex h-12 w-11 flex-col gap-[1px]">
                 {isHoliday && (
                   <span className="overflow-hidden whitespace-nowrap text-0.6 text-red-500">
                     {isHoliday}
@@ -97,7 +99,7 @@ const HomeCalendar = () => {
                     {company}
                   </span>
                 ))}
-              </div>
+              </p>
             </>
           );
         },

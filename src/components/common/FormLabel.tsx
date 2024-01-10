@@ -32,7 +32,7 @@ const FormLabel = ({
               {errorMessage}
             </span>
           ) : message ? (
-            <span className="pl-2 text-0.8 font-normal text-black-400 xs:text-0.7">
+            <span className="pl-2 text-0.8 font-normal text-black-500 xs:text-0.7">
               {message}
             </span>
           ) : null}

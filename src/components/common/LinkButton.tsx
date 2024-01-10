@@ -36,8 +36,6 @@ const LinkButton = ({ path }: LinkButtonProps) => {
 
   return (
     <Link
-      role="tab"
-      aria-controls={`${path}-tab`}
       href={href}
       className={`z-20 flex h-full w-full flex-col items-center justify-center web:text-0.85 ${
         isLeft ? 'col-start-1' : 'col-start-3'
@@ -46,12 +44,12 @@ const LinkButton = ({ path }: LinkButtonProps) => {
       <Icon
         name={path}
         className={`fill-none transition-all hover:scale-110 ${
-          isCurrent ? 'stroke-primary-500' : 'stroke-black-200'
+          isCurrent ? 'stroke-primary-500' : 'stroke-black-400'
         }`}
       />
       <span
         className={`hidden web:inline ${
-          isCurrent ? 'text-black-900' : 'text-black-200'
+          isCurrent ? 'text-black-900' : 'text-black-400'
         }`}
       >
         {name}

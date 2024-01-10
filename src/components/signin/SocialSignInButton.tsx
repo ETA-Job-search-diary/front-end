@@ -6,14 +6,14 @@ import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
 
 export type ProviderType = Record<string, ClientSafeProvider>;
 
-interface SocialSiginButtonProps {
+interface SocialSignInButtonProps {
   providers: ProviderType;
   callbackUrl: string;
 }
-const SocialSiginButton = ({
+const SocialSignInButton = ({
   providers,
   callbackUrl,
-}: SocialSiginButtonProps) => {
+}: SocialSignInButtonProps) => {
   return (
     <>
       {Object.values(providers).map(({ name, id }) => {
@@ -21,8 +21,9 @@ const SocialSiginButton = ({
 
         return (
           <button
-            className="z-10 grid w-full grid-cols-[1fr_auto_1fr] items-center justify-center rounded-medium border-[0.7px] border-black-100 bg-white px-4 py-3 web:px-6 web:py-4"
+            aria-label={`${name}-socialSignin-button`}
             key={name}
+            className="z-10 grid w-full grid-cols-[1fr_auto_1fr] items-center justify-center rounded-medium border-[0.7px] border-black-100 bg-white px-4 py-3 web:px-6 web:py-4"
             onClick={() => signIn(id, { callbackUrl })}
           >
             <Icon name={iconName} className="h-7 w-7 xs:h-5 xs:w-5" />
@@ -45,4 +46,4 @@ export async function getServersideProps() {
   };
 }
 
-export default SocialSiginButton;
+export default SocialSignInButton;
