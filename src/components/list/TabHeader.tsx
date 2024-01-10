@@ -32,9 +32,10 @@ const TabHeader = ({
         const handleClick = () => onSwitch(type);
         return (
           <button
+            aria-label={`list-${type}-tab`}
             key={type}
-            className={`h-16 w-full border-b-[2px] border-black-100 text-1 font-bold ${
-              isActive ? 'text-black-900' : 'text-black-300'
+            className={`h-16 w-full border-b-[2px] border-black-200 text-1 font-bold ${
+              isActive ? 'text-black-900' : 'text-black-400'
             }`}
             onClick={handleClick}
           >

@@ -1,5 +1,5 @@
 import Icon from '@/assets/Icon';
-import SocialSiginButton from '@/components/signin/SocialSiginButton';
+import SocialSignInButton from '@/components/signin/SocialSignInButton';
 import { getProviders } from 'next-auth/react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -48,7 +48,7 @@ export default async function SingInPage({
               </p>
             </div>
             <div className="relative flex w-full flex-col items-center justify-center gap-3">
-              <SocialSiginButton
+              <SocialSignInButton
                 providers={providers}
                 callbackUrl={callbackUrl ?? '/'}
               />

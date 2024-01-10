@@ -61,6 +61,7 @@ const Alert = ({ message, submessage, type, onClose }: AlertProps) => {
         <div className="flex w-full justify-between gap-1.5">
           {type.map(({ value, onClick }) => (
             <Button
+              aria-label={`alert-${value}-button`}
               key={value}
               variant={ButtonColors[value]}
               label={AlertTypes[value]}

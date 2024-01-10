@@ -22,13 +22,10 @@ const TabBar = () => {
         <LinkButton path="home" />
         <div className="absolute bottom-3.5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-tab">
           <Link
-            role="tab"
-            aria-controls={`new-tab`}
             href="/new"
             className="group z-20 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary-500 hover:drop-shadow-md"
           >
             <Icon
-              aria-label="new-button"
               name="edit"
               className="h-8 w-8 fill-none stroke-white transition-all group-hover:scale-105"
             />

@@ -34,6 +34,7 @@ const TextInputWithReset = forwardRef<
       />
       {isFilled && (
         <button
+          aria-label="reset-input"
           type="button"
           className="absolute bottom-1 right-3 -translate-y-1/2"
           onClick={onResetInput}
