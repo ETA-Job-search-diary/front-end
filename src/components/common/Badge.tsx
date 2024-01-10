@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { HTMLAttributes, forwardRef } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 
 interface BadgeProps
   extends HTMLAttributes<HTMLDivElement>,
@@ -40,7 +40,7 @@ const getBadgeLabel = ({
 };
 
 const badgeVariants = cva(
-  'h-max w-max whitespace-nowrap px-1.5 py-1 text-[0.85rem] rounded-md font-medium',
+  'h-max w-max whitespace-nowrap px-1.5 py-1 text-[0.85rem] rounded-md font-semibold',
   {
     variants: {
       variant: {

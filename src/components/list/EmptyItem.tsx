@@ -15,12 +15,9 @@ const EmptyItem = ({ messageType }: EmptyItemProps) => {
 
   return (
     <div className="flex h-[calc(100vh-24rem)] w-full grow flex-col items-center justify-center gap-3 text-black-200">
-      <Icon
-        name="mainCharacter"
-        className="w-24 web:w-28"
-      />
+      <Icon name="mainCharacter" className="w-24 web:w-28" />
       <h3 className="text-1.1 font-extrabold text-primary-500">{title}</h3>
-      <p className="whitespace-pre-line text-center text-0.9 font-semibold leading-6 text-black-500">
+      <p className="whitespace-pre-line text-center text-0.9 font-semibold leading-6 text-black-600">
         {suggestion}
       </p>
       {!token && (
