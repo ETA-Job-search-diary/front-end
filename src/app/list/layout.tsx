@@ -16,7 +16,7 @@ interface ListPagelayoutProps {
 
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
-    <section className="flex h-screen w-full flex-col bg-white pt-safe-top">
+    <section className="flex min-h-screen w-full flex-col bg-white pt-safe-top">
       {children}
     </section>
   );

@@ -1,7 +1,8 @@
 import Icon, { IconTypes } from '@/assets/Icon';
 import { FORM_LABEL } from '@/constants/form';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import MarkDownViewer from '../common/MarkdownViewer';
+const MarkDownViewer = dynamic(() => import('../common/MarkdownViewer'));
 
 interface DetailTitleProps {
   title: keyof typeof FORM_LABEL;
@@ -41,9 +42,13 @@ DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
         href={content}
         rel="noopener noreferrer"
         target="_blank"
-        className={`${detailContentStyle} col-start-2 w-full pr-2`}
+        className="pr-2"
       >
-        <span className="break-words border-b border-black-600">{content}</span>
+        <span
+          className={`${detailContentStyle} text-wrap h-max w-full break-words border-b border-black-600`}
+        >
+          {content}
+        </span>
       </Link>
     </div>
   );
@@ -61,9 +66,10 @@ DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   );
 };
 
-const itemStyle = 'grid grid-cols-[90px_auto] web:grid-cols-[auto_308px] gap-5';
+const itemStyle =
+  'grid grid-cols-[5.5rem_minmax(8rem,_auto)] web:grid-cols-[auto_308px] gap-2';
 const titleStyle =
-  'text-black-800 font-semibold flex gap-3 items-center whitespace-nowrap leading5 text-1 web:text-1.1';
+  'text-black-800 font-semibold flex gap-3 items-center text-1 web:text-1.1 w-max';
 const iconStyle = 'w-4 h-4';
 export const detailContentStyle =
   'text-black-600 font-medium text-1 web:text-1.1';

@@ -148,7 +148,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  userScalable: false,
   viewportFit: 'cover',
   themeColor: '#2FC964',
 };
@@ -156,6 +155,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <GoogleAnalytics />
       <body
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
@@ -168,7 +168,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </AuthSessionProvider>
           </main>
         </ThemeProvider>
-        <GoogleAnalytics />
       </body>
     </html>
   );
