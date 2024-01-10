@@ -42,14 +42,15 @@ const LinkButton = ({ path }: LinkButtonProps) => {
       }`}
     >
       <Icon
+        aria-label={`${path} icon`}
         name={path}
         className={`fill-none transition-all hover:scale-110 ${
-          isCurrent ? 'stroke-primary-500' : 'stroke-black-400'
+          isCurrent ? 'stroke-primary-500' : 'stroke-black-500'
         }`}
       />
       <span
         className={`hidden font-medium web:inline ${
-          isCurrent ? 'text-black-900' : 'text-black-400'
+          isCurrent ? 'text-black-900' : 'text-black-500'
         }`}
       >
         {name}

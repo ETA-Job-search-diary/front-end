@@ -22,10 +22,10 @@ interface DetailItemLinkProps {
 const DetailItem = ({ title, icon, content }: DetailItemProps) => {
   return (
     <div className={`${itemStyle}`}>
-      <h3 className={`${titleStyle}`}>
+      <p className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FORM_LABEL[title]}
-      </h3>
+      </p>
       <p className={`${detailContentStyle}`}>{content}</p>
     </div>
   );
@@ -34,10 +34,10 @@ const DetailItem = ({ title, icon, content }: DetailItemProps) => {
 DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
   return (
     <div className={`${itemStyle} items-start`}>
-      <h3 className={`${titleStyle}`}>
+      <p className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FORM_LABEL[title]}
-      </h3>
+      </p>
       <Link
         href={content}
         rel="noopener noreferrer"
@@ -57,10 +57,10 @@ DetailItem.Link = ({ title, icon, content }: DetailItemLinkProps) => {
 DetailItem.MarkDown = ({ title, icon, content }: DetailItemProps) => {
   return (
     <div className="flex flex-col items-start gap-4">
-      <h3 className={`${titleStyle}`}>
+      <p className={`${titleStyle}`}>
         <Icon name={icon} className={`${iconStyle}`} />
         {FORM_LABEL[title]}
-      </h3>
+      </p>
       <MarkDownViewer content={content} />
     </div>
   );

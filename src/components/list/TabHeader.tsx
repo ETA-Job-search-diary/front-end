@@ -38,7 +38,7 @@ const TabHeader = ({
           >
             <span
               className={`pr-1 ${
-                isActive ? 'text-black-900' : 'text-black-500'
+                isActive ? 'text-black-900' : 'text-black-600'
               }`}
             >
               {name}
