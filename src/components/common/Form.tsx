@@ -59,7 +59,7 @@ const Form = ({ originData }: FormProps) => {
     setValue,
     watch,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = methods;
 
   const handleKeyDown = (
@@ -122,8 +122,8 @@ const Form = ({ originData }: FormProps) => {
   ) => {
     const res = await setEditSchedule(id, data, token);
     if (!res) return;
-    refresh();
     replace(`/schedule/${id}`);
+    refresh();
   };
 
   const newSchedule = async (data: CompleteFormType, token: string) => {
@@ -148,7 +148,10 @@ const Form = ({ originData }: FormProps) => {
     <>
       {isClient && (
         <form className="pb-8" onSubmit={handleSubmit(onSubmit)}>
-          <NewNavBar hasOrigin={!!originData} isValid={isValid} />
+          <NewNavBar
+            hasOrigin={!!originData}
+            isSubmitValid={isValid && !isSubmitting} //TODO: 중복 클릭 방지해야됨!!!
+          />
           <div className="flex flex-col gap-12 px-page web:px-[28px]">
             {/* 전형 단계 */}
             <Controller
@@ -300,7 +303,7 @@ const Form = ({ originData }: FormProps) => {
               )}
             />
 
-            {/* 일정 */}
+            {/* 일정 (시간 : 23:59시로 ?? )*/}
             <Controller
               control={control}
               name="date"
