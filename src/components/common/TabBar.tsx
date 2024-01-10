@@ -22,6 +22,7 @@ const TabBar = () => {
         <LinkButton path="home" />
         <div className="absolute bottom-3.5 flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-tab">
           <Link
+            aria-label="create new schedule"
             href="/new"
             className="group z-20 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary-500 hover:drop-shadow-md"
           >

@@ -21,7 +21,6 @@ const SocialSignInButton = ({
 
         return (
           <button
-            aria-label={`${name}-socialSignin-button`}
             key={name}
             className="z-10 grid w-full grid-cols-[1fr_auto_1fr] items-center justify-center rounded-medium border-[0.7px] border-black-100 bg-white px-4 py-3 web:px-6 web:py-4"
             onClick={() => signIn(id, { callbackUrl })}

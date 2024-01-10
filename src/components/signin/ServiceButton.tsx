@@ -26,7 +26,6 @@ const ServiceButton = ({ label, onClick }: ServiceButtonProps) => {
   return (
     <button
       type="button"
-      aria-label={`${label}-button`}
       className="flex w-full items-center gap-3 px-3 py-5"
       onClick={onClick}
     >

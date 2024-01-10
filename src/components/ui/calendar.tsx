@@ -43,13 +43,13 @@ function Calendar({
         cell: 'rounded-[9999px] text-center text-1 web:text-0.85 p-0 relative [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-[999px] last:[&:has([aria-selected])]:rounded-[9999px] focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
-          'h-9 w-9 p-0 web:p-3 font-normal aria-selected:opacity-100 rounded-[9999px]',
+          'h-9 w-9 p-0 web:p-3 font-medium aria-selected:opacity-100 rounded-[9999px]',
         ),
         day_selected:
           'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
         day_today: 'bg-accent text-accent-foreground',
-        day_outside: 'text-muted-foreground opacity-80',
-        day_disabled: 'text-muted-foreground opacity-80',
+        day_outside: 'text-muted-foreground opacity-95',
+        day_disabled: 'text-muted-foreground opacity-95',
         day_range_middle:
           'aria-selected:bg-accent aria-selected:text-accent-foreground',
         day_hidden: 'invisible',
