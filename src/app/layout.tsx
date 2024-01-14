@@ -161,7 +161,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <ThemeProvider>
-          <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col bg-white">
+          <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col">
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>
               <TabBar />

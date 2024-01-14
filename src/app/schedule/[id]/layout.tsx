@@ -15,7 +15,7 @@ interface DetaillayoutProps {
 }
 export default function Detaillayout({ children }: DetaillayoutProps) {
   return (
-    <section className="h-full w-full bg-white pb-[calc(env(safe-area-inset-bottom)+90px)]">
+    <section className="h-full min-h-screen w-full bg-white pb-[calc(env(safe-area-inset-bottom)+90px)]">
       {children}
     </section>
   );

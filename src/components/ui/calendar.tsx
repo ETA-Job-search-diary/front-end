@@ -67,7 +67,8 @@ function Calendar({
 const formatCaption: DateFormatter = (month, options) =>
   format(month, 'yyyy.MM', { locale: options?.locale });
 
-const chevronStyle = 'h-5 w-5 text-black-400 hover:text-black active:scale-110';
+const chevronStyle =
+  'h-5 web:h-6 text-black-400 hover:text-black active:scale-110';
 
 Calendar.LeftButton = () => <ChevronLeft className={`${chevronStyle}`} />;
 Calendar.RightButton = () => <ChevronRight className={`${chevronStyle}`} />;

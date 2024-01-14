@@ -6,40 +6,42 @@ import { api } from './api';
 
 type KakaoHoliday = {
   data: {
-    events: EventData[];
+    events: KakaoHolidayData[];
   };
 };
 
-type EventData = {
-  date: string;
-  name: string;
-  holiday?: boolean;
+type KakaoHolidayData = {
+  id: string;
+  title: string;
+  time: {
+    start_at: string;
+    end_at: string;
+    all_day: boolean;
+  };
+  holiday: boolean;
 };
 
 export const getHolidays = async (date: string) => {
   const [year, month] = date.split('-');
   const holidays = await getHolidaysFromDB(year, month);
-  if (!holidays) {
+  if (!holidays.length) {
     const holidays = await getHolidaysFromKakao(year, month);
     return holidays;
   }
   return holidays;
 };
 
-const getHolidaysFromDB = async (year: string, month: string) => {
+const getHolidaysFromDB = async (
+  year: string,
+  month: string,
+): Promise<string[]> => {
   const { data } = await supabase
     .from('holiday')
     .select('date, name')
     .like('date', `%${year}-${month}%`);
-  if (!data) return false;
-  return getDateMap(data);
-};
 
-const getDateMap = (data: EventData[]) => {
-  return data.reduce((map: Record<string, string>, event) => {
-    map[event.date] = event.name;
-    return map;
-  }, {});
+  if (!data) return [];
+  return data.map((event) => event.date);
 };
 
 const getHolidaysFromKakao = async (year: string, month: string) => {
@@ -56,15 +58,14 @@ const getHolidaysFromKakao = async (year: string, month: string) => {
         },
       },
     );
-    const holiday = data.events.filter((event: any) => event.holiday);
-
-    const holidaysForDB = holiday.map((event: any) => ({
-      date: event.time.start_at,
+    const holiday = data.events.filter((event) => event.holiday);
+    const holidaysForDB = holiday.map((event) => ({
+      date: event.time.start_at.split('T')[0],
       name: event.title,
     }));
     await supabase.from('holiday').insert(holidaysForDB);
 
-    return getDateMap(holiday);
+    return holidaysForDB.map((event) => event.date);
   } catch (e) {
     console.error(e);
   }

@@ -58,9 +58,9 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <MoreMenuItem label={'수정'} onClick={handleEditConfirm} />
+          <MoreMenuItem label="edit" onClick={handleEditConfirm} />
           <DropdownMenuSeparator />
-          <MoreMenuItem label={'삭제'} onClick={openMenu} />
+          <MoreMenuItem label="delete" onClick={openMenu} />
         </DropdownMenuContent>
       </DropdownMenu>
       {isOpen && (

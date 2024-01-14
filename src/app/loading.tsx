@@ -2,7 +2,7 @@ import Icon from '@/assets/Icon';
 
 export default function loading() {
   return (
-    <div className="flex h-screen w-full items-center justify-center">
+    <div className="flex h-screen w-full items-center justify-center bg-white">
       <div className="flex gap-8 web:gap-12">
         <Icon
           name="union1"
