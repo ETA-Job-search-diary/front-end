@@ -4,7 +4,7 @@ import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
 import { ScheduleDetailType, ScheduleStatusType } from '@/model/schedule';
 import { useListStore } from '@/store/zustand';
-import { useCallback, useState } from 'react';
+import { Fragment, useCallback, useState } from 'react';
 import { useSWRConfig } from 'swr';
 import Alert, { AlertTypes } from '../common/Alert';
 import Skeleton from '../common/Skeleton';
@@ -188,12 +188,9 @@ const FilterList = ({ tab }: FilterListProps) => {
                   const isChecked = checkedIds.includes(item.id);
                   if (isNewMonth) lastMonth = month;
                   return (
-                    <>
-                      {isNewMonth && (
-                        <DateLine key={month} date={month} tab={tab} />
-                      )}
+                    <Fragment key={item.id}>
+                      {isNewMonth && <DateLine date={month} tab={tab} />}
                       <li
-                        key={item.id}
                         className={`items-center web:gap-3 ${
                           isEdit ? 'grid grid-cols-[20px_auto] gap-1' : ''
                         }`}
@@ -214,7 +211,7 @@ const FilterList = ({ tab }: FilterListProps) => {
                           />
                         )}
                       </li>
-                    </>
+                    </Fragment>
                   );
                 })}
               </ul>

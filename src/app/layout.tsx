@@ -1,3 +1,4 @@
+import A2HS from '@/components/common/A2HS';
 import GoogleAnalytics from '@/components/common/GoogleAnalytics';
 import TabBar from '@/components/common/TabBar';
 import { Toaster } from '@/components/ui/toaster';
@@ -160,11 +161,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased`}
       >
         <ThemeProvider>
-          <main className="mx-auto flex min-h-screen min-w-[280px] max-w-[500px] flex-col bg-white">
+          <main className="mx-auto flex min-h-screen min-w-280 max-w-500 flex-col bg-white">
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>
               <TabBar />
               <Toaster />
+              <A2HS />
             </AuthSessionProvider>
           </main>
         </ThemeProvider>
