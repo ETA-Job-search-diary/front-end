@@ -53,7 +53,7 @@ const HomeCalendar = () => {
                 <h1 className="pl-2 text-1.2 font-bold text-black-900 web:font-semibold">
                   {format(displayMonth, 'yyyy년 MM월')}
                 </h1>
-                <div className="flex items-end gap-4">
+                <div className="flex items-end gap-7">
                   <button
                     aria-label="previous month move button"
                     disabled={!previousMonth}
