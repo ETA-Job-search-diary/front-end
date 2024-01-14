@@ -33,7 +33,7 @@ const ScheduleItem = ({
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`hover:bg-light grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
+      className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
@@ -55,7 +55,7 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`flex flex-col rounded-large border bg-gray-50 px-5 py-4 transition-colors ${borderStyle}`}
+      className={`flex flex-col rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
     >
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap pb-4 ">
         <ScheduleItem.Date date={date} />

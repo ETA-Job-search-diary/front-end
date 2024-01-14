@@ -4,8 +4,8 @@ import Button from '../common/Button';
 
 const StatusButton = {
   pending: '합격여부 입력하기',
-  pass: '입력완료(합격)',
-  fail: '입력완료(불합격)',
+  pass: '합격',
+  fail: '불합격',
 };
 
 interface CompleteButtonProps {

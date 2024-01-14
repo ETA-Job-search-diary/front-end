@@ -8,11 +8,11 @@ interface DateLineProps extends VariantProps<typeof datelineVariants> {
 
 const DateLine = ({ tab, date }: DateLineProps) => {
   const month = convertDateToAlternateFormat(date);
-  return <div className={cn(datelineVariants({ tab }))}>{month}</div>;
+  return <p className={cn(datelineVariants({ tab }))}>{month}</p>;
 };
 
 const datelineVariants = cva(
-  'h-8 w-full px-2.5 text-0.85 font-semibold leading-8',
+  'w-full px-2.5 py-1.5 text-0.85 font-semibold rounded-sm',
   {
     variants: {
       tab: {

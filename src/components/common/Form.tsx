@@ -147,12 +147,15 @@ const Form = ({ originData }: FormProps) => {
   return (
     <>
       {isClient && (
-        <form className="pb-8" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="min-h-screen bg-white pb-8"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <NewNavBar
             hasOrigin={!!originData}
             isSubmitValid={isValid && !isSubmitting} //TODO: 중복 클릭 방지해야됨!!!
           />
-          <div className="flex flex-col gap-12 px-page web:px-[28px]">
+          <div className="flex flex-col gap-10 px-page">
             {/* 전형 단계 */}
             <Controller
               control={control}

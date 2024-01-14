@@ -1,5 +1,6 @@
 'use client';
 
+import Icon from '@/assets/Icon';
 import AccountButton from '@/components/home/AccountButton';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
@@ -12,7 +13,7 @@ import { Calendar } from '../ui/calendar';
 
 type HomeCalendar = {
   events: EventsType;
-  holidays: Record<string, string>;
+  holidays: string[];
 };
 
 type EventsType = Record<
@@ -39,9 +40,9 @@ const HomeCalendar = () => {
       className="h-max rounded-2xl bg-white px-3 pb-2 pt-6"
       classNames={{
         day: 'h-full w-11 flex flex-col gap-0.5 justify-center font-medium',
-        day_today: 'font-extrabold text-primary-500 pointer-events-none',
+        day_today: 'pointer-events-none',
         head_row: 'flex justify-between w-full pb-2 border-b border-black-100',
-        head_cell: 'w-11 text-0.9 font-medium text-black-900',
+        head_cell: 'w-11 text-0.9 font-semibold text-black-900',
         row: 'flex justify-between w-full mt-2 first:mt-4',
       }}
       components={{
@@ -49,8 +50,8 @@ const HomeCalendar = () => {
           const { goToMonth, nextMonth, previousMonth } = useNavigation();
           return (
             <div className="flex items-end justify-between">
-              <div className="grid grid-cols-[minmax(7.5rem,1fr)_1fr] gap-2">
-                <h1 className="pl-2 text-1.2 font-bold text-black-900 web:font-semibold">
+              <div className="grid grid-cols-[minmax(7.5rem,1fr)_1fr] items-end gap-2">
+                <h1 className="pl-2 text-1.2 font-bold leading-none text-black-900 web:font-semibold">
                   {format(displayMonth, 'yyyy년 MM월')}
                 </h1>
                 <div className="flex items-end gap-7">
@@ -74,21 +75,21 @@ const HomeCalendar = () => {
             </div>
           );
         },
-        DayContent: ({ date }) => {
+        DayContent: ({ date, activeModifiers: { today, outside } }) => {
           const day = format(date, 'yyyy-MM-dd');
-          const isHoliday = holidays?.[`${day}T00:00:00Z`];
+          const isHoliday = holidays?.some((holiday) => holiday === day);
+          const isSunday = date.getDay() === 0 && !outside;
           const isEvents = events?.[day];
           return (
             <>
-              <p className={`text-0.9 ${isHoliday ? 'text-red-500' : ''}`}>
+              <p
+                className={`text-0.9 ${
+                  isHoliday || isSunday ? 'text-red-500' : ''
+                }`}
+              >
                 {format(date, 'd')}
               </p>
               <p className="flex h-12 w-11 flex-col gap-[1px]">
-                {isHoliday && (
-                  <span className="overflow-hidden whitespace-nowrap text-0.6 font-bold text-red-500">
-                    {isHoliday}
-                  </span>
-                )}
                 {isEvents?.map(({ company, step }) => (
                   <span
                     key={company}
@@ -99,6 +100,9 @@ const HomeCalendar = () => {
                     {company}
                   </span>
                 ))}
+                {today && !isEvents && (
+                  <Icon name="groupB2" className="w-6 place-self-center" />
+                )}
               </p>
             </>
           );

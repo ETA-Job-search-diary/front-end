@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: 'var(--app-white)',
+  themeColor: '#FFF',
 };
 
 interface EditPageProps {

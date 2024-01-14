@@ -9,7 +9,7 @@ interface GridChipsProps {
 
 const GridChips = ({ checked, onClick }: GridChipsProps) => {
   return (
-    <ul className="grid grid-cols-4 gap-[0.7rem]">
+    <ul className="grid grid-cols-4 gap-2.5">
       {STEPS.map(({ type, name }) => {
         return (
           <li key={type}>
