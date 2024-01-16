@@ -20,6 +20,7 @@ type EventsType = Record<
   string,
   { id: string; company: string; step: StepTypes }[]
 >;
+
 //TODO: 공휴일 서버사이드로 받아올 수 있는지 확인...!!
 const HomeCalendar = () => {
   const today = new Date();
@@ -77,14 +78,26 @@ const HomeCalendar = () => {
         },
         DayContent: ({ date, activeModifiers: { today, outside } }) => {
           const day = format(date, 'yyyy-MM-dd');
-          const isHoliday = holidays?.some((holiday) => holiday === day);
-          const isSunday = date.getDay() === 0 && !outside;
+          const isHoliday =
+            holidays?.some((holiday) => holiday === day) ||
+            (date.getDay() === 0 && !outside);
+          const isSaturday = date.getDay() === 6 && !outside;
           const isEvents = events?.[day];
+          const isNoEvents = !!Object.values(events || {}).length;
+
+          console.log(isNoEvents);
+
           return (
             <>
               <p
-                className={`text-0.9 ${
-                  isHoliday || isSunday ? 'text-red-500' : ''
+                className={`mx-auto min-h-[1.5rem] w-max min-w-[1.5rem] rounded-full text-0.9 leading-6 ${
+                  isNoEvents && today
+                    ? 'bg-black text-white'
+                    : isHoliday
+                      ? 'text-red-500'
+                      : isSaturday
+                        ? 'text-blue-200'
+                        : ''
                 }`}
               >
                 {format(date, 'd')}
@@ -100,7 +113,7 @@ const HomeCalendar = () => {
                     {company}
                   </span>
                 ))}
-                {today && !isEvents && (
+                {!isNoEvents && today && (
                   <Icon name="groupB2" className="w-6 place-self-center" />
                 )}
               </p>

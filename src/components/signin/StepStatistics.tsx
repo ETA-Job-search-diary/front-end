@@ -1,3 +1,4 @@
+import Icon from '@/assets/Icon';
 import { STEP_STATISTICS } from '@/constants/form';
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -28,12 +29,13 @@ const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
         {STEP_STATISTICS.map(({ name, type }) => (
           <div key={name} className={cn(typeBoxVariants({ variant }))}>
             {variant === 'colorful' && (
-              <p className={`${eventStyle[type]} h-1.5 w-1.5 rounded-full`} />
+              // <p className={`${eventStyle[type]} h-1.5 w-1.5 rounded-full`} />
+              <Icon name="tag" className={`${eventStyle[type]} w-4`} />
             )}
             <p className={cn(countVariants({ variant }))}>
               {statistics?.[type]}
             </p>
-            <p className="text-0.9 text-black-600 ">{name}</p>
+            <p className={cn(textVariants({ variant }))}>{name}</p>
           </div>
         ))}
       </div>
@@ -79,11 +81,23 @@ const countVariants = cva('text-1 font-bold text-black-800', {
   },
 });
 
+const textVariants = cva('text-0.9', {
+  variants: {
+    variant: {
+      default: 'text-black-600',
+      colorful: 'text-black-900',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
+
 const eventStyle = {
-  documentAssignment: 'bg-orange-100',
-  personalityWritten: 'bg-blue-200',
-  interview: 'bg-mint-100',
-  etc: 'bg-purple-100',
+  documentAssignment: 'fill-orange-100',
+  personalityWritten: 'fill-blue-200',
+  interview: 'fill-mint-100',
+  etc: 'fill-purple-100',
 };
 
 export default StepStatistics;

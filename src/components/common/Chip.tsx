@@ -33,7 +33,9 @@ const chipVariants = cva(
         false: 'border-black-100 text-black-900',
       },
     },
-    defaultVariants: {},
+    defaultVariants: {
+      checked: false,
+    },
   },
 );
 
