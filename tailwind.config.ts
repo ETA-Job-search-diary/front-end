@@ -111,7 +111,6 @@ module.exports = {
           50: 'rgb(var(--app-mint-50))',
           100: 'rgb(var(--app-mint-100))',
         },
-        'ligtht-gray': 'rgba(234, 234, 234, 0.30)', //TODO: remove
         body: 'rgb(var(--app-web-bg))',
         alert: 'rgba(var(--app-alert))',
         toast: 'rgba(var(--app-toast))',

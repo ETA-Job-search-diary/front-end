@@ -1,3 +1,4 @@
+import Icon from '@/assets/Icon';
 import { STEP_STATISTICS } from '@/constants/form';
 import { cn } from '@/lib/utils';
 import { cva, VariantProps } from 'class-variance-authority';
@@ -28,12 +29,12 @@ const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
         {STEP_STATISTICS.map(({ name, type }) => (
           <div key={name} className={cn(typeBoxVariants({ variant }))}>
             {variant === 'colorful' && (
-              <p className={`${eventStyle[type]} h-1.5 w-1.5 rounded-full`} />
+              <Icon name="tag" className={`${eventStyle[type]} w-4`} />
             )}
             <p className={cn(countVariants({ variant }))}>
               {statistics?.[type]}
             </p>
-            <p className="text-0.9 text-black-600 ">{name}</p>
+            <p className={cn(textVariants({ variant }))}>{name}</p>
           </div>
         ))}
       </div>
@@ -59,7 +60,7 @@ const typeBoxVariants = cva('', {
     variant: {
       default: 'flex flex-col gap-1 web:gap-3',
       colorful:
-        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-6 odd:border-r border-black-100 h-6',
+        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-4 web:px-6 odd:border-r border-black-100 h-6 web:h-8',
     },
   },
   defaultVariants: {
@@ -67,11 +68,23 @@ const typeBoxVariants = cva('', {
   },
 });
 
-const countVariants = cva('text-1 font-bold text-black-800', {
+const countVariants = cva('text-[1rem] font-bold text-black-800', {
   variants: {
     variant: {
       default: 'h-5',
-      colorful: 'order-1 min-w-4 text-center',
+      colorful: 'order-1 min-w-[1rem] text-center',
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+});
+
+const textVariants = cva('text-[0.9rem]', {
+  variants: {
+    variant: {
+      default: 'text-black-600',
+      colorful: 'text-black-900',
     },
   },
   defaultVariants: {
@@ -80,10 +93,10 @@ const countVariants = cva('text-1 font-bold text-black-800', {
 });
 
 const eventStyle = {
-  documentAssignment: 'bg-orange-100',
-  personalityWritten: 'bg-blue-200',
-  interview: 'bg-mint-100',
-  etc: 'bg-purple-100',
+  documentAssignment: 'fill-orange-100',
+  personalityWritten: 'fill-blue-200',
+  interview: 'fill-mint-100',
+  etc: 'fill-purple-100',
 };
 
 export default StepStatistics;

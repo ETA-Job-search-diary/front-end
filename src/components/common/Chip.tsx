@@ -10,11 +10,11 @@ interface ChipProps
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>(
-  ({ label, checked, onClick, className, ...rest }, ref) => {
+  ({ label, variant, onClick, className, ...rest }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn(chipVariants({ checked }), className)}
+        className={cn(chipVariants({ variant }), className)}
         onClick={onClick}
         {...rest}
       >
@@ -25,15 +25,18 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
 );
 
 const chipVariants = cva(
-  'rounded-full cursor-pointer border-[0.8px] web:border text-center xs:text-0.7 text-[0.85rem] web:text-[1rem] xs:h-6 xs:leading-6 h-8 leading-8 web:h-10 web:leading-10',
+  'rounded-full cursor-pointer text-center xs:text-0.7 text-[0.85rem] web:text-[1rem] xs:h-6 xs:leading-6 h-8 leading-8 web:h-10 web:leading-10',
   {
     variants: {
-      checked: {
-        true: 'border-primary-500 text-primary-500',
-        false: 'border-black-100 text-black-900',
+      variant: {
+        default: 'border-black-100 text-black-900 border-[0.8px] web:border',
+        outline: 'border border-primary-500 text-primary-500',
+        filled: 'bg-primary-500 text-white',
       },
     },
-    defaultVariants: {},
+    defaultVariants: {
+      variant: 'default',
+    },
   },
 );
 

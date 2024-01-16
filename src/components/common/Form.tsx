@@ -31,6 +31,8 @@ const TEXTAREA_MAX_LENGTH = 200;
 interface FormProps {
   originData?: ScheduleDetailType;
 }
+
+//TODO: Form에서 time 없이 보낼 수 있는지 확인, 중복요청 방지
 const Form = ({ originData }: FormProps) => {
   const { fullDate: currentDate } = getFormattedISODateTime();
   const { refresh, replace } = useRouter();
@@ -153,7 +155,7 @@ const Form = ({ originData }: FormProps) => {
         >
           <NewNavBar
             hasOrigin={!!originData}
-            isSubmitValid={isValid && !isSubmitting} //TODO: 중복 클릭 방지해야됨!!!
+            isSubmitValid={isValid && !isSubmitting}
           />
           <div className="flex flex-col gap-10 px-page">
             {/* 전형 단계 */}
@@ -164,6 +166,7 @@ const Form = ({ originData }: FormProps) => {
               render={({ field: { value, onChange } }) => (
                 <FormLabel must label="전형단계">
                   <GridChips
+                    variant="filled"
                     checked={[value]}
                     onClick={(step: string) => {
                       if (step === value) {
