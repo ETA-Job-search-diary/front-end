@@ -102,7 +102,7 @@ const HomeCalendar = () => {
               >
                 {format(date, 'd')}
               </p>
-              <p className="flex h-12 w-11 flex-col gap-[1px]">
+              <p className="flex h-12 w-11 flex-col gap-[1px] web:h-20">
                 {isEvents?.map(({ company, step }) => (
                   <span
                     key={company}

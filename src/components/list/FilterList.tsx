@@ -35,7 +35,7 @@ const Message = {
   delete: '선택한 일정을 삭제할까요?',
   result: '해당전형에 합격하셨나요?',
 };
-//TODO: Refactoring 필요함
+
 const FilterList = ({ tab }: FilterListProps) => {
   const {
     filter,
@@ -168,7 +168,11 @@ const FilterList = ({ tab }: FilterListProps) => {
   return (
     <>
       <div className="flex h-full flex-col gap-5 bg-white px-page pt-20">
-        <GridChips checked={filter} onClick={handleStepFilter} />
+        <GridChips
+          variant="outline"
+          checked={filter}
+          onClick={handleStepFilter}
+        />
         <EditButtons
           currentOrder={sort}
           isEdit={isEdit}

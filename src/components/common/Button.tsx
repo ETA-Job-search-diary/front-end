@@ -38,7 +38,7 @@ const buttonVariants = cva('font-semibold hover:font-extrabold', {
     },
     variant: {
       primary: 'bg-primary-500 text-white',
-      gray: 'bg-black-500 text-white',
+      gray: 'bg-black-400 text-white',
       'primary-border': 'text-primary-500',
       'gray-border': 'text-black-600',
       'light-gray': 'bg-gray-300 text-black-700',

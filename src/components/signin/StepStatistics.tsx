@@ -29,7 +29,6 @@ const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
         {STEP_STATISTICS.map(({ name, type }) => (
           <div key={name} className={cn(typeBoxVariants({ variant }))}>
             {variant === 'colorful' && (
-              // <p className={`${eventStyle[type]} h-1.5 w-1.5 rounded-full`} />
               <Icon name="tag" className={`${eventStyle[type]} w-4`} />
             )}
             <p className={cn(countVariants({ variant }))}>
@@ -61,7 +60,7 @@ const typeBoxVariants = cva('', {
     variant: {
       default: 'flex flex-col gap-1 web:gap-3',
       colorful:
-        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-6 odd:border-r border-black-100 h-6',
+        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-4 web:px-6 odd:border-r border-black-100 h-6 web:h-8',
     },
   },
   defaultVariants: {
@@ -69,11 +68,11 @@ const typeBoxVariants = cva('', {
   },
 });
 
-const countVariants = cva('text-1 font-bold text-black-800', {
+const countVariants = cva('text-[1rem] font-bold text-black-800', {
   variants: {
     variant: {
       default: 'h-5',
-      colorful: 'order-1 min-w-4 text-center',
+      colorful: 'order-1 min-w-[1rem] text-center',
     },
   },
   defaultVariants: {
@@ -81,7 +80,7 @@ const countVariants = cva('text-1 font-bold text-black-800', {
   },
 });
 
-const textVariants = cva('text-0.9', {
+const textVariants = cva('text-[0.9rem]', {
   variants: {
     variant: {
       default: 'text-black-600',

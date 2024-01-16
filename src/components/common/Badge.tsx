@@ -1,3 +1,4 @@
+import Icon from '@/assets/Icon';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { forwardRef, HTMLAttributes } from 'react';
@@ -16,6 +17,7 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         className={cn(badgeVariants({ variant }), className)}
         {...rest}
       >
+        {!variant && <Icon name="clock" className="w-3" />}
         {variant ? getBadgeLabel({ label, variant }) : label}
       </div>
     );
@@ -40,11 +42,12 @@ const getBadgeLabel = ({
 };
 
 const badgeVariants = cva(
-  'h-max w-max whitespace-nowrap px-1.5 py-1 text-[0.85rem] rounded-md font-semibold',
+  'h-max w-max whitespace-nowrap m-auto px-1 py-0.5 text-[0.85rem] rounded-md font-semibold',
   {
     variants: {
       variant: {
-        pending: 'bg-primary-50 text-primary-500',
+        pending:
+          'bg-primary-50 text-primary-500 flex items-center justify-center gap-1',
         pass: 'bg-blue-50 text-blue-300',
         fail: 'bg-gray-200 text-black-300',
       },

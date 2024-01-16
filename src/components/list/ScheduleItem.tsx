@@ -21,6 +21,7 @@ interface ItemWithStatusProps extends ScheduleDetailType {
   tab: EventType;
   onResult?: () => void;
 }
+//TODO: Badge : 서류전형 이면서 00:00이면 안보이게
 const ScheduleItem = ({
   id,
   step,
@@ -37,7 +38,7 @@ const ScheduleItem = ({
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      <Badge label={time} />
+      {time !== '00:00' && <Badge label={time} />}
     </Link>
   );
 };
@@ -60,7 +61,7 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap pb-4 ">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, tab, date }} />
-        <Badge label={time} variant="fail" />
+        {time !== '00:00' && <Badge label={time} variant="fail" />}
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>
@@ -71,10 +72,10 @@ ScheduleItem.Date = ({ date: dateInfo }: ScheduleDate) => {
   const { date, day } = getFormattedDateTimeInfo(dateInfo);
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center gap-1.5 border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
+      className={`flex w-full flex-col items-center justify-center border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
     >
-      <h3 className="text-1.3 font-bold xs:text-1.1 web:text-1.5">{date}</h3>
-      <span className="text-0.85 web:text-0.95">{day}</span>
+      <div className="text-1.3 font-bold xs:text-1.1 web:text-1.5">{date}</div>
+      <div className="text-0.85 web:text-0.95">{day}</div>
     </div>
   );
 };
@@ -88,11 +89,11 @@ ScheduleItem.Content = ({
   const formatStep = getStepByValue(step);
   return (
     <div className="flex w-full flex-col justify-between gap-1.5 overflow-hidden py-1.5 pl-4 pr-2 web:gap-2 web:pl-6">
-      <h3
+      <div
         className={`truncate text-0.9 font-semibold leading-5 web:text-1 ${accentStyle}`}
       >
         {company} {formatStep}
-      </h3>
+      </div>
       <div className="flex items-center gap-1">
         <Icon
           name="briefcase"
