@@ -19,10 +19,7 @@ function Calendar({
       showOutsideDays
       locale={ko}
       formatters={{ formatCaption }}
-      className={cn(
-        'h-80 w-full min-w-max p-4 pb-0 web:h-full web:p-5',
-        className,
-      )}
+      className={cn('w-full pb-1', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',

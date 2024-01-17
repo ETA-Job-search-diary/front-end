@@ -12,7 +12,7 @@ const DateLine = ({ tab, date }: DateLineProps) => {
 };
 
 const datelineVariants = cva(
-  'w-full px-2.5 py-1.5 text-0.85 font-semibold rounded-sm',
+  'w-full px-2.5 py-1.5 text-[0.85rem] font-semibold rounded-sm',
   {
     variants: {
       tab: {

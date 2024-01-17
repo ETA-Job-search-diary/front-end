@@ -11,7 +11,7 @@ interface MarkDownViewerProps {
 const MarkDownViewer = ({ content }: MarkDownViewerProps) => {
   return (
     <Markdown
-      className={`prose lg:prose-xl min-h-[10rem] w-full max-w-none rounded-small border-form border-primary-300 bg-primary-light-50 p-[0.8rem] web:min-h-[13rem] ${detailContentStyle}`}
+      className={`lg:prose-xl prose min-h-[10rem] w-full max-w-none rounded-small border-1 border-primary-300 bg-primary-light-50 p-[0.8rem] web:min-h-[13rem] ${detailContentStyle}`}
       remarkPlugins={[remarkGfm]}
       components={{
         code({ node, className, children, ...rest }: any) {

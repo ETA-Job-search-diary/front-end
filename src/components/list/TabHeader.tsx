@@ -25,7 +25,7 @@ const TabHeader = ({
   onSwitch,
 }: TabHeaderProps) => {
   return (
-    <div className="fixed top-0 flex w-full min-w-[280px] max-w-[500px] justify-between bg-white pt-safe-top">
+    <div className="fixed top-0 flex w-full min-w-280 max-w-500 justify-between bg-white pt-safe-top">
       {eventTypes.map(({ type, name }) => {
         const count = type === 'coming' ? comingCount : pastCount;
         const isActive = current === type;

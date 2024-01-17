@@ -24,7 +24,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <label
         htmlFor={id}
-        className={`flex h-36 flex-col rounded-small border-form border-primary-300 bg-primary-light-50 web:h-64`}
+        className={`flex h-36 flex-col rounded-small border-1 border-primary-300 bg-primary-light-50 web:h-64`}
       >
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea

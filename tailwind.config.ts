@@ -39,7 +39,6 @@ module.exports = {
       },
       borderWidth: {
         DEFAULT: '0.5px',
-        form: '0.8px',
         1: '1px',
       },
       backgroundImage: {
@@ -144,6 +143,11 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        naver: '#00BF19',
+        kakao: {
+          yellow: '#F9E000',
+          brown: '#371C1D',
+        },
       },
       fontSize: {
         0.6: '0.6rem',
@@ -213,5 +217,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 };

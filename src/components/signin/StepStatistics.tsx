@@ -47,7 +47,7 @@ const statisticsVariants = cva('grid bg-white', {
     variant: {
       default:
         'grid-cols-4 divide-x rounded-xl divide-black-100 border border-black-100 text-center py-5',
-      colorful: 'grid-cols-2 rounded-2xl py-6',
+      colorful: 'grid-cols-2 rounded-2xl py-6 w-full min-w-max xs:min-w-0',
     },
   },
   defaultVariants: {
@@ -60,7 +60,7 @@ const typeBoxVariants = cva('', {
     variant: {
       default: 'flex flex-col gap-1 web:gap-3',
       colorful:
-        'grid grid-cols-[auto_1fr_auto] gap-2 items-center px-4 web:px-6 odd:border-r border-black-100 h-6 web:h-8',
+        'grid grid-cols-[auto_1fr_auto] gap-2 xs:gap-0.5 items-center px-6 xs:px-2 odd:border-r border-black-100 h-6 web:h-8',
     },
   },
   defaultVariants: {
@@ -68,19 +68,22 @@ const typeBoxVariants = cva('', {
   },
 });
 
-const countVariants = cva('text-[1rem] font-bold text-black-800', {
-  variants: {
-    variant: {
-      default: 'h-5',
-      colorful: 'order-1 min-w-[1rem] text-center',
+const countVariants = cva(
+  'text-[1rem] xs:text-[0.8rem] font-bold text-black-800',
+  {
+    variants: {
+      variant: {
+        default: 'h-5',
+        colorful: 'order-1 min-w-[1rem] text-center',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
     },
   },
-  defaultVariants: {
-    variant: 'default',
-  },
-});
+);
 
-const textVariants = cva('text-[0.9rem]', {
+const textVariants = cva('text-[0.9rem] xs:text-[0.8rem] whitespace-nowrap', {
   variants: {
     variant: {
       default: 'text-black-600',

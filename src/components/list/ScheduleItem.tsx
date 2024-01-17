@@ -38,7 +38,7 @@ const ScheduleItem = ({
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      {time !== '00:00' && <Badge label={time} />}
+      {time !== '00:00' && <Badge hasIcon label={time} />}
     </Link>
   );
 };
@@ -56,12 +56,12 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
     <Link
       href={`/schedule/${id}`}
       scroll={false}
-      className={`flex flex-col rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
+      className={`flex flex-col gap-3 rounded-large border px-5 py-4 transition-colors xs:gap-2 xs:px-3 ${borderStyle}`}
     >
-      <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap pb-4 ">
+      <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, tab, date }} />
-        {time !== '00:00' && <Badge label={time} variant="fail" />}
+        {time !== '00:00' && <Badge hasIcon label={time} variant="fail" />}
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>

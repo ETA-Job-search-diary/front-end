@@ -7,17 +7,18 @@ interface BadgeProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof badgeVariants> {
   label: string;
+  hasIcon?: boolean;
 }
 
 const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  ({ label, variant, className, ...rest }, ref) => {
+  ({ label, hasIcon = false, variant, className, ...rest }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(badgeVariants({ variant }), className)}
         {...rest}
       >
-        {!variant && <Icon name="clock" className="w-3" />}
+        {hasIcon && <Icon name="clock" className="w-3" />}
         {variant ? getBadgeLabel({ label, variant }) : label}
       </div>
     );

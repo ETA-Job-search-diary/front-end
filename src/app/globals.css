@@ -148,31 +148,4 @@
   textarea {
     resize: none;
   }
-
-  /* width */
-  ::-webkit-scrollbar {
-    width: 0.45rem;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300;
-    border-radius: 5px;
-  }
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  * {
-    scrollbar-width: 0px;
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  }
 }
