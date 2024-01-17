@@ -20,7 +20,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
         ref={ref}
         type="time"
         defaultValue={time}
-        className={`h-11 w-full rounded-small border-form border-primary-300 bg-primary-light-50 px-[0.8rem] py-2 text-left web:cursor-text ${
+        className={`h-11 w-full rounded-small border-1 border-primary-300 bg-primary-light-50 px-[0.8rem] py-2 text-left web:cursor-text ${
           isFilled ? `${formTextStyle}` : `text-0.95 ${formPlaceholderStyle}`
         }`}
         step="600"

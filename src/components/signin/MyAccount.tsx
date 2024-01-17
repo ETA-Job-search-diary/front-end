@@ -40,13 +40,13 @@ const MyAccount = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-20 h-max w-full bg-gray-100 pt-safe-top">
+      <div className="fixed top-0 z-20 h-max w-full min-w-280 max-w-500 bg-gray-100 pt-safe-top">
         <NavBar
           label="마이페이지"
           leftSection={<BackButton onClose={() => replace('/')} />}
         />
       </div>
-      <div className="flex flex-col gap-8 px-page py-2">
+      <div className="flex h-full flex-col gap-8 px-page py-2 pt-20">
         <UserInfo user={user} />
         <StatisticsSection label="etc">
           <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4 xs:px-2">

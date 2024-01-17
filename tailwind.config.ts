@@ -39,7 +39,6 @@ module.exports = {
       },
       borderWidth: {
         DEFAULT: '0.5px',
-        form: '0.8px',
         1: '1px',
       },
       backgroundImage: {
@@ -143,6 +142,11 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        naver: '#00BF19',
+        kakao: {
+          yellow: '#F9E000',
+          brown: '#371C1D',
         },
       },
       fontSize: {
