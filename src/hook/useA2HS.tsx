@@ -32,7 +32,7 @@ const useA2HS = () => {
   }, []);
 
   const installApp = () => {
-    //TODO: Safari에서는 설치 안내 화면 띄우기
+    //TODO: Safari에서는 설치 안내 화면 띄우기 (navigator.standalone === true 이면 이미 설치된것임)
     // if (/iP(hone|od|ad)/.test(navigator.platform)) {
     //   setIsSafari(true);
     //   return;

@@ -1,16 +1,11 @@
-'use client';
-
 import HomeCalendar from '@/components/home/HomeCalendar';
-import StepStatistics from '@/components/signin/StepStatistics';
-import useSWR from 'swr';
+import HomeStatistics from '@/components/home/HomeStatistics';
 
 export default function Home() {
-  const { data: statistics } = useSWR('/schedules/statistics');
-
   return (
-    <section className="flex h-full min-h-screen flex-col justify-center gap-3 overflow-y-auto bg-primary-500 px-page pb-[calc(env(safe-area-inset-bottom)+90px)] pt-[calc(env(safe-area-inset-top)+0.2rem)]">
+    <section className="scrollbar-none sticky top-0 flex h-full min-h-screen w-full flex-col justify-center gap-3 overflow-y-auto bg-primary-500 px-page pb-[calc(env(safe-area-inset-bottom)+90px)] pt-safe-top web:pt-2">
       <HomeCalendar />
-      <StepStatistics statistics={statistics} variant="colorful" />
+      <HomeStatistics />
     </section>
   );
 }

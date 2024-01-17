@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
     ]);
     return NextResponse.json({ events, holidays });
   } catch (e) {
-    console.error(e);
     return new Response(
       'Internal server error. 서버 에러입니다. Calendar 정보를 가져올 수 없습니다.',
       {

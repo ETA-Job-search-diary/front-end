@@ -25,12 +25,12 @@ const PassRate = (rate: PassRateProps) => {
         <Tooltip
           message={`완료된 일정에 입력한 합격여부를\n바탕으로 집계된 합격률이에요`}
         >
-          <Icon name="helpcircle" className="h-4 w-4" />
+          <Icon name="helpcircle" className="h-4 w-4 stroke-black-400" />
         </Tooltip>
       }
     >
       <ul
-        className={`grid grid-cols-${COLUMN_COUNT} rounded-xl border border-black-100 bg-white p-5`}
+        className={`grid grid-cols-${COLUMN_COUNT} rounded-xl border border-black-100 bg-white p-5 xs:px-0 xs:py-2`}
       >
         {STEP_RATE.map(({ type, name }) => (
           <li key={name} className="flex flex-col items-center justify-center">

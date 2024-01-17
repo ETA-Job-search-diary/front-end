@@ -11,7 +11,7 @@ interface UserInfoProps {
     email: string;
   };
 }
-//TODO: 병렬로 요청하는게 맞는지 확인 아니면 캐싱하기
+
 const UserInfo = ({ user }: UserInfoProps) => {
   const { data: statistics } = useSWR('/schedules/statistics');
   const { data: passRate } = useSWR('/schedules/passRate');

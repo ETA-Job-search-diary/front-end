@@ -18,8 +18,8 @@ const skeletonVariants = cva(
     variants: {
       size: {
         sm: 'h-2.5 web:h-3.5 w-10',
-        md: 'h-2.5 web:h-3.5 w-20',
-        lg: 'h-2.5 web:h-3.5 w-32',
+        md: 'h-2.5 web:h-3.5 w-20 xs:w-16',
+        lg: 'h-2.5 web:h-3.5 w-32 xs:w-20',
       },
     },
     defaultVariants: {
