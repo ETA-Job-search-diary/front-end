@@ -21,7 +21,6 @@ type EventsType = Record<
   { id: string; company: string; step: StepTypes }[]
 >;
 
-//TODO: 공휴일 서버사이드로 받아올 수 있는지 확인...!!
 const HomeCalendar = () => {
   const today = new Date();
   const [month, setMonth] = useState<Date>(today);
@@ -38,24 +37,25 @@ const HomeCalendar = () => {
     <Calendar
       month={month}
       onMonthChange={setMonth}
-      className="h-max rounded-2xl bg-white px-3 pb-2 pt-6"
+      className="rounded-2xl bg-white px-3 pt-6 xs:px-2 xs:pt-4"
       classNames={{
-        day: 'h-full w-11 flex flex-col gap-0.5 justify-center font-medium',
+        cell: 'w-full',
+        day: 'font-medium text-center',
         day_today: 'pointer-events-none',
-        head_row: 'flex justify-between w-full pb-2 border-b border-black-100',
-        head_cell: 'w-11 text-0.9 font-semibold text-black-900',
-        row: 'flex justify-between w-full mt-2 first:mt-4',
+        head_row: 'grid grid-cols-7 pb-2 border-b border-black-100',
+        head_cell: 'w-full text-0.9 font-semibold text-black-900',
+        row: 'grid grid-cols-7 mt-0.5 first:mt-3',
       }}
       components={{
         Caption: ({ displayMonth }) => {
           const { goToMonth, nextMonth, previousMonth } = useNavigation();
           return (
             <div className="flex items-end justify-between">
-              <div className="grid grid-cols-[minmax(7.5rem,1fr)_1fr] items-end gap-2">
-                <h1 className="pl-2 text-1.2 font-bold leading-none text-black-900 web:font-semibold">
+              <div className="grid grid-cols-[minmax(7.5rem,1fr)_1fr] items-end gap-2 xs:grid-cols-[minmax(6rem,1fr)_1fr]">
+                <h1 className="pl-2 text-1.2 font-bold leading-none text-black-900 xs:text-1 web:font-semibold">
                   {format(displayMonth, 'yyyy년 MM월')}
                 </h1>
-                <div className="flex items-end gap-7">
+                <div className="flex items-end gap-7 xs:gap-2">
                   <button
                     aria-label="previous month move button"
                     disabled={!previousMonth}
@@ -84,13 +84,10 @@ const HomeCalendar = () => {
           const isSaturday = date.getDay() === 6 && !outside;
           const isEvents = events?.[day];
           const isNoEvents = !!Object.values(events || {}).length;
-
-          console.log(isNoEvents);
-
           return (
             <>
-              <p
-                className={`mx-auto min-h-[1.5rem] w-max min-w-[1.5rem] rounded-full text-0.9 leading-6 ${
+              <div
+                className={`mx-auto mb-[1px] min-h-[1.5rem] w-[1.5rem] rounded-full text-0.9 leading-6 ${
                   isNoEvents && today
                     ? 'bg-black text-white'
                     : isHoliday
@@ -101,12 +98,12 @@ const HomeCalendar = () => {
                 }`}
               >
                 {format(date, 'd')}
-              </p>
-              <p className="flex h-12 w-11 flex-col gap-[1px] web:h-20">
+              </div>
+              <div className="flex h-16 w-full flex-col gap-[0.5px] web:h-20">
                 {isEvents?.map(({ company, step }) => (
                   <span
                     key={company}
-                    className={`overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[1px] text-0.6 font-extrabold ${
+                    className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[1px] text-0.6 font-extrabold ${
                       eventStyle[getSteps(step)]
                     }`}
                   >
@@ -114,9 +111,12 @@ const HomeCalendar = () => {
                   </span>
                 ))}
                 {!isNoEvents && today && (
-                  <Icon name="groupB2" className="w-6 place-self-center" />
+                  <Icon
+                    name="characterBlack"
+                    className="w-6 place-self-center"
+                  />
                 )}
-              </p>
+              </div>
             </>
           );
         },

@@ -99,7 +99,12 @@ DateTimePicker.Desktop = ({
           />
         </AccordionTrigger>
         <AccordionContent>
-          <Calendar mode="single" selected={selectedDate} onSelect={onDate} />
+          <Calendar
+            className="p-5"
+            mode="single"
+            selected={selectedDate}
+            onSelect={onDate}
+          />
         </AccordionContent>
       </AccordionItem>
       <div ref={pointer} />
@@ -128,6 +133,7 @@ DateTimePicker.Mobile = ({
             mode="single"
             selected={selectedDate}
             onSelect={onDate}
+            className="p-4"
             components={{
               Caption: ({ displayMonth }) => {
                 const { goToMonth, nextMonth, previousMonth } = useNavigation();

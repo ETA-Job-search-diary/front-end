@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 const StatisticsLabel = {
   rate: '나의 합격률',
   application: '나의 지원 현황',
+  etc: '기타/문의',
 };
 
 interface StatisticsSectionProps {

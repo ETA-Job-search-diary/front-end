@@ -11,6 +11,7 @@ import Alert from '../common/Alert';
 import NavBar from '../common/NavBar';
 import BackButton from '../navbar/BackButton';
 import ServiceButton from './ServiceButton';
+import StatisticsSection from './StatisticsSection';
 import UserInfo from './UserInfo';
 
 const serviceTypes = {
@@ -39,26 +40,28 @@ const MyAccount = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-20 h-full w-full bg-gray-100 pt-safe-top">
+      <div className="sticky top-0 z-20 h-max w-full bg-gray-100 pt-safe-top">
         <NavBar
           label="마이페이지"
           leftSection={<BackButton onClose={() => replace('/')} />}
         />
       </div>
-      <div className="flex flex-col gap-8 px-page">
+      <div className="flex flex-col gap-8 px-page py-2">
         <UserInfo user={user} />
-        <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4">
-          <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
-          <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
-          <ServiceButton
-            label="logout"
-            onClick={() => handleAlert(serviceTypes.LOGOUT)}
-          />
-          <ServiceButton
-            label="withdraw"
-            onClick={() => handleAlert(serviceTypes.WITHDRAW)}
-          />
-        </div>
+        <StatisticsSection label="etc">
+          <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4 xs:px-2">
+            <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
+            <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
+            <ServiceButton
+              label="logout"
+              onClick={() => handleAlert(serviceTypes.LOGOUT)}
+            />
+            <ServiceButton
+              label="withdraw"
+              onClick={() => handleAlert(serviceTypes.WITHDRAW)}
+            />
+          </div>
+        </StatisticsSection>
         <Icon
           name="teamETA"
           className="mb-16 mt-20 h-[119px] w-40 place-self-end web:h-[155px] web:w-[212px]"

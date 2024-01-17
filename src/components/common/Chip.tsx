@@ -14,7 +14,7 @@ const Chip = forwardRef<HTMLDivElement, ChipProps>(
     return (
       <div
         ref={ref}
-        className={cn(chipVariants({ variant }), className)}
+        className={cn(chipVariants({ variant }))}
         onClick={onClick}
         {...rest}
       >
@@ -29,8 +29,8 @@ const chipVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-black-100 text-black-900 border-[0.8px] web:border',
-        outline: 'border border-primary-500 text-primary-500',
+        default: 'border-black-100 text-black-900 border-1 web:border',
+        outline: 'border-1 border-primary-500 text-primary-500',
         filled: 'bg-primary-500 text-white',
       },
     },

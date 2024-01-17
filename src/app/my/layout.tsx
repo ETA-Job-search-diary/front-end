@@ -15,7 +15,7 @@ interface MyLayoutProps {
 
 const MyLayout = ({ children }: MyLayoutProps) => {
   return (
-    <section className="h-full min-h-screen w-full bg-gray-100">
+    <section className="scrollbar-none fixed h-full min-h-screen w-full min-w-280 max-w-500 overflow-x-hidden overflow-y-scroll bg-gray-100">
       {children}
     </section>
   );
