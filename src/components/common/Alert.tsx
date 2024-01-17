@@ -39,7 +39,7 @@ const Alert = ({ message, type, onClose }: AlertProps) => {
             variant={ButtonColors[value]}
             label={AlertTypes[value]}
             onClick={onClick}
-            className={value === 'CANCEL' ? 'border border-primary-500' : ''}
+            className={value === 'CANCEL' ? 'border-1 border-primary-500' : ''}
           />
         ))}
       </div>

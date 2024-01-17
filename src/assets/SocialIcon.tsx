@@ -2,14 +2,16 @@ import { cn } from '@/lib/utils';
 import { VariantProps, cva } from 'class-variance-authority';
 import Icon from './Icon';
 
+export type ProviderTypes = 'naver' | 'kakao';
+
 interface SocialIconProps extends VariantProps<typeof socialIconVariants> {
-  name: 'naver' | 'kakao';
+  name?: ProviderTypes;
 }
 
 const SocialIcon = ({ name, size }: SocialIconProps) => {
   return (
     <div className={cn(socialIconVariants({ name, size }))}>
-      <Icon name={name} className={cn(iconVariants({ name }))} />
+      {name && <Icon name={name} className={cn(iconVariants({ name }))} />}
     </div>
   );
 };

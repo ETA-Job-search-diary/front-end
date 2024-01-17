@@ -40,13 +40,13 @@ const MyAccount = () => {
 
   return (
     <>
-      <div className="fixed top-0 z-20 h-max w-full min-w-280 max-w-500 bg-gray-100 pt-safe-top">
+      <div className="sticky top-0 z-20 h-max w-full bg-gray-100 pt-safe-top web:fixed web:min-w-280 web:max-w-500">
         <NavBar
           label="마이페이지"
           leftSection={<BackButton onClose={() => replace('/')} />}
         />
       </div>
-      <div className="flex h-full flex-col gap-8 px-page py-2 pt-20">
+      <div className="mb-16 flex h-max min-h-full flex-col gap-8 px-page py-2 pb-safe-bottom web:pt-20">
         <UserInfo user={user} />
         <StatisticsSection label="etc">
           <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4 xs:px-2">
@@ -64,26 +64,25 @@ const MyAccount = () => {
         </StatisticsSection>
         <Icon
           name="teamETA"
-          className="mb-16 mt-20 h-[119px] w-40 place-self-end web:h-[155px] web:w-[212px]"
+          className="mt-16 h-[119px] w-40 place-self-end web:h-[155px] web:w-[212px]"
         />
-        {isOpen && (
-          <Alert
-            message={message}
-            type={[
-              {
-                value: 'CANCEL',
-                onClick: () => setIsOpen(false),
-              },
-              {
-                value: 'CONFIRM',
-                onClick:
-                  message === serviceTypes.LOGOUT ? onSignOut : onWithdraw,
-              },
-            ]}
-            onClose={() => setIsOpen(false)}
-          />
-        )}
       </div>
+      {isOpen && (
+        <Alert
+          message={message}
+          type={[
+            {
+              value: 'CANCEL',
+              onClick: () => setIsOpen(false),
+            },
+            {
+              value: 'CONFIRM',
+              onClick: message === serviceTypes.LOGOUT ? onSignOut : onWithdraw,
+            },
+          ]}
+          onClose={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 };

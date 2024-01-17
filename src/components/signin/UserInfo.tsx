@@ -15,7 +15,7 @@ interface UserInfoProps {
 const UserInfo = ({ user }: UserInfoProps) => {
   const { data: statistics } = useSWR('/schedules/statistics');
   const { data: passRate } = useSWR('/schedules/passRate');
-  const provier = getProviderByEmail(user?.email ?? '');
+  const provier = user && getProviderByEmail(user?.email);
 
   return (
     <>
