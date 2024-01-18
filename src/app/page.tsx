@@ -3,9 +3,11 @@ import HomeStatistics from '@/components/home/HomeStatistics';
 
 export default function Home() {
   return (
-    <section className="scrollbar-none sticky top-0 flex h-full min-h-screen w-full flex-col justify-center gap-3 overflow-y-auto bg-primary-500 px-page pb-[calc(env(safe-area-inset-bottom)+90px)] pt-safe-top web:pt-2">
-      <HomeCalendar />
-      <HomeStatistics />
+    <section className="fixed top-0 flex h-screen w-full min-w-280 max-w-500 flex-col justify-center bg-primary-500 px-page pt-safe-top web:static">
+      <div className="flex h-max flex-col gap-3 overflow-y-auto pb-[calc(env(safe-area-inset-bottom)+90px)] pt-[1px] scrollbar-none">
+        <HomeCalendar />
+        <HomeStatistics />
+      </div>
     </section>
   );
 }

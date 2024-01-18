@@ -99,11 +99,11 @@ const HomeCalendar = () => {
               >
                 {format(date, 'd')}
               </div>
-              <div className="flex h-16 w-full flex-col gap-[0.5px] web:h-20">
+              <div className="flex h-14 w-full flex-col gap-[0.5px] web:h-16">
                 {isEvents?.map(({ company, step }) => (
                   <span
                     key={company}
-                    className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[1px] text-0.6 font-extrabold ${
+                    className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[0.5px] text-0.6 font-extrabold ${
                       eventStyle[getSteps(step)]
                     }`}
                   >

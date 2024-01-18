@@ -2,7 +2,7 @@
 
 import Icon from '@/assets/Icon';
 import useA2HS from '@/hook/useA2HS';
-import { Sheet, SheetContent } from '../ui/sheet';
+import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
 import Button from './Button';
 //TODO: Safari에서는 설치 안내 화면 띄우기
 const A2HS = () => {
@@ -14,6 +14,7 @@ const A2HS = () => {
 
   return (
     <Sheet defaultOpen>
+      <SheetTitle className="sr-only">A2HS</SheetTitle>
       <SheetContent
         side="bottom"
         hasCloseButton={false}
