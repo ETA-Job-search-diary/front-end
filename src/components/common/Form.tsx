@@ -198,7 +198,6 @@ const Form = ({ originData }: FormProps) => {
                 }) => (
                   <FormLabel
                     id="link"
-                    must
                     label="채용공고"
                     message={
                       value && value.length > 0 && watch('platform')

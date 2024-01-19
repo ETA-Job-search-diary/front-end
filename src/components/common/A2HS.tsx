@@ -88,7 +88,7 @@ A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
           홈 화면에 <b>취준로그 앱</b>을{`\n`}
           추가해보세요!
         </h1>
-        <div className="relative w-full overflow-hidden rounded-2xl border border-black-50 bg-white px-4 pb-5 pt-12 shadow-box">
+        <div className="relative w-full overflow-hidden rounded-2xl border border-black-50 bg-white px-4 pb-5 pt-6 shadow-box">
           <div className="absolute left-0 top-0 border-b-[3.2rem] border-l-[3.2rem] border-b-transparent border-l-primary-500" />
           <span className="absolute left-2 top-2 rotate-[-42.95deg] text-0.8 font-extrabold text-white">
             iOS
@@ -102,12 +102,31 @@ A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
                 </>
               }
             >
-              <Image
-                src="/images/step1.webp"
-                alt="a2hs step1"
-                width={500}
-                height={500}
-              />
+              <div className="flex flex-col gap-3 rounded-lg bg-gray-200 py-3">
+                <div className="mx-4 grid grid-cols-[auto_1fr_auto] items-center rounded-lg bg-gray-100 bg-opacity-80 px-4 py-2 shadow-box">
+                  <div className="w-max">
+                    <span className="text-0.75 font-semibold">가</span>
+                    <span className="text-0.85 font-bold">가</span>
+                  </div>
+                  <div className="text-center text-0.9 font-semibold">
+                    newjoblog.vercel.app
+                  </div>
+                  <Icon
+                    name="arrowSpin"
+                    className="mx-auto w-4 fill-black-900"
+                  />
+                </div>
+                <div className="relative mx-4 flex justify-between">
+                  <Icon name="left" className=" w-4 fill-[#4693FF]" />
+                  <Icon name="right" className="w-4 fill-black-100" />
+                  <p />
+                  <Icon name="book" className="w-4 stroke-[#4693FF]" />
+                  <Icon name="copy" className="w-4 stroke-[#4693FF]" />
+                  <div className="absolute -top-4 left-1/2 h-12 w-12 -translate-x-1/2 rounded-lg bg-gray-200 p-1.5 shadow-md">
+                    <Icon name="share" className="mx-auto stroke-[#4693FF]" />
+                  </div>
+                </div>
+              </div>
             </A2HS.Step>
             <A2HS.Step
               number={2}
