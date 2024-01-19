@@ -22,6 +22,7 @@ export { default as logout } from './logout.svg';
 export { default as mainCharacter } from './main-character.svg';
 export { default as moreVertical } from './more-vertical.svg';
 export { default as naver } from './naver.svg';
+export { default as plusSquare } from './plus-square.svg';
 export { default as message } from './servicemessage.svg';
 export { default as tag } from './tag.svg';
 export { default as teamETA } from './team-eta.svg';

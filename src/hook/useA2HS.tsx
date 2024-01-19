@@ -45,13 +45,14 @@ const useA2HS = () => {
       e.preventDefault();
       deferredPrompt.current = e;
       setTimeout(() => {
-        if (
-          !isActive() ||
-          (window.matchMedia &&
-            window.matchMedia('(display-mode: standalone)').matches)
-        )
-          return;
-        setIsShown(true);
+        const isStandalone = window.matchMedia(
+          '(display-mode: standalone)',
+        ).matches;
+        if (isStandalone) return;
+
+        if (isActive()) {
+          setIsShown(true);
+        }
       }, A2HS_DELAY_TIME);
     };
     window.addEventListener('beforeinstallprompt', beforeInstallPrompt);
@@ -60,19 +61,18 @@ const useA2HS = () => {
   }, []);
 
   useEffect(() => {
-    if ('standalone' in navigator) {
-      if (navigator.standalone) {
-        setIsShown(false);
-        return;
-      }
-    }
-    setIsShown(true);
-
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    if (isSafari) {
-      setIsSafari(true);
-      return;
-    }
+    if (isSafari) setIsSafari(true);
+
+    setTimeout(() => {
+      if ('standalone' in navigator) {
+        if (navigator.standalone) {
+          setIsShown(false);
+          return;
+        }
+      }
+      setIsShown(true);
+    }, A2HS_DELAY_TIME);
   }, []);
 
   return {

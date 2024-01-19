@@ -68,7 +68,7 @@ const A2HS = () => {
 
 A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
   return createPortal(
-    <section className="fixed top-0 z-40 h-screen w-full min-w-280 max-w-500 overflow-y-auto bg-gray-100 pb-16">
+    <section className="fixed top-0 z-40 h-screen w-full min-w-280 max-w-500 overflow-y-auto bg-gray-100 pb-24">
       <div className="sticky top-0 z-50 bg-gray-100">
         <NavBar
           leftSection={
@@ -93,7 +93,7 @@ A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
           <span className="absolute left-2 top-2 rotate-[-42.95deg] text-0.8 font-extrabold text-white">
             iOS
           </span>
-          <div className="flex flex-col divide-y-1 divide-gray-50">
+          <div className="flex h-max flex-col divide-y-1 divide-gray-50">
             <A2HS.Step
               number={1}
               title={
@@ -117,12 +117,14 @@ A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
                 </>
               }
             >
-              <Image
-                src="/images/step2.webp"
-                alt="a2hs step2"
-                width={500}
-                height={500}
-              />
+              <div className="rounded-lg bg-[#EFF5F1] p-4">
+                <div className="flex justify-between rounded-md bg-white p-4 shadow-sm">
+                  <span className="text-0.9 font-semibold text-black-900">
+                    홈 화면에 추가
+                  </span>
+                  <Icon name="plusSquare" className="w-4 stroke-black-900" />
+                </div>
+              </div>
             </A2HS.Step>
             <A2HS.Step
               number={3}
@@ -157,7 +159,7 @@ A2HS.Guide = ({ onClose }: { onClose: () => void }) => {
 
 A2HS.Step = ({ number, title, children }: A2HSStepProps) => {
   return (
-    <div className="flex min-h-[9.5rem] flex-col justify-center gap-3">
+    <div className="flex min-h-[11rem] flex-col justify-center gap-3">
       <div className="flex items-center gap-2">
         <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-50">
           <span className="text-0.75 font-extrabold text-primary-500">
