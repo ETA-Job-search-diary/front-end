@@ -9,7 +9,7 @@ const useA2HS = () => {
   const [isShown, setIsShown] = useState(false);
   const [isSafari, setIsSafari] = useState(false);
 
-  const isActive = () => {
+  const isActivated = () => {
     const A2HS = localStorage.getItem('A2HS');
     if (!A2HS) return true;
 
@@ -32,8 +32,15 @@ const useA2HS = () => {
   }, []);
 
   const installApp = useCallback(() => {
-    setIsShown(false);
     deferredPrompt.current?.prompt();
+    localStorage.setItem(
+      'A2HS',
+      JSON.stringify({
+        active: true,
+        time: new Date().getTime(),
+      }),
+    );
+    setIsShown(false);
   }, []);
 
   const closeA2HS = useCallback(() => {
@@ -45,12 +52,15 @@ const useA2HS = () => {
       e.preventDefault();
       deferredPrompt.current = e;
       setTimeout(() => {
-        const isStandalone = window.matchMedia(
-          '(display-mode: standalone)',
-        ).matches;
-        if (isStandalone) return;
+        const isInstalled =
+          window.matchMedia('(display-mode: standalone)').matches ||
+          ('standalone' in navigator && navigator.standalone);
+        if (isInstalled) {
+          setIsShown(false);
+          return;
+        }
 
-        if (isActive()) {
+        if (isActivated()) {
           setIsShown(true);
         }
       }, A2HS_DELAY_TIME);

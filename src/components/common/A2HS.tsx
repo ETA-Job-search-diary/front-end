@@ -14,7 +14,7 @@ interface A2HSStepProps {
   title: ReactNode;
   children: ReactNode;
 }
-
+//TODO: FIX: 이미 설치되어있으면 안떠야되는데.. 뜸
 const A2HS = () => {
   const { isShown, isSafari, installApp, addLater, closeA2HS } = useA2HS();
   const [showGuide, setShowGuide] = useState(false);
