@@ -70,7 +70,7 @@ const itemStyle =
   'grid grid-cols-[5.5rem_minmax(8rem,_auto)] web:grid-cols-[auto_308px] gap-2';
 const titleStyle =
   'text-black-800 font-semibold flex gap-3 items-center text-1 web:text-1.1 w-max';
-const iconStyle = 'w-4 h-4';
+const iconStyle = 'w-4 h-4 stroke-[#82DFA2]';
 export const detailContentStyle =
   'text-black-600 font-medium text-1 web:text-1.1';
 

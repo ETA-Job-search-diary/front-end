@@ -27,7 +27,7 @@ const Detail = ({
       <DetailItem title="POSITION" icon="position" content={position} />
       <DetailItem title="DATE" icon="clock" content={fullDateEndTime} />
       {platform && (
-        <DetailItem title="PLATFORM" icon="position" content={platform} />
+        <DetailItem title="PLATFORM" icon="web" content={platform} />
       )}
       {link !== ' ' && link && (
         <DetailItem.Link title="LINK" icon="globe" content={link} />

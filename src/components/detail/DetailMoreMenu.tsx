@@ -57,7 +57,7 @@ const DetailMoreMenu = ({ scheduleId }: DetailMoreMenuProps) => {
             className="mx-auto w-5 fill-none stroke-black-900 transition-all hover:scale-110"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="mr-3">
           <MoreMenuItem label="edit" onClick={handleEditConfirm} />
           <DropdownMenuSeparator />
           <MoreMenuItem label="delete" onClick={openMenu} />

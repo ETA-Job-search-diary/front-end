@@ -24,6 +24,7 @@ export { default as loginCharacter } from './login-character.svg';
 export { default as logo } from './logo.svg';
 export { default as logout } from './logout.svg';
 export { default as mainCharacter } from './main-character.svg';
+export { default as web } from './monitor.svg';
 export { default as moreVertical } from './more-vertical.svg';
 export { default as naver } from './naver.svg';
 export { default as plusSquare } from './plus-square.svg';
