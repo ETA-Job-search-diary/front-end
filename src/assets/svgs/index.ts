@@ -1,4 +1,5 @@
 export { default as alert } from './alert-circle.svg';
+export { default as app } from './app.svg';
 export { default as arrowleft } from './arrow-left.svg';
 export { default as position } from './book.svg';
 export { default as briefcase } from './briefcase.svg';

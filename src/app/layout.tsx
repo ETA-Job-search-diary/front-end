@@ -158,16 +158,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko" suppressHydrationWarning>
       <GoogleAnalytics />
       <body
-        className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} scrollbar-none web:scrollbar-thin web:scrollbar-thumb-rounded-sm web:scrollbar-thumb-gray-300 web:scrollbar-track-gray-100 web:hover:scrollbar-thumb-gray-400 antialiased`}
+        className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased scrollbar-none web:scrollbar-thin web:scrollbar-track-gray-100 web:scrollbar-thumb-gray-300 web:scrollbar-thumb-rounded-sm web:hover:scrollbar-thumb-gray-400`}
       >
         <ThemeProvider>
           <main className="mx-auto min-h-screen min-w-280 max-w-500">
             <AuthSessionProvider>
               <SWRContext>{children}</SWRContext>
               <TabBar />
-              <Toaster />
-              <A2HS />
             </AuthSessionProvider>
+            <Toaster />
+            <A2HS />
           </main>
         </ThemeProvider>
       </body>
