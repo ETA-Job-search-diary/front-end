@@ -52,6 +52,7 @@ module.exports = {
         tab: '0px -5px 20px rgba(219, 219, 219, 0.25)',
       },
       boxShadow: {
+        box: '0px 0px 25px 0px rgba(0, 0, 0, 0.05)',
         tab: '0px -2px 5px 0px rgba(0, 0, 0, 0.06)',
       },
       colors: {

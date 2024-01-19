@@ -20,7 +20,7 @@ const useA2HS = () => {
     return now - time > A2HS_WAIT_TIME;
   };
 
-  const closeA2HS = useCallback(() => {
+  const addLater = useCallback(() => {
     localStorage.setItem(
       'A2HS',
       JSON.stringify({
@@ -31,15 +31,14 @@ const useA2HS = () => {
     setIsShown(false);
   }, []);
 
-  const installApp = () => {
-    //TODO: Safari에서는 설치 안내 화면 띄우기 (navigator.standalone === true 이면 이미 설치된것임)
-    // if (/iP(hone|od|ad)/.test(navigator.platform)) {
-    //   setIsSafari(true);
-    //   return;
-    // }
+  const installApp = useCallback(() => {
     setIsShown(false);
     deferredPrompt.current?.prompt();
-  };
+  }, []);
+
+  const closeA2HS = useCallback(() => {
+    setIsShown(false);
+  }, []);
 
   useEffect(() => {
     const beforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
@@ -60,10 +59,27 @@ const useA2HS = () => {
       window.removeEventListener('beforeinstallprompt', beforeInstallPrompt);
   }, []);
 
+  useEffect(() => {
+    if ('standalone' in navigator) {
+      if (navigator.standalone) {
+        setIsShown(false);
+        return;
+      }
+    }
+    setIsShown(true);
+
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari) {
+      setIsSafari(true);
+      return;
+    }
+  }, []);
+
   return {
     isSafari,
     isShown,
     installApp,
+    addLater,
     closeA2HS,
   };
 };

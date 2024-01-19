@@ -37,7 +37,7 @@ const HomeCalendar = () => {
     <Calendar
       month={month}
       onMonthChange={setMonth}
-      className="rounded-2xl bg-white px-3 pt-6 xs:px-2 xs:pt-4"
+      className="rounded-2xl bg-white px-3 pt-4 xs:px-2 xs:pt-4 web:pt-6"
       classNames={{
         cell: 'w-full',
         day: 'font-medium text-center',
