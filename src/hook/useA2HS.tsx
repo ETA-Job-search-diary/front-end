@@ -36,7 +36,7 @@ const useA2HS = () => {
     localStorage.setItem(
       'A2HS',
       JSON.stringify({
-        active: true,
+        active: false,
         time: new Date().getTime(),
       }),
     );
@@ -55,6 +55,7 @@ const useA2HS = () => {
         const isInstalled =
           window.matchMedia('(display-mode: standalone)').matches ||
           ('standalone' in navigator && navigator.standalone);
+
         if (isInstalled) {
           setIsShown(false);
           return;
@@ -65,6 +66,7 @@ const useA2HS = () => {
         }
       }, A2HS_DELAY_TIME);
     };
+
     window.addEventListener('beforeinstallprompt', beforeInstallPrompt);
     return () =>
       window.removeEventListener('beforeinstallprompt', beforeInstallPrompt);
@@ -75,12 +77,15 @@ const useA2HS = () => {
     if (isSafari) setIsSafari(true);
 
     setTimeout(() => {
-      if ('standalone' in navigator) {
-        if (navigator.standalone) {
-          setIsShown(false);
-          return;
-        }
+      const isInstalled =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        ('standalone' in navigator && navigator.standalone);
+
+      if (isInstalled) {
+        setIsShown(false);
+        return;
       }
+
       setIsShown(true);
     }, A2HS_DELAY_TIME);
   }, []);
