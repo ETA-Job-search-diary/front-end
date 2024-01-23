@@ -16,6 +16,7 @@ const GridChips = ({ variant, checked, onClick }: GridChipsProps) => {
         return (
           <li key={type}>
             <Chip
+              id={`filter_step_${type}`}
               label={name}
               variant={chipVariant}
               onClick={() => onClick(type)}

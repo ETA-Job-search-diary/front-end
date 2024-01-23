@@ -22,8 +22,8 @@ type EventsType = Record<
 >;
 
 const HomeCalendar = () => {
-  const today = new Date();
-  const [month, setMonth] = useState<Date>(today);
+  const todayMonth = new Date();
+  const [month, setMonth] = useState<Date>(todayMonth);
   const currentMonth = format(month, 'yyyy-MM');
   const { data } = useSWR<HomeCalendar>(
     `api/schedules/calendar?date=${currentMonth}`,

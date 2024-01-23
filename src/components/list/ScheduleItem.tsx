@@ -32,7 +32,7 @@ const ScheduleItem = ({
   const { time } = getFormattedISODateTime(date);
   return (
     <Link
-      id="upcoming_schedule"
+      id="coming_schedule"
       href={`/schedule/${id}`}
       scroll={false}
       className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
