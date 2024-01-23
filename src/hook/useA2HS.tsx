@@ -75,6 +75,7 @@ const useA2HS = () => {
   useEffect(() => {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     if (isSafari) setIsSafari(true);
+    else return;
 
     setTimeout(() => {
       const isInstalled =

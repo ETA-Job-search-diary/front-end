@@ -21,7 +21,7 @@ interface ItemWithStatusProps extends ScheduleDetailType {
   tab: EventType;
   onResult?: () => void;
 }
-//TODO: Badge : 서류전형 이면서 00:00이면 안보이게
+
 const ScheduleItem = ({
   id,
   step,
@@ -38,7 +38,9 @@ const ScheduleItem = ({
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      {time !== '00:00' && <Badge hasIcon label={time} />}
+      {time !== '00:00' && step !== 'document' && (
+        <Badge hasIcon label={time} />
+      )}
     </Link>
   );
 };
@@ -61,7 +63,9 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, tab, date }} />
-        {time !== '00:00' && <Badge hasIcon label={time} variant="fail" />}
+        {time !== '00:00' && step !== 'document' && (
+          <Badge hasIcon label={time} variant="fail" />
+        )}
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>

@@ -26,7 +26,7 @@ const TextInputWithReset = forwardRef<
         ref={ref}
         id={id}
         className={cn(
-          `h-11 w-full rounded-small border-[0.8px] border-primary-300 bg-primary-light-50 py-2 pl-[0.8rem] pr-10 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`,
+          `h-11 w-full rounded-small border-1 border-primary-300 bg-primary-light-50 py-2 pl-[0.8rem] pr-10 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`,
           className,
         )}
         onChange={handleFilled}
