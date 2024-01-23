@@ -20,7 +20,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
-    { id, must, label, type = 'text', isLoading, placeholder, ...rest },
+    { id, must, label, type = 'text', isLoading, placeholder, ...props },
     ref,
   ) => {
     return (
@@ -31,7 +31,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         placeholder={`${
           isLoading ? '정보를 가져오고 있어요...' : placeholder
         } `}
-        {...rest}
+        {...props}
       />
     );
   },

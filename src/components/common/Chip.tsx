@@ -10,13 +10,13 @@ interface ChipProps
 }
 
 const Chip = forwardRef<HTMLDivElement, ChipProps>(
-  ({ label, variant, onClick, className, ...rest }, ref) => {
+  ({ label, variant, onClick, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(chipVariants({ variant }))}
         onClick={onClick}
-        {...rest}
+        {...props}
       >
         <span>{label}</span>
       </div>

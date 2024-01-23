@@ -1,7 +1,7 @@
 const MESSAGE_TYPES = {
   title: {
     coming: '다가오는 일정이 없어요',
-    past: '지난 일정이 없어요',
+    past: '완료된 일정이 없어요',
     category: '해당 카테고리에 등록된 일정이 없어요',
   },
   suggestion: {

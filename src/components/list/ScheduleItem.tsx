@@ -32,6 +32,7 @@ const ScheduleItem = ({
   const { time } = getFormattedISODateTime(date);
   return (
     <Link
+      id="upcoming_schedule"
       href={`/schedule/${id}`}
       scroll={false}
       className={`grid grid-cols-[auto_1fr_auto] items-center whitespace-nowrap rounded-large border px-5 py-4 transition-colors ${borderStyle}`}
@@ -56,6 +57,7 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
 
   return (
     <Link
+      id="completed_schedule"
       href={`/schedule/${id}`}
       scroll={false}
       className={`flex flex-col gap-3 rounded-large border px-5 py-4 transition-colors xs:gap-2 xs:px-3 ${borderStyle}`}

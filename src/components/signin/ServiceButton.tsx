@@ -38,6 +38,7 @@ const ServiceButton = ({ label, onClick }: ServiceButtonProps) => {
 ServiceButton.Link = ({ href, label }: ServiceButtonLinkProps) => {
   return (
     <Link
+      id={`service_${label}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"

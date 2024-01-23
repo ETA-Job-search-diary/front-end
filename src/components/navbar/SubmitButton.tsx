@@ -7,7 +7,7 @@ interface SubmitButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
-  ({ label = '저장', active, ...rest }, ref) => {
+  ({ label = '저장', active, ...props }, ref) => {
     return (
       <Button
         ref={ref}
@@ -16,7 +16,7 @@ const SubmitButton = forwardRef<HTMLButtonElement, SubmitButtonProps>(
         label={label}
         variant={active ? 'primary-border' : 'gray-border'}
         disabled={!active}
-        {...rest}
+        {...props}
       />
     );
   },

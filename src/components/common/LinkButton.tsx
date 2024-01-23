@@ -36,6 +36,7 @@ const LinkButton = ({ path }: LinkButtonProps) => {
 
   return (
     <Link
+      id={`${path}_button`}
       href={href}
       className={`z-20 flex h-full w-full flex-col items-center justify-center web:text-0.85 ${
         isLeft ? 'col-start-1' : 'col-start-3'

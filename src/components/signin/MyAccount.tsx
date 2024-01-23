@@ -69,6 +69,7 @@ const MyAccount = () => {
       </div>
       {isOpen && (
         <Alert
+          id={`${message === serviceTypes.LOGOUT ? 'logout' : 'withdraw'}_alert`}
           message={message}
           type={[
             {

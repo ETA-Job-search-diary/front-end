@@ -8,7 +8,7 @@ interface NavBarProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
-  ({ label, leftSection, rightSection, className, ...rest }, ref) => {
+  ({ label, leftSection, rightSection, className, ...props }, ref) => {
     return (
       <nav
         ref={ref}
@@ -16,7 +16,7 @@ const NavBar = forwardRef<HTMLDivElement, NavBarProps>(
           'grid h-16 w-full grid-cols-[1fr_5fr_1fr] place-items-stretch items-center justify-center px-1 text-1.1 text-black-900 web:h-[70px]',
           className,
         )}
-        {...rest}
+        {...props}
       >
         <p className="col-start-1">{leftSection}</p>
         <p className="col-start-2 text-center font-semibold">{label}</p>

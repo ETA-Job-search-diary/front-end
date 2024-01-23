@@ -8,10 +8,14 @@ import NavBar from '@/components/common/NavBar';
 import BackButton from '@/components/navbar/BackButton';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
 import { getToken } from '@/service/token';
-import { Viewport } from 'next';
+import { Metadata, Viewport } from 'next';
+
+export const metadata: Metadata = {
+  title: '로그인',
+};
 
 export const viewport: Viewport = {
-  themeColor: 'var(--app-white)',
+  themeColor: '#FFF',
 };
 
 interface SignInProps {
@@ -31,7 +35,7 @@ export default async function SingInPage({
   return (
     <>
       <div className="sticky top-0 z-20 h-full w-full bg-white pt-safe-top">
-        <NavBar leftSection={<BackButton />} />
+        <NavBar leftSection={<BackButton id="signin_page_out" />} />
       </div>
       <section className="h-[calc(100vh-70px)] w-full overflow-x-hidden bg-white px-page scrollbar-none">
         <div className="relative top-[10%]">
