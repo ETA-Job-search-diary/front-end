@@ -5,7 +5,7 @@ import useA2HS from '@/hook/useA2HS';
 import Image from 'next/image';
 import { ReactNode, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
+import { Sheet, SheetContent } from '../ui/sheet';
 import Button from './Button';
 import NavBar from './NavBar';
 
@@ -32,7 +32,6 @@ const A2HS = () => {
     <>
       {!showGuide && isShown && (
         <Sheet defaultOpen>
-          <SheetTitle className="sr-only">A2HS</SheetTitle>
           <SheetContent
             side="bottom"
             hasCloseButton={false}

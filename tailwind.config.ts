@@ -86,6 +86,7 @@ module.exports = {
             50: 'rgba(var(--app-primary-light-50))',
             100: 'rgba(var(--app-primary-light-100))',
           },
+          icon: 'rgb(var(--app-primary-icon))',
         },
         gray: {
           50: 'rgb(var(--app-gray-50))',

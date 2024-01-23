@@ -18,7 +18,9 @@ const Badge = forwardRef<HTMLDivElement, BadgeProps>(
         className={cn(badgeVariants({ variant }), className)}
         {...rest}
       >
-        {hasIcon && <Icon name="clock" className="w-3" />}
+        {hasIcon && (
+          <Icon name="clock" className={cn(badgeIconVariants({ variant }))} />
+        )}
         {variant ? getBadgeLabel({ label, variant }) : label}
       </div>
     );
@@ -50,7 +52,7 @@ const badgeVariants = cva(
         pending:
           'bg-primary-50 text-primary-500 flex items-center justify-center gap-1',
         pass: 'bg-blue-50 text-blue-300',
-        fail: 'bg-gray-200 text-black-300',
+        fail: 'bg-gray-200 text-black-300 flex items-center justify-center gap-1',
       },
     },
     defaultVariants: {
@@ -58,5 +60,15 @@ const badgeVariants = cva(
     },
   },
 );
+
+const badgeIconVariants = cva('w-3', {
+  variants: {
+    variant: {
+      pending: 'stroke-primary-icon',
+      pass: '',
+      fail: 'stroke-black-300',
+    },
+  },
+});
 
 export default Badge;

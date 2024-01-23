@@ -38,7 +38,8 @@ const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
 
   const { date, time } = getFormattedISODateTime(inputDate);
 
-  const selectedDate = new Date(convertDateToAlternateFormat(date, '-'));
+  const convertDate = convertDateToAlternateFormat(date, '-');
+  const selectedDate = new Date(convertDate);
 
   const handleCalendarSelect = (value?: Date) => {
     if (!value) return;
@@ -49,7 +50,7 @@ const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
   };
 
   const handleTimeChange = (value: string) => {
-    const fullDate = `${date}T${value}:00.000Z`;
+    const fullDate = `${convertDate}T${value}:00.000Z`;
     onChange(fullDate);
   };
 
