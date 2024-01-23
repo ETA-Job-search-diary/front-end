@@ -1,3 +1,4 @@
+import { HTMLAttributes, forwardRef } from 'react';
 import Button, { ButtonVariantTypes } from './Button';
 import PortalSection from './PortalSection';
 
@@ -19,7 +20,7 @@ const ButtonColors: Record<keyof typeof AlertTypes, ButtonVariantTypes> = {
   FAIL: 'gray',
 };
 
-interface AlertProps {
+interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   message: string;
   type: {
     value: keyof typeof AlertTypes;
@@ -28,23 +29,33 @@ interface AlertProps {
   onClose: () => void;
 }
 
-const Alert = ({ message, type, onClose }: AlertProps) => {
-  return (
-    <PortalSection className="bg-white" onClose={onClose}>
-      <div className="grow p-8 pb-7 text-center">{message}</div>
-      <div className="flex w-full justify-between gap-1.5">
-        {type.map(({ value, onClick }) => (
-          <Button
-            key={value}
-            variant={ButtonColors[value]}
-            label={AlertTypes[value]}
-            onClick={onClick}
-            className={value === 'CANCEL' ? 'border-1 border-primary-500' : ''}
-          />
-        ))}
-      </div>
-    </PortalSection>
-  );
-};
+const Alert = forwardRef<HTMLDivElement, AlertProps>(
+  ({ message, type, onClose, ...props }, ref) => {
+    return (
+      <PortalSection
+        ref={ref}
+        className="bg-white"
+        onClose={onClose}
+        {...props}
+      >
+        <div className="grow p-8 pb-7 text-center">{message}</div>
+        <div className="flex w-full justify-between gap-1.5">
+          {type.map(({ value, onClick }) => (
+            <Button
+              id={`alert_${value.toLowerCase()}_button`}
+              key={value}
+              variant={ButtonColors[value]}
+              label={AlertTypes[value]}
+              onClick={onClick}
+              className={
+                value === 'CANCEL' ? 'border-1 border-primary-500' : ''
+              }
+            />
+          ))}
+        </div>
+      </PortalSection>
+    );
+  },
+);
 
 export default Alert;

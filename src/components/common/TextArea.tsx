@@ -12,7 +12,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ id, label, maxLength, onChange, ...rest }, ref) => {
+  ({ id, label, maxLength, onChange, ...props }, ref) => {
     const [count, setCount] = useState(0);
 
     const handleTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,7 +32,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={`w-full grow bg-transparent p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           onChange={handleTextArea}
-          {...rest}
+          {...props}
         />
         {maxLength && (
           <span className="pb-2.5 pr-[0.9rem] text-end text-0.85 text-black-200">{`${count} / ${maxLength} 자`}</span>

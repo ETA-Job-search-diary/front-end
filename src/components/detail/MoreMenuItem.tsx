@@ -23,6 +23,7 @@ const labelTypes: Record<
 const MoreMenuItem = ({ label, onClick }: MoreMenuItemProps) => {
   return (
     <DropdownMenuItem
+      id={`schedule_${label}`}
       onClick={onClick}
       className="flex items-center justify-center gap-2"
     >

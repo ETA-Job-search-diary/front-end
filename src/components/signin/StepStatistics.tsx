@@ -19,12 +19,12 @@ interface StatisticsSectionProps
 }
 
 const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
-  ({ statistics, variant, className, ...rest }, ref) => {
+  ({ statistics, variant, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(statisticsVariants({ variant }), className)}
-        {...rest}
+        {...props}
       >
         {STEP_STATISTICS.map(({ name, type }) => (
           <div key={name} className={cn(typeBoxVariants({ variant }))}>

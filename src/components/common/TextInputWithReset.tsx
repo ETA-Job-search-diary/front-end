@@ -11,7 +11,7 @@ interface TextInputWithResetProps
 const TextInputWithReset = forwardRef<
   HTMLInputElement,
   TextInputWithResetProps
->(({ id, onChange, onResetInput, className, ...rest }, ref) => {
+>(({ id, onChange, onResetInput, className, ...props }, ref) => {
   const [isFilled, setIsFilled] = useState(false);
 
   const handleFilled = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ const TextInputWithReset = forwardRef<
           className,
         )}
         onChange={handleFilled}
-        {...rest}
+        {...props}
       />
       {isFilled && (
         <button

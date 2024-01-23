@@ -7,7 +7,7 @@ interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
-  ({ time, onTime, ...rest }, ref) => {
+  ({ time, onTime, ...props }, ref) => {
     const isFilled = time !== undefined;
 
     const handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
         step="600"
         required
         onChange={handleTimeChange}
-        {...rest}
+        {...props}
       />
     );
   },

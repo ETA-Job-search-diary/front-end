@@ -11,13 +11,13 @@ interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ type, width, variant, label, size, className, ...rest }, ref) => {
+  ({ type, width, variant, label, size, className, ...props }, ref) => {
     return (
       <button
         ref={ref}
         type={type}
         className={cn(buttonVariants({ width, size, variant }), className)}
-        {...rest}
+        {...props}
       >
         {label}
       </button>

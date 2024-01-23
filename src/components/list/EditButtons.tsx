@@ -42,6 +42,7 @@ const EditButtons = ({
         <>
           <SortButtons current={currentOrder} onSort={onOrder} />
           <Button
+            id="list_edit"
             size="sm"
             label="편집"
             width="max"

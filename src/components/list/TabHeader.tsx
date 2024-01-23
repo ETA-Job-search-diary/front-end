@@ -7,7 +7,7 @@ const eventTypes: { type: EventType; name: string }[] = [
   },
   {
     type: 'past',
-    name: '지난 일정',
+    name: '완료된 일정',
   },
 ];
 

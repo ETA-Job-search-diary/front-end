@@ -20,6 +20,7 @@ const SortButtons = ({ current, onSort }: SortButtonsProps) => {
         const isCurrent = current === label;
         return (
           <button
+            id={`sort_${label}`}
             key={label}
             className="flex items-center justify-center gap-1"
             onClick={() => onSort(label)}

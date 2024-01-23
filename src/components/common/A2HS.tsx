@@ -47,11 +47,15 @@ const A2HS = () => {
                 편리하게 이용해 보세요 :)
               </p>
               <Button
+                id="add_to_home_screen_button"
                 variant="primary"
                 label="홈 화면에 추가하기"
                 onClick={isSafari ? handleSafariGiuid : handleAddToHomeScreen}
               />
-              <button onClick={handleAddToHomeScreenLater}>
+              <button
+                id="add_to_home_screen_later_button"
+                onClick={handleAddToHomeScreenLater}
+              >
                 <span className="border-b border-black-500 text-0.9 text-black-500">
                   그냥 볼게요
                 </span>

@@ -11,12 +11,12 @@ interface BadgeProps
 }
 
 const Badge = forwardRef<HTMLDivElement, BadgeProps>(
-  ({ label, hasIcon = false, variant, className, ...rest }, ref) => {
+  ({ label, hasIcon = false, variant, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={cn(badgeVariants({ variant }), className)}
-        {...rest}
+        {...props}
       >
         {hasIcon && (
           <Icon name="clock" className={cn(badgeIconVariants({ variant }))} />
