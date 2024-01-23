@@ -32,6 +32,7 @@ const TabHeader = ({
         const handleClick = () => onSwitch(type);
         return (
           <button
+            id={`${type}_tab`}
             key={type}
             className={`h-16 w-full border-b-[2px] border-black-200 text-1 font-bold`}
             onClick={handleClick}
