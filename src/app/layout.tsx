@@ -4,13 +4,14 @@ import { Toaster } from '@/components/ui/toaster';
 import AuthSessionProvider from '@/context/AuthSessionProvider';
 import SWRContext from '@/context/SWRContext';
 import ThemeProvider from '@/context/ThemeProvider';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import suit from 'next/font/local';
 import { ReactNode } from 'react';
 import './globals.css';
 
 const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
+const GTM_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER;
 
 const suitFont = suit({
   src: [
@@ -159,6 +160,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko" suppressHydrationWarning>
       <GoogleAnalytics gaId={GA_TRACKING_ID ?? ''} />
+      <GoogleTagManager gtmId={GTM_TRACKING_ID ?? ''} />
       <body
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased scrollbar-none web:scrollbar-thin web:scrollbar-track-gray-100 web:scrollbar-thumb-gray-300 web:scrollbar-thumb-rounded-sm web:hover:scrollbar-thumb-gray-400`}
       >
