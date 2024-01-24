@@ -37,7 +37,7 @@ export default async function SingInPage({
       <div className="sticky top-0 z-20 h-full w-full bg-white pt-safe-top">
         <NavBar leftSection={<BackButton id="signin_page_out" />} />
       </div>
-      <section className="h-[calc(100vh-70px)] w-full overflow-x-hidden bg-white px-page scrollbar-none">
+      <section className="h-[calc(100svh-5rem)] w-full overflow-x-hidden bg-white px-page scrollbar-none">
         <div className="relative top-[10%]">
           <div className="flex flex-col gap-28 web:gap-32">
             <div className="flex flex-col gap-6 text-black-900">
