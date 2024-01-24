@@ -12,10 +12,12 @@ const NewNavBar = ({ hasOrigin, isSubmitValid }: NewNavBarProps) => {
     <div className="sticky top-0 z-20 h-full w-full bg-white pt-safe-top">
       <NavBar
         label={hasOrigin ? '일정수정' : '일정등록'}
-        leftSection={<BackButton id="new_page_out" />}
+        leftSection={
+          <BackButton id={hasOrigin ? 'new_page_out' : 'edit_page_out'} />
+        }
         rightSection={
           <SubmitButton
-            id="new_submit"
+            id={hasOrigin ? 'new_submit' : 'eidt_submit'}
             label={hasOrigin ? '수정' : '저장'}
             active={isSubmitValid}
           />
