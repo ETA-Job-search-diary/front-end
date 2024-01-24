@@ -110,7 +110,7 @@ const HomeCalendar = () => {
                     {company}
                   </span>
                 ))}
-                {!isNoEvents && today && (
+                {today && !isNoEvents && (
                   <Icon
                     name="characterBlack"
                     className="w-6 place-self-center"
