@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#FFF',
+  userScalable: false,
 };
 
 interface EditPageProps {
