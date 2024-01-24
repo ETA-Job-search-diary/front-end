@@ -9,7 +9,7 @@ interface PortalSectionProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const PortalSection = forwardRef<HTMLDivElement, PortalSectionProps>(
-  ({ children, className, onClose }, ref) => {
+  ({ children, className, onClose, ...props }, ref) => {
     if (typeof window === 'undefined') return null;
 
     const handleBackGroundClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -28,9 +28,10 @@ const PortalSection = forwardRef<HTMLDivElement, PortalSectionProps>(
         <section
           ref={ref}
           className={cn(
-            'shadow-md` flex min-w-[60%] flex-col items-center justify-center rounded-medium px-4 py-4',
+            'flex min-w-[60%] flex-col items-center justify-center rounded-medium px-4 py-4 shadow-md',
             className,
           )}
+          {...props}
         >
           {children}
         </section>
