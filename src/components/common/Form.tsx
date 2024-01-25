@@ -320,7 +320,7 @@ const Form = ({ originData }: FormProps) => {
               )}
             />
 
-            {/* 일정 (시간 : 23:59시로 ?? )*/}
+            {/* 일정 (시간 : 23:59시로 ?? 입력전에는 회색으로 )*/}
             <Controller
               control={control}
               name="date"

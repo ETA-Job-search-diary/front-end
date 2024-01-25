@@ -32,6 +32,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={`w-full grow bg-transparent p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           onChange={handleTextArea}
+          maxLength={maxLength}
           {...props}
         />
         {maxLength && (

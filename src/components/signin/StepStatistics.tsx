@@ -46,7 +46,7 @@ const statisticsVariants = cva('grid bg-white', {
   variants: {
     variant: {
       default:
-        'grid-cols-4 divide-x rounded-xl divide-black-100 border border-black-100 text-center py-5',
+        'grid-cols-4 divide-x-1 rounded-xl divide-black-100 border border-black-100 text-center py-5',
       colorful:
         'grid-cols-2 rounded-2xl py-4 web:py-6 w-full min-w-max xs:min-w-0 h-max',
     },
