@@ -1,6 +1,12 @@
 import ResetIcon from '@/assets/ResetIcon';
 import { cn } from '@/lib/utils';
-import { ChangeEvent, InputHTMLAttributes, forwardRef, useState } from 'react';
+import {
+  ChangeEvent,
+  ClipboardEvent,
+  InputHTMLAttributes,
+  forwardRef,
+  useState,
+} from 'react';
 import { formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TextInputWithResetProps
@@ -11,13 +17,23 @@ interface TextInputWithResetProps
 const TextInputWithReset = forwardRef<
   HTMLInputElement,
   TextInputWithResetProps
->(({ id, onChange, onResetInput, className, ...props }, ref) => {
+>(({ id, onChange, onPaste, onResetInput, className, ...props }, ref) => {
   const [isFilled, setIsFilled] = useState(false);
 
   const handleFilled = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    onChange && onChange(e);
+    onChange?.(e);
     setIsFilled(value.length > 0);
+  };
+
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
+    onPaste?.(e);
+    setIsFilled(e.clipboardData.getData('text').length > 0);
+  };
+
+  const handleReset = () => {
+    onResetInput();
+    setIsFilled(false);
   };
 
   return (
@@ -30,6 +46,7 @@ const TextInputWithReset = forwardRef<
           className,
         )}
         onChange={handleFilled}
+        onPaste={handlePaste}
         {...props}
       />
       {isFilled && (
@@ -37,7 +54,7 @@ const TextInputWithReset = forwardRef<
           aria-label="reset-input"
           type="button"
           className="absolute bottom-1 right-3 -translate-y-1/2"
-          onClick={onResetInput}
+          onClick={handleReset}
         >
           <ResetIcon />
         </button>
