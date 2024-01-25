@@ -70,11 +70,23 @@ const Form = ({ originData }: FormProps) => {
     if (e.key === 'Enter') e.preventDefault();
   };
 
+  const handleURLInput = async (url: string) => {
+    if (!REGEX.URL.test(url)) return;
+    await getCrawlingInfo(url);
+    isPasted = false;
+  };
+
   const getCrawlingInfo = async (link: string) => {
     const { company, position, platform } = await crawlLink(link);
     setValue('company', company);
     setValue('position', position);
     setValue('platform', platform);
+  };
+
+  const extractLink = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const matches = text.match(urlRegex);
+    return matches ? matches[0] : '';
   };
 
   const onSubmit: SubmitHandler<CompleteFormType> = (data) => {
@@ -186,7 +198,7 @@ const Form = ({ originData }: FormProps) => {
                 control={control}
                 name="link"
                 rules={{
-                  required: true,
+                  required: false,
                   pattern: {
                     value: REGEX.URL,
                     message: 'URL형식에 맞게 입력해주세요',
@@ -218,23 +230,23 @@ const Form = ({ originData }: FormProps) => {
                       }}
                       onKeyDown={handleKeyDown}
                       onPaste={async (e: ClipboardEvent<HTMLInputElement>) => {
+                        e.preventDefault();
                         if (!e.clipboardData) return;
-                        const link = e.clipboardData.getData('text');
-                        const index = link.indexOf('http');
-                        const linkWithoutSpace = link.slice(index);
-
-                        if (!REGEX.URL.test(linkWithoutSpace)) return;
                         isPasted = true;
-                        await getCrawlingInfo(linkWithoutSpace);
-                        setValue('link', linkWithoutSpace);
-                        isPasted = false;
+                        const pastedText = e.clipboardData.getData('text');
+                        const url = extractLink(pastedText);
+                        if (url) {
+                          handleURLInput(url);
+                          setValue('link', url);
+                          return;
+                        }
+                        onChange(pastedText);
                       }}
                       onChange={async (e: ChangeEvent<HTMLInputElement>) => {
-                        const { value } = e.currentTarget;
-                        onChange(value);
-                        if (isPasted || !REGEX.URL.test(value)) return;
-                        await getCrawlingInfo(value);
-                        setValue('link', value);
+                        const { value } = e.target;
+                        if (isPasted || isCrawling) return;
+                        handleURLInput(value);
+                        onChange(e);
                       }}
                     />
                   </FormLabel>
@@ -244,7 +256,7 @@ const Form = ({ originData }: FormProps) => {
                 <Controller
                   control={control}
                   name="platform"
-                  rules={{ required: true }}
+                  rules={{ required: false }}
                   render={({ field }) => (
                     <FormLabel id="platform" className="relative">
                       <TextInput
