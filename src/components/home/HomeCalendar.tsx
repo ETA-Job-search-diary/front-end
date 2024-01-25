@@ -5,7 +5,9 @@ import AccountButton from '@/components/home/AccountButton';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
 import { getSteps } from '@/service/calendar';
+import { useListStore } from '@/store/zustand';
 import { format } from 'date-fns';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useNavigation } from 'react-day-picker';
 import useSWR from 'swr';
@@ -33,6 +35,17 @@ const HomeCalendar = () => {
   const events = data?.events;
   const holidays = data?.holidays;
 
+  const { push } = useRouter();
+  const handleSwitchTab = useListStore((state) => state.setTab);
+
+  const handleDayClick = (isPast: boolean) => {
+    if (isPast) {
+      handleSwitchTab('past');
+    } else handleSwitchTab('coming');
+
+    push('/list');
+  };
+
   return (
     <Calendar
       month={month}
@@ -41,7 +54,7 @@ const HomeCalendar = () => {
       classNames={{
         cell: 'w-full',
         day: 'font-medium text-center',
-        day_today: 'pointer-events-none',
+        day_today: 'bg-transparent',
         head_row: 'grid grid-cols-7 pb-2 border-b border-black-100',
         head_cell: 'w-full text-0.9 font-semibold text-black-900',
         row: 'grid grid-cols-7 mt-0.5 first:mt-3',
@@ -84,6 +97,7 @@ const HomeCalendar = () => {
           const isSaturday = date.getDay() === 6 && !outside;
           const isEvents = events?.[day];
           const isNoEvents = !!Object.values(events || {}).length;
+          const isPast = date < new Date();
           return (
             <>
               <div
@@ -99,22 +113,25 @@ const HomeCalendar = () => {
               >
                 {format(date, 'd')}
               </div>
-              <div className="flex h-14 w-full flex-col gap-[0.5px] web:h-16">
-                {isEvents?.map(({ company, step }) => (
-                  <span
-                    key={company}
-                    className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[0.5px] text-0.6 font-extrabold ${
-                      eventStyle[getSteps(step)]
-                    }`}
-                  >
-                    {company}
-                  </span>
-                ))}
+              <div className="h-14 w-full web:h-16">
+                {!!isEvents?.length && (
+                  <ul className="flex w-full cursor-pointer flex-col gap-[0.5px]">
+                    <button onClick={() => handleDayClick(isPast)}>
+                      {isEvents.map(({ company, step }) => (
+                        <li
+                          key={company}
+                          className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[0.5px] text-0.6 font-extrabold ${
+                            eventStyle[getSteps(step)]
+                          }`}
+                        >
+                          {company}
+                        </li>
+                      ))}
+                    </button>
+                  </ul>
+                )}
                 {today && !isNoEvents && (
-                  <Icon
-                    name="characterBlack"
-                    className="w-6 place-self-center"
-                  />
+                  <Icon name="characterBlack" className="m-auto w-6" />
                 )}
               </div>
             </>

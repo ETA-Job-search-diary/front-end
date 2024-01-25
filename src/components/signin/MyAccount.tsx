@@ -50,8 +50,8 @@ const MyAccount = () => {
         <UserInfo user={user} />
         <StatisticsSection label="etc">
           <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4 xs:px-2">
-            <ServiceButton.Link href={SERVICE_DESCRIPTION} label="message" />
-            <ServiceButton.Link href={SUPPORT_FORM} label="helpcircle" />
+            <ServiceButton.Link href={SUPPORT_FORM} label="message" />
+            <ServiceButton.Link href={SERVICE_DESCRIPTION} label="helpcircle" />
             <ServiceButton
               label="logout"
               onClick={() => handleAlert(serviceTypes.LOGOUT)}
