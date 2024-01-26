@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { convertDateToAlternateFormat } from '@/service/date';
+import { convertDateFormat } from '@/service/date';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 interface DateLineProps extends VariantProps<typeof datelineVariants> {
@@ -7,7 +7,7 @@ interface DateLineProps extends VariantProps<typeof datelineVariants> {
 }
 
 const DateLine = ({ tab, date }: DateLineProps) => {
-  const month = convertDateToAlternateFormat(date);
+  const month = convertDateFormat(date);
   return <p className={cn(datelineVariants({ tab }))}>{month}</p>;
 };
 

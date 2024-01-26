@@ -1,5 +1,5 @@
 import Icon from '@/assets/Icon';
-import { convertDateToAlternateFormat } from '@/service/date';
+import { convertDateFormat } from '@/service/date';
 import { formTextStyle } from './Form';
 
 interface DateInputProps {
@@ -10,7 +10,7 @@ const DateInput = ({ date }: DateInputProps) => {
   return (
     <span className="flex h-full w-full items-center justify-between rounded-small border-1 border-primary-300 bg-primary-light-50 pr-3">
       <span className={`px-[0.8rem] py-2 ${formTextStyle}`}>
-        {convertDateToAlternateFormat(date)}
+        {convertDateFormat(date)}
       </span>
       <Icon
         name="calendar"

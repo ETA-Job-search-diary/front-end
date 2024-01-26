@@ -1,9 +1,6 @@
 import Icon from '@/assets/Icon';
 import { ScheduleDetailType } from '@/model/schedule';
-import {
-  getFormattedDateTimeInfo,
-  getFormattedISODateTime,
-} from '@/service/date';
+import { formatDateTimeDetails } from '@/service/date';
 import { getStepByValue } from '@/service/form';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
@@ -29,7 +26,7 @@ const ScheduleItem = ({
   position,
   date,
 }: ScheduleDetailType) => {
-  const { time } = getFormattedISODateTime(date);
+  const { hours24 } = formatDateTimeDetails(date);
   return (
     <Link
       id="coming_schedule"
@@ -39,8 +36,8 @@ const ScheduleItem = ({
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      {!(step === 'document' && time === '00:00') && (
-        <Badge hasIcon label={time} />
+      {!(step === 'document' && hours24 === '00:00') && (
+        <Badge hasIcon label={hours24} />
       )}
     </Link>
   );
@@ -48,7 +45,7 @@ const ScheduleItem = ({
 
 ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
   const { id, step, company, position, date, status, onResult, tab } = props;
-  const { time } = getFormattedISODateTime(date);
+  const { hours24 } = formatDateTimeDetails(date);
 
   const handleComplete = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -65,8 +62,8 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, tab, date }} />
-        {!(step === 'document' && time === '00:00') && (
-          <Badge hasIcon label={time} variant="fail" />
+        {!(step === 'document' && hours24 === '00:00') && (
+          <Badge hasIcon label={hours24} variant="fail" />
         )}
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
@@ -75,13 +72,13 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
 };
 
 ScheduleItem.Date = ({ date: dateInfo }: ScheduleDate) => {
-  const { date, day } = getFormattedDateTimeInfo(dateInfo);
+  const { date, longWeekDay } = formatDateTimeDetails(dateInfo);
   return (
     <div
       className={`flex w-full flex-col items-center justify-center border-r pr-4 web:pr-6 ${borderStyle} ${accentStyle}`}
     >
       <div className="text-1.3 font-bold xs:text-1.1 web:text-1.5">{date}</div>
-      <div className="text-0.85 web:text-0.95">{day}</div>
+      <div className="text-0.85 web:text-0.95">{longWeekDay}</div>
     </div>
   );
 };

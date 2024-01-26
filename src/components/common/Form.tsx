@@ -7,7 +7,7 @@ import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
 import { CompleteFormType, ScheduleDetailType } from '@/model/schedule';
-import { getFormattedISODateTime } from '@/service/date';
+import { formatDateForCalendar } from '@/service/date';
 import { postSchedule } from '@/service/schedule';
 import { useRouter } from 'next/navigation';
 import {
@@ -34,7 +34,7 @@ interface FormProps {
 
 //TODO: Form에서 time 없이 보낼 수 있는지 확인, 중복요청 방지
 const Form = ({ originData }: FormProps) => {
-  const { fullDate: currentDate } = getFormattedISODateTime();
+  const currentDate = `${formatDateForCalendar()}T00:00:00.000Z`;
   const { refresh, replace } = useRouter();
   const { showTokenExpirationToast } = useShowToast();
   const { token } = useSession();

@@ -8,11 +8,7 @@ import { Calendar } from '@/components/ui/calendar';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import useMediaQuery from '@/hook/useMediaQuery';
 import useScrollPointer from '@/hook/useScrollPointer';
-import {
-  convertDateToAlternateFormat,
-  formatCalendarDate,
-  getFormattedISODateTime,
-} from '@/service/date';
+import { formatDateForCalendar } from '@/service/date';
 import { format } from 'date-fns';
 import { useNavigation } from 'react-day-picker';
 import DateInput from './DateInput';
@@ -36,21 +32,20 @@ const DESKTOP_MEDIAQUERY = '(min-width: 500px)';
 const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
 
-  const { date, time } = getFormattedISODateTime(inputDate);
-
-  const convertDate = convertDateToAlternateFormat(date, '-');
-  const selectedDate = new Date(convertDate);
+  const [date, time] = inputDate.split('T');
+  const hours24 = time.slice(0, 5);
+  const selectedDate = new Date(date);
 
   const handleCalendarSelect = (value?: Date) => {
     if (!value) return;
-    const date = formatCalendarDate(value);
+    const date = formatDateForCalendar(value);
     if (!date) return;
-    const fullDate = `${date}T${time}:00.000Z`;
+    const fullDate = `${date}T${hours24}:00.000Z`;
     onChange(fullDate);
   };
 
   const handleTimeChange = (value: string) => {
-    const fullDate = `${convertDate}T${value}:00.000Z`;
+    const fullDate = `${date}T${value}:00.000Z`;
     onChange(fullDate);
   };
 
@@ -60,7 +55,7 @@ const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
         <DateTimePicker.Desktop
           selectedDate={selectedDate}
           date={date}
-          time={time}
+          time={hours24}
           onDate={handleCalendarSelect}
           onTime={handleTimeChange}
         />
@@ -68,7 +63,7 @@ const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
         <DateTimePicker.Mobile
           selectedDate={selectedDate}
           date={date}
-          time={time}
+          time={hours24}
           onDate={handleCalendarSelect}
           onTime={handleTimeChange}
         />
