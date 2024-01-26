@@ -1,10 +1,11 @@
 import { ProviderTypes } from '@/assets/SocialIcon';
 import { REGEX } from '@/constants/regex';
 
-export const getProviderByEmail = (
-  email: string,
-): { name: ProviderTypes; label: string } => {
-  const isNaver = REGEX.NAVER.test(email);
+export const getProviderInfo = (
+  string: string,
+): { name: ProviderTypes; label: string } | null => {
+  const isNaver = REGEX.NAVER.test(string);
+  const isKakao = REGEX.KAKAO.test(string);
 
   const providerMap: Record<
     ProviderTypes,
@@ -20,6 +21,5 @@ export const getProviderByEmail = (
     },
   };
 
-  const { name, label } = isNaver ? providerMap.naver : providerMap.kakao;
-  return { name, label };
+  return isNaver ? providerMap.naver : isKakao ? providerMap.kakao : null;
 };

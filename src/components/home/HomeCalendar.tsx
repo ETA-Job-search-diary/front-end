@@ -4,7 +4,7 @@ import Icon from '@/assets/Icon';
 import AccountButton from '@/components/home/AccountButton';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
-import { getSteps } from '@/service/calendar';
+import { getSteps } from '@/service/form';
 import { useListStore } from '@/store/zustand';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
@@ -42,7 +42,6 @@ const HomeCalendar = () => {
     if (isPast) {
       handleSwitchTab('past');
     } else handleSwitchTab('coming');
-
     push('/list');
   };
 

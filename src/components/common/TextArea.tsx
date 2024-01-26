@@ -17,7 +17,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const handleTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
       const { value } = e.currentTarget;
-      onChange && onChange(e);
+      onChange?.(e);
       setCount(value.length);
     };
 

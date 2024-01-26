@@ -1,4 +1,4 @@
-import { getFormattedDateTimeInfo } from '@/service/date';
+import { formatDateTimeDetails } from '@/service/date';
 import DetailItem from './DetailItem';
 
 interface DetailProps {
@@ -18,8 +18,8 @@ const Detail = ({
   platform,
   memo,
 }: DetailProps) => {
-  const { fullDate, shortDay, endTime } = getFormattedDateTimeInfo(date);
-  const fullDateEndTime = `${fullDate}(${shortDay}) ${endTime}`;
+  const { fullDate, shortWeekDay, hours12 } = formatDateTimeDetails(date);
+  const fullDateEndTime = `${fullDate}(${shortWeekDay}) ${hours12}`;
 
   return (
     <section className="flex h-full w-full flex-col gap-7 scroll-auto px-page pt-8 web:px-7">

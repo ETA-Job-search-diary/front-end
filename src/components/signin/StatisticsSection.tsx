@@ -7,22 +7,24 @@ const StatisticsLabel = {
 };
 
 interface StatisticsSectionProps {
-  label: keyof typeof StatisticsLabel;
-  icon?: ReactNode;
+  title: keyof typeof StatisticsLabel;
+  subSection?: ReactNode;
   children: ReactNode;
 }
 
 const StatisticsSection = ({
-  label,
-  icon,
+  title,
+  subSection,
   children,
 }: StatisticsSectionProps) => {
   return (
     <section className="flex flex-col gap-3">
-      <h1 className="flex items-center gap-1 pl-1 text-1 font-semibold text-black-900">
-        {StatisticsLabel[label]}
-        {icon && icon}
-      </h1>
+      <div className="flex items-center gap-1 pl-1 text-black-900">
+        <h1 className="whitespace-nowrap text-1 font-semibold">
+          {StatisticsLabel[title]}
+        </h1>
+        {subSection && subSection}
+      </div>
       {children}
     </section>
   );

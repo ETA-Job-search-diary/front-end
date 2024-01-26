@@ -7,7 +7,6 @@ import useCrawler from '@/hook/useCrawler';
 import useSession from '@/hook/useSession';
 import useShowToast from '@/hook/useShowToast';
 import { CompleteFormType, ScheduleDetailType } from '@/model/schedule';
-import { getFormattedISODateTime } from '@/service/date';
 import { postSchedule } from '@/service/schedule';
 import { useRouter } from 'next/navigation';
 import {
@@ -34,11 +33,10 @@ interface FormProps {
 
 //TODO: Form에서 time 없이 보낼 수 있는지 확인, 중복요청 방지
 const Form = ({ originData }: FormProps) => {
-  const { fullDate: currentDate } = getFormattedISODateTime();
   const { refresh, replace } = useRouter();
   const { showTokenExpirationToast } = useShowToast();
   const { token } = useSession();
-  const { mutate, setEditSchedule } = useScheduleList({});
+  const { setEditSchedule } = useScheduleList({});
   const { isCrawling, crawlLink } = useCrawler();
 
   let isPasted = false;
@@ -51,7 +49,7 @@ const Form = ({ originData }: FormProps) => {
       platform: originData?.platform ?? '',
       company: originData?.company ?? '',
       position: originData?.position ?? '',
-      date: originData?.date ?? currentDate,
+      date: originData?.date ?? '',
       memo: originData?.memo === ' ' ? '' : originData?.memo,
     },
   });
@@ -320,7 +318,7 @@ const Form = ({ originData }: FormProps) => {
               )}
             />
 
-            {/* 일정 (시간 : 23:59시로 ?? 입력전에는 회색으로 )*/}
+            {/* 일정 - 시간*/}
             <Controller
               control={control}
               name="date"

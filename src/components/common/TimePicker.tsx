@@ -2,14 +2,13 @@ import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react';
 import { formPlaceholderStyle, formTextStyle } from './Form';
 
 interface TimePickerProps extends InputHTMLAttributes<HTMLInputElement> {
+  isSelect: boolean;
   time: string;
   onTime: (time: string) => void;
 }
 
 const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
-  ({ time, onTime, ...props }, ref) => {
-    const isFilled = time !== undefined;
-
+  ({ isSelect, time, onTime, ...props }, ref) => {
     const handleTimeChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       onTime(value);
@@ -19,9 +18,9 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
       <input
         ref={ref}
         type="time"
-        defaultValue={time}
+        value={time}
         className={`h-11 w-full rounded-small border-1 border-primary-300 bg-primary-light-50 px-[0.8rem] py-2 text-left web:cursor-text ${
-          isFilled ? `${formTextStyle}` : `text-0.95 ${formPlaceholderStyle}`
+          isSelect ? `${formTextStyle}` : `text-0.95 ${formPlaceholderStyle}`
         }`}
         step="600"
         required

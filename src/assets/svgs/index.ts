@@ -7,6 +7,7 @@ export { default as position } from './book.svg';
 export { default as briefcase } from './briefcase.svg';
 export { default as calendar } from './calendar.svg';
 export { default as check } from './check-circle.svg';
+export { default as chevronRight } from './chevron-right.svg';
 export { default as memo } from './clipboard.svg';
 export { default as clock } from './clock.svg';
 export { default as close } from './close.svg';
