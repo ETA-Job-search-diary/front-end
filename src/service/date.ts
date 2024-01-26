@@ -1,4 +1,4 @@
-const parseDateTimeString = (dateTimeString: string) => {
+export const parseDateTimeString = (dateTimeString: string) => {
   const [dateString, timeString] = dateTimeString.split('T');
   const [year, month, day, hour, minute] = [
     ...dateString.split('-'),
@@ -7,7 +7,7 @@ const parseDateTimeString = (dateTimeString: string) => {
   return new Date(year, month - 1, day, hour, minute);
 };
 
-const formatDateStringWithDot = (inputDate: Date) => {
+export const formatDateStringWithDot = (inputDate: Date) => {
   return inputDate
     .toLocaleDateString('ko', {
       year: 'numeric',
@@ -18,11 +18,11 @@ const formatDateStringWithDot = (inputDate: Date) => {
     .slice(0, -1);
 };
 
-const formattedDayOfWeek = (inputDate: Date, type: 'short' | 'long') => {
+export const formattedDayOfWeek = (inputDate: Date, type: 'short' | 'long') => {
   return new Intl.DateTimeFormat('ko-KR', { weekday: type }).format(inputDate);
 };
 
-const formattedEndTime = (inputDate: Date) => {
+export const formattedEndTime = (inputDate: Date) => {
   return inputDate.toLocaleTimeString('ko-KR', {
     hour: 'numeric',
     minute: '2-digit',
@@ -52,32 +52,13 @@ export const formatCalendarDate = (inputDate: Date) => {
   return `${year}-${month}-${day}`;
 };
 
-export const getFormattedCurrentTime = (current: string) => {
-  const [hour, minute] = current.split(':');
-  let formatedHour = hour;
-  const meridiem = formatedHour >= '12' ? '오후' : '오전';
-  if (Number(formatedHour) > 12) {
-    formatedHour = String(Number(formatedHour) - 12).padStart(2, '0');
-  } else if (Number(formatedHour) === 0) {
-    formatedHour = '12';
-  } else {
-    formatedHour = String(Number(formatedHour)).padStart(2, '0');
-  }
-  const time24Hour = `${String(Number(hour)).padStart(2, '0')}:${minute}`;
-  const time12Hour = `${formatedHour}:${minute}`;
-
-  return {
-    meridiem,
-    time24Hour,
-    time12Hour,
-  };
-};
-
 export const getFormattedISODateTime = (origin?: string) => {
   const dateObj = origin ? new Date(origin) : new Date();
+
   const date = origin
     ? origin.slice(0, 10).replaceAll('-', '.')
     : formatDateStringWithDot(dateObj);
+
   const time = origin ? origin.slice(11, 16) : '00:00';
 
   return {
