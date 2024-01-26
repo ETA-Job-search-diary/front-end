@@ -1,6 +1,4 @@
-import { StatisticsType } from '@/components/signin/StepStatistics';
 import supabase from '@/lib/supabase';
-import { StepTypes } from '@/model/schedule';
 import axios from 'axios';
 import { api } from './api';
 
@@ -73,21 +71,4 @@ const getHolidaysFromKakao = async (year: string, month: string) => {
 
 export const getUserEvents = async (currentMonth: string, token: string) => {
   return api(`/schedules/calendar/detail?date=s${currentMonth}`, 'get', token);
-};
-
-export const getSteps = (step: StepTypes): StatisticsType => {
-  switch (step) {
-    case 'document':
-    case 'assignment':
-      return 'documentAssignment';
-    case 'personality':
-    case 'written':
-      return 'personalityWritten';
-    case 'first':
-    case 'second':
-    case 'final':
-      return 'interview';
-    default:
-      return 'etc';
-  }
 };

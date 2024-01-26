@@ -4,7 +4,6 @@ import Icon from '@/assets/Icon';
 import AccountButton from '@/components/home/AccountButton';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
-import { getSteps } from '@/service/calendar';
 import { useListStore } from '@/store/zustand';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
@@ -12,6 +11,7 @@ import { useState } from 'react';
 import { useNavigation } from 'react-day-picker';
 import useSWR from 'swr';
 import { Calendar } from '../ui/calendar';
+import { getSteps } from '@/service/form';
 
 type HomeCalendar = {
   events: EventsType;
