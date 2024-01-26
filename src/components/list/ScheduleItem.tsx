@@ -37,7 +37,7 @@ const ScheduleItem = ({
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
       {!(step === 'document' && hours24 === '00:00') && (
-        <Badge hasIcon label={hours24} />
+        <Badge hasIcon variant="pending" label={hours24} />
       )}
     </Link>
   );

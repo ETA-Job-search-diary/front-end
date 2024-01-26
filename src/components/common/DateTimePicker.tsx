@@ -17,13 +17,13 @@ import TimePicker from './TimePicker';
 interface PickerProps {
   time: string;
   date: string;
-  selectedDate: Date;
+  selectedDate?: Date;
   onDate: (date?: Date) => void;
   onTime: (time: string) => void;
 }
 
 interface DateTimePickerProps {
-  date: string;
+  date?: string;
   onChange: (date: string) => void;
 }
 
@@ -32,9 +32,12 @@ const DESKTOP_MEDIAQUERY = '(min-width: 500px)';
 const DateTimePicker = ({ date: inputDate, onChange }: DateTimePickerProps) => {
   const isDesktop = useMediaQuery(DESKTOP_MEDIAQUERY);
 
-  const [date, time] = inputDate.split('T');
+  const currentDate = inputDate
+    ? inputDate
+    : `${formatDateForCalendar()}T00:00:00.000Z`;
+  const [date, time] = currentDate.split('T');
   const hours24 = time.slice(0, 5);
-  const selectedDate = new Date(date);
+  const selectedDate = inputDate ? new Date(inputDate) : undefined;
 
   const handleCalendarSelect = (value?: Date) => {
     if (!value) return;
@@ -85,8 +88,9 @@ DateTimePicker.Desktop = ({
     <Accordion type="single" collapsible>
       <AccordionItem value="date">
         <AccordionTrigger onClick={toggleScrollPointer} className="flex gap-3">
-          <DateInput date={date} />
+          <DateInput isSelected={!!selectedDate} date={date} />
           <TimePicker
+            isSelect={!!selectedDate}
             time={time}
             onTime={onTime}
             onClick={(e) => {
@@ -119,7 +123,7 @@ DateTimePicker.Mobile = ({
     <div className="grid grid-cols-2 gap-3">
       <Sheet>
         <SheetTrigger>
-          <DateInput date={date} />
+          <DateInput isSelected={!!selectedDate} date={date} />
         </SheetTrigger>
         <SheetContent
           side="bottom"
@@ -163,7 +167,7 @@ DateTimePicker.Mobile = ({
           />
         </SheetContent>
       </Sheet>
-      <TimePicker time={time} onTime={onTime} />
+      <TimePicker isSelect={!!selectedDate} time={time} onTime={onTime} />
     </div>
   );
 };

@@ -48,7 +48,7 @@ const MyAccount = () => {
       </div>
       <div className="mb-16 flex h-max min-h-full flex-col gap-8 px-page py-2 pb-safe-bottom web:pt-20">
         <UserInfo user={user} />
-        <StatisticsSection label="etc">
+        <StatisticsSection title="etc">
           <div className="divide-black100 grid grid-rows-4 divide-y-[0.5px] rounded-xl border border-black-100 bg-white px-4 xs:px-2">
             <ServiceButton.Link href={SUPPORT_FORM} label="message" />
             <ServiceButton.Link href={SERVICE_DESCRIPTION} label="helpcircle" />

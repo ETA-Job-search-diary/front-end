@@ -1,3 +1,4 @@
+import { StepTypes } from '@/model/schedule';
 import { getStepByValue } from '@/service/form';
 import Badge from '../common/Badge';
 import NavBar from '../common/NavBar';
@@ -8,7 +9,7 @@ interface DetailNavBarProps {
   id: string;
   company: string;
   position: string;
-  step: string;
+  step: StepTypes;
   status: string;
 }
 

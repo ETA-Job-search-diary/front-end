@@ -27,7 +27,7 @@ const UserInfo = ({ user }: UserInfoProps) => {
         </div>
       </section>
       <PassRate {...passRate} />
-      <StatisticsSection label="application">
+      <StatisticsSection title="application">
         <StepStatistics statistics={statistics} />
       </StatisticsSection>
     </>

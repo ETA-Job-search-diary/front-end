@@ -32,7 +32,7 @@ const StepStatistics = forwardRef<HTMLDivElement, StatisticsSectionProps>(
               <Icon name="tag" className={`${eventStyle[type]} w-4`} />
             )}
             <p className={cn(countVariants({ variant }))}>
-              {statistics?.[type]}
+              {statistics?.[type] ?? 0}
             </p>
             <p className={cn(textVariants({ variant }))}>{name}</p>
           </div>
