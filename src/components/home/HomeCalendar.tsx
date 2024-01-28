@@ -113,14 +113,14 @@ const HomeCalendar = () => {
               <div className="h-14 w-full web:h-16">
                 {!!isEvents?.length && (
                   <button
-                    className="flex w-full cursor-pointer flex-col gap-[0.5px]"
+                    className="w-full"
                     onClick={() => handleDayClick(isPast)}
                   >
-                    <ul>
+                    <ul className="flex w-full cursor-pointer flex-col gap-[0.5px]">
                       {isEvents.map(({ company, step }) => (
                         <li
                           key={company}
-                          className={`mx-auto w-full max-w-[2.75rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[0.5px] text-0.6 font-extrabold ${
+                          className={`mx-auto w-full max-w-[3rem] overflow-hidden whitespace-nowrap rounded-[0.1rem] px-[0.1rem] py-[0.5px] text-0.6 font-extrabold ${
                             eventStyle[getSteps(step)]
                           }`}
                         >
