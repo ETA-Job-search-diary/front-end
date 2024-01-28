@@ -1,12 +1,13 @@
+import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: '마이 페이지',
+  title: METADATA.title.my,
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FAFAFA',
+  themeColor: THEME_COLOR.my,
 };
 
 interface MyLayoutProps {

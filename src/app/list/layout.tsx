@@ -1,13 +1,14 @@
+import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: '다가오는 일정',
-  description: '다가오는 일정을 확인해보세요. 당신의 취뽀를 응원합니다:)',
+  title: METADATA.title.list,
+  description: METADATA.description.list,
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFF',
+  themeColor: THEME_COLOR.default,
 };
 
 interface ListPagelayoutProps {
@@ -16,7 +17,7 @@ interface ListPagelayoutProps {
 
 export default function ListPagelayout({ children }: ListPagelayoutProps) {
   return (
-    <section className="scrollbar-none web:scrollbar-thin flex min-h-screen w-full flex-col bg-white pt-safe-top">
+    <section className="flex min-h-screen w-full flex-col bg-white pt-safe-top scrollbar-none web:scrollbar-thin">
       {children}
     </section>
   );

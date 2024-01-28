@@ -1,13 +1,14 @@
+import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: '상세 일정',
-  description: '상세 일정을 확인해보세요.',
+  title: METADATA.title.detail,
+  description: METADATA.description.detail,
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFF',
+  themeColor: THEME_COLOR.default,
 };
 
 interface DetaillayoutProps {

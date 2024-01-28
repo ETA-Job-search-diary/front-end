@@ -6,16 +6,17 @@ import { redirect } from 'next/navigation';
 
 import NavBar from '@/components/common/NavBar';
 import BackButton from '@/components/navbar/BackButton';
+import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from '@/constants/service';
 import { getToken } from '@/service/token';
 import { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
-  title: '로그인',
+  title: METADATA.title.signin,
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFF',
+  themeColor: THEME_COLOR.default,
 };
 
 interface SignInProps {

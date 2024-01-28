@@ -1,15 +1,16 @@
 import Form from '@/components/common/Form';
+import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import { getScheduleBy } from '@/service/schedule';
 import { getToken } from '@/service/token';
 import { Metadata, Viewport } from 'next';
 import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
-  title: '일정 편집',
+  title: METADATA.title.edit,
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FFF',
+  themeColor: THEME_COLOR.default,
   userScalable: false,
 };
 
