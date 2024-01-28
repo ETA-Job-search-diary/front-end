@@ -1,6 +1,5 @@
 'use client';
 
-import Icon from '@/assets/Icon';
 import AccountButton from '@/components/home/AccountButton';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
@@ -95,13 +94,12 @@ const HomeCalendar = () => {
             (date.getDay() === 0 && !outside);
           const isSaturday = date.getDay() === 6 && !outside;
           const isEvents = events?.[day];
-          const isNoEvents = !!Object.values(events || {}).length;
           const isPast = date < new Date();
           return (
             <>
               <div
                 className={`mx-auto mb-[1px] min-h-[1.5rem] w-[1.5rem] rounded-full text-0.9 leading-6 ${
-                  isNoEvents && today
+                  today
                     ? 'bg-black text-white'
                     : isHoliday
                       ? 'text-red-500'
@@ -114,8 +112,11 @@ const HomeCalendar = () => {
               </div>
               <div className="h-14 w-full web:h-16">
                 {!!isEvents?.length && (
-                  <ul className="flex w-full cursor-pointer flex-col gap-[0.5px]">
-                    <button onClick={() => handleDayClick(isPast)}>
+                  <button
+                    className="flex w-full cursor-pointer flex-col gap-[0.5px]"
+                    onClick={() => handleDayClick(isPast)}
+                  >
+                    <ul>
                       {isEvents.map(({ company, step }) => (
                         <li
                           key={company}
@@ -126,11 +127,8 @@ const HomeCalendar = () => {
                           {company}
                         </li>
                       ))}
-                    </button>
-                  </ul>
-                )}
-                {today && !isNoEvents && (
-                  <Icon name="characterBlack" className="m-auto w-6" />
+                    </ul>
+                  </button>
                 )}
               </div>
             </>
