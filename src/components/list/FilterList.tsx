@@ -168,19 +168,23 @@ const FilterList = ({ tab }: FilterListProps) => {
   return (
     <>
       <div className="flex h-full flex-col gap-5 bg-white px-page pt-20">
-        <GridChips
-          variant="outline"
-          checked={filter}
-          onClick={handleStepFilter}
-        />
-        <EditButtons
-          currentOrder={sort}
-          isEdit={isEdit}
-          onEdit={handleEditStart}
-          onDelete={handleDeleteAlert}
-          onCompleted={handleEditComplete}
-          onOrder={handleOrder}
-        />
+        {!!data?.length && (
+          <>
+            <GridChips
+              variant="outline"
+              checked={filter}
+              onClick={handleStepFilter}
+            />
+            <EditButtons
+              currentOrder={sort}
+              isEdit={isEdit}
+              onEdit={handleEditStart}
+              onDelete={handleDeleteAlert}
+              onCompleted={handleEditComplete}
+              onOrder={handleOrder}
+            />
+          </>
+        )}
         {isLoading && <Skeleton.List />}
         {!isLoading &&
           (!!data?.length ? (
