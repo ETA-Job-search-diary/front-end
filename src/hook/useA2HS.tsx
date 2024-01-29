@@ -14,10 +14,15 @@ const useA2HS = () => {
     if (!A2HS) return true;
 
     const { active, time } = JSON.parse(A2HS);
-    if (active) return true;
-
     const now = new Date().getTime();
-    return now - time > A2HS_WAIT_TIME;
+
+    if (now - time > A2HS_WAIT_TIME) {
+      localStorage.removeItem('A2HS');
+      return true;
+    }
+
+    if (active) return true;
+    return false;
   };
 
   const addLater = useCallback(() => {
@@ -87,7 +92,9 @@ const useA2HS = () => {
         return;
       }
 
-      setIsShown(true);
+      if (isActivated()) {
+        setIsShown(true);
+      }
     }, A2HS_DELAY_TIME);
   }, []);
 

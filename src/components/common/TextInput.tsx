@@ -13,16 +13,11 @@ export type FormIdType =
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: FormIdType;
-  must?: boolean;
-  label?: string;
   isLoading?: boolean;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    { id, must, label, type = 'text', isLoading, placeholder, ...props },
-    ref,
-  ) => {
+  ({ id, type = 'text', isLoading, placeholder, ...props }, ref) => {
     return (
       <input
         id={id}

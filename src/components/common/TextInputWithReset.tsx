@@ -8,9 +8,11 @@ import {
   useState,
 } from 'react';
 import { formPlaceholderStyle, formTextStyle } from './Form';
+import { FormIdType } from './TextInput';
 
 interface TextInputWithResetProps
   extends InputHTMLAttributes<HTMLInputElement> {
+  id: FormIdType;
   onResetInput: () => void;
 }
 
