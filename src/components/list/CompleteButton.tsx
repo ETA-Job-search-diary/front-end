@@ -1,11 +1,23 @@
 import { ScheduleStatusType } from '@/model/schedule';
 import { MouseEvent } from 'react';
-import Button from '../common/Button';
+import Button, { ButtonVariantTypes } from '../common/Button';
 
-const StatusButton = {
-  pending: '합격여부 입력하기',
-  pass: '합격',
-  fail: '불합격',
+const buttonVariants: Record<
+  ScheduleStatusType,
+  { label: string; variant: ButtonVariantTypes }
+> = {
+  pending: {
+    label: '합격여부 입력하기',
+    variant: 'primary',
+  },
+  pass: {
+    label: '합격',
+    variant: 'light-blue',
+  },
+  fail: {
+    label: '불합격',
+    variant: 'light-gray',
+  },
 };
 
 interface CompleteButtonProps {
@@ -14,15 +26,14 @@ interface CompleteButtonProps {
 }
 
 const CompleteButton = ({ status, onClick }: CompleteButtonProps) => {
-  const buttonText = StatusButton[status];
   const isPending = status === 'pending';
 
   return (
     <Button
       size="sm"
-      variant={isPending ? 'primary' : 'light-gray'}
+      variant={buttonVariants[status].variant}
       disabled={!isPending}
-      label={buttonText}
+      label={buttonVariants[status].label}
       onClick={onClick}
     />
   );

@@ -37,10 +37,6 @@ const A2HS = () => {
             hasCloseButton={false}
             className="rounded-t-3xl border-none pb-14 pt-16 outline-none"
           >
-            <Icon
-              name="mainCharacter"
-              className="absolute left-1/2 w-32 -translate-x-1/2 -translate-y-28"
-            />
             <div className="m-auto flex max-w-[70%] flex-col items-center justify-center gap-3">
               <p className="whitespace-pre-line text-center text-1 leading-6 text-black-900">
                 홈 화면에 <b>취준로그 앱</b>을 추가하고{`\n`}
