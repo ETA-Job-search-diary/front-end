@@ -168,7 +168,7 @@ const FilterList = ({ tab }: FilterListProps) => {
   return (
     <>
       <div className="flex h-full flex-col gap-5 bg-white px-page pt-20">
-        {!!data?.length && (
+        {(!!data?.length || !!filter.length) && (
           <>
             <GridChips
               variant="outline"
