@@ -283,12 +283,14 @@ const Form = ({ originData }: FormProps) => {
                   label="지원하는 회사"
                   className="relative"
                 >
-                  <TextInput
+                  <TextInputWithReset
                     id="company"
                     placeholder={`${PLACE_HOLDER.COMPANY}`}
-                    isLoading={isCrawling}
                     disabled={isCrawling}
                     onKeyDown={handleKeyDown}
+                    onResetInput={() => {
+                      setValue('company', '');
+                    }}
                     {...field}
                   />
                 </FormLabel>
