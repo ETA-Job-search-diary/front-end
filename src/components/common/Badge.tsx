@@ -45,7 +45,7 @@ const getBadgeLabel = ({
 };
 
 const badgeVariants = cva(
-  'h-max w-max whitespace-nowrap m-auto px-1 py-0.5 text-[0.85rem] rounded-md font-semibold',
+  'h-max w-max whitespace-nowrap m-auto px-2 py-0.5 text-[0.85rem] rounded-md font-semibold',
   {
     variants: {
       variant: {

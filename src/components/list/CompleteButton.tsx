@@ -11,11 +11,11 @@ const buttonVariants: Record<
     variant: 'primary',
   },
   pass: {
-    label: '합격',
-    variant: 'light-blue',
+    label: '합격 🥳',
+    variant: 'light-gray',
   },
   fail: {
-    label: '불합격',
+    label: '불합격 🥺',
     variant: 'light-gray',
   },
 };

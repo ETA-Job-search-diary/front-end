@@ -1,3 +1,4 @@
+import useFocus from '@/hook/useFocus';
 import {
   ChangeEvent,
   TextareaHTMLAttributes,
@@ -14,6 +15,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ id, label, maxLength, onChange, ...props }, ref) => {
     const [count, setCount] = useState(0);
+    const { isFocus, onBlur, onFocus } = useFocus();
 
     const handleTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
       const { value } = e.currentTarget;
@@ -24,7 +26,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <label
         htmlFor={id}
-        className={`flex h-36 flex-col rounded-small border-1 border-primary-300 bg-primary-light-50 web:h-64`}
+        className={`flex h-36 flex-col rounded-small border-1 web:h-64 ${!!count ? 'bg-primary-light-50' : ''} ${isFocus || !!count ? 'border-primary-300' : 'border-black-100'}`}
       >
         {label && <span className={`${formLabelStyle}`}>{label}</span>}
         <textarea
@@ -32,6 +34,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={`w-full grow bg-transparent p-[0.9rem] ${formTextStyle} placeholder:${formPlaceholderStyle}`}
           ref={ref}
           onChange={handleTextArea}
+          onBlurCapture={onBlur}
+          onFocus={onFocus}
           maxLength={maxLength}
           {...props}
         />

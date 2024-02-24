@@ -4,7 +4,6 @@ import { formatDateTimeDetails } from '@/service/date';
 import { getStepByValue } from '@/service/form';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
-import Badge from '../common/Badge';
 import CompleteButton from './CompleteButton';
 import { EventType } from './TabHeader';
 
@@ -36,9 +35,6 @@ const ScheduleItem = ({
     >
       <ScheduleItem.Date date={date} />
       <ScheduleItem.Content {...{ company, position, step, date }} />
-      {!(step === 'document' && hours24 === '00:00') && (
-        <Badge hasIcon variant="pending" label={hours24} />
-      )}
     </Link>
   );
 };
@@ -62,9 +58,6 @@ ScheduleItem.WithStatus = ({ ...props }: ItemWithStatusProps) => {
       <div className="grid grid-cols-[auto_1fr_auto] whitespace-nowrap">
         <ScheduleItem.Date date={date} />
         <ScheduleItem.Content {...{ company, position, step, tab, date }} />
-        {!(step === 'document' && hours24 === '00:00') && (
-          <Badge hasIcon label={hours24} variant="fail" />
-        )}
       </div>
       <CompleteButton status={status} onClick={handleComplete} />
     </Link>
@@ -97,10 +90,10 @@ ScheduleItem.Content = ({
       >
         {company} {formatStep}
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1.5">
         <Icon
           name="briefcase"
-          className={`h-2.5 w-2.5 web:h-4 web:w-4 ${
+          className={`h-3.5 w-3.5 web:h-4 web:w-4 ${
             tab === 'coming' ? 'stroke-primary-300' : 'stroke-black-300'
           }`}
         />
