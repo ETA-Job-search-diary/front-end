@@ -134,28 +134,19 @@
     }
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
   input,
   textarea {
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-  }
-
-  textarea {
     resize: none;
   }
 
-  input,
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
-    @apply bg-transparent text-black-900;
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(47, 201, 100, 0.03) inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }

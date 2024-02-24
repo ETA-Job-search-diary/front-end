@@ -1,17 +1,11 @@
 import ResetIcon from '@/assets/ResetIcon';
+import useFocus from '@/hook/useFocus';
 import { cn } from '@/lib/utils';
-import {
-  ChangeEvent,
-  ClipboardEvent,
-  InputHTMLAttributes,
-  forwardRef,
-  useState,
-} from 'react';
-import { formPlaceholderStyle, formTextStyle } from './Form';
+import { cva } from 'class-variance-authority';
+import { ClipboardEvent, ComponentPropsWithoutRef, forwardRef } from 'react';
 import { FormIdType } from './TextInput';
 
-interface TextInputWithResetProps
-  extends InputHTMLAttributes<HTMLInputElement> {
+interface TextInputWithResetProps extends ComponentPropsWithoutRef<'input'> {
   id: FormIdType;
   onResetInput: () => void;
 }
@@ -20,23 +14,12 @@ const TextInputWithReset = forwardRef<
   HTMLInputElement,
   TextInputWithResetProps
 >(({ id, onChange, onPaste, onResetInput, className, ...props }, ref) => {
-  const [isFilled, setIsFilled] = useState(false);
+  const isFilled = !!props.value;
+  const { isFocus, onBlur, onFocus } = useFocus();
 
-  const handleFilled = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    onChange?.(e);
-    setIsFilled(value.length > 0);
-  };
+  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => onPaste?.(e);
 
-  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    onPaste?.(e);
-    setIsFilled(e.clipboardData.getData('text').length > 0);
-  };
-
-  const handleReset = () => {
-    onResetInput();
-    setIsFilled(false);
-  };
+  const handleReset = () => onResetInput();
 
   return (
     <>
@@ -44,11 +27,13 @@ const TextInputWithReset = forwardRef<
         ref={ref}
         id={id}
         className={cn(
-          `h-11 w-full rounded-small border-1 border-primary-300 bg-primary-light-50 py-2 pl-[0.8rem] pr-10 font-medium web:h-12 ${formTextStyle} placeholder:${formPlaceholderStyle}`,
+          variants({ isFilled, outline: isFocus || isFilled }),
           className,
         )}
-        onChange={handleFilled}
+        onChange={onChange}
         onPaste={handlePaste}
+        onBlurCapture={onBlur}
+        onFocus={onFocus}
         {...props}
       />
       {isFilled && (
@@ -64,5 +49,24 @@ const TextInputWithReset = forwardRef<
     </>
   );
 });
+
+const variants = cva(
+  'h-11 w-full rounded-small py-2 pl-[0.8rem] border-1 pr-10 font-medium web:h-12 text-0.95 text-black-900 placeholder:text-black-300',
+  {
+    variants: {
+      isFilled: {
+        true: 'bg-primary-light-50',
+        false: '',
+      },
+      outline: {
+        true: 'border-primary-300',
+        false: 'border-black-100',
+      },
+    },
+    defaultVariants: {
+      isFilled: false,
+    },
+  },
+);
 
 export default TextInputWithReset;

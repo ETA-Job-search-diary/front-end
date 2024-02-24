@@ -1,8 +1,8 @@
 import { PLATFORM } from '@/constants/form';
 
 export const getPlatformBy = (url: string): string | undefined => {
-  const foundPlatform = Object.values(PLATFORM).find(
-    (platform) => platform.value?.some((value) => url.includes(value)),
+  const foundPlatform = Object.values(PLATFORM).find((platform) =>
+    platform.value?.some((value) => url.includes(value)),
   );
   return foundPlatform ? foundPlatform.name : undefined;
 };
@@ -62,6 +62,9 @@ export const processForCompany = (
     case '슈퍼루키': {
       return title.split('|')[0].replace('채용', '').trim();
     }
+    case '랠릿': {
+      return;
+    }
     default:
       return title;
   }
@@ -113,6 +116,9 @@ export const processForPosition = (
     }
     case '자소설닷컴': {
       return title.split(/-/)[0].replace('채용공고', '').trim();
+    }
+    case '랠릿': {
+      return title.split('-')[0].trim();
     }
     default:
       return title;

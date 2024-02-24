@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import { Calendar } from '@/components/ui/calendar';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import useFocus from '@/hook/useFocus';
 import useMediaQuery from '@/hook/useMediaQuery';
 import useScrollPointer from '@/hook/useScrollPointer';
 import { formatDateForCalendar } from '@/service/date';
@@ -82,13 +83,23 @@ DateTimePicker.Desktop = ({
   onTime,
   onDate,
 }: PickerProps) => {
+  const { isFocus, onBlur, onFocus } = useFocus();
   const { pointer, toggleScrollPointer } = useScrollPointer();
 
   return (
     <Accordion type="single" collapsible>
       <AccordionItem value="date">
-        <AccordionTrigger onClick={toggleScrollPointer} className="flex gap-3">
-          <DateInput isSelected={!!selectedDate} date={date} />
+        <AccordionTrigger
+          onClick={toggleScrollPointer}
+          onBlurCapture={onBlur}
+          onFocus={onFocus}
+          className="flex gap-3"
+        >
+          <DateInput
+            isFocus={isFocus}
+            isSelected={!!selectedDate}
+            date={date}
+          />
           <TimePicker
             isSelect={!!selectedDate}
             time={time}
@@ -119,15 +130,21 @@ DateTimePicker.Mobile = ({
   onDate,
   onTime,
 }: PickerProps) => {
+  const { isFocus, onBlur, onFocus } = useFocus();
+
   return (
     <div className="grid grid-cols-2 gap-3">
       <Sheet>
-        <SheetTrigger>
-          <DateInput isSelected={!!selectedDate} date={date} />
+        <SheetTrigger onBlurCapture={onBlur} onFocus={onFocus}>
+          <DateInput
+            isFocus={isFocus}
+            isSelected={!!selectedDate}
+            date={date}
+          />
         </SheetTrigger>
         <SheetContent
           side="bottom"
-          className="rounded-t-3xl border-none pb-[calc(env(safe-area-inset-bottom)+1rem)] pt-8 outline-none"
+          className="rounded-t-3xl border-none pb-[calc(env(safe-area-inset-bottom)+1rem)] pt-4 outline-none"
         >
           <Calendar
             mode="single"

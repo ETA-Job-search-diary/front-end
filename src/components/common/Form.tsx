@@ -56,6 +56,7 @@ const Form = ({ originData }: FormProps) => {
 
   const {
     control,
+    trigger,
     setValue,
     watch,
     handleSubmit,
@@ -79,6 +80,7 @@ const Form = ({ originData }: FormProps) => {
     setValue('company', company);
     setValue('position', position);
     setValue('platform', platform);
+    trigger(['company', 'position', 'platform']);
   };
 
   const extractLink = (text: string) => {
@@ -227,7 +229,7 @@ const Form = ({ originData }: FormProps) => {
                         onChange('');
                       }}
                       onKeyDown={handleKeyDown}
-                      onPaste={async (e: ClipboardEvent<HTMLInputElement>) => {
+                      onPaste={(e: ClipboardEvent<HTMLInputElement>) => {
                         e.preventDefault();
                         if (!e.clipboardData) return;
                         isPasted = true;
@@ -240,7 +242,7 @@ const Form = ({ originData }: FormProps) => {
                         }
                         onChange(pastedText);
                       }}
-                      onChange={async (e: ChangeEvent<HTMLInputElement>) => {
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         const { value } = e.target;
                         if (isPasted || isCrawling) return;
                         handleURLInput(value);
@@ -283,12 +285,14 @@ const Form = ({ originData }: FormProps) => {
                   label="지원하는 회사"
                   className="relative"
                 >
-                  <TextInput
+                  <TextInputWithReset
                     id="company"
                     placeholder={`${PLACE_HOLDER.COMPANY}`}
-                    isLoading={isCrawling}
                     disabled={isCrawling}
                     onKeyDown={handleKeyDown}
+                    onResetInput={() => {
+                      setValue('company', '');
+                    }}
                     {...field}
                   />
                 </FormLabel>
