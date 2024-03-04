@@ -19,7 +19,7 @@ function Calendar({
       showOutsideDays
       locale={ko}
       formatters={{ formatCaption }}
-      className={cn('w-full pb-1', className)}
+      className={cn('w-full', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
@@ -32,7 +32,7 @@ function Calendar({
         ),
         nav_button_previous: 'mr-3',
         nav_button_next: 'ml-3',
-        table: 'w-full border-collapse space-y-1',
+        table: 'w-full',
         head_row: 'flex justify-between w-full',
         head_cell:
           'text-muted-foreground rounded-[9999px] w-7 web:w-9 font-normal text-0.85',
