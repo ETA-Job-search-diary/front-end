@@ -9,8 +9,10 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import useFocus from '@/hook/useFocus';
 import useMediaQuery from '@/hook/useMediaQuery';
 import useScrollPointer from '@/hook/useScrollPointer';
+import useToggle from '@/hook/useToggle';
 import { formatDateForCalendar } from '@/service/date';
 import { format } from 'date-fns';
+import { X } from 'lucide-react';
 import { useNavigation } from 'react-day-picker';
 import DateInput from './DateInput';
 import TimePicker from './TimePicker';
@@ -85,6 +87,7 @@ DateTimePicker.Desktop = ({
 }: PickerProps) => {
   const { isFocus, onBlur, onFocus } = useFocus();
   const { pointer, toggleScrollPointer } = useScrollPointer();
+  // TODO: 자동닫힘기능 추가
 
   return (
     <Accordion type="single" collapsible>
@@ -131,11 +134,16 @@ DateTimePicker.Mobile = ({
   onTime,
 }: PickerProps) => {
   const { isFocus, onBlur, onFocus } = useFocus();
+  const { isOpen, onToggle, onClose } = useToggle();
 
   return (
     <div className="grid grid-cols-2 gap-3">
-      <Sheet>
-        <SheetTrigger onBlurCapture={onBlur} onFocus={onFocus}>
+      <Sheet open={isOpen}>
+        <SheetTrigger
+          onClick={onToggle}
+          onBlurCapture={onBlur}
+          onFocus={onFocus}
+        >
           <DateInput
             isFocus={isFocus}
             isSelected={!!selectedDate}
@@ -149,35 +157,47 @@ DateTimePicker.Mobile = ({
           <Calendar
             mode="single"
             selected={selectedDate}
-            onSelect={onDate}
-            className="p-4"
+            onSelect={(value) => {
+              onDate(value);
+              onClose();
+            }}
+            className="p-4 pt-2"
             components={{
               Caption: ({ displayMonth }) => {
                 const { goToMonth, nextMonth, previousMonth } = useNavigation();
                 return (
-                  <div className="grid grid-cols-[minmax(4.5rem,auto)_1fr] gap-2">
-                    <h1 className="pl-2 text-1 font-bold text-black-900">
-                      {format(displayMonth, 'yyyy.MM')}
-                    </h1>
-                    <div className="flex gap-3">
-                      <button
-                        aria-label="previous month move button"
-                        disabled={!previousMonth}
-                        onClick={() =>
-                          previousMonth && goToMonth(previousMonth)
-                        }
-                      >
-                        <Calendar.LeftButton />
-                      </button>
-                      <button
-                        aria-label="next month move button"
-                        disabled={!nextMonth}
-                        onClick={() => nextMonth && goToMonth(nextMonth)}
-                      >
-                        <Calendar.RightButton />
-                      </button>
+                  <>
+                    <button
+                      className="absolute right-4 top-4 p-2"
+                      onClick={onClose}
+                    >
+                      <X className="h-4 w-4" />
+                      <span className="sr-only">Close</span>
+                    </button>
+                    <div className="grid grid-cols-[minmax(4.5rem,auto)_1fr] gap-2">
+                      <h1 className="pl-2 text-1 font-bold text-black-900">
+                        {format(displayMonth, 'yyyy.MM')}
+                      </h1>
+                      <div className="flex gap-3">
+                        <button
+                          aria-label="previous month move button"
+                          disabled={!previousMonth}
+                          onClick={() =>
+                            previousMonth && goToMonth(previousMonth)
+                          }
+                        >
+                          <Calendar.LeftButton />
+                        </button>
+                        <button
+                          aria-label="next month move button"
+                          disabled={!nextMonth}
+                          onClick={() => nextMonth && goToMonth(nextMonth)}
+                        >
+                          <Calendar.RightButton />
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </>
                 );
               },
             }}
