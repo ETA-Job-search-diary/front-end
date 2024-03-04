@@ -1,6 +1,6 @@
 'use client';
 
-import AccountButton from '@/components/home/AccountButton';
+import Icon from '@/assets/Icon';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
 import { getSteps } from '@/service/form';
@@ -8,9 +8,10 @@ import { useListStore } from '@/store/zustand';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useNavigation } from 'react-day-picker';
 import useSWR from 'swr';
 import { Calendar } from '../ui/calendar';
+import AccountButton from './AccountButton';
+import HomeStatistics from './HomeStatistics';
 
 type HomeCalendar = {
   events: EventsType;
@@ -48,40 +49,34 @@ const HomeCalendar = () => {
     <Calendar
       month={month}
       onMonthChange={setMonth}
-      className="rounded-2xl bg-white px-3 pt-4 xs:px-2 xs:pt-4 web:pt-6"
+      footer={
+        <div className="px-page pb-4 pt-2">
+          <HomeStatistics />
+        </div>
+      }
       classNames={{
         cell: 'w-full',
         day: 'font-medium text-center',
         day_today: 'bg-transparent',
-        head_row: 'grid grid-cols-7 pb-2 border-b border-black-100',
+        head_row:
+          'grid grid-cols-7 border-b border-black-100 pb-5 pt-7 px-page',
         head_cell: 'w-full text-0.9 font-semibold text-black-900',
-        row: 'grid grid-cols-7 mt-0.5 first:mt-3',
+        row: 'grid grid-cols-7 mt-0.5 first:mt-3 px-page',
+        table: 'w-full bg-white rounded-t-3xl',
       }}
       components={{
         Caption: ({ displayMonth }) => {
-          const { goToMonth, nextMonth, previousMonth } = useNavigation();
+          const [year, month] = format(displayMonth, 'yyyy년 MM월').split(' ');
           return (
-            <div className="flex items-end justify-between">
-              <div className="grid grid-cols-[minmax(7.5rem,1fr)_1fr] items-end gap-2 xs:grid-cols-[minmax(6rem,1fr)_1fr]">
-                <h1 className="pl-2 text-1.2 font-bold leading-none text-black-900 xs:text-1 web:font-semibold">
-                  {format(displayMonth, 'yyyy년 MM월')}
+            <div className="flex items-center justify-between px-page pt-6">
+              <div className="grid grid-cols-[minmax(9rem,1fr)_auto] items-end gap-2 xs:grid-cols-[minmax(6rem,1fr)_1fr] xs:gap-1">
+                <h1 className="text-1.5 leading-none text-white xs:text-1">
+                  <span className="font-medium">{year} </span>
+                  <span className="font-extrabold">{month}</span>
                 </h1>
-                <div className="flex items-end gap-7 xs:gap-2">
-                  <button
-                    aria-label="previous month move button"
-                    disabled={!previousMonth}
-                    onClick={() => previousMonth && goToMonth(previousMonth)}
-                  >
-                    <Calendar.LeftButton />
-                  </button>
-                  <button
-                    aria-label="next month move button"
-                    disabled={!nextMonth}
-                    onClick={() => nextMonth && goToMonth(nextMonth)}
-                  >
-                    <Calendar.RightButton />
-                  </button>
-                </div>
+                <button className="flex h-6 w-6 items-center justify-center rounded-md bg-primary-200 hover:bg-primary-100 xs:h-4 xs:w-4 xs:rounded-sm">
+                  <Icon name="arrowdown" className="w-2.5 xs:w-1.5" />
+                </button>
               </div>
               <AccountButton />
             </div>
