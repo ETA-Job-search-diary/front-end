@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/service/api';
 import axios from 'axios';
 import { NextAuthOptions } from 'next-auth';
 
@@ -9,22 +10,22 @@ export const authOptions: NextAuthOptions = {
     NaverProvider({
       clientId: process.env.NAVER_CLIENTID ?? '',
       clientSecret: process.env.NAVER_SECRET ?? '',
-      profile({ response }) {
+      profile({ response: { id, name, email } }) {
         return {
-          id: response.id.toString().slice(1),
-          name: response.name,
-          email: response.email,
+          id: id.toString().slice(1), // naver id starts with '-' so slice it
+          name,
+          email,
         };
       },
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENTID ?? '',
       clientSecret: process.env.KAKAO_SECRET ?? '',
-      profile(profile) {
+      profile({ id, kakao_account: { profile, email } }) {
         return {
-          id: profile.id,
-          name: profile.kakao_account.profile.nickname,
-          email: profile.kakao_account.email,
+          id,
+          name: profile.nickname,
+          email,
         };
       },
     }),
@@ -35,11 +36,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) {
+      if (!token.accessToken && user.accessToken) {
         token.id = user.id;
         token.accessToken = user.accessToken;
+        return token;
+      } else if (token.accessToken) {
+        return token;
       }
-      return token;
+      throw new Error('Callback jwt error');
     },
     async session({ session, token }) {
       const sessionUser = session?.user;
@@ -50,21 +54,21 @@ export const authOptions: NextAuthOptions = {
           id: token.id as string,
           accessToken: token.accessToken as string,
         };
+        return session;
       }
-      return session;
+      throw new Error('Callback session error');
     },
     async signIn({ user }) {
       const { name, email } = user;
       try {
         if (!email) return false;
-        const { data } = await axios.post(
-          `https://newjoblog.bugilabs.com/api/auth/login`,
-          { name, email },
-        );
+        const { data } = await axios.post(`${BASE_URL}/auth/login`, {
+          name,
+          email,
+        });
         user.accessToken = data.token;
         return true;
       } catch (err) {
-        console.log(err);
         return false;
       }
     },

@@ -34,7 +34,6 @@ const A2HS = () => {
         <Sheet defaultOpen>
           <SheetContent
             side="bottom"
-            hasCloseButton={false}
             className="rounded-t-3xl border-none pb-14 pt-16 outline-none"
           >
             <div className="m-auto flex max-w-[70%] flex-col items-center justify-center gap-3">
