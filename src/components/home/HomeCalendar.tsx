@@ -1,6 +1,5 @@
 'use client';
 
-import Icon from '@/assets/Icon';
 import { fetcher } from '@/lib/fetcher';
 import { StepTypes } from '@/model/schedule';
 import { getSteps } from '@/service/form';
@@ -74,9 +73,13 @@ const HomeCalendar = () => {
                   <span className="font-medium">{year} </span>
                   <span className="font-extrabold">{month}</span>
                 </h1>
-                <button className="flex h-6 w-6 items-center justify-center rounded-md bg-primary-200 hover:bg-primary-100 xs:h-4 xs:w-4 xs:rounded-sm">
-                  <Icon name="arrowdown" className="w-2.5 xs:w-1.5" />
-                </button>
+                {/* //TODO: DatePicker */}
+                {/* <CaptionPicker
+                  currentMonth={currentMonth}
+                  onMonthChange={(year, month) => {
+                    setMonth(new Date(year, month - 1));
+                  }}
+                /> */}
               </div>
               <AccountButton />
             </div>

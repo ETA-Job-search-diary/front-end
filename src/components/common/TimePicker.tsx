@@ -25,7 +25,7 @@ const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
         className={`h-11 w-full rounded-small border-1 px-[0.8rem] py-2 text-left web:cursor-text ${isFocus || isSelect ? 'border-primary-300' : 'border-black-100'} ${
           isSelect
             ? `${formTextStyle} bg-primary-light-50`
-            : `text-0.95 ${formPlaceholderStyle}`
+            : `text-0.95 ${formPlaceholderStyle} bg-white`
         }`}
         step="600"
         required
