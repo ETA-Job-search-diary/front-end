@@ -10,6 +10,7 @@ import { useState } from 'react';
 import useSWR from 'swr';
 import { Calendar } from '../ui/calendar';
 import AccountButton from './AccountButton';
+import CaptionPicker from './CaptionPicker';
 import HomeStatistics from './HomeStatistics';
 
 type HomeCalendar = {
@@ -49,7 +50,7 @@ const HomeCalendar = () => {
       month={month}
       onMonthChange={setMonth}
       footer={
-        <div className="px-page pb-4 pt-2">
+        <div className="px-page pb-2 pt-1">
           <HomeStatistics />
         </div>
       }
@@ -58,7 +59,7 @@ const HomeCalendar = () => {
         day: 'font-medium text-center',
         day_today: 'bg-transparent',
         head_row:
-          'grid grid-cols-7 border-b border-black-100 pb-5 pt-7 px-page',
+          'grid grid-cols-7 border-b border-black-100 pb-4 pt-6 px-page',
         head_cell: 'w-full text-0.9 font-semibold text-black-900',
         row: 'grid grid-cols-7 mt-0.5 first:mt-3 px-page',
         table: 'w-full bg-white rounded-t-3xl',
@@ -67,19 +68,18 @@ const HomeCalendar = () => {
         Caption: ({ displayMonth }) => {
           const [year, month] = format(displayMonth, 'yyyy년 MM월').split(' ');
           return (
-            <div className="flex items-center justify-between px-page pt-6">
+            <div className="flex items-center justify-between px-page pt-4">
               <div className="grid grid-cols-[minmax(9rem,1fr)_auto] items-end gap-2 xs:grid-cols-[minmax(6rem,1fr)_1fr] xs:gap-1">
                 <h1 className="text-1.5 leading-none text-white xs:text-1">
                   <span className="font-medium">{year} </span>
                   <span className="font-extrabold">{month}</span>
                 </h1>
-                {/* //TODO: DatePicker */}
-                {/* <CaptionPicker
+                <CaptionPicker
                   currentMonth={currentMonth}
                   onMonthChange={(year, month) => {
                     setMonth(new Date(year, month - 1));
                   }}
-                /> */}
+                />
               </div>
               <AccountButton />
             </div>
