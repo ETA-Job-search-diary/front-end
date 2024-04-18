@@ -59,9 +59,9 @@ const HomeCalendar = () => {
         day: 'font-medium text-center',
         day_today: 'bg-transparent',
         head_row:
-          'grid grid-cols-7 border-b border-black-100 pb-4 pt-6 px-page',
+          'grid grid-cols-7 border-b border-black-100 pb-3 pt-5 px-page',
         head_cell: 'w-full text-0.9 font-semibold text-black-900',
-        row: 'grid grid-cols-7 mt-0.5 first:mt-3 px-page',
+        row: 'grid grid-cols-7 mt-[1px] first:mt-2 px-page',
         table: 'w-full bg-white rounded-t-3xl',
       }}
       components={{
