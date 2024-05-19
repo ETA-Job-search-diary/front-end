@@ -1,15 +1,20 @@
 import { BASE_URL } from '@/service/api';
 import axios from 'axios';
-import { NextAuthOptions } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 
 import KakaoProvider from 'next-auth/providers/kakao';
 import NaverProvider from 'next-auth/providers/naver';
 
+const NaverClienId = process.env.NAVER_CLIENTID ?? '';
+const NaverSecret = process.env.NAVER_SECRET ?? '';
+const KakaoClientId = process.env.KAKAO_CLIENTID ?? '';
+const KakaoSecret = process.env.KAKAO_SECRET ?? '';
+
 export const authOptions: NextAuthOptions = {
   providers: [
     NaverProvider({
-      clientId: process.env.NAVER_CLIENTID ?? '',
-      clientSecret: process.env.NAVER_SECRET ?? '',
+      clientId: NaverClienId,
+      clientSecret: NaverSecret,
       profile({ response: { id, name, email } }) {
         return {
           id: id.toString().slice(1), // naver id starts with '-' so slice it
@@ -19,8 +24,8 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENTID ?? '',
-      clientSecret: process.env.KAKAO_SECRET ?? '',
+      clientId: KakaoClientId,
+      clientSecret: KakaoSecret,
       profile({ id, kakao_account: { profile, email } }) {
         return {
           id,
@@ -49,9 +54,9 @@ export const authOptions: NextAuthOptions = {
       const sessionUser = session?.user;
       if (sessionUser) {
         session.user = {
+          id: token.id as string,
           name: sessionUser.name,
           email: sessionUser.email,
-          id: token.id as string,
           accessToken: token.accessToken as string,
         };
         return session;

@@ -4,7 +4,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { METADATA, THEME_COLOR } from '@/constants/metadata';
 import AuthSessionProvider from '@/context/AuthSessionProvider';
 import SWRContext from '@/context/SWRContext';
-import ThemeProvider from '@/context/ThemeProvider';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import suit from 'next/font/local';
@@ -79,16 +78,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`h-full w-screen overflow-x-hidden web:bg-body ${suitFont.className} antialiased scrollbar-none web:scrollbar-thin web:scrollbar-track-gray-100 web:scrollbar-thumb-gray-300 web:scrollbar-thumb-rounded-sm web:hover:scrollbar-thumb-gray-400`}
       >
-        <ThemeProvider>
-          <main className="mx-auto min-h-screen min-w-280 max-w-500">
-            <AuthSessionProvider>
-              <SWRContext>{children}</SWRContext>
-              <TabBar />
-            </AuthSessionProvider>
-            <Toaster />
-            <A2HS />
-          </main>
-        </ThemeProvider>
+        <main className="mx-auto min-h-screen min-w-280 max-w-500">
+          <AuthSessionProvider>
+            <SWRContext>{children}</SWRContext>
+            <TabBar />
+          </AuthSessionProvider>
+          <Toaster />
+          <A2HS />
+        </main>
       </body>
     </html>
   );

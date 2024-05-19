@@ -17,7 +17,7 @@ const NewNavBar = ({ hasOrigin, isSubmitValid }: NewNavBarProps) => {
         }
         rightSection={
           <SubmitButton
-            id={hasOrigin ? 'new_submit' : 'eidt_submit'}
+            id={hasOrigin ? 'new_submit' : 'edit_submit'}
             label={hasOrigin ? '수정' : '저장'}
             active={isSubmitValid}
           />
